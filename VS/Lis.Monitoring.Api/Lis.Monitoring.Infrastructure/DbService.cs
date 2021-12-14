@@ -16,7 +16,7 @@ namespace Lis.Monitoring.Infrastructure {
 		public DbService(DbContextOptions<DbService> options, IServiceProvider serviceProvider)
 			: base(options) {
 			_serviceProvider = serviceProvider;
-			_listeners = new DbServiceListeners(this, () => CurrentMember);
+			//_listeners = new DbServiceListeners(this, () => CurrentMember);
 			//_listeners.AddMetadataHandling();
 		}
 

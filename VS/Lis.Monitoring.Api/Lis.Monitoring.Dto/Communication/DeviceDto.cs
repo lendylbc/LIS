@@ -6,5 +6,6 @@ namespace Lis.Monitoring.Dto.Communication {
 		public string Description { get; set; }
 		public string IpAddress { get; set; }
 		public DateTime Inserted { get; set; }
+		public bool Active { get; set; }
 	}
 }

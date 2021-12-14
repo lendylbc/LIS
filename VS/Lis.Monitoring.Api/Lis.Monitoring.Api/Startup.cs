@@ -1,4 +1,5 @@
 using System.Text;
+using AutoMapper;
 using Lis.Monitoring.Api.Authentication;
 using Lis.Monitoring.Infrastructure;
 //using AutoMapper;
@@ -55,7 +56,7 @@ namespace Lis.Monitoring.Api {
 
 			services.AddSingleton<IAuthJwt>(new Auth(key));
 
-			services.AddAutoMapper();
+			//services.AddAutoMapper(typeof(Startup));
 
 			services.AddScoped<IMemberService, MemberService>();
 			services.AddScoped<IDeviceService, DeviceService>();
@@ -66,12 +67,14 @@ namespace Lis.Monitoring.Api {
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-		public void Configure(IApplicationBuilder app, IWebHostEnvironment env) {
+		public void Configure(IApplicationBuilder app, IWebHostEnvironment env/*, IMapper autoMapper*/) {
 			if(env.IsDevelopment()) {
 				app.UseDeveloperExceptionPage();
 				app.UseSwagger();
 				app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Lis.Monitoring.Api v1"));
 			}
+
+			//autoMapper.ConfigurationProvider.AssertConfigurationIsValid();
 
 			app.UseHttpsRedirection();
 

@@ -24,14 +24,14 @@ namespace Lis.Monitoring.Api.Controllers {
 				new MemberDto() {Id=3, Name="Irča"}
 		  };
 
-		public MemberController(IMemberService memberService, IMapper mapper, IAuthJwt authJwt):base(memberService, mapper) {// : base(TEntityService entityService, mapper) {		//IMemberService entityService, IMapper mapper, 
+		public MemberController(IMemberService memberService/*, IMapper mapper*/, IAuthJwt authJwt):base(memberService/*, mapper*/) {// : base(TEntityService entityService, mapper) {		//IMemberService entityService, IMapper mapper, 
 			_authJwt = authJwt;
 		}
 
-		[HttpGet]
-		public IEnumerable<MemberDto> AllMembers() {
-			return lstMember;
-		}
+		//[HttpGet]
+		//public IEnumerable<MemberDto> AllMembers() {
+		//	return lstMember;
+		//}
 
 		[AllowAnonymous]
 		// POST api/<MembersController>
