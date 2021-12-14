@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lis.Monitoring.Abstractions\Lis.Monitoring.Abstractions.csproj" />
+    <ProjectReference Include="..\Lis.Monitoring.Domain\Lis.Monitoring.Domain.csproj" />
+    <ProjectReference Include="..\Lis.Monitoring.Dto\Lis.Monitoring.Dto.csproj" />
+    <ProjectReference Include="..\Lis.Monitoring.Infrastructure\Lis.Monitoring.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

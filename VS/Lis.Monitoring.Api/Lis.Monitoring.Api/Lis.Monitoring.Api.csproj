@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.12" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.15.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lis.Monitoring.Abstractions\Lis.Monitoring.Abstractions.csproj" />
+    <ProjectReference Include="..\Lis.Monitoring.Dto\Lis.Monitoring.Dto.csproj" />
+    <ProjectReference Include="..\Lis.Monitoring.Services\Lis.Monitoring.Services.csproj" />
+    <ProjectReference Include="..\Lis.Monitoring.Shared\Lis.Monitoring.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

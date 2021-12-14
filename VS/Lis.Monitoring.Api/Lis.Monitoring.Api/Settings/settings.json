@@ -1,0 +1,16 @@
+{
+  "Db": {
+    "ConnectionString": "Server=DESKTOP-MML2OJV\\SQLEXPRESS; Initial Catalog=Test;Integrated Security=true",
+    "AutoUpdate": true
+  },
+  "MailService": {
+    "Host": "",
+    "Port": 25,
+    "Username": "",
+    "Heslo": "",
+    "From": ""
+  },
+  "Logger": {
+    "LogFolderPath": ".\\logs\\"
+  }
+}
