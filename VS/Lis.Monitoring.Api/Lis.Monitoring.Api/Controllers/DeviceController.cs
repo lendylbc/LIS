@@ -16,7 +16,7 @@ namespace Lis.Monitoring.Api.Controllers {
 	[ApiController]
 	public class DeviceController : BaseController<Device, long, IDeviceService, DeviceDto, DeviceDto, DeviceDto, DeviceQuery> {//<Device, long, IDeviceService, DeviceDto, DeviceDto, DeviceDto, DeviceQuery> {
 
-		public DeviceController(IDeviceService deviceService/*, IMapper mapper*/) :base(deviceService/*, mapper*/) {// : base(entityService, mapper) { //IDeviceService entityService, IMapper mapper
+		public DeviceController(IDeviceService deviceService, IMapper mapper) :base(deviceService, mapper) {// : base(entityService, mapper) { //IDeviceService entityService, IMapper mapper
 		}
 
 		private static readonly string[] Summaries = new[]

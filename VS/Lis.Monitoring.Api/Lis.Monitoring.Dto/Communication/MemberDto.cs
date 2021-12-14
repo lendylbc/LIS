@@ -1,4 +1,5 @@
-﻿using Lis.Monitoring.Dto.Core;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using Lis.Monitoring.Dto.Core;
 
 namespace Lis.Monitoring.Dto.Communication {
 		/// <summary>
@@ -40,6 +41,7 @@ namespace Lis.Monitoring.Dto.Communication {
 		/// <summary>
 		/// Příznak odběru notifikací
 		/// </summary>
+		[NotMapped]
 		public bool ZasilatNotifikace { get; set; }
-		}
+	}
 	}

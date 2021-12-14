@@ -9,14 +9,16 @@ namespace Lis.Monitoring.Infrastructure
 	{
 		public const string DEFAULT_SCHEMA = "dbo";
 
-		public DbSet<Member> Uzivatel { get; set; }
-	
+		public DbSet<Member> Member { get; set; }
+      public DbSet<Device> Device { get; set; }
 
-		private void ApplyEntityConfigurations(ModelBuilder modelBuilder) 
+
+      private void ApplyEntityConfigurations(ModelBuilder modelBuilder) 
 		{
-			//modelBuilder.ApplyConfiguration(new MemberEntityTypeConfiguration());
-			
-		}
+			modelBuilder.ApplyConfiguration(new MemberEntityTypeConfiguration());
+         modelBuilder.ApplyConfiguration(new DeviceEntityTypeConfiguration());
+
+      }
 
         private void DataSeed(ModelBuilder modelbuilder) {
 
@@ -29,7 +31,7 @@ namespace Lis.Monitoring.Infrastructure
 
             modelbuilder.Entity<Member>().HasData(
                 new Member { 
-                    //Email = "b2b@inisoft.cz",
+                    //Email = "lendr@visionq.cz",
                     //EmailVerifikovan = true,
                     //Jmeno = "Admin",
                     //Prijmeni = "Admin",

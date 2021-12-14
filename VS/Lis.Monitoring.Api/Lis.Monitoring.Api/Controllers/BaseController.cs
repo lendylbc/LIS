@@ -24,9 +24,9 @@ namespace Lis.Monitoring.Api.Controllers {
 		protected readonly TEntityService EntityService;
 		protected readonly IMapper Mapper;
 
-		protected BaseController(TEntityService entityService/*, IMapper mapper*/) {  //	TEntityService entityService, IMapper mapper
+		protected BaseController(TEntityService entityService, IMapper mapper) {  //	TEntityService entityService, IMapper mapper
 			EntityService = entityService;
-			//Mapper = mapper;
+			Mapper = mapper;
 		}
 
 		/// <summary>
