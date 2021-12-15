@@ -3,12 +3,19 @@ using Lis.Monitoring.Services.Abstractions;
 using Lis.Monitoring.Domain.Entities;
 using Lis.Monitoring.Services.Queries;
 using Lis.Monitoring.Dto.Communication;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Lis.Monitoring.Services.Entities {
 	public class MemberService : BaseEntityService<Member, long, MemberQuery, MemberDto>, IMemberService {
 
 		public MemberService(DbService dbService) : base(dbService) {
 			
+		}
+
+		public Member GetByCredentials(string login, string password) {
+			Task<Member> entity = EntitySet.SingleOrDefaultAsync(x => x.Login.Equals(login) && x.Password.Equals(password));
+			return entity.Result;			
 		}
 
 		//public async Task<Member> Update(long id, MemberDto data) {

@@ -5,26 +5,20 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Lis.Monitoring.Domain.Entities;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Lis.Monitoring.Api.Authentication {
 	public class Auth : IAuthJwt {
-		private readonly string username = "Tom";
-		private readonly string password = "Lendy";
+
 		private readonly string key;
 		public Auth(string key) {
 			this.key = key;
 		}
-		public string Authenticate(string username, string password) {
-			if(!(username.Equals(username) || password.Equals(password))) {
+		public string Authenticate(Member member) {
+			if(member == null) {
 				return null;
 			}
-
-			//var member = EntityService.Authenticate(userDto.Email, userDto.Heslo);
-
-			//if(member == null){
-			//	return BadRequest(new { message = "Uživatelské jméno nebo helso bylo zadáno špatně" });
-			//}
 
 			// 1. Create Security Token Handler
 			var tokenHandler = new JwtSecurityTokenHandler();
@@ -37,10 +31,9 @@ namespace Lis.Monitoring.Api.Authentication {
 				Subject = new ClaimsIdentity(
 					  new Claim[]
 					  {
-								new Claim(ClaimTypes.Name, username)
-					//			new Claim(ClaimTypes.GivenName, user.Jmeno),
-					//new Claim(ClaimTypes.Surname, user.Prijmeni),
-					//new Claim(ClaimTypes.Email, user.Email),
+							new Claim(ClaimTypes.Name, member.Name),
+							new Claim(ClaimTypes.Surname, member.Surname),
+							new Claim(ClaimTypes.Email, member.Email)
 					  }),
 				Expires = DateTime.UtcNow.AddHours(1),
 				SigningCredentials = new SigningCredentials(
