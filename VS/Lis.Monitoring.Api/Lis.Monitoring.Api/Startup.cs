@@ -1,24 +1,26 @@
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using AutoMapper;
+using Lis.Monitoring.Abstractions.Services;
 using Lis.Monitoring.Api.Authentication;
 using Lis.Monitoring.Infrastructure;
 using Lis.Monitoring.Services.Abstractions;
+using Lis.Monitoring.Services.Aspects;
 using Lis.Monitoring.Services.Entities;
 using Lis.Monitoring.Shared.Configuration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using Serilog.Events;
-//using ILogger = Microsoft.Extensions.Logging.ILogger;
 
 namespace Lis.Monitoring.Api {
 	public class Startup {
@@ -27,16 +29,12 @@ namespace Lis.Monitoring.Api {
 
 			ConfigureLogger(Configuration.GetSection("Logger").Get<Shared.Configuration.LoggerConfiguration>());
 
-			Serilog.ILogger log = Serilog.Log.ForContext<Startup>();
-			log.Information("INFO");
-			log.Debug("DEBUG");
-			log.Warning("WARNING");
-			log.Error("ERROR");
-
-			log.Information($"Application pid: {Process.GetCurrentProcess().Id}");
+			_logger.Information($"Application pid: {Process.GetCurrentProcess().Id}");
 			//_logger.LogInformation($"Application starting assets path: {WebAppConfiguration.AssetsPath}, virtual app path: {WebAppConfiguration.VirtualAppPath}");
 
 			DbOptions = Configuration.GetSection("Db").Get<DbServiceOptions>();
+
+			_jwtOptions = Configuration.GetSection("JWT").Get<JwtServiceOptions>();
 
 			MailServiceOptions = Configuration.GetSection("MailService").Get<MailServiceOptions>();
 			//RecaptchaOptions = Configuration.GetSection("Recaptcha").Get<RecaptchaConfiguration>();
@@ -45,7 +43,11 @@ namespace Lis.Monitoring.Api {
 		/// <summary>
 		/// Service pro logování
 		/// </summary>
-		//private ILogger _logger;
+		private ILogger _logger;
+		/// <summary>
+		/// Specifikace pro JWT service auth
+		/// </summary>
+		private JwtServiceOptions _jwtOptions { get; }
 		/// <summary>
 		/// Root konfigurace aplikace
 		/// </summary>
@@ -55,11 +57,8 @@ namespace Lis.Monitoring.Api {
 		/// </summary>
 		public DbServiceOptions DbOptions { get; }
 		/// <summary>
-		/// Specifikace pøipojení k dokumentové databázi
-		/// </summary>
-		/// <summary>
 		/// Specifikace pro service na odesílání e-mailù
-		/// </summary>
+		/// </summary>				
 		private MailServiceOptions MailServiceOptions { get; }
 		///// <summary>
 		///// Specifikace pro reCaptcha
@@ -78,42 +77,111 @@ namespace Lis.Monitoring.Api {
 
 			services.AddControllers();
 
-			//	Authentication
-			var key = "Test KEY monitoring LIS temperature";
+			//services.AddCors(options => options.AddPolicy("CorsPolicy",
+			//	 builder => builder.AllowAnyOrigin()
+			//		  .AllowAnyMethod()
+			//		  .AllowAnyHeader()
+			//		  .AllowCredentials()
+			//	 )
+			//);
+
+			services.AddAutoMapper(typeof(Startup));
+
+			//	Authentication			
 			services.AddAuthentication(x => {
 				x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
 				x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 			}).AddJwtBearer(x => {
+				//x.Events = new JwtBearerEvents {
+				//	OnTokenValidated = context => {
+				//		var userService = context.HttpContext.RequestServices.GetRequiredService<IMemberService>();
+				//		var userId = Guid.Parse(context.Principal.Identity.Name);
+				//		var user = userService.GetById(userId);
+				//		if(user == null || !user.Active) {
+				//			// return unauthorized if user no longer exists
+				//			context.Fail("Unauthorized");
+				//		}
+				//		return Task.CompletedTask;
+				//	}
+				//};
 				x.RequireHttpsMetadata = false;
 				x.SaveToken = true;
-				x.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters {
+				x.TokenValidationParameters = new TokenValidationParameters {
 					ValidateIssuerSigningKey = true,
 					ValidateIssuer = false,
 					ValidateAudience = false,
-					IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(key))
+					ValidateLifetime = true,
+					IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_jwtOptions.Secret))
 				};
 			});
 
-			services.AddSingleton<IAuthJwt>(new Auth(key));
-
-			services.AddAutoMapper(typeof(Startup));
+			services.AddSingleton<IAuthJwt>(new Auth(_jwtOptions.Secret));
 
 			services.AddScoped<IMemberService, MemberService>();
 			services.AddScoped<IDeviceService, DeviceService>();
 
 			services.AddSwaggerGen(c => {
-				c.SwaggerDoc("v1", new OpenApiInfo { Title = "Lis.Monitoring.Api", Version = "v1" });
+				c.SwaggerDoc("v1", new OpenApiInfo { Title = "Lis.Monitoring.Api", 
+					Version = "v1",
+					Description = "Complete LIS API description",
+					//TermsOfService = new System.Uri("http://lis.cz/terms/"),
+					Contact = new OpenApiContact {
+						Name = "VisionQ s.r.o.",
+						Email = "info@visionq.cz",
+						Url = new System.Uri("https://visionq.cz/")
+					}
+				});
+
+				OpenApiSecurityScheme securityScheme = new OpenApiSecurityScheme {
+					Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+					Name = "Authorization",
+					In = ParameterLocation.Header,
+					Type = SecuritySchemeType.ApiKey
+				};
+
+				OpenApiSecurityRequirement security = new OpenApiSecurityRequirement {
+					  {securityScheme, new string[] { }},
+				 };
+
+				c.AddSecurityDefinition("Bearer", securityScheme);
+				c.AddSecurityRequirement(security);
+
+				//Locate the XML file being generated by ASP.NET...
+				//var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.XML";
+				//var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+
+				//... and tell Swagger to use those XML comments.
+				//c.IncludeXmlComments(xmlPath);
 			});
+
+			services.AddSingleton<IMailService>(new MailService(
+				MailServiceOptions.Host,
+				MailServiceOptions.Port,
+				MailServiceOptions.Username,
+				MailServiceOptions.Heslo,
+				MailServiceOptions.From));
+			//services.AddSingleton(RecaptchaOptions);
+			//services.AddScoped<INotificationService, NotificationService>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-		public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory, IMapper autoMapper) {
+		public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IMapper autoMapper) {
 			if(env.IsDevelopment()) {
 				app.UseDeveloperExceptionPage();
 				app.UseSwagger();
 				app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Lis.Monitoring.Api v1"));
 				autoMapper.ConfigurationProvider.AssertConfigurationIsValid();
 			}
+
+			app.UseHsts();
+			
+			//app.UseCors("CorsPolicy");
+
+			//	Only for migrations
+			//if(DbOptions.AutoUpdate) {
+			//	DbService db = serviceProvider.GetService<DbService>();
+			//	db.Database.Migrate();
+			//}
 
 			app.UseHttpsRedirection();
 
@@ -122,6 +190,8 @@ namespace Lis.Monitoring.Api {
 			app.UseAuthentication();
 
 			app.UseAuthorization();
+
+			//app.UseMiddleware(typeof(ErrorHandlingMiddleware));
 
 			app.UseEndpoints(endpoints => {
 				endpoints.MapControllers();
@@ -153,14 +223,11 @@ namespace Lis.Monitoring.Api {
 				.Enrich.WithThreadId()
 				.CreateLogger();
 
-
-
-			//.WriteTo.Conditional(e => e.Level == LogEventLevel.Information).File(logPath + @"info_.log", rollingInterval: RollingInterval.Day, shared: true, restrictedToMinimumLevel: LogEventLevel.Information)
-
-
-
-
-
+			_logger = Serilog.Log.ForContext<Startup>();
+			_logger.Information("INFO");
+			_logger.Debug("DEBUG");
+			_logger.Warning("WARNING");
+			_logger.Error("ERROR");
 		}
 	}
 }
