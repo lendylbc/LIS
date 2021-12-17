@@ -31,54 +31,54 @@ namespace WinFormsApp1 {
 		//			edtIp.Text
 		//}
 		private void SnmpRequest(string ip) {
-			//IList<Variable> result = Messenger.Get(VersionCode.V1,
-			//									new IPEndPoint(IPAddress.Parse(ip), 161),
-			//									new Lextm.SharpSnmpLib.OctetString("public"),
-			//									new List<Variable> {
-			//							new Variable(new ObjectIdentifier("1.3.6.1.2.1.1.1.0")),
+			IList<Variable> result = Messenger.Get(VersionCode.V1,
+												new IPEndPoint(IPAddress.Parse(ip), 161),
+												new Lextm.SharpSnmpLib.OctetString("public"),
+												new List<Variable> {
+										new Variable(new ObjectIdentifier("1.3.6.1.2.1.1.1.0")),
 
 
-			//						new Variable(new ObjectIdentifier("1.3.6.1.4.1.18248.31.1.2.1.1.3.1")),
+									new Variable(new ObjectIdentifier("1.3.6.1.4.1.18248.31.1.2.1.1.3.1")),
 
-			//									},
-			//									60000);
-
-			//if(result != null) {
-			//	foreach(Variable variable in result) {
-			//		if(variable.Id.ToString().Equals("1.3.6.1.4.1.18248.31.1.2.1.1.3.1")) {
-			//			string data = variable.Data.ToString();
-			//			edtLog.Text += "\t" + data.Insert(data.Length - 1, ".") + "°C";
-			//		} else {
-			//			edtLog.Text += variable.Data.ToString();//Environment.NewLine + variable.Id.ToString() + "  " + 
-			//		}
-			//	}
-			//	edtLog.Text += Environment.NewLine;
-			//}
-
-			//	************************************************************************************************
-
-			SimpleSnmp snmp = new SimpleSnmp(ip, 161, "public");
-
-			if(!snmp.Valid) {
-				return;
-			}
-
-			Dictionary<Oid, AsnType> result = snmp.Get(SnmpVersion.Ver1, new string[] {
-				"1.3.6.1.2.1.1.1.0",
-				"1.3.6.1.4.1.18248.31.1.2.1.1.3.1"
-			});
+												},
+												60000);
 
 			if(result != null) {
-				foreach(KeyValuePair<Oid, AsnType> variable in result) {
-					if(variable.Key.ToString().Equals("1.3.6.1.4.1.18248.31.1.2.1.1.3.1")) {
-						string data = variable.Value.ToString();
+				foreach(Variable variable in result) {
+					if(variable.Id.ToString().Equals("1.3.6.1.4.1.18248.31.1.2.1.1.3.1")) {
+						string data = variable.Data.ToString();
 						edtLog.Text += "\t" + data.Insert(data.Length - 1, ".") + "°C";
 					} else {
-						edtLog.Text += variable.Value.ToString();//Environment.NewLine + variable.Id.ToString() + "  " + 
+						edtLog.Text += variable.Data.ToString();//Environment.NewLine + variable.Id.ToString() + "  " + 
 					}
 				}
 				edtLog.Text += Environment.NewLine;
 			}
+
+			//	************************************************************************************************
+
+			//SimpleSnmp snmp = new SimpleSnmp(ip, 161, "public");
+
+			//if(!snmp.Valid) {
+			//	return;
+			//}
+
+			//Dictionary<Oid, AsnType> result = snmp.Get(SnmpVersion.Ver1, new string[] {
+			//	"1.3.6.1.2.1.1.1.0",
+			//	"1.3.6.1.4.1.18248.31.1.2.1.1.3.1"
+			//});
+
+			//if(result != null) {
+			//	foreach(KeyValuePair<Oid, AsnType> variable in result) {
+			//		if(variable.Key.ToString().Equals("1.3.6.1.4.1.18248.31.1.2.1.1.3.1")) {
+			//			string data = variable.Value.ToString();
+			//			edtLog.Text += "\t" + data.Insert(data.Length - 1, ".") + "°C";
+			//		} else {
+			//			edtLog.Text += variable.Value.ToString();//Environment.NewLine + variable.Id.ToString() + "  " + 
+			//		}
+			//	}
+			//	edtLog.Text += Environment.NewLine;
+			//}
 
 			//	************************************************************************************************
 

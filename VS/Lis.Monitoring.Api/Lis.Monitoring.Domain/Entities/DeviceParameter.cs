@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 using Lis.Monitoring.Abstractions.Entities;
 
 namespace Lis.Monitoring.Domain.Entities {
-	public class Device : Entity {
+	public class DeviceParameter : Entity {
 		public string Description { get; set; }
-		public string IpAddress { get; set; }
-		public string Port { get; set; }
-		public string Community { get; set; }
+		public string Oid { get; set; }
+		public string Unit { get; set; }
+		public long IdDevice { get; set; }
+		public Device Device { get; set; }		
 		public DateTime Inserted { get; set; }
 		public bool Active { get; set; }
-		public ICollection<DeviceParameter> DeviceParameter { get; set; } = new List<DeviceParameter>();
 	}
 }

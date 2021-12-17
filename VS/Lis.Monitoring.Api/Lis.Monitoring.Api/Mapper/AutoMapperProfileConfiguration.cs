@@ -8,7 +8,8 @@ namespace Lis.Monitoring.Api.Mapper {
 		public AutoMapperProfileConfiguration() : this("BaseProfile") { }
 
 		public AutoMapperProfileConfiguration(string profileName) : base(profileName) {
-			CreateMap<Member, MemberDto>().ForMember(dest => dest.ZasilatNotifikace, opt => opt.Ignore());
+			CreateMap<Member, MemberDto>()
+				.ForMember(dest => dest.ZasilatNotifikace, opt => opt.Ignore());
 			CreateMap<Device, DeviceDto>();
 		}
 	}
