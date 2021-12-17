@@ -11,7 +11,9 @@ namespace Lis.Monitoring.Infrastructure
 
 		public DbSet<Member> Member { get; set; }
       public DbSet<Device> Device { get; set; }
-
+      public DbSet<DeviceParameter> DeviceParameter { get; set; }
+      public DbSet<DeviceParameterData> DeviceParameterData { get; set; }
+      public DbSet<MemberType> MemberType { get; set; }
 
       private void ApplyEntityConfigurations(ModelBuilder modelBuilder) 
 		{

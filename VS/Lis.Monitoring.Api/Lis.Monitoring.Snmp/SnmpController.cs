@@ -9,15 +9,25 @@ namespace Lis.Monitoring.Snmp {
 
 		}
 
-		public Dictionary<Oid, AsnType> SnmpRequest(string ip, int port, string community, List<string> oidList) {
+		public Dictionary<string, object> SnmpRequest(string ip, int port, string community, List<string> oidList) {
+			Dictionary<string, object> result = null;
 			try {
 				SimpleSnmp snmp = new SimpleSnmp(ip, port, community);
 
 				if(!snmp.Valid) {
 					return null;
 				}
+				Dictionary<Oid, AsnType> sensorData = snmp.Get(_snmpVersion, oidList.ToArray());
 
-				return snmp.Get(_snmpVersion, oidList.ToArray());
+				if(sensorData.Count > 0) {
+					result = new Dictionary<string, object>();
+					foreach(KeyValuePair<Oid, AsnType> data in sensorData) {
+						result.Add(data.Key.ToString(), (object)data.Value);
+					}
+				}
+
+
+				return result;
 			} catch {
 				return null;
 			}

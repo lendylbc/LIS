@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,8 +10,8 @@ namespace Lis.Monitoring.Domain.Entities {
 	public class DeviceParameter : Entity {
 		public string Description { get; set; }
 		public string Oid { get; set; }
-		public string Unit { get; set; }
-		public long IdDevice { get; set; }
+		public string Unit { get; set; }		
+		public long DeviceId{ get; set; }
 		public Device Device { get; set; }		
 		public DateTime Inserted { get; set; }
 		public bool Active { get; set; }

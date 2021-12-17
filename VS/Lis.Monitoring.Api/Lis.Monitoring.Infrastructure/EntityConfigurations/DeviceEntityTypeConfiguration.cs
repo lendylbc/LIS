@@ -11,6 +11,8 @@ namespace Lis.Monitoring.Infrastructure.EntityConfigurations {
 			userConfiguration.HasKey(r => r.Id);
 
 			userConfiguration.HasIndex(r => r.IpAddress).IsUnique();
+
+			//userConfiguration.HasMany(p => p.DeviceParameter);
 		}
 	}
 }

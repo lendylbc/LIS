@@ -20,23 +20,28 @@ namespace Lis.Monitoring.Services.Entities {
 			EntitySet = DbService.Set<TEntity>();
 		}
 
-		public virtual async Task<TEntity> GetByIdAsync(TId id) {
-			TEntity entity = await EntitySet.SingleOrDefaultAsync(x => x.Id.Equals(id));
-			return entity;
-		}
-
 		public virtual TEntity GetById(TId id) {
 			TEntity entity = EntitySet.SingleOrDefault(x => x.Id.Equals(id));
 			return entity;
 		}
-
-		public virtual async Task<TEntity> Save(TEntity entity) {
+		public virtual TEntity Save(TEntity entity) {
 			EntitySet.Add(entity);
-			await DbService.SaveChangesAsync();
+			DbService.SaveChanges();
 			return entity;
 		}
 
-		public virtual async Task<ICollection<TEntity>> GetList(TFilter query) {
+		public virtual async Task<TEntity> GetByIdAsync(TId id) {
+			TEntity entity = await EntitySet.SingleOrDefaultAsync(x => x.Id.Equals(id));
+			return entity;
+		}		
+
+		public virtual async Task<TEntity> SaveAsync(TEntity entity) {
+			EntitySet.Add(entity);
+			await DbService.SaveChangesAsync();
+			return entity;
+		}		
+
+		public virtual async Task<ICollection<TEntity>> GetListAsync(TFilter query) {
 			IQueryable<TEntity> queryable = EntitySet
 				.Skip(query.Page * query.Size)
 				.Take(query.Size);
@@ -59,7 +64,7 @@ namespace Lis.Monitoring.Services.Entities {
 			return query;
 		}
 
-		public virtual Task<TEntity> Update(TId id, TUpdateDto data) {
+		public virtual Task<TEntity> UpdateAsync(TId id, TUpdateDto data) {
 			throw new System.NotImplementedException();
 		}
 

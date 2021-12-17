@@ -7,10 +7,11 @@ namespace Lis.Monitoring.Services.Abstractions {
        where TEntity : class, IEntity<TId>
        where TId : struct
        where TFilter : class {
-      Task<TEntity> GetByIdAsync(TId id);
       TEntity GetById(TId id);
-      Task<TEntity> Save(TEntity entity);
-      Task<ICollection<TEntity>> GetList(TFilter query);
-      Task<TEntity> Update(TId id, TUpdateDto data);
+      TEntity Save(TEntity entity);
+      Task<TEntity> GetByIdAsync(TId id);      
+      Task<TEntity> SaveAsync(TEntity entity);
+      Task<ICollection<TEntity>> GetListAsync(TFilter query);
+      Task<TEntity> UpdateAsync(TId id, TUpdateDto data);      
    }
 }

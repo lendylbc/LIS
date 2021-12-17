@@ -4,6 +4,10 @@ using Lis.Monitoring.Dto.Core;
 using Lis.Monitoring.Domain.Entities;
 using Lis.Monitoring.Services.Queries;
 using Lis.Monitoring.Dto.Communication;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Lis.Monitoring.Services.Entities {
 	public class DeviceService : BaseEntityService<Device, long, DeviceQuery, DeviceDto>, IDeviceService {
@@ -11,5 +15,11 @@ namespace Lis.Monitoring.Services.Entities {
 		public DeviceService(DbService dbService) : base(dbService) {
 		}
 
-	}
+      public IEnumerable<Device> GetAllDevicesWithParams() {
+         var devices = EntitySet.Where(x => x.Active)
+             .Include(d => d.DeviceParameter);
+
+         return devices;
+      }
+   }
 }

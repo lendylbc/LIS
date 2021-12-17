@@ -53,7 +53,7 @@ namespace Lis.Monitoring.Api.Controllers {
 		[ProducesResponseType(400)]
 		[ProducesResponseType(401)]
 		public async Task<IPagedResponse<TDto>> Get([FromQuery] TQuery query) {
-			ICollection<TEntity> items = await EntityService.GetList(query);
+			ICollection<TEntity> items = await EntityService.GetListAsync(query);
 
 			var response = new PagedResponse<TDto> {
 				Page = query.Page,
@@ -70,7 +70,7 @@ namespace Lis.Monitoring.Api.Controllers {
 		[ProducesResponseType(400)]
 		[ProducesResponseType(401)]
 		public virtual async Task<ActionResult<TDto>> Save([FromBody] TInputDto dto) {
-			TEntity res = await EntityService.Save(Mapper.Map<TEntity>(dto));
+			TEntity res = await EntityService.SaveAsync(Mapper.Map<TEntity>(dto));
 
 			return CreatedAtAction(nameof(GetById), new { res.Id }, Mapper.Map<TInputDto>(res));
 		}
@@ -81,7 +81,7 @@ namespace Lis.Monitoring.Api.Controllers {
 		[ProducesResponseType(409)]
 		public virtual async Task<IActionResult> Put(TId id, TUpdateDto data) {
 			try {
-				TEntity entity = await EntityService.Update(id, data);
+				TEntity entity = await EntityService.UpdateAsync(id, data);
 			} catch(Exception xe) {
 				return BadRequest(new { message = xe.Message });
 			}

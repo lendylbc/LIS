@@ -123,7 +123,8 @@ namespace Lis.Monitoring.Api {
 
 			services.AddScoped<IMemberService, MemberService>();
 			services.AddScoped<IDeviceService, DeviceService>();
-
+			services.AddScoped<IDeviceParameterDataService, DeviceParameterDataService>();
+			
 			services.AddSwaggerGen(c => {
 				c.SwaggerDoc("v1", new OpenApiInfo { Title = "Lis.Monitoring.Api", 
 					Version = "v1",
@@ -159,6 +160,7 @@ namespace Lis.Monitoring.Api {
 			});
 
 			services.AddScoped<IScopedScheduleService, DeviceInfoScheduledService>();
+			services.AddScoped<ISnmpService, SnmpService>();
 
 			services.AddCronJob<DeviceScheduler>(c => {
 				c.TimeZoneInfo = TimeZoneInfo.Local;

@@ -24,8 +24,6 @@ namespace Lis.Monitoring.Api.Controllers {
 					"Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
 			  };
 
-		private readonly ILogger<DeviceController> _logger;
-
 		//public DeviceController(ILogger<DeviceController> logger) {
 		//	_logger = logger;
 		//}
