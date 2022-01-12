@@ -5,56 +5,47 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Lis.Monitoring.Dto;
+using Lis.Monitoring.Dto.Core;
 using Newtonsoft.Json;
 using RestSharp;
 
 namespace Lis.Monitoring.Api {
 	public class RequestController: ApiBase {
+		private const string _API_URL = "https://localhost:44336";
 		public string JwtToken { get; set; }
-
-		public RestResponse Post(BaseDto bodyData, bool useAuthToken = true) {
+		//BaseDto<long>
+		public RestResponse Post(object bodyData, string resource, Method method, bool useAuthToken = true) {
 			
-			RestClient client = new RestClient("https://localhost:44336");
+			RestClient client = new RestClient(_API_URL);
 			//client.Timeout = -1;
-			RestRequest request = new RestRequest("api/Member/authentication/", Method.Post);
-			request.AddHeader("Content-Type", "application/json");
+			RestRequest request = new RestRequest($"api/{resource}", method);
+			if(bodyData != null) {
+				request.AddHeader("Content-Type", "application/json");
+			}
+			if(useAuthToken) {
+				if(!string.IsNullOrEmpty(JwtToken)) {
+					request.AddHeader("Authorization", $"Bearer {JwtToken}");
+				} else {
+					throw new UnauthorizedAccessException("Uživatel musí být přihlášen!");
+				}
+			}
 
 			request.RequestFormat = DataFormat.Json;
-			string body = JsonConvert.SerializeObject(bodyData);
-			//request.AddParameter("application/json", body, ParameterType.RequestBody);
-			request.AddBody(body, "application/json");
+
+			if(bodyData != null) {
+				
+				string body = JsonConvert.SerializeObject(bodyData);
+				//request.AddParameter("application/json", body, ParameterType.RequestBody);
+				request.AddBody(body, "application/json");
+			}
+
 			Task<RestResponse> response = client.ExecuteAsync(request);
 
 			LogRequest(client, request, response.Result);
 
 
 			return response?.Result;
-		}
-
-		public object Post(bool useAuthToken = true) {
-			UzivatelLogin UzivatelLogin = new UzivatelLogin();// { Email = edtLogin.Text, Heslo = edtPassword.Text };
-			var client = new RestClient("https://localhost:44336");
-			//client.Timeout = -1;
-			var request = new RestRequest("api/Member/authentication/", Method.Post);
-			request.AddHeader("Content-Type", "application/json");
-			
-			request.RequestFormat = DataFormat.Json;
-			var body = @"{
-" + "\n" +
-			@"  ""userName"": ""LENDY"",
-" + "\n" +
-			@"  ""password"": ""admin""
-" + "\n" +
-			@"}";
-			//request.AddParameter("application/json", body, ParameterType.RequestBody);
-			request.AddBody(body, "application/json");
-			Task<RestResponse> response = client.ExecuteAsync(request);
-
-			LogRequest(client, request, response.Result);
-
-
-			return response.Result;
-		}
+		}	
 	}
 }
 
