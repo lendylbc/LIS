@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Lextm.SharpSnmpLib;
 using Lextm.SharpSnmpLib.Messaging;
+using NModbus;
 using SnmpSharpNet;
 
 namespace WinFormsApp1 {
@@ -31,54 +32,66 @@ namespace WinFormsApp1 {
 		//			edtIp.Text
 		//}
 		private void SnmpRequest(string ip) {
-			IList<Variable> result = Messenger.Get(VersionCode.V1,
-												new IPEndPoint(IPAddress.Parse(ip), 161),
-												new Lextm.SharpSnmpLib.OctetString("public"),
-												new List<Variable> {
-										new Variable(new ObjectIdentifier("1.3.6.1.2.1.1.1.0")),
+			//IList<Variable> result = Messenger.Get(VersionCode.V1,
+			//									new IPEndPoint(IPAddress.Parse(ip), 161),
+			//									new Lextm.SharpSnmpLib.OctetString("public"),
+			//									new List<Variable> {
+			//							new Variable(new ObjectIdentifier("1.3.6.1.2.1.1.1.0")),
 
 
-									new Variable(new ObjectIdentifier("1.3.6.1.4.1.18248.31.1.2.1.1.3.1")),
+			//						new Variable(new ObjectIdentifier("1.3.6.1.4.1.18248.31.1.2.1.1.3.1")),
 
-												},
-												60000);
-
-			if(result != null) {
-				foreach(Variable variable in result) {
-					if(variable.Id.ToString().Equals("1.3.6.1.4.1.18248.31.1.2.1.1.3.1")) {
-						string data = variable.Data.ToString();
-						edtLog.Text += "\t" + data.Insert(data.Length - 1, ".") + "°C";
-					} else {
-						edtLog.Text += variable.Data.ToString();//Environment.NewLine + variable.Id.ToString() + "  " + 
-					}
-				}
-				edtLog.Text += Environment.NewLine;
-			}
-
-			//	************************************************************************************************
-
-			//SimpleSnmp snmp = new SimpleSnmp(ip, 161, "public");
-
-			//if(!snmp.Valid) {
-			//	return;
-			//}
-
-			//Dictionary<Oid, AsnType> result = snmp.Get(SnmpVersion.Ver1, new string[] {
-			//	"1.3.6.1.2.1.1.1.0",
-			//	"1.3.6.1.4.1.18248.31.1.2.1.1.3.1"
-			//});
+			//									},
+			//									60000);
 
 			//if(result != null) {
-			//	foreach(KeyValuePair<Oid, AsnType> variable in result) {
-			//		if(variable.Key.ToString().Equals("1.3.6.1.4.1.18248.31.1.2.1.1.3.1")) {
-			//			string data = variable.Value.ToString();
+			//	foreach(Variable variable in result) {
+			//		if(variable.Id.ToString().Equals("1.3.6.1.4.1.18248.31.1.2.1.1.3.1")) {
+			//			string data = variable.Data.ToString();
 			//			edtLog.Text += "\t" + data.Insert(data.Length - 1, ".") + "°C";
 			//		} else {
-			//			edtLog.Text += variable.Value.ToString();//Environment.NewLine + variable.Id.ToString() + "  " + 
+			//			edtLog.Text += variable.Data.ToString();//Environment.NewLine + variable.Id.ToString() + "  " + 
 			//		}
 			//	}
 			//	edtLog.Text += Environment.NewLine;
 			//}
+
+			//	************************************************************************************************
+
+			SimpleSnmp snmp = new SimpleSnmp(ip, 161, "public");
+
+			if(!snmp.Valid) {
+				return;
+			}
+
+			string[] oids = edtOids.Text.Split(Environment.NewLine);
+
+			Dictionary<Oid, AsnType> result = snmp.Get(SnmpVersion.Ver1, oids);
+
+
+			//	new string[] {
+			//"1.3.6.1.4.1.18248.16.1.1.0",
+
+
+			//	//"1.3.6.1.4.1.18248.16.2.1.1.1.1"//,
+			////"1.3.6.1.2.1.1.1.0",
+			////"1.3.6.1.4.1.18248.31.1.2.1.1.3.1"
+			//});
+			
+			if(result != null) {
+				foreach(KeyValuePair<Oid, AsnType> variable in result) {
+					if(variable.Key.ToString().Equals("1.3.6.1.4.1.18248.31.1.2.1.1.3.1") ||
+						variable.Key.ToString().Equals("1.3.6.1.4.1.18248.31.1.2.1.1.3.4") ||
+						variable.Key.ToString().Equals("1.3.6.1.4.1.18248.1.1.1.0") ||
+						variable.Key.ToString().Equals("1.3.6.1.4.1.18248.16.1.1.0")) {						
+						string data = variable.Value.ToString();
+						edtLog.Text += "\t" + data.Insert(data.Length - 1, ".") + "°C";
+					} else {
+						edtLog.Text += variable.Value.ToString();//Environment.NewLine + variable.Id.ToString() + "  " + 
+					}
+					edtLog.Text += Environment.NewLine;
+				}				
+			}
 
 			//	************************************************************************************************
 
@@ -215,15 +228,94 @@ namespace WinFormsApp1 {
 			}
 		}
 
-		private void button1_Click(object sender, EventArgs e) {
+		private void btnTimer_Click(object sender, EventArgs e) {
 			if(timer1.Enabled)
 				timer1.Stop();
 			else
 				timer1.Start();
 		}
 
-		private void button2_Click(object sender, EventArgs e) {
+		private void btnClearLog_Click(object sender, EventArgs e) {
 			edtLog.Clear();
+		}
+
+		private void btnQuido_Click(object sender, EventArgs e) {			
+			edtOids.Text = "1.3.6.1.4.1.18248.16.1.3.0" + Environment.NewLine +
+			"1.3.6.1.4.1.18248.16.1.1.0" + Environment.NewLine +
+			"1.3.6.1.4.1.18248.16.2.1.1.2.1" + Environment.NewLine +
+			 "1.3.6.1.4.1.18248.16.2.1.1.1.1";
+			edtSnmpIp.Text = "192.168.1.243";
+		}
+
+		private void btnTme_Click(object sender, EventArgs e) {			
+			edtOids.Text = "1.3.6.1.4.1.18248.1.1.3.0" + Environment.NewLine + 
+				"1.3.6.1.4.1.18248.1.1.1.0";
+			edtSnmpIp.Text = "192.168.1.244";
+		}
+
+		private void btnPapouch_Click(object sender, EventArgs e) {
+			edtOids.Text = "1.3.6.1.4.1.18248.31.1.1.1.0" + Environment.NewLine +
+				"1.3.6.1.4.1.18248.31.1.2.1.1.3.1" + Environment.NewLine +
+			"1.3.6.1.4.1.18248.31.1.2.1.1.3.4";
+			edtSnmpIp.Text = "192.168.1.245";
+		}
+
+		private void btnModbus_Click(object sender, EventArgs e) {
+			TcpClient client;
+
+			client = new TcpClient();
+			client.ReceiveTimeout = 2000;
+
+			try {
+				client.BeginConnect(edtModbusIp.Text, (int)edtModbusPort.Value, null, null);
+
+				// Create modbus master device on the tcp client
+				//ModbusIpMaster master = ModbusIpMaster.CreateIp(tcpClient);
+				ModbusFactory modbusFactory = new ModbusFactory();
+				IModbusMaster modbusMaster = modbusFactory.CreateMaster(client);
+
+				//modbusSlaveTransport = modbusFactory.CreateSlaveNetwork(tcpListener);
+				if(client.Connected) {
+					try {
+						//modbusMaster.WriteMultipleRegisters(0, 0, new ushort[] { 1, 2, 3, 4, 5 });
+						modbusMaster.WriteMultipleCoils(0, 0, new bool[] { true, false, true, false, true });
+
+						//	WriteMultipleRegisters
+					} catch {
+
+					}
+					//bool[] dInputs = modbusMaster.ReadInputs(0, 0, 5);
+				}
+			} catch {
+
+			}
+			
+			client.Close();
+				
+
+			//TcpClient client;
+
+			//client = new TcpClient(edtModbusIp.Text, (int)edtModbusPort.Value);
+			//client.ReceiveTimeout = 2000;
+
+			//byte[] commandTestBytes = Encoding.ASCII.GetBytes(edtModbusData.Text);
+
+			////byte[] dataCommand = new byte[commandTestBytes.Length + 2];
+
+			////Array.Copy(commandTestBytes, 0, dataCommand, 1, commandTestBytes.Length);
+
+			////dataCommand[0] = 0x02;
+			////dataCommand[dataCommand.Length - 1] = 0x03;
+
+			//byte[] data = RequestData(commandTestBytes, client);
+
+			//if(data != null) {
+			//	//edtLog.Text = BitConverter.ToString(data).Replace("-", "");
+
+			//	edtLog.Text += Environment.NewLine + Encoding.ASCII.GetString(data);
+			//}
+
+			//client.Close();
 		}
 	}
 }

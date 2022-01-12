@@ -15,7 +15,7 @@ namespace Lis.Monitoring.Domain.Entities {
 		public string Surname { get; set; }
 		public string Email { get; set; }
 		public bool Active { get; set; }
-		public long MemberTypeId { get; set; }
+		public int MemberType { get; set; }
 
 		[NotMapped]
 		public string UserName => Email;

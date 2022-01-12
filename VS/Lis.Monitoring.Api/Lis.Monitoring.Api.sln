@@ -21,7 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lis.Monitoring.Services", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lis.Monitoring.Shared", "Lis.Monitoring.Shared\Lis.Monitoring.Shared.csproj", "{63E9F0F1-9F4A-4D80-8D32-4C39D32CE9AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lis.Monitoring.Snmp", "Lis.Monitoring.Snmp\Lis.Monitoring.Snmp.csproj", "{76D829E7-9CEF-4304-826E-7272F7848A55}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lis.Monitoring.Snmp", "Lis.Monitoring.Snmp\Lis.Monitoring.Snmp.csproj", "{76D829E7-9CEF-4304-826E-7272F7848A55}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lis.Monitoring.Modbus", "Lis.Monitoring.Modbus\Lis.Monitoring.Modbus.csproj", "{1102F081-9955-4FC1-BA7B-1FFD0361E037}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +63,10 @@ Global
 		{76D829E7-9CEF-4304-826E-7272F7848A55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76D829E7-9CEF-4304-826E-7272F7848A55}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76D829E7-9CEF-4304-826E-7272F7848A55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1102F081-9955-4FC1-BA7B-1FFD0361E037}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1102F081-9955-4FC1-BA7B-1FFD0361E037}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1102F081-9955-4FC1-BA7B-1FFD0361E037}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1102F081-9955-4FC1-BA7B-1FFD0361E037}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -74,6 +80,7 @@ Global
 		{236F28E8-42DE-4287-B2F2-E72043F32559} = {1BD4D614-8CBF-494D-BEFC-9CCEE2B4EC45}
 		{63E9F0F1-9F4A-4D80-8D32-4C39D32CE9AC} = {1BD4D614-8CBF-494D-BEFC-9CCEE2B4EC45}
 		{76D829E7-9CEF-4304-826E-7272F7848A55} = {1BD4D614-8CBF-494D-BEFC-9CCEE2B4EC45}
+		{1102F081-9955-4FC1-BA7B-1FFD0361E037} = {1BD4D614-8CBF-494D-BEFC-9CCEE2B4EC45}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7711F541-8307-4EE6-81DD-380658D8868E}

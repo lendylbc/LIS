@@ -9,7 +9,7 @@ using Lis.Monitoring.Abstractions.Entities;
 namespace Lis.Monitoring.Domain.Entities {
 	public class DeviceParameter : Entity {
 		public string Description { get; set; }
-		public string Oid { get; set; }
+		public string Address { get; set; }
 		public string Unit { get; set; }		
 		public long DeviceId{ get; set; }
 		public Device Device { get; set; }		

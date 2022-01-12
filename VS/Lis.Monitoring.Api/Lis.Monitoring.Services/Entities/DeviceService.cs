@@ -15,8 +15,8 @@ namespace Lis.Monitoring.Services.Entities {
 		public DeviceService(DbService dbService) : base(dbService) {
 		}
 
-      public IEnumerable<Device> GetAllDevicesWithParams() {
-         var devices = EntitySet.Where(x => x.Active)
+      public IEnumerable<Device> GetAllDevicesWithParams(int deviceType) {
+         var devices = EntitySet.Where(x => x.Active && x.DeviceType == deviceType)
              .Include(d => d.DeviceParameter);
 
          return devices;

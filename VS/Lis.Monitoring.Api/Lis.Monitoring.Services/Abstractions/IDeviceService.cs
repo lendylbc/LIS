@@ -7,6 +7,6 @@ using System.Collections.Generic;
 
 namespace Lis.Monitoring.Services.Abstractions {
 	public interface IDeviceService : IBaseEntityService<Device, long, DeviceQuery, DeviceDto> {
-		IEnumerable<Device> GetAllDevicesWithParams();		
+		IEnumerable<Device> GetAllDevicesWithParams(int deviceType);		
 	}
 }

@@ -14,6 +14,8 @@
     <ProjectReference Include="..\Lis.Monitoring.Domain\Lis.Monitoring.Domain.csproj" />
     <ProjectReference Include="..\Lis.Monitoring.Dto\Lis.Monitoring.Dto.csproj" />
     <ProjectReference Include="..\Lis.Monitoring.Infrastructure\Lis.Monitoring.Infrastructure.csproj" />
+    <ProjectReference Include="..\Lis.Monitoring.Modbus\Lis.Monitoring.Modbus.csproj" />
+    <ProjectReference Include="..\Lis.Monitoring.Shared\Lis.Monitoring.Shared.csproj" />
     <ProjectReference Include="..\Lis.Monitoring.Snmp\Lis.Monitoring.Snmp.csproj" />
   </ItemGroup>
 
