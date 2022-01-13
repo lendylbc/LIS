@@ -25,7 +25,7 @@ namespace Lis.Monitoring.Services.Entities {
 		public async Task<IEnumerable<ActiveDeviceLastData>> GetAllActiveDevicesWithLastData() {
 			DbSet<ActiveDeviceLastData> lastDataSet = DbService.Set<ActiveDeviceLastData>();
 
-			return await lastDataSet.Where(x => x.Value != null).ToListAsync();
+			return await lastDataSet.ToListAsync();
 		}
 	}
 }

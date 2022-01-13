@@ -271,12 +271,17 @@ namespace WinFormsApp1 {
 
 				// Create modbus master device on the tcp client
 				//ModbusIpMaster master = ModbusIpMaster.CreateIp(tcpClient);
+
+				//RequestData(new byte[] { 0xaa, 0x55, 0x5a }, client);
+				//return;
+				 
 				ModbusFactory modbusFactory = new ModbusFactory();
 				IModbusMaster modbusMaster = modbusFactory.CreateMaster(client);
 
 				//modbusSlaveTransport = modbusFactory.CreateSlaveNetwork(tcpListener);
 				if(client.Connected) {
 					try {
+						//modbusMaster.WriteSingleRegister(0, 0, 10);
 						//modbusMaster.WriteMultipleRegisters(0, 0, new ushort[] { 1, 2, 3, 4, 5 });
 						modbusMaster.WriteMultipleCoils(0, 0, new bool[] { true, false, true, false, true });
 
