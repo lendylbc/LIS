@@ -8,7 +8,6 @@ using Lis.Monitoring.Dto.Communication;
 using Lis.Monitoring.Services.Queries;
 
 namespace Lis.Monitoring.Services.Abstractions {
-	public interface IDeviceParameterDataService : IBaseEntityService<DeviceParameterData, long, DeviceParameterDataQuery, DeviceParameterDataDto> {
-		Task<IEnumerable<ActiveDeviceLastData>> GetLastDataAllActiveDevices();
+	public interface IDeviceParameterConditionService : IBaseEntityService<DeviceParameterCondition, long, DeviceParameterConditionQuery, DeviceParameterConditionDto> {
 	}
 }

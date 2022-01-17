@@ -63,7 +63,8 @@ namespace Lis.Monitoring.Manager {
 		private void GetActiveDeviceData() {
 			PagedResponse<ActiveDeviceLastDataDto> result = _apiController.GetActiveDeviceLastData();
 			if(result != null) {
-				grdData.DataSource = result.Data;
+				var data = result.Data.OrderByDescending(x => x.Inserted).ToList();
+				grdData.DataSource = data;
 			} else {
 				//edtLog.Text = result.
 				edtLog.Text = _apiController.Request;
@@ -90,12 +91,14 @@ namespace Lis.Monitoring.Manager {
 		}
 
 		private void DesignDataGrid() {
-			grdData.Columns["Id"].Visible = false;
-			grdData.Columns["DeviceId"].Visible = false;
-			grdData.Columns["ParamId"].Visible = false;
-			//grdData.Columns["ParamDesc"].Visible = false;
-			grdData.Columns["Value"].Visible = false;
-			grdData.Columns["Unit"].Visible = false;
+			try {
+				grdData.Columns["Id"].Visible = false;
+				grdData.Columns["DeviceId"].Visible = false;
+				grdData.Columns["ParamId"].Visible = false;
+				//grdData.Columns["ParamDesc"].Visible = false;
+				grdData.Columns["Value"].Visible = false;
+				grdData.Columns["Unit"].Visible = false;
+			} catch { }
 		}
 
 		private void grdDevices_DataSourceChanged(object sender, EventArgs e) {

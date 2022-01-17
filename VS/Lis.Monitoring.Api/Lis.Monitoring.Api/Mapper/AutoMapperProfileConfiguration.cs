@@ -11,6 +11,9 @@ namespace Lis.Monitoring.Api.Mapper {
 			CreateMap<Member, MemberDto>()
 				.ForMember(dest => dest.ZasilatNotifikace, opt => opt.Ignore());
 			CreateMap<Device, DeviceDto>();
+			CreateMap<DeviceParameter, DeviceParameterDto>();
+			CreateMap<DeviceParameterCondition, DeviceParameterConditionDto>();
+			CreateMap<DeviceParameterData, DeviceParameterDataDto>();
 			CreateMap<ActiveDeviceLastData, ActiveDeviceLastDataDto>();
 		}
 	}

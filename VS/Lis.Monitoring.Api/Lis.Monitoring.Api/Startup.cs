@@ -124,7 +124,9 @@ namespace Lis.Monitoring.Api {
 			services.AddScoped<IMemberService, MemberService>();
 			services.AddScoped<IDeviceService, DeviceService>();
 			services.AddScoped<IDeviceParameterDataService, DeviceParameterDataService>();
-			
+			services.AddScoped<IDeviceParameterService, DeviceParameterService>();
+			services.AddScoped<IDeviceParameterConditionService, DeviceParameterConditionService>();
+
 			services.AddSwaggerGen(c => {
 				c.SwaggerDoc("v1", new OpenApiInfo { Title = "Lis.Monitoring.Api", 
 					Version = "v1",

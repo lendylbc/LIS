@@ -261,6 +261,49 @@ namespace WinFormsApp1 {
 		}
 
 		private void btnModbus_Click(object sender, EventArgs e) {
+
+			//using(TcpClient client = new TcpClient(edtModbusIp.Text, (int)edtModbusPort.Value)) {
+
+			//	//int byteCount = Encoding.ASCII.GetByteCount(edtModbusData.Text);
+			//	//byte[] sendData = new byte[byteCount + 1];
+
+			//	//Array.Copy(Encoding.ASCII.GetBytes(edtModbusData.Text), sendData, byteCount);
+			//	//sendData[byteCount] = 0xFF;
+			//	if(!client.Connected) {
+			//		edtLog.Text += "not connected";
+			//		//client.Connect();
+			//	}
+			//		byte[] sendData = Encoding.ASCII.GetBytes(edtModbusData.Text);
+
+			//	client.SendBufferSize = 0;
+			//	//Task.Delay(1000);
+
+			//	using(NetworkStream stream = client.GetStream()) {
+			//		//Task.Delay(1000);
+			//		if(stream.CanWrite) {
+			//			edtLog.Text += "can write";
+			//			stream.Write(sendData, 0, sendData.Length);
+			//			//stream.Write(sendData, 0, sendData.Length);
+			//			//stream.Flush();
+			//			//stream.
+			//		} else {
+			//			edtLog.Text += "can't write";						
+			//		}
+
+			//		//stream.Write(sendData, 0, sendData.Length);
+			//		//stream.Write(sendData, 0, sendData.Length);
+			//		//stream.Write(sendData, 0, sendData.Length);
+			//		//stream.Write(sendData, 0, sendData.Length);
+
+			//		//Task.Delay(1000);
+			//		stream.Close();
+			//		//stream.Dispose();
+			//	}
+			//	client.Close();
+			//	//client.Dispose();
+			//}
+
+
 			TcpClient client;
 
 			client = new TcpClient();
@@ -268,22 +311,22 @@ namespace WinFormsApp1 {
 
 			try {
 				client.BeginConnect(edtModbusIp.Text, (int)edtModbusPort.Value, null, null);
-
+				client.SendBufferSize = 0;
 				// Create modbus master device on the tcp client
 				//ModbusIpMaster master = ModbusIpMaster.CreateIp(tcpClient);
 
 				//RequestData(new byte[] { 0xaa, 0x55, 0x5a }, client);
 				//return;
-				 
+
 				ModbusFactory modbusFactory = new ModbusFactory();
 				IModbusMaster modbusMaster = modbusFactory.CreateMaster(client);
 
 				//modbusSlaveTransport = modbusFactory.CreateSlaveNetwork(tcpListener);
 				if(client.Connected) {
 					try {
-						//modbusMaster.WriteSingleRegister(0, 0, 10);
+						modbusMaster.WriteSingleRegister(6, 6, 18);
 						//modbusMaster.WriteMultipleRegisters(0, 0, new ushort[] { 1, 2, 3, 4, 5 });
-						modbusMaster.WriteMultipleCoils(0, 0, new bool[] { true, false, true, false, true });
+						//modbusMaster.WriteMultipleCoils(0, 0, new bool[] { true, false, true, false, true });
 
 						//	WriteMultipleRegisters
 					} catch {
@@ -294,9 +337,9 @@ namespace WinFormsApp1 {
 			} catch {
 
 			}
-			
+
 			client.Close();
-				
+
 
 			//TcpClient client;
 

@@ -33,20 +33,23 @@ namespace Lis.Monitoring.Services.Entities {
 		public virtual async Task<TEntity> GetByIdAsync(TId id) {
 			TEntity entity = await EntitySet.SingleOrDefaultAsync(x => x.Id.Equals(id));
 			return entity;
-		}		
+		}
 
 		public virtual async Task<TEntity> SaveAsync(TEntity entity) {
 			EntitySet.Add(entity);
 			await DbService.SaveChangesAsync();
 			return entity;
-		}		
+		}
 
 		public virtual async Task<ICollection<TEntity>> GetListAsync(TFilter query) {
-			IQueryable<TEntity> queryable = EntitySet
-				.Skip(query.Page * query.Size)
-				.Take(query.Size);
+			IQueryable<TEntity> queryable = EntitySet;
 
 			queryable = EntityFilter(queryable, query);
+
+			if(query.Size > 0) {
+				queryable = queryable.Skip(query.Page * query.Size)
+					.Take(query.Size);
+			}
 
 			var entities = await queryable
 				.ToListAsync();

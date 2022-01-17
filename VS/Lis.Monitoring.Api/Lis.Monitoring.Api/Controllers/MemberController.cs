@@ -20,22 +20,9 @@ namespace Lis.Monitoring.Api.Controllers {
 
 		private readonly IAuthJwt _authJwt;
 
-		private readonly List<MemberDto> lstMember = new List<MemberDto>()
-		{
-				new MemberDto() {Id=1, Name="Lendy" },
-				new MemberDto() {Id=2, Name="Halba" },
-				new MemberDto() {Id=3, Name="Jirka"},
-				new MemberDto() {Id=3, Name="Irča"}
-		  };
-
 		public MemberController(IMemberService memberService, IMapper mapper, IAuthJwt authJwt) : base(memberService, mapper) {// : base(TEntityService entityService, mapper) {		//IMemberService entityService, IMapper mapper, 
 			_authJwt = authJwt;
 		}
-
-		//[HttpGet]
-		//public IEnumerable<MemberDto> AllMembers() {
-		//	return lstMember;
-		//}
 
 		[AllowAnonymous]
 		// POST api/<MembersController>

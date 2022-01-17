@@ -25,36 +25,37 @@ namespace Lis.Monitoring.Manager {
 		/// </summary>
 		private void InitializeComponent() {
 			this.components = new System.ComponentModel.Container();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.panel1 = new System.Windows.Forms.Panel();
+			this.btnGetDevices = new System.Windows.Forms.Button();
 			this.btnGetData = new System.Windows.Forms.Button();
 			this.edtPassword = new System.Windows.Forms.TextBox();
 			this.edtLogin = new System.Windows.Forms.TextBox();
 			this.btnGetToken = new System.Windows.Forms.Button();
 			this.panel2 = new System.Windows.Forms.Panel();
-			this.edtLog = new System.Windows.Forms.TextBox();
-			this.btnGetDevices = new System.Windows.Forms.Button();
 			this.panel3 = new System.Windows.Forms.Panel();
+			this.grdData = new System.Windows.Forms.DataGridView();
 			this.grdDevices = new System.Windows.Forms.DataGridView();
 			this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.IpAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Active = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-			this.grdData = new System.Windows.Forms.DataGridView();
+			this.edtLog = new System.Windows.Forms.TextBox();
+			this.timer = new System.Windows.Forms.Timer(this.components);
 			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.ParamDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.timer = new System.Windows.Forms.Timer(this.components);
 			this.panel1.SuspendLayout();
 			this.panel2.SuspendLayout();
 			this.panel3.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.grdDevices)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.grdData)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.grdDevices)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// panel1
@@ -69,6 +70,16 @@ namespace Lis.Monitoring.Manager {
 			this.panel1.Name = "panel1";
 			this.panel1.Size = new System.Drawing.Size(886, 65);
 			this.panel1.TabIndex = 6;
+			// 
+			// btnGetDevices
+			// 
+			this.btnGetDevices.Location = new System.Drawing.Point(199, 12);
+			this.btnGetDevices.Name = "btnGetDevices";
+			this.btnGetDevices.Size = new System.Drawing.Size(75, 23);
+			this.btnGetDevices.TabIndex = 9;
+			this.btnGetDevices.Text = "Get devices";
+			this.btnGetDevices.UseVisualStyleBackColor = true;
+			this.btnGetDevices.Click += new System.EventHandler(this.btnGetDevices_Click);
 			// 
 			// btnGetData
 			// 
@@ -116,25 +127,6 @@ namespace Lis.Monitoring.Manager {
 			this.panel2.Size = new System.Drawing.Size(886, 499);
 			this.panel2.TabIndex = 7;
 			// 
-			// edtLog
-			// 
-			this.edtLog.Dock = System.Windows.Forms.DockStyle.Right;
-			this.edtLog.Location = new System.Drawing.Point(636, 0);
-			this.edtLog.Multiline = true;
-			this.edtLog.Name = "edtLog";
-			this.edtLog.Size = new System.Drawing.Size(250, 499);
-			this.edtLog.TabIndex = 4;
-			// 
-			// btnGetDevices
-			// 
-			this.btnGetDevices.Location = new System.Drawing.Point(199, 12);
-			this.btnGetDevices.Name = "btnGetDevices";
-			this.btnGetDevices.Size = new System.Drawing.Size(75, 23);
-			this.btnGetDevices.TabIndex = 9;
-			this.btnGetDevices.Text = "Get devices";
-			this.btnGetDevices.UseVisualStyleBackColor = true;
-			this.btnGetDevices.Click += new System.EventHandler(this.btnGetDevices_Click);
-			// 
 			// panel3
 			// 
 			this.panel3.Controls.Add(this.grdData);
@@ -145,11 +137,83 @@ namespace Lis.Monitoring.Manager {
 			this.panel3.Size = new System.Drawing.Size(636, 499);
 			this.panel3.TabIndex = 5;
 			// 
+			// grdData
+			// 
+			this.grdData.AllowUserToAddRows = false;
+			this.grdData.AllowUserToDeleteRows = false;
+			this.grdData.AllowUserToResizeRows = false;
+			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.grdData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+			this.grdData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.grdData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.ParamDesc,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewCheckBoxColumn1});
+			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+			dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+			dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.grdData.DefaultCellStyle = dataGridViewCellStyle3;
+			this.grdData.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.grdData.Location = new System.Drawing.Point(0, 224);
+			this.grdData.Name = "grdData";
+			this.grdData.ReadOnly = true;
+			this.grdData.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.grdData.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+			this.grdData.RowHeadersVisible = false;
+			this.grdData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+			this.grdData.Size = new System.Drawing.Size(636, 275);
+			this.grdData.TabIndex = 8;
+			this.grdData.DataSourceChanged += new System.EventHandler(this.grdData_DataSourceChanged);			
+			// 
 			// grdDevices
 			// 
 			this.grdDevices.AllowUserToAddRows = false;
 			this.grdDevices.AllowUserToDeleteRows = false;
 			this.grdDevices.AllowUserToResizeRows = false;
+			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.grdDevices.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+			this.grdDevices.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.grdDevices.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Description,
+            this.IpAddress,
+            this.Active});
+			dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+			dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+			dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.grdDevices.DefaultCellStyle = dataGridViewCellStyle6;
+			this.grdDevices.Dock = System.Windows.Forms.DockStyle.Top;
+			this.grdDevices.Location = new System.Drawing.Point(0, 0);
+			this.grdDevices.Name = "grdDevices";
+			this.grdDevices.ReadOnly = true;
+			this.grdDevices.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
 			dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
 			dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
 			dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
@@ -157,33 +221,7 @@ namespace Lis.Monitoring.Manager {
 			dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
 			dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
 			dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.grdDevices.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
-			this.grdDevices.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.grdDevices.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Description,
-            this.IpAddress,
-            this.Active});
-			dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-			dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-			dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-			this.grdDevices.DefaultCellStyle = dataGridViewCellStyle8;
-			this.grdDevices.Dock = System.Windows.Forms.DockStyle.Top;
-			this.grdDevices.Location = new System.Drawing.Point(0, 0);
-			this.grdDevices.Name = "grdDevices";
-			this.grdDevices.ReadOnly = true;
-			this.grdDevices.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-			dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.grdDevices.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+			this.grdDevices.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
 			this.grdDevices.RowHeadersVisible = false;
 			this.grdDevices.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.grdDevices.Size = new System.Drawing.Size(636, 224);
@@ -213,51 +251,19 @@ namespace Lis.Monitoring.Manager {
 			this.Active.ReadOnly = true;
 			this.Active.Width = 50;
 			// 
-			// grdData
+			// edtLog
 			// 
-			this.grdData.AllowUserToAddRows = false;
-			this.grdData.AllowUserToDeleteRows = false;
-			this.grdData.AllowUserToResizeRows = false;
-			dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.grdData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
-			this.grdData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.grdData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.ParamDesc,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewCheckBoxColumn1});
-			dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
-			dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
-			dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-			this.grdData.DefaultCellStyle = dataGridViewCellStyle11;
-			this.grdData.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.grdData.Location = new System.Drawing.Point(0, 224);
-			this.grdData.Name = "grdData";
-			this.grdData.ReadOnly = true;
-			this.grdData.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-			dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.grdData.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
-			this.grdData.RowHeadersVisible = false;
-			this.grdData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.grdData.Size = new System.Drawing.Size(636, 275);
-			this.grdData.TabIndex = 8;
-			this.grdData.DataSourceChanged += new System.EventHandler(this.grdData_DataSourceChanged);
+			this.edtLog.Dock = System.Windows.Forms.DockStyle.Right;
+			this.edtLog.Location = new System.Drawing.Point(636, 0);
+			this.edtLog.Multiline = true;
+			this.edtLog.Name = "edtLog";
+			this.edtLog.Size = new System.Drawing.Size(250, 499);
+			this.edtLog.TabIndex = 4;
+			// 
+			// timer
+			// 
+			this.timer.Interval = 30000;
+			this.timer.Tick += new System.EventHandler(this.timer_Tick);
 			// 
 			// dataGridViewTextBoxColumn1
 			// 
@@ -284,17 +290,14 @@ namespace Lis.Monitoring.Manager {
 			// dataGridViewCheckBoxColumn1
 			// 
 			this.dataGridViewCheckBoxColumn1.DataPropertyName = "ValueUnit";
+			dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			this.dataGridViewCheckBoxColumn1.DefaultCellStyle = dataGridViewCellStyle2;
 			this.dataGridViewCheckBoxColumn1.HeaderText = "Hodnota";
 			this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
 			this.dataGridViewCheckBoxColumn1.ReadOnly = true;
 			this.dataGridViewCheckBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
 			this.dataGridViewCheckBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.dataGridViewCheckBoxColumn1.Width = 50;
-			// 
-			// timer
-			// 
-			this.timer.Interval = 30000;
-			this.timer.Tick += new System.EventHandler(this.timer_Tick);
+			this.dataGridViewCheckBoxColumn1.Width = 60;
 			// 
 			// MainForm
 			// 
@@ -313,8 +316,8 @@ namespace Lis.Monitoring.Manager {
 			this.panel2.ResumeLayout(false);
 			this.panel2.PerformLayout();
 			this.panel3.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.grdDevices)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.grdData)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.grdDevices)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -334,11 +337,11 @@ namespace Lis.Monitoring.Manager {
 		private System.Windows.Forms.DataGridViewTextBoxColumn Description;
 		private System.Windows.Forms.DataGridViewTextBoxColumn IpAddress;
 		private System.Windows.Forms.DataGridViewCheckBoxColumn Active;
+		private System.Windows.Forms.Timer timer;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
 		private System.Windows.Forms.DataGridViewTextBoxColumn ParamDesc;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewCheckBoxColumn1;
-		private System.Windows.Forms.Timer timer;
 	}
 }
 

@@ -230,7 +230,7 @@ namespace WinFormsApp1 {
 			this.edtModbusData.Name = "edtModbusData";
 			this.edtModbusData.Size = new System.Drawing.Size(173, 23);
 			this.edtModbusData.TabIndex = 14;
-			this.edtModbusData.Text = "5548755487554875548755487";
+			this.edtModbusData.Text = "01234567898765432108564";
 			// 
 			// edtModbusPort
 			// 

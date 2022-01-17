@@ -43,7 +43,7 @@ namespace Lis.Monitoring.Api {
 		}
 
 		public PagedResponse<ActiveDeviceLastDataDto> GetActiveDeviceLastData() {//?Page=0&Size=4
-			RestResponse response = _requestController.Post(null, "Device/GetActiveDeviceLastData", Method.Get, true);
+			RestResponse response = _requestController.Post(null, "DeviceData/GetLastDataAllActiveDevices", Method.Get, true);
 			if(response != null && response.StatusCode == System.Net.HttpStatusCode.OK && !string.IsNullOrEmpty(response.Content)) {
 				return (PagedResponse<ActiveDeviceLastDataDto>)JsonConvert.DeserializeObject<PagedResponse<ActiveDeviceLastDataDto>>(response.Content);
 			} else {
