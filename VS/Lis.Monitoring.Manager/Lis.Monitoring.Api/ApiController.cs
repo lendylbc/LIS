@@ -50,5 +50,39 @@ namespace Lis.Monitoring.Api {
 				return null;
 			}
 		}
+		public DeviceDto GetDeviceById(long id) {
+			RestResponse response = _requestController.Post(null, $"Device/GetById/{id}", Method.Get, true);
+			if(response != null && response.StatusCode == System.Net.HttpStatusCode.OK && !string.IsNullOrEmpty(response.Content)) {
+				return (DeviceDto)JsonConvert.DeserializeObject<DeviceDto>(response.Content);
+			} else {
+				return null;
+			}
+		}
+		public DeviceDto SaveDevice(DeviceDto device) {
+			RestResponse response = _requestController.Post(device, $"Device/Save/", Method.Post, true);
+			if(response != null && response.StatusCode == System.Net.HttpStatusCode.Created && !string.IsNullOrEmpty(response.Content)) {
+				return (DeviceDto)JsonConvert.DeserializeObject<DeviceDto>(response.Content);
+			} else {
+				return null;
+			}
+		}
+
+		public bool UpdateDevice(DeviceDto device) {
+			RestResponse response = _requestController.Post(device, $"Device/Put/{device.Id}", Method.Put, true);
+			if(response != null && response.StatusCode == System.Net.HttpStatusCode.OK) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		public bool DeleteDevice(long id) {
+			RestResponse response = _requestController.Post(null, $"Device/Delete/{id}", Method.Delete, true);
+			if(response != null && response.StatusCode == System.Net.HttpStatusCode.OK) {
+				return true;
+			} else {
+				return false;
+			}
+		}
 	}
 }

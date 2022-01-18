@@ -29,10 +29,10 @@ namespace Lis.Monitoring.Manager {
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.panel1 = new System.Windows.Forms.Panel();
+			this.btnUsers = new System.Windows.Forms.Button();
+			this.btnDevices = new System.Windows.Forms.Button();
 			this.btnGetDevices = new System.Windows.Forms.Button();
 			this.btnGetData = new System.Windows.Forms.Button();
 			this.edtPassword = new System.Windows.Forms.TextBox();
@@ -45,19 +45,12 @@ namespace Lis.Monitoring.Manager {
 			this.ParamDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.grdDevices = new System.Windows.Forms.DataGridView();
-			this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.IpAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Active = new System.Windows.Forms.DataGridViewCheckBoxColumn();
 			this.edtLog = new System.Windows.Forms.TextBox();
 			this.timer = new System.Windows.Forms.Timer(this.components);
-			this.btnDevices = new System.Windows.Forms.Button();
-			this.btnUsers = new System.Windows.Forms.Button();
 			this.panel1.SuspendLayout();
 			this.panel2.SuspendLayout();
 			this.panel3.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.grdData)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.grdDevices)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// panel1
@@ -74,6 +67,27 @@ namespace Lis.Monitoring.Manager {
 			this.panel1.Name = "panel1";
 			this.panel1.Size = new System.Drawing.Size(886, 65);
 			this.panel1.TabIndex = 6;
+			// 
+			// btnUsers
+			// 
+			this.btnUsers.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			this.btnUsers.Location = new System.Drawing.Point(93, 12);
+			this.btnUsers.Name = "btnUsers";
+			this.btnUsers.Size = new System.Drawing.Size(75, 28);
+			this.btnUsers.TabIndex = 11;
+			this.btnUsers.Text = "Uživatelé";
+			this.btnUsers.UseVisualStyleBackColor = true;
+			// 
+			// btnDevices
+			// 
+			this.btnDevices.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			this.btnDevices.Location = new System.Drawing.Point(12, 12);
+			this.btnDevices.Name = "btnDevices";
+			this.btnDevices.Size = new System.Drawing.Size(75, 28);
+			this.btnDevices.TabIndex = 10;
+			this.btnDevices.Text = "Zařízení";
+			this.btnDevices.UseVisualStyleBackColor = true;
+			this.btnDevices.Click += new System.EventHandler(this.btnDevices_Click);
 			// 
 			// btnGetDevices
 			// 
@@ -134,7 +148,6 @@ namespace Lis.Monitoring.Manager {
 			// panel3
 			// 
 			this.panel3.Controls.Add(this.grdData);
-			this.panel3.Controls.Add(this.grdDevices);
 			this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel3.Location = new System.Drawing.Point(0, 0);
 			this.panel3.Name = "panel3";
@@ -169,7 +182,7 @@ namespace Lis.Monitoring.Manager {
 			dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
 			this.grdData.DefaultCellStyle = dataGridViewCellStyle3;
 			this.grdData.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.grdData.Location = new System.Drawing.Point(0, 224);
+			this.grdData.Location = new System.Drawing.Point(0, 0);
 			this.grdData.Name = "grdData";
 			this.grdData.ReadOnly = true;
 			this.grdData.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
@@ -183,7 +196,7 @@ namespace Lis.Monitoring.Manager {
 			this.grdData.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
 			this.grdData.RowHeadersVisible = false;
 			this.grdData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.grdData.Size = new System.Drawing.Size(636, 275);
+			this.grdData.Size = new System.Drawing.Size(636, 499);
 			this.grdData.TabIndex = 8;
 			this.grdData.DataSourceChanged += new System.EventHandler(this.grdData_DataSourceChanged);
 			// 
@@ -221,74 +234,6 @@ namespace Lis.Monitoring.Manager {
 			this.dataGridViewCheckBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.dataGridViewCheckBoxColumn1.Width = 60;
 			// 
-			// grdDevices
-			// 
-			this.grdDevices.AllowUserToAddRows = false;
-			this.grdDevices.AllowUserToDeleteRows = false;
-			this.grdDevices.AllowUserToResizeRows = false;
-			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.grdDevices.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
-			this.grdDevices.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.grdDevices.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Description,
-            this.IpAddress,
-            this.Active});
-			dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-			dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-			dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-			this.grdDevices.DefaultCellStyle = dataGridViewCellStyle6;
-			this.grdDevices.Dock = System.Windows.Forms.DockStyle.Top;
-			this.grdDevices.Location = new System.Drawing.Point(0, 0);
-			this.grdDevices.Name = "grdDevices";
-			this.grdDevices.ReadOnly = true;
-			this.grdDevices.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-			dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.grdDevices.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
-			this.grdDevices.RowHeadersVisible = false;
-			this.grdDevices.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.grdDevices.Size = new System.Drawing.Size(636, 224);
-			this.grdDevices.TabIndex = 7;
-			this.grdDevices.DataSourceChanged += new System.EventHandler(this.grdDevices_DataSourceChanged);
-			// 
-			// Description
-			// 
-			this.Description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.Description.DataPropertyName = "Description";
-			this.Description.HeaderText = "Popis zařízení";
-			this.Description.Name = "Description";
-			this.Description.ReadOnly = true;
-			// 
-			// IpAddress
-			// 
-			this.IpAddress.DataPropertyName = "IpAddress";
-			this.IpAddress.HeaderText = "IP adresa";
-			this.IpAddress.Name = "IpAddress";
-			this.IpAddress.ReadOnly = true;
-			// 
-			// Active
-			// 
-			this.Active.DataPropertyName = "Active";
-			this.Active.HeaderText = "Aktivní";
-			this.Active.Name = "Active";
-			this.Active.ReadOnly = true;
-			this.Active.Width = 50;
-			// 
 			// edtLog
 			// 
 			this.edtLog.Dock = System.Windows.Forms.DockStyle.Right;
@@ -303,26 +248,6 @@ namespace Lis.Monitoring.Manager {
 			this.timer.Interval = 30000;
 			this.timer.Tick += new System.EventHandler(this.timer_Tick);
 			// 
-			// btnDevices
-			// 
-			this.btnDevices.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			this.btnDevices.Location = new System.Drawing.Point(12, 12);
-			this.btnDevices.Name = "btnDevices";
-			this.btnDevices.Size = new System.Drawing.Size(75, 28);
-			this.btnDevices.TabIndex = 10;
-			this.btnDevices.Text = "Zařízení";
-			this.btnDevices.UseVisualStyleBackColor = true;
-			// 
-			// btnUsers
-			// 
-			this.btnUsers.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			this.btnUsers.Location = new System.Drawing.Point(93, 12);
-			this.btnUsers.Name = "btnUsers";
-			this.btnUsers.Size = new System.Drawing.Size(75, 28);
-			this.btnUsers.TabIndex = 11;
-			this.btnUsers.Text = "Zařízení";
-			this.btnUsers.UseVisualStyleBackColor = true;
-			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -331,9 +256,10 @@ namespace Lis.Monitoring.Manager {
 			this.Controls.Add(this.panel2);
 			this.Controls.Add(this.panel1);
 			this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "MainForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "Form1";
+			this.Text = "Přehled";
 			this.Load += new System.EventHandler(this.MainForm_Load);
 			this.panel1.ResumeLayout(false);
 			this.panel1.PerformLayout();
@@ -341,7 +267,6 @@ namespace Lis.Monitoring.Manager {
 			this.panel2.PerformLayout();
 			this.panel3.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.grdData)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.grdDevices)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -357,10 +282,6 @@ namespace Lis.Monitoring.Manager {
 		private System.Windows.Forms.Button btnGetDevices;
 		private System.Windows.Forms.Panel panel3;
 		private System.Windows.Forms.DataGridView grdData;
-		private System.Windows.Forms.DataGridView grdDevices;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Description;
-		private System.Windows.Forms.DataGridViewTextBoxColumn IpAddress;
-		private System.Windows.Forms.DataGridViewCheckBoxColumn Active;
 		private System.Windows.Forms.Timer timer;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
 		private System.Windows.Forms.DataGridViewTextBoxColumn ParamDesc;

@@ -33,6 +33,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>monitoring.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -47,6 +50,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Edits\DeviceEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Edits\DeviceEdit.Designer.cs">
+      <DependentUpon>DeviceEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\DeviceList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DeviceList.Designer.cs">
+      <DependentUpon>DeviceList.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -55,6 +70,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Edits\DeviceEdit.resx">
+      <DependentUpon>DeviceEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DeviceList.resx">
+      <DependentUpon>DeviceList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -90,6 +111,44 @@
       <Project>{1dd943a8-4d32-4ff1-97db-b409007aa5ed}</Project>
       <Name>Lis.Monitoring.Dto</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Lis.Monitoring.Shared\Lis.Monitoring.Shared.csproj">
+      <Project>{ab3350d9-6a87-4063-b15a-bfafa17631e1}</Project>
+      <Name>Lis.Monitoring.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VQFramework.Win\VQFramework.Win.csproj">
+      <Project>{1CA0BFEF-A7CA-4319-8316-314721BC2FFF}</Project>
+      <Name>VQFramework.Win</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="monitoring.ico" />
+    <None Include="Resources\yellow1.png" />
+    <None Include="Resources\settings1.png" />
+    <None Include="Resources\refresh1.png" />
+    <None Include="Resources\red1.png" />
+    <None Include="Resources\insert1.png" />
+    <None Include="Resources\info1.png" />
+    <None Include="Resources\green1.png" />
+    <None Include="Resources\flash1.png" />
+    <None Include="Resources\find1.png" />
+    <None Include="Resources\edit1.png" />
+    <None Include="Resources\delete1.png" />
+    <None Include="Resources\copy1.png" />
+    <None Include="Resources\close1.png" />
+    <None Include="Resources\yellow.png" />
+    <None Include="Resources\settings.png" />
+    <None Include="Resources\refresh.png" />
+    <None Include="Resources\red.png" />
+    <None Include="Resources\info.png" />
+    <None Include="Resources\green.png" />
+    <None Include="Resources\flash.png" />
+    <None Include="Resources\find.png" />
+    <None Include="Resources\copy.png" />
+    <None Include="Resources\close.png" />
+    <None Include="Resources\delete.png" />
+    <None Include="Resources\edit.png" />
+    <None Include="Resources\insert.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

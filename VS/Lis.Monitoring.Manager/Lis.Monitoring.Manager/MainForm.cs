@@ -11,12 +11,12 @@ using Lis.Monitoring.Api;
 using Lis.Monitoring.Dto;
 using Lis.Monitoring.Dto.Communication;
 using Lis.Monitoring.Dto.Core;
+using Lis.Monitoring.Manager.Forms;
 
 namespace Lis.Monitoring.Manager {
 	public partial class MainForm : Form {
 
 		ApiController _apiController;
-
 
 		public MainForm() {
 			InitializeComponent();
@@ -39,22 +39,10 @@ namespace Lis.Monitoring.Manager {
 		}
 
 		private void btnGetDevices_Click(object sender, EventArgs e) {
-			GetDeviceList();
+			
 		}
 
-		private void GetDeviceList() {
-			PagedResponse<DeviceDto> result = _apiController.GetDevicesData();
-			if(result != null) {
-				foreach(DeviceDto device in result.Data) {
-					AddLogText(device.Description);
-				}
-				grdDevices.DataSource = result.Data;
-			} else {
-				//edtLog.Text = result.
-				edtLog.Text = _apiController.Request;
-				edtLog.Text += Environment.NewLine + "___________________________________" + Environment.NewLine + _apiController.Response;
-			}
-		}
+		
 
 		private void btnGetData_Click(object sender, EventArgs e) {
 			GetActiveDeviceData();
@@ -79,17 +67,11 @@ namespace Lis.Monitoring.Manager {
 
 		private void MainForm_Load(object sender, EventArgs e) {
 			Authenticate();
-			GetDeviceList();
+			
 			GetActiveDeviceData();
 			timer.Enabled = true;
 		}
-
-		private void DesignDeviceGrid() {
-			grdDevices.Columns["Id"].Visible = false;
-			grdDevices.Columns["DeviceType"].Visible = false;
-			grdDevices.Columns["Inserted"].Visible = false;
-		}
-
+	
 		private void DesignDataGrid() {
 			try {
 				grdData.Columns["Id"].Visible = false;
@@ -99,10 +81,6 @@ namespace Lis.Monitoring.Manager {
 				grdData.Columns["Value"].Visible = false;
 				grdData.Columns["Unit"].Visible = false;
 			} catch { }
-		}
-
-		private void grdDevices_DataSourceChanged(object sender, EventArgs e) {
-			DesignDeviceGrid();
 		}
 
 		private void grdData_DataSourceChanged(object sender, EventArgs e) {
@@ -116,6 +94,14 @@ namespace Lis.Monitoring.Manager {
 				AddLogText(DateTime.Now.ToString());
 			} finally {
 				timer.Enabled = true;
+			}
+		}
+
+		private void btnDevices_Click(object sender, EventArgs e) {
+			using(DeviceList form = new DeviceList(_apiController)) {
+				if(form.ShowDialog() == DialogResult.OK) {
+					
+				}
 			}
 		}
 	}
