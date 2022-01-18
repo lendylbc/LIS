@@ -88,5 +88,24 @@ namespace Lis.Monitoring.Api.Controllers {
 
 			return Ok();
 		}
+
+		[HttpDelete("{id:int}")]
+		[ProducesResponseType(200)]
+		[ProducesResponseType(400)]
+		[ProducesResponseType(409)]
+		public async Task<IActionResult> Delete(TId id) {
+			try {
+				var device = await EntityService.DeleteAsync(id);
+
+				if(device == null) {
+					return NotFound($"Id = {id} nenalezeno!");
+				}
+
+			} catch(Exception x) {
+				return BadRequest(new { message = x.Message });
+			}
+
+			return Ok();
+		}
 	}
 }

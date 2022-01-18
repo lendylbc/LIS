@@ -12,6 +12,7 @@ namespace Lis.Monitoring.Services.Abstractions {
       Task<TEntity> GetByIdAsync(TId id);      
       Task<TEntity> SaveAsync(TEntity entity);
       Task<ICollection<TEntity>> GetListAsync(TFilter query);
-      Task<TEntity> UpdateAsync(TId id, TUpdateDto data);      
+      Task<TEntity> UpdateAsync(TId id, TUpdateDto data);
+      Task<TEntity> DeleteAsync(TId id);
    }
 }

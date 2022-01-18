@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Lis.Monitoring.Abstractions.Common;
@@ -69,6 +70,19 @@ namespace Lis.Monitoring.Services.Entities {
 
 		public virtual Task<TEntity> UpdateAsync(TId id, TUpdateDto data) {
 			throw new System.NotImplementedException();
+		}
+
+		public virtual async Task<TEntity> DeleteAsync(TId id) {
+			var entity = await GetByIdAsync(id);
+
+			if(entity == null) {
+				throw new Exception($"Id = {id} nebylo nenalezeno!");
+			}
+
+			EntitySet.Remove(entity);
+
+			await DbService.SaveChangesAsync();
+			return entity;
 		}
 
 	}
