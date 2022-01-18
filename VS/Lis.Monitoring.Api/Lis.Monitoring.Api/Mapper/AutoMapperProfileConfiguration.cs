@@ -9,12 +9,12 @@ namespace Lis.Monitoring.Api.Mapper {
 
 		public AutoMapperProfileConfiguration(string profileName) : base(profileName) {
 			CreateMap<Member, MemberDto>()
-				.ForMember(dest => dest.ZasilatNotifikace, opt => opt.Ignore());
-			CreateMap<Device, DeviceDto>();
-			CreateMap<DeviceParameter, DeviceParameterDto>();
-			CreateMap<DeviceParameterCondition, DeviceParameterConditionDto>();
-			CreateMap<DeviceParameterData, DeviceParameterDataDto>();
-			CreateMap<ActiveDeviceLastData, ActiveDeviceLastDataDto>();
+				.ForMember(dest => dest.ZasilatNotifikace, opt => opt.Ignore()).ReverseMap();
+			CreateMap<Device, DeviceDto>().ReverseMap();
+			CreateMap<DeviceParameter, DeviceParameterDto>().ReverseMap();
+			CreateMap<DeviceParameterCondition, DeviceParameterConditionDto>().ReverseMap();
+			CreateMap<DeviceParameterData, DeviceParameterDataDto>().ReverseMap();
+			CreateMap<ActiveDeviceLastData, ActiveDeviceLastDataDto>().ReverseMap();
 		}
 	}
 }

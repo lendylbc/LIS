@@ -10,13 +10,16 @@ using Lis.Monitoring.Services.Abstractions;
 namespace Lis.Monitoring.Services.Aspects {
    public class DeviceInfoScheduledService : IScopedScheduleService {
       ISnmpService _snmpService;
-      public DeviceInfoScheduledService(ISnmpService snmpService) {
+      IModbusService _modbusService;
+      public DeviceInfoScheduledService(ISnmpService snmpService, IModbusService modbusService) {
          _snmpService = snmpService;
+         _modbusService = modbusService;
       }
 
       public async Task DoWork(CancellationToken cancellationToken) {
          _snmpService.GetDevicesData();
-          await Task.CompletedTask;
+         _modbusService.GetDevicesData();
+         await Task.CompletedTask;
       }
    }
 }

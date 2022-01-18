@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace Lis.Monitoring.Shared.Enums {
 	public enum DeviceType {
 		Snmp = 1,
-		Modbus = 2
+		Modbus = 2,
+		SnmpClient = 3
 	}
 }

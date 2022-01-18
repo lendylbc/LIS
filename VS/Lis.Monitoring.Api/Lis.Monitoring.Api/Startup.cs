@@ -163,6 +163,7 @@ namespace Lis.Monitoring.Api {
 
 			services.AddScoped<IScopedScheduleService, DeviceInfoScheduledService>();
 			services.AddScoped<ISnmpService, SnmpService>();
+			services.AddScoped<IModbusService, ModbusService>();
 
 			services.AddCronJob<DeviceScheduler>(c => {
 				c.TimeZoneInfo = TimeZoneInfo.Local;
