@@ -176,7 +176,7 @@ namespace Lis.Monitoring.Api {
 				MailServiceOptions.Heslo,
 				MailServiceOptions.From));
 			//services.AddSingleton(RecaptchaOptions);
-			//services.AddScoped<INotificationService, NotificationService>();
+			services.AddScoped<INotificationService, NotificationService>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Lis.Monitoring.Abstractions\Lis.Monitoring.Abstractions.csproj" />
+    <ProjectReference Include="..\Lis.Monitoring.Shared\Lis.Monitoring.Shared.csproj" />
   </ItemGroup>
 
 </Project>

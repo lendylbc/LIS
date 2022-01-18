@@ -28,10 +28,10 @@ namespace Lis.Monitoring.Manager {
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.btnGetDevices = new System.Windows.Forms.Button();
 			this.btnGetData = new System.Windows.Forms.Button();
@@ -41,16 +41,18 @@ namespace Lis.Monitoring.Manager {
 			this.panel2 = new System.Windows.Forms.Panel();
 			this.panel3 = new System.Windows.Forms.Panel();
 			this.grdData = new System.Windows.Forms.DataGridView();
+			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.ParamDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.grdDevices = new System.Windows.Forms.DataGridView();
 			this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.IpAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Active = new System.Windows.Forms.DataGridViewCheckBoxColumn();
 			this.edtLog = new System.Windows.Forms.TextBox();
 			this.timer = new System.Windows.Forms.Timer(this.components);
-			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.ParamDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.btnDevices = new System.Windows.Forms.Button();
+			this.btnUsers = new System.Windows.Forms.Button();
 			this.panel1.SuspendLayout();
 			this.panel2.SuspendLayout();
 			this.panel3.SuspendLayout();
@@ -60,6 +62,8 @@ namespace Lis.Monitoring.Manager {
 			// 
 			// panel1
 			// 
+			this.panel1.Controls.Add(this.btnUsers);
+			this.panel1.Controls.Add(this.btnDevices);
 			this.panel1.Controls.Add(this.btnGetDevices);
 			this.panel1.Controls.Add(this.btnGetData);
 			this.panel1.Controls.Add(this.edtPassword);
@@ -73,7 +77,7 @@ namespace Lis.Monitoring.Manager {
 			// 
 			// btnGetDevices
 			// 
-			this.btnGetDevices.Location = new System.Drawing.Point(199, 12);
+			this.btnGetDevices.Location = new System.Drawing.Point(797, 2);
 			this.btnGetDevices.Name = "btnGetDevices";
 			this.btnGetDevices.Size = new System.Drawing.Size(75, 23);
 			this.btnGetDevices.TabIndex = 9;
@@ -83,7 +87,7 @@ namespace Lis.Monitoring.Manager {
 			// 
 			// btnGetData
 			// 
-			this.btnGetData.Location = new System.Drawing.Point(296, 13);
+			this.btnGetData.Location = new System.Drawing.Point(716, 27);
 			this.btnGetData.Name = "btnGetData";
 			this.btnGetData.Size = new System.Drawing.Size(75, 23);
 			this.btnGetData.TabIndex = 8;
@@ -93,7 +97,7 @@ namespace Lis.Monitoring.Manager {
 			// 
 			// edtPassword
 			// 
-			this.edtPassword.Location = new System.Drawing.Point(12, 39);
+			this.edtPassword.Location = new System.Drawing.Point(610, 29);
 			this.edtPassword.Name = "edtPassword";
 			this.edtPassword.Size = new System.Drawing.Size(100, 20);
 			this.edtPassword.TabIndex = 7;
@@ -101,7 +105,7 @@ namespace Lis.Monitoring.Manager {
 			// 
 			// edtLogin
 			// 
-			this.edtLogin.Location = new System.Drawing.Point(12, 13);
+			this.edtLogin.Location = new System.Drawing.Point(610, 3);
 			this.edtLogin.Name = "edtLogin";
 			this.edtLogin.Size = new System.Drawing.Size(100, 20);
 			this.edtLogin.TabIndex = 6;
@@ -109,7 +113,7 @@ namespace Lis.Monitoring.Manager {
 			// 
 			// btnGetToken
 			// 
-			this.btnGetToken.Location = new System.Drawing.Point(118, 13);
+			this.btnGetToken.Location = new System.Drawing.Point(716, 3);
 			this.btnGetToken.Name = "btnGetToken";
 			this.btnGetToken.Size = new System.Drawing.Size(75, 23);
 			this.btnGetToken.TabIndex = 5;
@@ -181,7 +185,41 @@ namespace Lis.Monitoring.Manager {
 			this.grdData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.grdData.Size = new System.Drawing.Size(636, 275);
 			this.grdData.TabIndex = 8;
-			this.grdData.DataSourceChanged += new System.EventHandler(this.grdData_DataSourceChanged);			
+			this.grdData.DataSourceChanged += new System.EventHandler(this.grdData_DataSourceChanged);
+			// 
+			// dataGridViewTextBoxColumn1
+			// 
+			this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.dataGridViewTextBoxColumn1.DataPropertyName = "DeviceDesc";
+			this.dataGridViewTextBoxColumn1.HeaderText = "Popis zařízení";
+			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+			this.dataGridViewTextBoxColumn1.ReadOnly = true;
+			// 
+			// ParamDesc
+			// 
+			this.ParamDesc.DataPropertyName = "ParamDesc";
+			this.ParamDesc.HeaderText = "Parametr";
+			this.ParamDesc.Name = "ParamDesc";
+			this.ParamDesc.ReadOnly = true;
+			// 
+			// dataGridViewTextBoxColumn2
+			// 
+			this.dataGridViewTextBoxColumn2.DataPropertyName = "Inserted";
+			this.dataGridViewTextBoxColumn2.HeaderText = "Datum";
+			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+			this.dataGridViewTextBoxColumn2.ReadOnly = true;
+			// 
+			// dataGridViewCheckBoxColumn1
+			// 
+			this.dataGridViewCheckBoxColumn1.DataPropertyName = "ValueUnit";
+			dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			this.dataGridViewCheckBoxColumn1.DefaultCellStyle = dataGridViewCellStyle2;
+			this.dataGridViewCheckBoxColumn1.HeaderText = "Hodnota";
+			this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
+			this.dataGridViewCheckBoxColumn1.ReadOnly = true;
+			this.dataGridViewCheckBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.dataGridViewCheckBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.dataGridViewCheckBoxColumn1.Width = 60;
 			// 
 			// grdDevices
 			// 
@@ -265,39 +303,25 @@ namespace Lis.Monitoring.Manager {
 			this.timer.Interval = 30000;
 			this.timer.Tick += new System.EventHandler(this.timer_Tick);
 			// 
-			// dataGridViewTextBoxColumn1
+			// btnDevices
 			// 
-			this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.dataGridViewTextBoxColumn1.DataPropertyName = "DeviceDesc";
-			this.dataGridViewTextBoxColumn1.HeaderText = "Popis zařízení";
-			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-			this.dataGridViewTextBoxColumn1.ReadOnly = true;
+			this.btnDevices.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			this.btnDevices.Location = new System.Drawing.Point(12, 12);
+			this.btnDevices.Name = "btnDevices";
+			this.btnDevices.Size = new System.Drawing.Size(75, 28);
+			this.btnDevices.TabIndex = 10;
+			this.btnDevices.Text = "Zařízení";
+			this.btnDevices.UseVisualStyleBackColor = true;
 			// 
-			// ParamDesc
+			// btnUsers
 			// 
-			this.ParamDesc.DataPropertyName = "ParamDesc";
-			this.ParamDesc.HeaderText = "Parametr";
-			this.ParamDesc.Name = "ParamDesc";
-			this.ParamDesc.ReadOnly = true;
-			// 
-			// dataGridViewTextBoxColumn2
-			// 
-			this.dataGridViewTextBoxColumn2.DataPropertyName = "Inserted";
-			this.dataGridViewTextBoxColumn2.HeaderText = "Datum";
-			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-			this.dataGridViewTextBoxColumn2.ReadOnly = true;
-			// 
-			// dataGridViewCheckBoxColumn1
-			// 
-			this.dataGridViewCheckBoxColumn1.DataPropertyName = "ValueUnit";
-			dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			this.dataGridViewCheckBoxColumn1.DefaultCellStyle = dataGridViewCellStyle2;
-			this.dataGridViewCheckBoxColumn1.HeaderText = "Hodnota";
-			this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
-			this.dataGridViewCheckBoxColumn1.ReadOnly = true;
-			this.dataGridViewCheckBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.dataGridViewCheckBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.dataGridViewCheckBoxColumn1.Width = 60;
+			this.btnUsers.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			this.btnUsers.Location = new System.Drawing.Point(93, 12);
+			this.btnUsers.Name = "btnUsers";
+			this.btnUsers.Size = new System.Drawing.Size(75, 28);
+			this.btnUsers.TabIndex = 11;
+			this.btnUsers.Text = "Zařízení";
+			this.btnUsers.UseVisualStyleBackColor = true;
 			// 
 			// MainForm
 			// 
@@ -342,6 +366,8 @@ namespace Lis.Monitoring.Manager {
 		private System.Windows.Forms.DataGridViewTextBoxColumn ParamDesc;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewCheckBoxColumn1;
+		private System.Windows.Forms.Button btnUsers;
+		private System.Windows.Forms.Button btnDevices;
 	}
 }
 
