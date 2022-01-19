@@ -33,11 +33,6 @@ namespace Lis.Monitoring.Manager {
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.btnUsers = new System.Windows.Forms.Button();
 			this.btnDevices = new System.Windows.Forms.Button();
-			this.btnGetDevices = new System.Windows.Forms.Button();
-			this.btnGetData = new System.Windows.Forms.Button();
-			this.edtPassword = new System.Windows.Forms.TextBox();
-			this.edtLogin = new System.Windows.Forms.TextBox();
-			this.btnGetToken = new System.Windows.Forms.Button();
 			this.panel2 = new System.Windows.Forms.Panel();
 			this.panel3 = new System.Windows.Forms.Panel();
 			this.grdData = new System.Windows.Forms.DataGridView();
@@ -47,6 +42,7 @@ namespace Lis.Monitoring.Manager {
 			this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.edtLog = new System.Windows.Forms.TextBox();
 			this.timer = new System.Windows.Forms.Timer(this.components);
+			this.labLoggedUser = new System.Windows.Forms.Label();
 			this.panel1.SuspendLayout();
 			this.panel2.SuspendLayout();
 			this.panel3.SuspendLayout();
@@ -55,25 +51,21 @@ namespace Lis.Monitoring.Manager {
 			// 
 			// panel1
 			// 
+			this.panel1.Controls.Add(this.labLoggedUser);
 			this.panel1.Controls.Add(this.btnUsers);
 			this.panel1.Controls.Add(this.btnDevices);
-			this.panel1.Controls.Add(this.btnGetDevices);
-			this.panel1.Controls.Add(this.btnGetData);
-			this.panel1.Controls.Add(this.edtPassword);
-			this.panel1.Controls.Add(this.edtLogin);
-			this.panel1.Controls.Add(this.btnGetToken);
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
 			this.panel1.Location = new System.Drawing.Point(0, 0);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(886, 65);
+			this.panel1.Size = new System.Drawing.Size(910, 32);
 			this.panel1.TabIndex = 6;
 			// 
 			// btnUsers
 			// 
 			this.btnUsers.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			this.btnUsers.Location = new System.Drawing.Point(93, 12);
+			this.btnUsers.Location = new System.Drawing.Point(93, 2);
 			this.btnUsers.Name = "btnUsers";
-			this.btnUsers.Size = new System.Drawing.Size(75, 28);
+			this.btnUsers.Size = new System.Drawing.Size(83, 28);
 			this.btnUsers.TabIndex = 11;
 			this.btnUsers.Text = "Uživatelé";
 			this.btnUsers.UseVisualStyleBackColor = true;
@@ -81,68 +73,22 @@ namespace Lis.Monitoring.Manager {
 			// btnDevices
 			// 
 			this.btnDevices.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			this.btnDevices.Location = new System.Drawing.Point(12, 12);
+			this.btnDevices.Location = new System.Drawing.Point(4, 2);
 			this.btnDevices.Name = "btnDevices";
-			this.btnDevices.Size = new System.Drawing.Size(75, 28);
+			this.btnDevices.Size = new System.Drawing.Size(83, 28);
 			this.btnDevices.TabIndex = 10;
 			this.btnDevices.Text = "Zařízení";
 			this.btnDevices.UseVisualStyleBackColor = true;
 			this.btnDevices.Click += new System.EventHandler(this.btnDevices_Click);
-			// 
-			// btnGetDevices
-			// 
-			this.btnGetDevices.Location = new System.Drawing.Point(797, 2);
-			this.btnGetDevices.Name = "btnGetDevices";
-			this.btnGetDevices.Size = new System.Drawing.Size(75, 23);
-			this.btnGetDevices.TabIndex = 9;
-			this.btnGetDevices.Text = "Get devices";
-			this.btnGetDevices.UseVisualStyleBackColor = true;
-			this.btnGetDevices.Click += new System.EventHandler(this.btnGetDevices_Click);
-			// 
-			// btnGetData
-			// 
-			this.btnGetData.Location = new System.Drawing.Point(716, 27);
-			this.btnGetData.Name = "btnGetData";
-			this.btnGetData.Size = new System.Drawing.Size(75, 23);
-			this.btnGetData.TabIndex = 8;
-			this.btnGetData.Text = "Get data";
-			this.btnGetData.UseVisualStyleBackColor = true;
-			this.btnGetData.Click += new System.EventHandler(this.btnGetData_Click);
-			// 
-			// edtPassword
-			// 
-			this.edtPassword.Location = new System.Drawing.Point(610, 29);
-			this.edtPassword.Name = "edtPassword";
-			this.edtPassword.Size = new System.Drawing.Size(100, 20);
-			this.edtPassword.TabIndex = 7;
-			this.edtPassword.Text = "admin";
-			// 
-			// edtLogin
-			// 
-			this.edtLogin.Location = new System.Drawing.Point(610, 3);
-			this.edtLogin.Name = "edtLogin";
-			this.edtLogin.Size = new System.Drawing.Size(100, 20);
-			this.edtLogin.TabIndex = 6;
-			this.edtLogin.Text = "LENDY";
-			// 
-			// btnGetToken
-			// 
-			this.btnGetToken.Location = new System.Drawing.Point(716, 3);
-			this.btnGetToken.Name = "btnGetToken";
-			this.btnGetToken.Size = new System.Drawing.Size(75, 23);
-			this.btnGetToken.TabIndex = 5;
-			this.btnGetToken.Text = "Get token";
-			this.btnGetToken.UseVisualStyleBackColor = true;
-			this.btnGetToken.Click += new System.EventHandler(this.btnGetToken_Click);
 			// 
 			// panel2
 			// 
 			this.panel2.Controls.Add(this.panel3);
 			this.panel2.Controls.Add(this.edtLog);
 			this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panel2.Location = new System.Drawing.Point(0, 65);
+			this.panel2.Location = new System.Drawing.Point(0, 32);
 			this.panel2.Name = "panel2";
-			this.panel2.Size = new System.Drawing.Size(886, 499);
+			this.panel2.Size = new System.Drawing.Size(910, 606);
 			this.panel2.TabIndex = 7;
 			// 
 			// panel3
@@ -151,7 +97,7 @@ namespace Lis.Monitoring.Manager {
 			this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel3.Location = new System.Drawing.Point(0, 0);
 			this.panel3.Name = "panel3";
-			this.panel3.Size = new System.Drawing.Size(636, 499);
+			this.panel3.Size = new System.Drawing.Size(660, 606);
 			this.panel3.TabIndex = 5;
 			// 
 			// grdData
@@ -196,7 +142,7 @@ namespace Lis.Monitoring.Manager {
 			this.grdData.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
 			this.grdData.RowHeadersVisible = false;
 			this.grdData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.grdData.Size = new System.Drawing.Size(636, 499);
+			this.grdData.Size = new System.Drawing.Size(660, 606);
 			this.grdData.TabIndex = 8;
 			this.grdData.DataSourceChanged += new System.EventHandler(this.grdData_DataSourceChanged);
 			// 
@@ -237,10 +183,10 @@ namespace Lis.Monitoring.Manager {
 			// edtLog
 			// 
 			this.edtLog.Dock = System.Windows.Forms.DockStyle.Right;
-			this.edtLog.Location = new System.Drawing.Point(636, 0);
+			this.edtLog.Location = new System.Drawing.Point(660, 0);
 			this.edtLog.Multiline = true;
 			this.edtLog.Name = "edtLog";
-			this.edtLog.Size = new System.Drawing.Size(250, 499);
+			this.edtLog.Size = new System.Drawing.Size(250, 606);
 			this.edtLog.TabIndex = 4;
 			// 
 			// timer
@@ -248,11 +194,22 @@ namespace Lis.Monitoring.Manager {
 			this.timer.Interval = 30000;
 			this.timer.Tick += new System.EventHandler(this.timer_Tick);
 			// 
+			// labLoggedUser
+			// 
+			this.labLoggedUser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.labLoggedUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			this.labLoggedUser.ForeColor = System.Drawing.Color.MidnightBlue;
+			this.labLoggedUser.Location = new System.Drawing.Point(688, 4);
+			this.labLoggedUser.Name = "labLoggedUser";
+			this.labLoggedUser.Size = new System.Drawing.Size(219, 23);
+			this.labLoggedUser.TabIndex = 12;
+			this.labLoggedUser.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(886, 564);
+			this.ClientSize = new System.Drawing.Size(910, 638);
 			this.Controls.Add(this.panel2);
 			this.Controls.Add(this.panel1);
 			this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
@@ -262,7 +219,6 @@ namespace Lis.Monitoring.Manager {
 			this.Text = "Přehled";
 			this.Load += new System.EventHandler(this.MainForm_Load);
 			this.panel1.ResumeLayout(false);
-			this.panel1.PerformLayout();
 			this.panel2.ResumeLayout(false);
 			this.panel2.PerformLayout();
 			this.panel3.ResumeLayout(false);
@@ -273,13 +229,8 @@ namespace Lis.Monitoring.Manager {
 
 		#endregion
 		private System.Windows.Forms.Panel panel1;
-		private System.Windows.Forms.Button btnGetData;
-		private System.Windows.Forms.TextBox edtPassword;
-		private System.Windows.Forms.TextBox edtLogin;
-		private System.Windows.Forms.Button btnGetToken;
 		private System.Windows.Forms.Panel panel2;
 		private System.Windows.Forms.TextBox edtLog;
-		private System.Windows.Forms.Button btnGetDevices;
 		private System.Windows.Forms.Panel panel3;
 		private System.Windows.Forms.DataGridView grdData;
 		private System.Windows.Forms.Timer timer;
@@ -289,6 +240,7 @@ namespace Lis.Monitoring.Manager {
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewCheckBoxColumn1;
 		private System.Windows.Forms.Button btnUsers;
 		private System.Windows.Forms.Button btnDevices;
+		private System.Windows.Forms.Label labLoggedUser;
 	}
 }
 

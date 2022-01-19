@@ -10,15 +10,15 @@ namespace VQFramework.Win.Dialogs {
 			InitializeComponent();
 		}
 		private void btnStorno_Click(object sender, EventArgs e) {
-			if(CloseAction()) {
-				Close();
-			}
+			//if(CancelAction()) {
+			//	Close();
+			//}
 		}
 
 		private void btnOk_Click(object sender, EventArgs e) {
-			if(OkAction()) {
-				Close();
-			}
+			//if(OkAction()) {
+			//	Close();
+			//}
 		}
 
 		private void BaseDialog_KeyDown(object sender, KeyEventArgs e) {
@@ -34,9 +34,17 @@ namespace VQFramework.Win.Dialogs {
 			return true;
 		}
 
-		protected virtual bool CloseAction() {
+		protected virtual bool CancelAction() {
 			return true;
 		}
 
+		private void BaseDialog_FormClosing(object sender, FormClosingEventArgs e) {
+			if(DialogResult == DialogResult.OK) {
+				e.Cancel = !OkAction();
+				}
+			if(DialogResult == DialogResult.Cancel) {
+				e.Cancel = !CancelAction();
+			}
+		}
 	}
 }

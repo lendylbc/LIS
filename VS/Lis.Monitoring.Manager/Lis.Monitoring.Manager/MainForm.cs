@@ -16,38 +16,23 @@ using Lis.Monitoring.Manager.Forms;
 namespace Lis.Monitoring.Manager {
 	public partial class MainForm : Form {
 
-		ApiController _apiController;
+		private ApiController _apiController;
+		private MemberDto _member;
 
-		public MainForm() {
+		public MainForm(ApiController apiController, MemberDto member) {
+			_apiController = apiController;
+			_member = member;
 			InitializeComponent();
 			Init();
 		}
 
 		private void Init() {
-			_apiController = new ApiController();
+			//_apiController = new ApiController();
+			labLoggedUser.Text = _member.Login;
 		}
 
 		#region Events
-		private void btnGetToken_Click(object sender, EventArgs e) {
-			Authenticate();
-		}
-
-		private void Authenticate() {
-			if(_apiController.Authenticate(edtLogin.Text, edtPassword.Text)) {
-				AddLogText("Logged");
-			}
-		}
-
-		private void btnGetDevices_Click(object sender, EventArgs e) {
-			
-		}
-
 		
-
-		private void btnGetData_Click(object sender, EventArgs e) {
-			GetActiveDeviceData();
-		}
-
 		private void GetActiveDeviceData() {
 			PagedResponse<ActiveDeviceLastDataDto> result = _apiController.GetActiveDeviceLastData();
 			if(result != null) {
@@ -65,9 +50,7 @@ namespace Lis.Monitoring.Manager {
 			edtLog.Text += Environment.NewLine + text;
 		}		
 
-		private void MainForm_Load(object sender, EventArgs e) {
-			Authenticate();
-			
+		private void MainForm_Load(object sender, EventArgs e) {		
 			GetActiveDeviceData();
 			timer.Enabled = true;
 		}

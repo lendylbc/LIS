@@ -34,10 +34,9 @@
 			// 
 			this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.btnOk.Location = new System.Drawing.Point(21, 133);
-			this.btnOk.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.btnOk.Location = new System.Drawing.Point(16, 108);
 			this.btnOk.Name = "btnOk";
-			this.btnOk.Size = new System.Drawing.Size(113, 28);
+			this.btnOk.Size = new System.Drawing.Size(85, 23);
 			this.btnOk.TabIndex = 4;
 			this.btnOk.Text = "Ok";
 			this.btnOk.UseVisualStyleBackColor = true;
@@ -47,10 +46,9 @@
 			// 
 			this.btnStorno.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnStorno.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.btnStorno.Location = new System.Drawing.Point(143, 133);
-			this.btnStorno.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.btnStorno.Location = new System.Drawing.Point(107, 108);
 			this.btnStorno.Name = "btnStorno";
-			this.btnStorno.Size = new System.Drawing.Size(113, 28);
+			this.btnStorno.Size = new System.Drawing.Size(85, 23);
 			this.btnStorno.TabIndex = 5;
 			this.btnStorno.Text = "Cancel";
 			this.btnStorno.UseVisualStyleBackColor = true;
@@ -58,20 +56,20 @@
 			// 
 			// BaseDialog
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(276, 175);
+			this.ClientSize = new System.Drawing.Size(207, 142);
 			this.ControlBox = false;
 			this.Controls.Add(this.btnStorno);
 			this.Controls.Add(this.btnOk);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.KeyPreview = true;
-			this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.MinimizeBox = false;
 			this.Name = "BaseDialog";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "BaseEdit";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BaseDialog_FormClosing);
 			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.BaseDialog_KeyDown);
 			this.ResumeLayout(false);
 
