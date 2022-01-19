@@ -30,9 +30,9 @@ namespace Lis.Monitoring.Services.Entities {
 		}
 
 		/// <summary>
-		/// Provede změnu pro daného uživatele
+		/// Provede změnu pro dané zařízení
 		/// </summary>
-		/// <param name="id">Identifikátor uživatele</param>
+		/// <param name="id">Identifikátor zařízení</param>
 		/// <param name="data">Data, která mají být změněná</param>
 		/// <returns></returns>
 		public override async Task<Device> UpdateAsync(long id, DeviceDto data) {

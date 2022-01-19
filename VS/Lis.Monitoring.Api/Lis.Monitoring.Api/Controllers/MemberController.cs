@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Lis.Monitoring.Api.Controllers {
 	[Authorize]
-	[Route("api/[controller]")]
+	[Route("api/[controller]/[Action]")]
 	[ApiController]
 	public class MemberController : BaseController<Member, long, IMemberService, MemberDto, MemberDto, MemberDto, MemberQuery> {//BaseController<Member, long, IMemberService, MemberDto, MemberDto, MemberDto, MemberQuery> {
 		private static readonly ILogger log = Serilog.Log.ForContext<MemberController>();
@@ -26,7 +26,7 @@ namespace Lis.Monitoring.Api.Controllers {
 
 		[AllowAnonymous]
 		// POST api/<MembersController>
-		[HttpPost("authentication")]
+		[HttpPost()]//"authentication"
 		public IActionResult Authentication([FromBody] MemberCredentialDto userCredential) {//Task<MemberDto>																														
 			Member member = EntityService.GetByCredentials(userCredential.UserName, userCredential.Password);
 			var token = _authJwt.Authenticate(member);

@@ -5,6 +5,7 @@ using Lis.Monitoring.Services.Queries;
 using Lis.Monitoring.Dto.Communication;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace Lis.Monitoring.Services.Entities {
 	public class MemberService : BaseEntityService<Member, long, MemberQuery, MemberDto>, IMemberService {
@@ -18,27 +19,29 @@ namespace Lis.Monitoring.Services.Entities {
 			return entity.Result;			
 		}
 
-		//public async Task<Member> Update(long id, MemberDto data) {
-		//	//Uzivatel uzivatel = await EntitySet.SingleOrDefaultAsync(u => u.Id == id);
-		//	//if(uzivatel == null) {
-		//	//   throw new Exception("Uživatel nebyl nalezen");
-		//	//}
+		/// <summary>
+		/// Provede změnu pro daného uživatele
+		/// </summary>
+		/// <param name="id">Identifikátor uživatele</param>
+		/// <param name="data">Data, která mají být změněná</param>
+		/// <returns></returns>
+		public override async Task<Member> UpdateAsync(long id, MemberDto data) {
+			Member member = await EntitySet.SingleOrDefaultAsync(u => u.Id == id);
+			if(member == null) {
+				throw new Exception("Zařízení nebylo nalezeno!");
+			}
 
-		//	//uzivatel.Jmeno = data.Jmeno;
-		//	//uzivatel.Prijmeni = data.Prijmeni;
-		//	//uzivatel.ZasilatNotifikace = data.ZasilatNotifikace;
+			member.Name = data.Name;
+			member.Surname = data.Surname;
+			member.Email = data.Email;
+			member.Login = data.Login;
+			member.Password = data.Password;
+			member.MemberType = data.MemberType;
+			member.Active = data.Active;
 
-		//	//if(!string.IsNullOrEmpty(data.Heslo)) {
-		//	//   // check if password is correct
-		//	//   if(!PasswordHelper.IsPasswordRight(data.Heslo, uzivatel.HesloHash, Convert.FromBase64String(uzivatel.HesloSul))) {
-		//	//      throw new Exception("Současné heslo bylo zadáno špatně");
-		//	//   }
-		//	//   VygenerovatHashHeslo(uzivatel, data.HesloNove);
-		//	//}
+			await DbService.SaveChangesAsync();
 
-		//	//await DbService.SaveChangesAsync();
-		//	Member uzivatel = null;
-		//	return uzivatel;
-		//}
+			return member;
+		}
 	}
 }

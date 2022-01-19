@@ -8,10 +8,12 @@ using Lis.Monitoring.Dto.Core;
 using Lis.Monitoring.Services.Abstractions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 
 namespace Lis.Monitoring.Api.Controllers {
 	[Authorize]
-	[Route("api/v1/[controller]")]
+	[Route("api/[controller]/[Action]")]
 	[ApiController]
 	public abstract class BaseController<TEntity, TId, TEntityService, TInputDto, TDto, TUpdateDto, TQuery> : ControllerBase
 		where TEntity : class, IEntity<TId>
@@ -70,9 +72,12 @@ namespace Lis.Monitoring.Api.Controllers {
 		[ProducesResponseType(400)]
 		[ProducesResponseType(401)]
 		public virtual async Task<ActionResult<TDto>> Save([FromBody] TInputDto dto) {
-			TEntity res = await EntityService.SaveAsync(Mapper.Map<TEntity>(dto));
-
-			return CreatedAtAction(nameof(GetById), new { res.Id }, Mapper.Map<TInputDto>(res));
+			try {
+				TEntity res = await EntityService.SaveAsync(Mapper.Map<TEntity>(dto));
+				return CreatedAtAction(nameof(GetById), new { res.Id }, Mapper.Map<TInputDto>(res));
+			} catch(Exception e) {
+				return BadRequest(new { message = HandleException(e) });
+			}			
 		}
 
 		[HttpPut("{id}")]
@@ -82,11 +87,10 @@ namespace Lis.Monitoring.Api.Controllers {
 		public virtual async Task<IActionResult> Put(TId id, TUpdateDto data) {
 			try {
 				TEntity entity = await EntityService.UpdateAsync(id, data);
-			} catch(Exception xe) {
-				return BadRequest(new { message = xe.Message });
-			}
-
-			return Ok();
+				return Ok();
+			} catch(Exception e) {
+				return BadRequest(new { message = HandleException(e) });
+			}						
 		}
 
 		[HttpDelete("{id:int}")]
@@ -101,11 +105,39 @@ namespace Lis.Monitoring.Api.Controllers {
 					return NotFound($"Id = {id} nenalezeno!");
 				}
 
-			} catch(Exception x) {
-				return BadRequest(new { message = x.Message });
-			}
+				return Ok();
+			} catch(Exception e) {
+				return BadRequest(new { message = HandleException(e) });
+			}			
+		}
 
-			return Ok();
+		private string HandleException(Exception exception) {
+			if(exception is DbUpdateConcurrencyException concurrencyEx) {
+				return "Concurrency exception";
+			} else if(exception is DbUpdateException dbUpdateEx) {
+				if(dbUpdateEx.InnerException != null) {
+					if(dbUpdateEx.InnerException is SqlException sqlException) {
+						switch(sqlException.Number) {
+							case 2627:  // Unique constraint error
+							case 547:   // Constraint check violation
+							case 2601:  // Duplicated key row error
+											// Constraint violation exception
+
+								return "Unique key exception";
+							default:
+								return "Database access exception: " +
+								dbUpdateEx.Message + Environment.NewLine + dbUpdateEx.InnerException;
+						}
+					}
+
+					return "Database access exception: " +
+								dbUpdateEx.Message + Environment.NewLine + dbUpdateEx.InnerException;
+				} else {
+					return exception.Message;
+				}
+			} else {
+				return exception.Message;
+			}
 		}
 	}
 }
