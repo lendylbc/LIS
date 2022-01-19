@@ -31,6 +31,7 @@ namespace Lis.Monitoring.Manager {
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.panel1 = new System.Windows.Forms.Panel();
+			this.labLoggedUser = new System.Windows.Forms.Label();
 			this.btnUsers = new System.Windows.Forms.Button();
 			this.btnDevices = new System.Windows.Forms.Button();
 			this.panel2 = new System.Windows.Forms.Panel();
@@ -42,7 +43,7 @@ namespace Lis.Monitoring.Manager {
 			this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.edtLog = new System.Windows.Forms.TextBox();
 			this.timer = new System.Windows.Forms.Timer(this.components);
-			this.labLoggedUser = new System.Windows.Forms.Label();
+			this.button1 = new System.Windows.Forms.Button();
 			this.panel1.SuspendLayout();
 			this.panel2.SuspendLayout();
 			this.panel3.SuspendLayout();
@@ -51,6 +52,7 @@ namespace Lis.Monitoring.Manager {
 			// 
 			// panel1
 			// 
+			this.panel1.Controls.Add(this.button1);
 			this.panel1.Controls.Add(this.labLoggedUser);
 			this.panel1.Controls.Add(this.btnUsers);
 			this.panel1.Controls.Add(this.btnDevices);
@@ -59,6 +61,17 @@ namespace Lis.Monitoring.Manager {
 			this.panel1.Name = "panel1";
 			this.panel1.Size = new System.Drawing.Size(910, 32);
 			this.panel1.TabIndex = 6;
+			// 
+			// labLoggedUser
+			// 
+			this.labLoggedUser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.labLoggedUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			this.labLoggedUser.ForeColor = System.Drawing.Color.MidnightBlue;
+			this.labLoggedUser.Location = new System.Drawing.Point(688, 4);
+			this.labLoggedUser.Name = "labLoggedUser";
+			this.labLoggedUser.Size = new System.Drawing.Size(219, 23);
+			this.labLoggedUser.TabIndex = 12;
+			this.labLoggedUser.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// btnUsers
 			// 
@@ -69,6 +82,7 @@ namespace Lis.Monitoring.Manager {
 			this.btnUsers.TabIndex = 11;
 			this.btnUsers.Text = "Uživatelé";
 			this.btnUsers.UseVisualStyleBackColor = true;
+			this.btnUsers.Click += new System.EventHandler(this.btnUsers_Click);
 			// 
 			// btnDevices
 			// 
@@ -194,16 +208,15 @@ namespace Lis.Monitoring.Manager {
 			this.timer.Interval = 30000;
 			this.timer.Tick += new System.EventHandler(this.timer_Tick);
 			// 
-			// labLoggedUser
+			// button1
 			// 
-			this.labLoggedUser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.labLoggedUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			this.labLoggedUser.ForeColor = System.Drawing.Color.MidnightBlue;
-			this.labLoggedUser.Location = new System.Drawing.Point(688, 4);
-			this.labLoggedUser.Name = "labLoggedUser";
-			this.labLoggedUser.Size = new System.Drawing.Size(219, 23);
-			this.labLoggedUser.TabIndex = 12;
-			this.labLoggedUser.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.button1.Location = new System.Drawing.Point(263, 8);
+			this.button1.Name = "button1";
+			this.button1.Size = new System.Drawing.Size(75, 23);
+			this.button1.TabIndex = 13;
+			this.button1.Text = "button1";
+			this.button1.UseVisualStyleBackColor = true;
+			this.button1.Click += new System.EventHandler(this.button1_Click);
 			// 
 			// MainForm
 			// 
@@ -241,6 +254,7 @@ namespace Lis.Monitoring.Manager {
 		private System.Windows.Forms.Button btnUsers;
 		private System.Windows.Forms.Button btnDevices;
 		private System.Windows.Forms.Label labLoggedUser;
+		private System.Windows.Forms.Button button1;
 	}
 }
 

@@ -14,7 +14,7 @@ namespace Lis.Monitoring.Api {
 		private const string _API_URL = "https://localhost:44336";
 		public string JwtToken { get; set; }
 		//BaseDto<long>
-		public RestResponse Post(object bodyData, string resource, Method method, bool useAuthToken = true) {
+		public RestResponse Post(string resource, Method method, object bodyData, Dictionary<string, string> parameters, bool useAuthToken = true) {
 			
 			RestClient client = new RestClient(_API_URL);
 			//client.Timeout = -1;
@@ -37,6 +37,12 @@ namespace Lis.Monitoring.Api {
 				string body = JsonConvert.SerializeObject(bodyData);
 				//request.AddParameter("application/json", body, ParameterType.RequestBody);
 				request.AddBody(body, "application/json");
+			}
+
+			if(parameters != null && parameters.Count > 0) {
+				foreach(KeyValuePair<string, string> parameter in parameters) {					
+					request.AddQueryParameter(parameter.Key, parameter.Value);
+				}				
 			}
 
 			Task<RestResponse> response = client.ExecuteAsync(request);

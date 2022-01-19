@@ -55,9 +55,17 @@
     <Compile Include="Core\IPagedResponse.cs" />
     <Compile Include="Core\PagedResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queries\DeviceParameterDataQuery.cs" />
+    <Compile Include="Queries\PagedQuery.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lis.Monitoring.Shared\Lis.Monitoring.Shared.csproj">
+      <Project>{AB3350D9-6A87-4063-B15A-BFAFA17631E1}</Project>
+      <Name>Lis.Monitoring.Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

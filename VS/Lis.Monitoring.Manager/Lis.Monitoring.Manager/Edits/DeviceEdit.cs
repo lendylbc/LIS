@@ -79,8 +79,7 @@ namespace Lis.Monitoring.Manager.Edits {
 				//if(log.IsErrorEnabled) log.Error(ex.Message);
 				MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return false;
-			}
-			return true;
+			}			
 		}
 
 		protected override bool ValidateData() {

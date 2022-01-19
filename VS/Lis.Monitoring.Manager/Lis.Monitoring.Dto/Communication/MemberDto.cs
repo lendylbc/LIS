@@ -1,5 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using Lis.Monitoring.Dto.Core;
+using Lis.Monitoring.Shared.Enums;
 
 namespace Lis.Monitoring.Dto.Communication {
 		/// <summary>
@@ -26,6 +28,8 @@ namespace Lis.Monitoring.Dto.Communication {
 		public string Login { get; set; }
 
 		public bool Active { get; set; }
+		public int MemberType { get; set; }
+		public DateTime Inserted { get; set; }
 		//      /// <summary>
 		//      /// Pro jaký subjekt se chce uživatel registrovat
 		//      /// </summary>
@@ -43,5 +47,7 @@ namespace Lis.Monitoring.Dto.Communication {
 		/// </summary>
 		[NotMapped]
 		public bool ZasilatNotifikace { get; set; }
+
+		public string MemberTypeText { get => ((MemberType)MemberType).ToString(); }
 	}
 	}
