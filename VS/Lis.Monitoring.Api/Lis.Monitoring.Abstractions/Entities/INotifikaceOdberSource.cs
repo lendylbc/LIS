@@ -3,6 +3,6 @@
     public interface INotifikaceOdberSource
     {
         string Email { get; }
-        bool ZasilatNotifikace { get; }
+        bool SendNotifications { get; }
     }
 }

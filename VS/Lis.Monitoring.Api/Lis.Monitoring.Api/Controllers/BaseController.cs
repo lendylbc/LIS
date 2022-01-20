@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 namespace Lis.Monitoring.Api.Controllers {
 	[Authorize]
@@ -22,6 +23,8 @@ namespace Lis.Monitoring.Api.Controllers {
 		where TDto : IDto<TId?>, new()
 		where TQuery : class, IPagedQuery
 		where TEntityService : IBaseEntityService<TEntity, TId, TQuery, TUpdateDto> {
+
+		//private static readonly ILogger log = Serilog.Log.ForContext<BaseController>();
 
 		protected readonly TEntityService EntityService;
 		protected readonly IMapper Mapper;

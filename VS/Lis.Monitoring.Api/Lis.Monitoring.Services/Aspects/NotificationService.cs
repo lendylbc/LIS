@@ -29,7 +29,7 @@ namespace Lis.Monitoring.Services.Aspects {
 		/// <param name="filtrOdberNotifikaci">Možnost vypnout filtrování odběru notifikací (pokud false, odešle se notifikace bez ohledu na nastavení odběru)</param>
 		public async Task ZpracujUdalost(int typ, IEnumerable<INotifikaceOdberSource> odberatele, Dictionary<string, object> data = null, bool filtrOdberNotifikaci = true) {
 			if(filtrOdberNotifikaci) {
-				odberatele = odberatele.Where(o => o.ZasilatNotifikace);
+				odberatele = odberatele.Where(o => o.SendNotifications);
 			}
 			await OdeslatEmail((UdalostTyp)typ, odberatele, data);
 		}

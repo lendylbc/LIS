@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Lis.Monitoring.Abstractions.Entities;
 
 namespace Lis.Monitoring.Domain.Entities {
-	public class Member : Entity, IChangeTrackingMember {
+	public class Member : Entity, INotifikaceOdberSource, IChangeTrackingMember {
 
 		public string Login { get; set; }
 		public string Password { get; set; }
@@ -17,6 +17,7 @@ namespace Lis.Monitoring.Domain.Entities {
 		public bool Active { get; set; }
 		public int MemberType { get; set; }
 		public DateTime Inserted { get; set; }
+		public bool SendNotifications { get; set; }		
 
 		[NotMapped]
 		public string UserName => Email;

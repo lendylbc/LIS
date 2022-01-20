@@ -18,6 +18,8 @@ namespace Lis.Monitoring.Api {
 		public string Request { get { return _requestController.Request; } }
 		public string Response { get { return _requestController.Response; } }
 
+		public string JwtToken { get => _requestController.JwtToken; }
+
 		public ApiController() {
 			_requestController = new RequestController();
 		}
@@ -130,8 +132,7 @@ namespace Lis.Monitoring.Api {
 			}
 		}
 
-		public PagedResponse<DeviceParameterDataDto> GetFilteredData(DeviceParameterDataQuery query) {//?Page=0&Size=4
-		
+		public PagedResponse<DeviceParameterDataDto> GetFilteredDeviceData(DeviceParameterDataQuery query) {//?Page=0&Size=4		
 			Dictionary<string, string> parameters = new Dictionary<string, string>();
 			parameters.Add("DeviceParameterId", query.DeviceParameterId.ToString());
 			parameters.Add("DateTimeFrom", query.DateTimeFrom.ToString("yyyy-MM-ddTHH:mm:ss"));
@@ -144,6 +145,81 @@ namespace Lis.Monitoring.Api {
 				return (PagedResponse<DeviceParameterDataDto>)JsonConvert.DeserializeObject<PagedResponse<DeviceParameterDataDto>>(response.Content);
 			} else {
 				return null;
+			}
+		}
+
+		public PagedResponse<DeviceParameterDto> GetFilteredParameterList(long id) {//?Page=0&Size=4
+			Dictionary<string, string> parameters = new Dictionary<string, string>();
+			parameters.Add("DeviceId", id.ToString());
+			RestResponse response = _requestController.Post("DeviceParameter/Get", Method.Get, null, parameters, true);
+			if(response != null && response.StatusCode == System.Net.HttpStatusCode.OK && !string.IsNullOrEmpty(response.Content)) {
+				return (PagedResponse<DeviceParameterDto>)JsonConvert.DeserializeObject<PagedResponse<DeviceParameterDto>>(response.Content);
+			} else {
+				return null;
+			}
+		}
+
+		public bool DeleteParameter(long id) {
+			RestResponse response = _requestController.Post($"DeviceParameter/Delete/{id}", Method.Delete, null, null, true);
+			if(response != null && response.StatusCode == System.Net.HttpStatusCode.OK) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+		public PagedResponse<DeviceParameterConditionDto> GetFilteredConditionList(long id) {//?Page=0&Size=4
+			Dictionary<string, string> parameters = new Dictionary<string, string>();
+			parameters.Add("DeviceParameterId", id.ToString());
+			RestResponse response = _requestController.Post("DeviceCondition/Get", Method.Get, null, parameters, true);
+			if(response != null && response.StatusCode == System.Net.HttpStatusCode.OK && !string.IsNullOrEmpty(response.Content)) {
+				return (PagedResponse<DeviceParameterConditionDto>)JsonConvert.DeserializeObject<PagedResponse<DeviceParameterConditionDto>>(response.Content);
+			} else {
+				return null;
+			}
+		}
+
+		public bool DeleteCondition(long id) {
+			RestResponse response = _requestController.Post($"DeviceCondition/Delete/{id}", Method.Delete, null, null, true);
+			if(response != null && response.StatusCode == System.Net.HttpStatusCode.OK) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		public DeviceParameterDto SaveDeviceParameter(DeviceParameterDto deviceParameter) {
+			RestResponse response = _requestController.Post($"DeviceParameter/Save/", Method.Post, deviceParameter, null, true);
+			if(response != null && response.StatusCode == System.Net.HttpStatusCode.Created && !string.IsNullOrEmpty(response.Content)) {
+				return (DeviceParameterDto)JsonConvert.DeserializeObject<DeviceParameterDto>(response.Content);
+			} else {
+				return null;
+			}
+		}
+
+		public bool UpdateDeviceParameter(DeviceParameterDto deviceParameter) {
+			RestResponse response = _requestController.Post($"DeviceParameter/Put/{deviceParameter.Id}", Method.Put, deviceParameter, null, true);
+			if(response != null && response.StatusCode == System.Net.HttpStatusCode.OK) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		public DeviceParameterConditionDto SaveParamCondition(DeviceParameterConditionDto DeviceCondition) {
+			RestResponse response = _requestController.Post($"DeviceCondition/Save/", Method.Post, DeviceCondition, null, true);
+			if(response != null && response.StatusCode == System.Net.HttpStatusCode.Created && !string.IsNullOrEmpty(response.Content)) {
+				return (DeviceParameterConditionDto)JsonConvert.DeserializeObject<DeviceParameterConditionDto>(response.Content);
+			} else {
+				return null;
+			}
+		}
+
+		public bool UpdateParamCondition(DeviceParameterConditionDto DeviceCondition) {
+			RestResponse response = _requestController.Post($"DeviceCondition/Put/{DeviceCondition.Id}", Method.Put, DeviceCondition, null, true);
+			if(response != null && response.StatusCode == System.Net.HttpStatusCode.OK) {
+				return true;
+			} else {
+				return false;
 			}
 		}
 	}

@@ -48,7 +48,9 @@
     <Compile Include="Authentication\MemberCredentialDto.cs" />
     <Compile Include="Communication\ActiveDeviceLastDataDto.cs" />
     <Compile Include="Communication\DeviceDto.cs" />
+    <Compile Include="Communication\DeviceParameterConditionDto.cs" />
     <Compile Include="Communication\DeviceParameterDataDto.cs" />
+    <Compile Include="Communication\DeviceParameterDto.cs" />
     <Compile Include="Communication\MemberDto.cs" />
     <Compile Include="Core\BaseDto.cs" />
     <Compile Include="Core\IDto.cs" />

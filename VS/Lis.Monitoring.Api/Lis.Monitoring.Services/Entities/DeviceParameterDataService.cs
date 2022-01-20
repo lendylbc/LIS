@@ -11,13 +11,12 @@ using Lis.Monitoring.Services.Queries;
 using Microsoft.EntityFrameworkCore;
 
 namespace Lis.Monitoring.Services.Entities {
-	public class DeviceParameterDataService : BaseEntityService<DeviceParameterData, long, DeviceParameterDataQuery, DeviceParameterDataDto>, IDeviceParameterDataService {
-
+	public class DeviceParameterDataService : BaseEntityService<DeviceParameterData, long, DeviceParameterDataQuery, DeviceParameterDataDto>, IDeviceParameterDataService {		
 		public DeviceParameterDataService(DbService dbService) : base(dbService) {
 		}		
 
 		public override IQueryable<DeviceParameterData> EntityFilter(IQueryable<DeviceParameterData> query, DeviceParameterDataQuery filtr) {
-			return query.Where(x => x.DeviceParameterId == filtr.DeviceParameterId && x.Inserted >= filtr.DateTimeFrom && x.Inserted <= filtr.DateTimeTo); ;
+			return query.Where(x => x.DeviceParameterId == filtr.DeviceParameterId && x.Inserted >= filtr.DateTimeFrom && x.Inserted <= filtr.DateTimeTo);
 		}
 
 		public async Task<IEnumerable<ActiveDeviceLastData>> GetLastDataAllActiveDevices() {

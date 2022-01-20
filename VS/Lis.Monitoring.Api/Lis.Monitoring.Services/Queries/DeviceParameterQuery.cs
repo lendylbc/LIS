@@ -6,5 +6,6 @@ using System.Threading.Tasks;
 
 namespace Lis.Monitoring.Services.Queries {
 	public class DeviceParameterQuery : PagedQuery {
+		public long DeviceId { get; set; }
 	}
 }

@@ -11,14 +11,14 @@ using Lis.Monitoring.Services.Abstractions;
 using Lis.Monitoring.Services.Queries;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace Lis.Monitoring.Api.Controllers {
 	[Authorize]
 	[Route("api/[controller]/[Action]")]
 	[ApiController]
 	public class DeviceConditionController : BaseController<DeviceParameterCondition, long, IDeviceParameterConditionService, DeviceParameterConditionDto, DeviceParameterConditionDto, DeviceParameterConditionDto, DeviceParameterConditionQuery> {
-
+		private static readonly ILogger log = Serilog.Log.ForContext<DeviceConditionController>();
 		public DeviceConditionController(IDeviceParameterConditionService deviceService, IMapper mapper) : base(deviceService, mapper) {// : base(entityService, mapper) { //IDeviceService entityService, IMapper mapper
 		}
 	}

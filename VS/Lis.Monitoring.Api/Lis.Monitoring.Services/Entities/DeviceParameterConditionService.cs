@@ -11,8 +11,11 @@ using Lis.Monitoring.Services.Queries;
 
 namespace Lis.Monitoring.Services.Entities {
 	public class DeviceParameterConditionService : BaseEntityService<DeviceParameterCondition, long, DeviceParameterConditionQuery, DeviceParameterConditionDto>, IDeviceParameterConditionService {
-
 		public DeviceParameterConditionService(DbService dbService) : base(dbService) {
+		}
+
+		public override IQueryable<DeviceParameterCondition> EntityFilter(IQueryable<DeviceParameterCondition> query, DeviceParameterConditionQuery filtr) {
+			return query.Where(x => x.DeviceParameterId == filtr.DeviceParameterId);
 		}
 	}
 }

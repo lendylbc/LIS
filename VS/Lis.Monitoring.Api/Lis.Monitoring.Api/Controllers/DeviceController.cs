@@ -10,14 +10,14 @@ using Lis.Monitoring.Services.Abstractions;
 using Lis.Monitoring.Services.Queries;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace Lis.Monitoring.Api.Controllers {
 	[Authorize]
 	[Route("api/[controller]/[Action]")]
 	[ApiController]
 	public class DeviceController : BaseController<Device, long, IDeviceService, DeviceDto, DeviceDto, DeviceDto, DeviceQuery> {//<Device, long, IDeviceService, DeviceDto, DeviceDto, DeviceDto, DeviceQuery> {
-
+		private static readonly ILogger log = Serilog.Log.ForContext<DeviceController>();
 		public DeviceController(IDeviceService deviceService, IMapper mapper) :base(deviceService, mapper) {// : base(entityService, mapper) { //IDeviceService entityService, IMapper mapper
 		}
 
@@ -36,7 +36,7 @@ namespace Lis.Monitoring.Api.Controllers {
 				Total = 0,
 				Data = Mapper.Map<List<ActiveDeviceLastDataDto>>(items)
 			};
-
+			
 			return response;
 		}
 	}

@@ -3,19 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Lis.Monitoring.Abstractions.Services;
 using Lis.Monitoring.Domain.Entities;
 using Lis.Monitoring.Services.Abstractions;
 using Lis.Monitoring.Shared.Enums;
 using Lis.Monitoring.Snmp;
+using Microsoft.Extensions.Logging;
 
 namespace Lis.Monitoring.Services.Aspects {
-	public class SnmpService: ISnmpService {
-		IDeviceService _deviceService;
-		IDeviceParameterDataService _deviceParameterDataService;
+	public class SnmpService: ISnmpService {		
+		private IDeviceService _deviceService;
+		private IDeviceParameterDataService _deviceParameterDataService;
+		private INotificationService _notificationService;
+		private IConditionService _conditionService;
 
-		public SnmpService(IDeviceService deviceService, IDeviceParameterDataService deviceParameterDataService) {
+		public SnmpService(IDeviceService deviceService, IDeviceParameterDataService deviceParameterDataService, IConditionService conditionService, INotificationService notificationService) {
 			_deviceService = deviceService;
 			_deviceParameterDataService = deviceParameterDataService;
+			_notificationService = notificationService;
+			_conditionService = conditionService;			
 		}
 
 		public void GetDevicesData() {			
@@ -36,11 +42,15 @@ namespace Lis.Monitoring.Services.Aspects {
 								value = (decimal)Convert.ToInt32(data.Value.ToString()) / 10;
 							}
 
-							_deviceParameterDataService.Save(new DeviceParameterData() { DeviceParameterId = parameter.Id, Inserted = DateTime.Now, Value = value });
+							_deviceParameterDataService.Save(new DeviceParameterData() { DeviceParameterId = parameter.Id, Inserted = DateTime.Now, Value = value });							
 						}
 					}
 				}
+				_conditionService.ResolveConditions();
 			}
+			if(_conditionService.DeviceErrors?.Count > 0) {
+				_notificationService.ZpracujUdalost((int)UdalostTyp.ValueCondition, null, null, false);
+			}		
 		}
 	}
 }
