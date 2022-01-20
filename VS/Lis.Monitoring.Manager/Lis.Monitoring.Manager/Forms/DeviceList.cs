@@ -26,8 +26,30 @@ namespace Lis.Monitoring.Manager.Forms {
 			grdDevices.Columns["Inserted"].Visible = false;
 		}
 
-		private void RefreshGrid() {
+		private void DesignParamGrid() {
+			grdParams.Columns["Id"].Visible = false;
+			grdParams.Columns["DeviceId"].Visible = false;
+			grdParams.Columns["Inserted"].Visible = false;
+		}
+
+		private void DesignConditionGrid() {
+			grdConditions.Columns["Id"].Visible = false;
+			grdConditions.Columns["DeviceParameterId"].Visible = false;
+			grdConditions.Columns["Inserted"].Visible = false;
+		}
+
+		private void RefreshDeviceGrid() {
 			GetDeviceList();
+		}
+
+		private void RefreshParamGrid() {
+			DeviceDto device = (DeviceDto)grdDevices.CurrentRow.DataBoundItem;
+			GetParamList((long)device?.Id);
+		}
+
+		private void RefreshConditionGrid() {
+			DeviceParameterDto deviceParam = (DeviceParameterDto)grdParams.CurrentRow.DataBoundItem;
+			GetConditionList((long)deviceParam?.Id);
 		}
 
 		private void GetDeviceList() {
@@ -39,12 +61,65 @@ namespace Lis.Monitoring.Manager.Forms {
 			}
 		}
 
+		private void GetParamList(long id) {
+			PagedResponse<DeviceParameterDto> result = _apiController.GetFilteredParameterList(id);
+			if(result != null) {
+				grdParams.DataSource = result.Data;
+			} else {
+				grdParams.DataSource = null;
+			}
+		}
+
+		private void GetConditionList(long id) {
+			PagedResponse<DeviceParameterConditionDto> result = _apiController.GetFilteredConditionList(id);
+			if(result != null) {
+				grdConditions.DataSource = result.Data;
+			} else {
+				grdConditions.DataSource = null;
+			}
+		}
 		private void grdDevices_DataSourceChanged(object sender, EventArgs e) {
-			DesignDeviceGrid();
+			DesignDeviceGrid();			
 		}
 
 		private void DeviceList_Load(object sender, EventArgs e) {
-			RefreshGrid();
+			RefreshDeviceGrid();
+		}			
+
+		private void EditDevice(DeviceDto deviceDto) {
+			using(DeviceEdit edt = new DeviceEdit(deviceDto, _apiController)) {
+				if(edt.ShowDialog() == DialogResult.OK) {
+					if(deviceDto != null) {
+						RefreshDeviceGrid();
+					} else {
+						RefreshDeviceGrid();
+					}
+				}
+			}
+		}
+
+		private void EditParam(long idDevice, DeviceParameterDto deviceParameterDto) {
+			using(DeviceParameterEdit edt = new DeviceParameterEdit(idDevice, deviceParameterDto, _apiController)) {
+				if(edt.ShowDialog() == DialogResult.OK) {
+					if(deviceParameterDto != null) {
+						RefreshParamGrid();
+					} else {
+						RefreshParamGrid();
+					}
+				}
+			}
+		}
+
+		private void EditCondition(long idParameter, DeviceParameterConditionDto deviceParameterConditionDto) {
+			using(ParamConditionEdit edt = new ParamConditionEdit(idParameter, deviceParameterConditionDto, _apiController)) {
+				if(edt.ShowDialog() == DialogResult.OK) {
+					if(deviceParameterConditionDto != null) {
+						RefreshConditionGrid();
+					} else {
+						RefreshConditionGrid();
+					}
+				}
+			}
 		}
 
 		private void btnInsert_Click(object sender, EventArgs e) {
@@ -61,10 +136,59 @@ namespace Lis.Monitoring.Manager.Forms {
 					DeviceDto deviceDto = (DeviceDto)grdDevices.CurrentRow.DataBoundItem;
 					try {
 						_apiController.DeleteDevice((long)deviceDto.Id);
-						RefreshGrid();
+						RefreshDeviceGrid();
 					} catch {
 						MessageBox.Show("Zařízení nelze smazat." + Environment.NewLine +
 							"Pravděpodobně má podřízené záznamy.", Lis.Monitoring.Manager.Properties.Resources.Chyba, MessageBoxButtons.OK, MessageBoxIcon.Error);
+					}
+				}
+			}
+		}
+
+		private void btnParamInsert_Click(object sender, EventArgs e) {
+			DeviceDto deviceDto = (DeviceDto)grdDevices.CurrentRow.DataBoundItem;
+			EditParam((long)deviceDto.Id, null);
+		}
+
+		private void btnParamEdit_Click(object sender, EventArgs e) {
+			DeviceDto deviceDto = (DeviceDto)grdDevices.CurrentRow.DataBoundItem;
+			EditParam((long)deviceDto.Id, (DeviceParameterDto)grdParams.CurrentRow.DataBoundItem);
+		}
+
+		private void btnParamDelete_Click(object sender, EventArgs e) {
+			if(grdParams.SelectedCells.Count > 0) {
+				if(MessageBox.Show("Přejete si smazat parametr?", Lis.Monitoring.Manager.Properties.Resources.Dotaz, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
+					DeviceParameterDto deviceParam = (DeviceParameterDto)grdParams.CurrentRow.DataBoundItem;
+					try {
+						_apiController.DeleteParameter((long)deviceParam.Id);
+						RefreshParamGrid();
+					} catch {
+						MessageBox.Show("Parametr nelze smazat." + Environment.NewLine +
+							"Pravděpodobně má podřízené záznamy.", Lis.Monitoring.Manager.Properties.Resources.Chyba, MessageBoxButtons.OK, MessageBoxIcon.Error);
+					}
+				}
+			}
+		}
+
+		private void btnConditionInsert_Click(object sender, EventArgs e) {
+			DeviceParameterDto deviceParam = (DeviceParameterDto)grdParams.CurrentRow.DataBoundItem;
+			EditCondition((long)deviceParam.Id, null);
+		}
+
+		private void btnConditionEdit_Click(object sender, EventArgs e) {
+			DeviceParameterDto deviceParam = (DeviceParameterDto)grdParams.CurrentRow.DataBoundItem;
+			EditCondition((long)deviceParam.Id, (DeviceParameterConditionDto)grdConditions.CurrentRow.DataBoundItem);
+		}
+
+		private void btnConditionDelete_Click(object sender, EventArgs e) {
+			if(grdConditions.SelectedCells.Count > 0) {
+				if(MessageBox.Show("Přejete si smazat podmínku?", Lis.Monitoring.Manager.Properties.Resources.Dotaz, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
+					DeviceParameterConditionDto deviceCondition = (DeviceParameterConditionDto)grdConditions.CurrentRow.DataBoundItem;
+					try {
+						_apiController.DeleteCondition((long)deviceCondition.Id);
+						RefreshConditionGrid();
+					} catch {
+						MessageBox.Show("Podmínku nelze smazat.", Lis.Monitoring.Manager.Properties.Resources.Chyba, MessageBoxButtons.OK, MessageBoxIcon.Error);
 					}
 				}
 			}
@@ -74,16 +198,32 @@ namespace Lis.Monitoring.Manager.Forms {
 			Close();
 		}
 
-		private void EditDevice(DeviceDto deviceDto) {
-			using(DeviceEdit edt = new DeviceEdit(deviceDto, _apiController)) {
-				if(edt.ShowDialog() == DialogResult.OK) {
-					if(deviceDto != null) {
-						RefreshGrid();
-					} else {
-						RefreshGrid();
-					}
-				}
-			}
+		private void grdParams_DataSourceChanged(object sender, EventArgs e) {
+			DesignParamGrid();			
+		}
+
+		private void grdConditions_DataSourceChanged(object sender, EventArgs e) {
+			DesignConditionGrid();
+		}
+
+		private void grdDevices_SelectionChanged(object sender, EventArgs e) {
+			RefreshParamGrid();
+		}
+
+		private void grdParams_SelectionChanged(object sender, EventArgs e) {
+			RefreshConditionGrid();
+		}
+
+		private void grdDevices_DoubleClick(object sender, EventArgs e) {
+			btnEdit_Click(sender, e);
+		}
+
+		private void grdParams_DoubleClick(object sender, EventArgs e) {
+			btnParamEdit_Click(sender, e);
+		}
+
+		private void grdConditions_DoubleClick(object sender, EventArgs e) {
+			btnConditionEdit_Click(sender, e);
 		}
 	}
 }

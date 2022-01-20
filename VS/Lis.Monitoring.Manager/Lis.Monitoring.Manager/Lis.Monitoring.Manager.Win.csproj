@@ -63,11 +63,23 @@
     <Compile Include="Edits\DeviceEdit.Designer.cs">
       <DependentUpon>DeviceEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Edits\DeviceParameterEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Edits\DeviceParameterEdit.Designer.cs">
+      <DependentUpon>DeviceParameterEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Edits\MemberEdit.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Edits\MemberEdit.Designer.cs">
       <DependentUpon>MemberEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Edits\ParamConditionEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Edits\ParamConditionEdit.Designer.cs">
+      <DependentUpon>ParamConditionEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ChartForm.cs">
       <SubType>Form</SubType>
@@ -102,8 +114,14 @@
     <EmbeddedResource Include="Edits\DeviceEdit.resx">
       <DependentUpon>DeviceEdit.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Edits\DeviceParameterEdit.resx">
+      <DependentUpon>DeviceParameterEdit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Edits\MemberEdit.resx">
       <DependentUpon>MemberEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Edits\ParamConditionEdit.resx">
+      <DependentUpon>ParamConditionEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ChartForm.resx">
       <DependentUpon>ChartForm.cs</DependentUpon>
@@ -161,6 +179,7 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="monitoring.ico" />
+    <None Include="Resources\logo.png" />
     <None Include="Resources\yellow1.png" />
     <None Include="Resources\settings1.png" />
     <None Include="Resources\refresh1.png" />

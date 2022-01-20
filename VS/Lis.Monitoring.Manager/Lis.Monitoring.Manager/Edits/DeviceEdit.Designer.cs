@@ -56,7 +56,7 @@ namespace Lis.Monitoring.Manager.Edits {
 			// edtDescription
 			// 
 			this.edtDescription.Location = new System.Drawing.Point(12, 21);
-			this.edtDescription.MaxLength = 20;
+			this.edtDescription.MaxLength = 50;
 			this.edtDescription.Name = "edtDescription";
 			this.edtDescription.Size = new System.Drawing.Size(269, 20);
 			this.edtDescription.TabIndex = 13;

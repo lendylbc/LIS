@@ -43,7 +43,6 @@ namespace Lis.Monitoring.Manager {
 			this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.edtLog = new System.Windows.Forms.TextBox();
 			this.timer = new System.Windows.Forms.Timer(this.components);
-			this.button1 = new System.Windows.Forms.Button();
 			this.panel1.SuspendLayout();
 			this.panel2.SuspendLayout();
 			this.panel3.SuspendLayout();
@@ -52,7 +51,6 @@ namespace Lis.Monitoring.Manager {
 			// 
 			// panel1
 			// 
-			this.panel1.Controls.Add(this.button1);
 			this.panel1.Controls.Add(this.labLoggedUser);
 			this.panel1.Controls.Add(this.btnUsers);
 			this.panel1.Controls.Add(this.btnDevices);
@@ -159,6 +157,7 @@ namespace Lis.Monitoring.Manager {
 			this.grdData.Size = new System.Drawing.Size(660, 606);
 			this.grdData.TabIndex = 8;
 			this.grdData.DataSourceChanged += new System.EventHandler(this.grdData_DataSourceChanged);
+			this.grdData.Click += new System.EventHandler(this.grdData_Click);
 			// 
 			// dataGridViewTextBoxColumn1
 			// 
@@ -208,16 +207,6 @@ namespace Lis.Monitoring.Manager {
 			this.timer.Interval = 30000;
 			this.timer.Tick += new System.EventHandler(this.timer_Tick);
 			// 
-			// button1
-			// 
-			this.button1.Location = new System.Drawing.Point(263, 8);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(75, 23);
-			this.button1.TabIndex = 13;
-			this.button1.Text = "button1";
-			this.button1.UseVisualStyleBackColor = true;
-			this.button1.Click += new System.EventHandler(this.button1_Click);
-			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -254,7 +243,6 @@ namespace Lis.Monitoring.Manager {
 		private System.Windows.Forms.Button btnUsers;
 		private System.Windows.Forms.Button btnDevices;
 		private System.Windows.Forms.Label labLoggedUser;
-		private System.Windows.Forms.Button button1;
 	}
 }
 

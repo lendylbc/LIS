@@ -29,62 +29,62 @@ namespace Lis.Monitoring.Manager.Forms {
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.btnClose = new System.Windows.Forms.Button();
-			this.btnDelete = new System.Windows.Forms.Button();
-			this.btnEdit = new System.Windows.Forms.Button();
-			this.btnInsert = new System.Windows.Forms.Button();
+			this.btnDeviceDelete = new System.Windows.Forms.Button();
+			this.btnDeviceEdit = new System.Windows.Forms.Button();
+			this.btnDeviceInsert = new System.Windows.Forms.Button();
 			this.panel2 = new System.Windows.Forms.Panel();
-			this.tipDevice = new System.Windows.Forms.ToolTip(this.components);
-			this.panel4 = new System.Windows.Forms.Panel();
 			this.panel3 = new System.Windows.Forms.Panel();
 			this.grdDevices = new System.Windows.Forms.DataGridView();
 			this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.IpAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Active = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-			this.panel5 = new System.Windows.Forms.Panel();
+			this.panel4 = new System.Windows.Forms.Panel();
 			this.panel6 = new System.Windows.Forms.Panel();
-			this.panel7 = new System.Windows.Forms.Panel();
+			this.grdConditions = new System.Windows.Forms.DataGridView();
 			this.panel8 = new System.Windows.Forms.Panel();
-			this.button1 = new System.Windows.Forms.Button();
-			this.button2 = new System.Windows.Forms.Button();
-			this.button3 = new System.Windows.Forms.Button();
-			this.button4 = new System.Windows.Forms.Button();
-			this.button5 = new System.Windows.Forms.Button();
-			this.button6 = new System.Windows.Forms.Button();
-			this.dataGridView1 = new System.Windows.Forms.DataGridView();
+			this.btnConditionDelete = new System.Windows.Forms.Button();
+			this.btnConditionEdit = new System.Windows.Forms.Button();
+			this.btnConditionInsert = new System.Windows.Forms.Button();
+			this.panel5 = new System.Windows.Forms.Panel();
+			this.grdParams = new System.Windows.Forms.DataGridView();
+			this.panel7 = new System.Windows.Forms.Panel();
+			this.btnParamDelete = new System.Windows.Forms.Button();
+			this.btnParamEdit = new System.Windows.Forms.Button();
+			this.btnParamInsert = new System.Windows.Forms.Button();
+			this.tipDevice = new System.Windows.Forms.ToolTip(this.components);
+			this.Operator = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-			this.dataGridView2 = new System.Windows.Forms.DataGridView();
-			this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewCheckBoxColumn2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
 			this.panel1.SuspendLayout();
 			this.panel2.SuspendLayout();
-			this.panel4.SuspendLayout();
 			this.panel3.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.grdDevices)).BeginInit();
-			this.panel5.SuspendLayout();
+			this.panel4.SuspendLayout();
 			this.panel6.SuspendLayout();
-			this.panel7.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.grdConditions)).BeginInit();
 			this.panel8.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+			this.panel5.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.grdParams)).BeginInit();
+			this.panel7.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// panel1
 			// 
 			this.panel1.Controls.Add(this.btnClose);
-			this.panel1.Controls.Add(this.btnDelete);
-			this.panel1.Controls.Add(this.btnEdit);
-			this.panel1.Controls.Add(this.btnInsert);
+			this.panel1.Controls.Add(this.btnDeviceDelete);
+			this.panel1.Controls.Add(this.btnDeviceEdit);
+			this.panel1.Controls.Add(this.btnDeviceInsert);
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
 			this.panel1.Location = new System.Drawing.Point(0, 0);
 			this.panel1.Name = "panel1";
@@ -104,41 +104,41 @@ namespace Lis.Monitoring.Manager.Forms {
 			this.btnClose.UseVisualStyleBackColor = true;
 			this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
 			// 
-			// btnDelete
+			// btnDeviceDelete
 			// 
-			this.btnDelete.Image = global::Lis.Monitoring.Manager.Properties.Resources.delete;
-			this.btnDelete.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.btnDelete.Location = new System.Drawing.Point(63, 2);
-			this.btnDelete.Name = "btnDelete";
-			this.btnDelete.Size = new System.Drawing.Size(28, 28);
-			this.btnDelete.TabIndex = 8;
-			this.tipDevice.SetToolTip(this.btnDelete, "Smazat zařízení");
-			this.btnDelete.UseVisualStyleBackColor = true;
-			this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+			this.btnDeviceDelete.Image = global::Lis.Monitoring.Manager.Properties.Resources.delete;
+			this.btnDeviceDelete.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+			this.btnDeviceDelete.Location = new System.Drawing.Point(63, 2);
+			this.btnDeviceDelete.Name = "btnDeviceDelete";
+			this.btnDeviceDelete.Size = new System.Drawing.Size(28, 28);
+			this.btnDeviceDelete.TabIndex = 8;
+			this.tipDevice.SetToolTip(this.btnDeviceDelete, "Smazat zařízení");
+			this.btnDeviceDelete.UseVisualStyleBackColor = true;
+			this.btnDeviceDelete.Click += new System.EventHandler(this.btnDelete_Click);
 			// 
-			// btnEdit
+			// btnDeviceEdit
 			// 
-			this.btnEdit.Image = global::Lis.Monitoring.Manager.Properties.Resources.edit;
-			this.btnEdit.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.btnEdit.Location = new System.Drawing.Point(33, 2);
-			this.btnEdit.Name = "btnEdit";
-			this.btnEdit.Size = new System.Drawing.Size(28, 28);
-			this.btnEdit.TabIndex = 7;
-			this.tipDevice.SetToolTip(this.btnEdit, "Upravit zařízení");
-			this.btnEdit.UseVisualStyleBackColor = true;
-			this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+			this.btnDeviceEdit.Image = global::Lis.Monitoring.Manager.Properties.Resources.edit;
+			this.btnDeviceEdit.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+			this.btnDeviceEdit.Location = new System.Drawing.Point(33, 2);
+			this.btnDeviceEdit.Name = "btnDeviceEdit";
+			this.btnDeviceEdit.Size = new System.Drawing.Size(28, 28);
+			this.btnDeviceEdit.TabIndex = 7;
+			this.tipDevice.SetToolTip(this.btnDeviceEdit, "Upravit zařízení");
+			this.btnDeviceEdit.UseVisualStyleBackColor = true;
+			this.btnDeviceEdit.Click += new System.EventHandler(this.btnEdit_Click);
 			// 
-			// btnInsert
+			// btnDeviceInsert
 			// 
-			this.btnInsert.Image = ((System.Drawing.Image)(resources.GetObject("btnInsert.Image")));
-			this.btnInsert.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.btnInsert.Location = new System.Drawing.Point(3, 2);
-			this.btnInsert.Name = "btnInsert";
-			this.btnInsert.Size = new System.Drawing.Size(28, 28);
-			this.btnInsert.TabIndex = 6;
-			this.tipDevice.SetToolTip(this.btnInsert, "Přidat zařízení");
-			this.btnInsert.UseVisualStyleBackColor = true;
-			this.btnInsert.Click += new System.EventHandler(this.btnInsert_Click);
+			this.btnDeviceInsert.Image = ((System.Drawing.Image)(resources.GetObject("btnDeviceInsert.Image")));
+			this.btnDeviceInsert.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+			this.btnDeviceInsert.Location = new System.Drawing.Point(3, 2);
+			this.btnDeviceInsert.Name = "btnDeviceInsert";
+			this.btnDeviceInsert.Size = new System.Drawing.Size(28, 28);
+			this.btnDeviceInsert.TabIndex = 6;
+			this.tipDevice.SetToolTip(this.btnDeviceInsert, "Přidat zařízení");
+			this.btnDeviceInsert.UseVisualStyleBackColor = true;
+			this.btnDeviceInsert.Click += new System.EventHandler(this.btnInsert_Click);
 			// 
 			// panel2
 			// 
@@ -149,16 +149,6 @@ namespace Lis.Monitoring.Manager.Forms {
 			this.panel2.Name = "panel2";
 			this.panel2.Size = new System.Drawing.Size(800, 509);
 			this.panel2.TabIndex = 1;
-			// 
-			// panel4
-			// 
-			this.panel4.Controls.Add(this.panel6);
-			this.panel4.Controls.Add(this.panel5);
-			this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.panel4.Location = new System.Drawing.Point(0, 343);
-			this.panel4.Name = "panel4";
-			this.panel4.Size = new System.Drawing.Size(800, 166);
-			this.panel4.TabIndex = 1;
 			// 
 			// panel3
 			// 
@@ -213,6 +203,8 @@ namespace Lis.Monitoring.Manager.Forms {
 			this.grdDevices.Size = new System.Drawing.Size(800, 343);
 			this.grdDevices.TabIndex = 9;
 			this.grdDevices.DataSourceChanged += new System.EventHandler(this.grdDevices_DataSourceChanged);
+			this.grdDevices.SelectionChanged += new System.EventHandler(this.grdDevices_SelectionChanged);
+			this.grdDevices.DoubleClick += new System.EventHandler(this.grdDevices_DoubleClick);
 			// 
 			// Description
 			// 
@@ -237,19 +229,19 @@ namespace Lis.Monitoring.Manager.Forms {
 			this.Active.ReadOnly = true;
 			this.Active.Width = 50;
 			// 
-			// panel5
+			// panel4
 			// 
-			this.panel5.Controls.Add(this.dataGridView1);
-			this.panel5.Controls.Add(this.panel7);
-			this.panel5.Dock = System.Windows.Forms.DockStyle.Left;
-			this.panel5.Location = new System.Drawing.Point(0, 0);
-			this.panel5.Name = "panel5";
-			this.panel5.Size = new System.Drawing.Size(366, 166);
-			this.panel5.TabIndex = 0;
+			this.panel4.Controls.Add(this.panel6);
+			this.panel4.Controls.Add(this.panel5);
+			this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.panel4.Location = new System.Drawing.Point(0, 343);
+			this.panel4.Name = "panel4";
+			this.panel4.Size = new System.Drawing.Size(800, 166);
+			this.panel4.TabIndex = 1;
 			// 
 			// panel6
 			// 
-			this.panel6.Controls.Add(this.dataGridView2);
+			this.panel6.Controls.Add(this.grdConditions);
 			this.panel6.Controls.Add(this.panel8);
 			this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel6.Location = new System.Drawing.Point(366, 0);
@@ -257,101 +249,114 @@ namespace Lis.Monitoring.Manager.Forms {
 			this.panel6.Size = new System.Drawing.Size(434, 166);
 			this.panel6.TabIndex = 1;
 			// 
-			// panel7
+			// grdConditions
 			// 
-			this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.panel7.Controls.Add(this.button1);
-			this.panel7.Controls.Add(this.button2);
-			this.panel7.Controls.Add(this.button3);
-			this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
-			this.panel7.Location = new System.Drawing.Point(0, 0);
-			this.panel7.Name = "panel7";
-			this.panel7.Size = new System.Drawing.Size(366, 32);
-			this.panel7.TabIndex = 0;
+			this.grdConditions.AllowUserToAddRows = false;
+			this.grdConditions.AllowUserToDeleteRows = false;
+			this.grdConditions.AllowUserToResizeRows = false;
+			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.grdConditions.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+			this.grdConditions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.grdConditions.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Operator,
+            this.Value});
+			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+			dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+			dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.grdConditions.DefaultCellStyle = dataGridViewCellStyle5;
+			this.grdConditions.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.grdConditions.Location = new System.Drawing.Point(0, 32);
+			this.grdConditions.Name = "grdConditions";
+			this.grdConditions.ReadOnly = true;
+			this.grdConditions.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+			dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.grdConditions.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+			this.grdConditions.RowHeadersVisible = false;
+			this.grdConditions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+			this.grdConditions.Size = new System.Drawing.Size(434, 134);
+			this.grdConditions.TabIndex = 10;
+			this.grdConditions.DataSourceChanged += new System.EventHandler(this.grdConditions_DataSourceChanged);
+			this.grdConditions.DoubleClick += new System.EventHandler(this.grdConditions_DoubleClick);
 			// 
 			// panel8
 			// 
 			this.panel8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.panel8.Controls.Add(this.button4);
-			this.panel8.Controls.Add(this.button5);
-			this.panel8.Controls.Add(this.button6);
+			this.panel8.Controls.Add(this.btnConditionDelete);
+			this.panel8.Controls.Add(this.btnConditionEdit);
+			this.panel8.Controls.Add(this.btnConditionInsert);
 			this.panel8.Dock = System.Windows.Forms.DockStyle.Top;
 			this.panel8.Location = new System.Drawing.Point(0, 0);
 			this.panel8.Name = "panel8";
 			this.panel8.Size = new System.Drawing.Size(434, 32);
 			this.panel8.TabIndex = 1;
 			// 
-			// button1
+			// btnConditionDelete
 			// 
-			this.button1.Image = global::Lis.Monitoring.Manager.Properties.Resources.delete;
-			this.button1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.button1.Location = new System.Drawing.Point(63, 2);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(28, 28);
-			this.button1.TabIndex = 11;
-			this.tipDevice.SetToolTip(this.button1, "Smazat parametr");
-			this.button1.UseVisualStyleBackColor = true;
+			this.btnConditionDelete.Image = global::Lis.Monitoring.Manager.Properties.Resources.delete;
+			this.btnConditionDelete.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+			this.btnConditionDelete.Location = new System.Drawing.Point(64, 2);
+			this.btnConditionDelete.Name = "btnConditionDelete";
+			this.btnConditionDelete.Size = new System.Drawing.Size(28, 28);
+			this.btnConditionDelete.TabIndex = 11;
+			this.tipDevice.SetToolTip(this.btnConditionDelete, "Smazat podmínku");
+			this.btnConditionDelete.UseVisualStyleBackColor = true;
+			this.btnConditionDelete.Click += new System.EventHandler(this.btnConditionDelete_Click);
 			// 
-			// button2
+			// btnConditionEdit
 			// 
-			this.button2.Image = global::Lis.Monitoring.Manager.Properties.Resources.edit;
-			this.button2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.button2.Location = new System.Drawing.Point(33, 2);
-			this.button2.Name = "button2";
-			this.button2.Size = new System.Drawing.Size(28, 28);
-			this.button2.TabIndex = 10;
-			this.tipDevice.SetToolTip(this.button2, "Upravit parametr");
-			this.button2.UseVisualStyleBackColor = true;
+			this.btnConditionEdit.Image = global::Lis.Monitoring.Manager.Properties.Resources.edit;
+			this.btnConditionEdit.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+			this.btnConditionEdit.Location = new System.Drawing.Point(34, 2);
+			this.btnConditionEdit.Name = "btnConditionEdit";
+			this.btnConditionEdit.Size = new System.Drawing.Size(28, 28);
+			this.btnConditionEdit.TabIndex = 10;
+			this.tipDevice.SetToolTip(this.btnConditionEdit, "Upravit podmínku");
+			this.btnConditionEdit.UseVisualStyleBackColor = true;
+			this.btnConditionEdit.Click += new System.EventHandler(this.btnConditionEdit_Click);
 			// 
-			// button3
+			// btnConditionInsert
 			// 
-			this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
-			this.button3.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.button3.Location = new System.Drawing.Point(3, 2);
-			this.button3.Name = "button3";
-			this.button3.Size = new System.Drawing.Size(28, 28);
-			this.button3.TabIndex = 9;
-			this.tipDevice.SetToolTip(this.button3, "Přidat parametr");
-			this.button3.UseVisualStyleBackColor = true;
+			this.btnConditionInsert.Image = ((System.Drawing.Image)(resources.GetObject("btnConditionInsert.Image")));
+			this.btnConditionInsert.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+			this.btnConditionInsert.Location = new System.Drawing.Point(4, 2);
+			this.btnConditionInsert.Name = "btnConditionInsert";
+			this.btnConditionInsert.Size = new System.Drawing.Size(28, 28);
+			this.btnConditionInsert.TabIndex = 9;
+			this.tipDevice.SetToolTip(this.btnConditionInsert, "Přidat podmínku");
+			this.btnConditionInsert.UseVisualStyleBackColor = true;
+			this.btnConditionInsert.Click += new System.EventHandler(this.btnConditionInsert_Click);
 			// 
-			// button4
+			// panel5
 			// 
-			this.button4.Image = global::Lis.Monitoring.Manager.Properties.Resources.delete;
-			this.button4.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.button4.Location = new System.Drawing.Point(64, 2);
-			this.button4.Name = "button4";
-			this.button4.Size = new System.Drawing.Size(28, 28);
-			this.button4.TabIndex = 11;
-			this.tipDevice.SetToolTip(this.button4, "Smazat podmínku");
-			this.button4.UseVisualStyleBackColor = true;
+			this.panel5.Controls.Add(this.grdParams);
+			this.panel5.Controls.Add(this.panel7);
+			this.panel5.Dock = System.Windows.Forms.DockStyle.Left;
+			this.panel5.Location = new System.Drawing.Point(0, 0);
+			this.panel5.Name = "panel5";
+			this.panel5.Size = new System.Drawing.Size(366, 166);
+			this.panel5.TabIndex = 0;
 			// 
-			// button5
+			// grdParams
 			// 
-			this.button5.Image = global::Lis.Monitoring.Manager.Properties.Resources.edit;
-			this.button5.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.button5.Location = new System.Drawing.Point(34, 2);
-			this.button5.Name = "button5";
-			this.button5.Size = new System.Drawing.Size(28, 28);
-			this.button5.TabIndex = 10;
-			this.tipDevice.SetToolTip(this.button5, "Upravit podmínku");
-			this.button5.UseVisualStyleBackColor = true;
-			// 
-			// button6
-			// 
-			this.button6.Image = ((System.Drawing.Image)(resources.GetObject("button6.Image")));
-			this.button6.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.button6.Location = new System.Drawing.Point(4, 2);
-			this.button6.Name = "button6";
-			this.button6.Size = new System.Drawing.Size(28, 28);
-			this.button6.TabIndex = 9;
-			this.tipDevice.SetToolTip(this.button6, "Přidat podmínku");
-			this.button6.UseVisualStyleBackColor = true;
-			// 
-			// dataGridView1
-			// 
-			this.dataGridView1.AllowUserToAddRows = false;
-			this.dataGridView1.AllowUserToDeleteRows = false;
-			this.dataGridView1.AllowUserToResizeRows = false;
+			this.grdParams.AllowUserToAddRows = false;
+			this.grdParams.AllowUserToDeleteRows = false;
+			this.grdParams.AllowUserToResizeRows = false;
 			dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
 			dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
 			dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
@@ -359,11 +364,12 @@ namespace Lis.Monitoring.Manager.Forms {
 			dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
 			dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
 			dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
-			this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+			this.grdParams.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+			this.grdParams.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.grdParams.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
+            this.Address,
+            this.Unit,
             this.dataGridViewCheckBoxColumn1});
 			dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
 			dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
@@ -372,12 +378,12 @@ namespace Lis.Monitoring.Manager.Forms {
 			dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
 			dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
 			dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-			this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle8;
-			this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.dataGridView1.Location = new System.Drawing.Point(0, 32);
-			this.dataGridView1.Name = "dataGridView1";
-			this.dataGridView1.ReadOnly = true;
-			this.dataGridView1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+			this.grdParams.DefaultCellStyle = dataGridViewCellStyle8;
+			this.grdParams.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.grdParams.Location = new System.Drawing.Point(0, 32);
+			this.grdParams.Name = "grdParams";
+			this.grdParams.ReadOnly = true;
+			this.grdParams.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
 			dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
 			dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
 			dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
@@ -385,26 +391,100 @@ namespace Lis.Monitoring.Manager.Forms {
 			dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
 			dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
 			dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
-			this.dataGridView1.RowHeadersVisible = false;
-			this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.dataGridView1.Size = new System.Drawing.Size(366, 134);
-			this.dataGridView1.TabIndex = 10;
+			this.grdParams.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+			this.grdParams.RowHeadersVisible = false;
+			this.grdParams.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+			this.grdParams.Size = new System.Drawing.Size(366, 134);
+			this.grdParams.TabIndex = 10;
+			this.grdParams.DataSourceChanged += new System.EventHandler(this.grdParams_DataSourceChanged);
+			this.grdParams.SelectionChanged += new System.EventHandler(this.grdParams_SelectionChanged);
+			this.grdParams.DoubleClick += new System.EventHandler(this.grdParams_DoubleClick);
+			// 
+			// panel7
+			// 
+			this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.panel7.Controls.Add(this.btnParamDelete);
+			this.panel7.Controls.Add(this.btnParamEdit);
+			this.panel7.Controls.Add(this.btnParamInsert);
+			this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
+			this.panel7.Location = new System.Drawing.Point(0, 0);
+			this.panel7.Name = "panel7";
+			this.panel7.Size = new System.Drawing.Size(366, 32);
+			this.panel7.TabIndex = 0;
+			// 
+			// btnParamDelete
+			// 
+			this.btnParamDelete.Image = global::Lis.Monitoring.Manager.Properties.Resources.delete;
+			this.btnParamDelete.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+			this.btnParamDelete.Location = new System.Drawing.Point(63, 2);
+			this.btnParamDelete.Name = "btnParamDelete";
+			this.btnParamDelete.Size = new System.Drawing.Size(28, 28);
+			this.btnParamDelete.TabIndex = 11;
+			this.tipDevice.SetToolTip(this.btnParamDelete, "Smazat parametr");
+			this.btnParamDelete.UseVisualStyleBackColor = true;
+			this.btnParamDelete.Click += new System.EventHandler(this.btnParamDelete_Click);
+			// 
+			// btnParamEdit
+			// 
+			this.btnParamEdit.Image = global::Lis.Monitoring.Manager.Properties.Resources.edit;
+			this.btnParamEdit.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+			this.btnParamEdit.Location = new System.Drawing.Point(33, 2);
+			this.btnParamEdit.Name = "btnParamEdit";
+			this.btnParamEdit.Size = new System.Drawing.Size(28, 28);
+			this.btnParamEdit.TabIndex = 10;
+			this.tipDevice.SetToolTip(this.btnParamEdit, "Upravit parametr");
+			this.btnParamEdit.UseVisualStyleBackColor = true;
+			this.btnParamEdit.Click += new System.EventHandler(this.btnParamEdit_Click);
+			// 
+			// btnParamInsert
+			// 
+			this.btnParamInsert.Image = ((System.Drawing.Image)(resources.GetObject("btnParamInsert.Image")));
+			this.btnParamInsert.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+			this.btnParamInsert.Location = new System.Drawing.Point(3, 2);
+			this.btnParamInsert.Name = "btnParamInsert";
+			this.btnParamInsert.Size = new System.Drawing.Size(28, 28);
+			this.btnParamInsert.TabIndex = 9;
+			this.tipDevice.SetToolTip(this.btnParamInsert, "Přidat parametr");
+			this.btnParamInsert.UseVisualStyleBackColor = true;
+			this.btnParamInsert.Click += new System.EventHandler(this.btnParamInsert_Click);
+			// 
+			// Operator
+			// 
+			this.Operator.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.Operator.DataPropertyName = "Operator";
+			this.Operator.HeaderText = "Operátor";
+			this.Operator.Name = "Operator";
+			this.Operator.ReadOnly = true;
+			// 
+			// Value
+			// 
+			this.Value.DataPropertyName = "Value";
+			this.Value.HeaderText = "Hodnota";
+			this.Value.Name = "Value";
+			this.Value.ReadOnly = true;
 			// 
 			// dataGridViewTextBoxColumn1
 			// 
 			this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
 			this.dataGridViewTextBoxColumn1.DataPropertyName = "Description";
-			this.dataGridViewTextBoxColumn1.HeaderText = "Popis zařízení";
+			this.dataGridViewTextBoxColumn1.HeaderText = "Parametr";
 			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
 			this.dataGridViewTextBoxColumn1.ReadOnly = true;
 			// 
-			// dataGridViewTextBoxColumn2
+			// Address
 			// 
-			this.dataGridViewTextBoxColumn2.DataPropertyName = "IpAddress";
-			this.dataGridViewTextBoxColumn2.HeaderText = "IP adresa";
-			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-			this.dataGridViewTextBoxColumn2.ReadOnly = true;
+			this.Address.DataPropertyName = "Address";
+			this.Address.HeaderText = "Adresa";
+			this.Address.Name = "Address";
+			this.Address.ReadOnly = true;
+			// 
+			// Unit
+			// 
+			this.Unit.DataPropertyName = "Unit";
+			this.Unit.HeaderText = "Jednotka";
+			this.Unit.Name = "Unit";
+			this.Unit.ReadOnly = true;
+			this.Unit.Width = 60;
 			// 
 			// dataGridViewCheckBoxColumn1
 			// 
@@ -413,73 +493,6 @@ namespace Lis.Monitoring.Manager.Forms {
 			this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
 			this.dataGridViewCheckBoxColumn1.ReadOnly = true;
 			this.dataGridViewCheckBoxColumn1.Width = 50;
-			// 
-			// dataGridView2
-			// 
-			this.dataGridView2.AllowUserToAddRows = false;
-			this.dataGridView2.AllowUserToDeleteRows = false;
-			this.dataGridView2.AllowUserToResizeRows = false;
-			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
-			this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4,
-            this.dataGridViewCheckBoxColumn2});
-			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-			dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-			dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-			this.dataGridView2.DefaultCellStyle = dataGridViewCellStyle5;
-			this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.dataGridView2.Location = new System.Drawing.Point(0, 32);
-			this.dataGridView2.Name = "dataGridView2";
-			this.dataGridView2.ReadOnly = true;
-			this.dataGridView2.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-			dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.dataGridView2.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
-			this.dataGridView2.RowHeadersVisible = false;
-			this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.dataGridView2.Size = new System.Drawing.Size(434, 134);
-			this.dataGridView2.TabIndex = 10;
-			// 
-			// dataGridViewTextBoxColumn3
-			// 
-			this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.dataGridViewTextBoxColumn3.DataPropertyName = "Description";
-			this.dataGridViewTextBoxColumn3.HeaderText = "Popis zařízení";
-			this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-			this.dataGridViewTextBoxColumn3.ReadOnly = true;
-			// 
-			// dataGridViewTextBoxColumn4
-			// 
-			this.dataGridViewTextBoxColumn4.DataPropertyName = "IpAddress";
-			this.dataGridViewTextBoxColumn4.HeaderText = "IP adresa";
-			this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-			this.dataGridViewTextBoxColumn4.ReadOnly = true;
-			// 
-			// dataGridViewCheckBoxColumn2
-			// 
-			this.dataGridViewCheckBoxColumn2.DataPropertyName = "Active";
-			this.dataGridViewCheckBoxColumn2.HeaderText = "Aktivní";
-			this.dataGridViewCheckBoxColumn2.Name = "dataGridViewCheckBoxColumn2";
-			this.dataGridViewCheckBoxColumn2.ReadOnly = true;
-			this.dataGridViewCheckBoxColumn2.Width = 50;
 			// 
 			// DeviceList
 			// 
@@ -495,15 +508,15 @@ namespace Lis.Monitoring.Manager.Forms {
 			this.Load += new System.EventHandler(this.DeviceList_Load);
 			this.panel1.ResumeLayout(false);
 			this.panel2.ResumeLayout(false);
-			this.panel4.ResumeLayout(false);
 			this.panel3.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.grdDevices)).EndInit();
-			this.panel5.ResumeLayout(false);
+			this.panel4.ResumeLayout(false);
 			this.panel6.ResumeLayout(false);
-			this.panel7.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.grdConditions)).EndInit();
 			this.panel8.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+			this.panel5.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.grdParams)).EndInit();
+			this.panel7.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
@@ -512,9 +525,9 @@ namespace Lis.Monitoring.Manager.Forms {
 
 		private System.Windows.Forms.Panel panel1;
 		private System.Windows.Forms.Panel panel2;
-		private System.Windows.Forms.Button btnDelete;
-		private System.Windows.Forms.Button btnEdit;
-		private System.Windows.Forms.Button btnInsert;
+		private System.Windows.Forms.Button btnDeviceDelete;
+		private System.Windows.Forms.Button btnDeviceEdit;
+		private System.Windows.Forms.Button btnDeviceInsert;
 		private System.Windows.Forms.Button btnClose;
 		private System.Windows.Forms.ToolTip tipDevice;
 		private System.Windows.Forms.Panel panel3;
@@ -525,21 +538,21 @@ namespace Lis.Monitoring.Manager.Forms {
 		private System.Windows.Forms.Panel panel4;
 		private System.Windows.Forms.Panel panel6;
 		private System.Windows.Forms.Panel panel8;
-		private System.Windows.Forms.Button button4;
-		private System.Windows.Forms.Button button5;
-		private System.Windows.Forms.Button button6;
+		private System.Windows.Forms.Button btnConditionDelete;
+		private System.Windows.Forms.Button btnConditionEdit;
+		private System.Windows.Forms.Button btnConditionInsert;
 		private System.Windows.Forms.Panel panel5;
 		private System.Windows.Forms.Panel panel7;
-		private System.Windows.Forms.Button button1;
-		private System.Windows.Forms.Button button2;
-		private System.Windows.Forms.Button button3;
-		private System.Windows.Forms.DataGridView dataGridView2;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-		private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn2;
-		private System.Windows.Forms.DataGridView dataGridView1;
+		private System.Windows.Forms.Button btnParamDelete;
+		private System.Windows.Forms.Button btnParamEdit;
+		private System.Windows.Forms.Button btnParamInsert;
+		private System.Windows.Forms.DataGridView grdConditions;
+		private System.Windows.Forms.DataGridView grdParams;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Operator;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Value;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Address;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Unit;
 		private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
 	}
 }

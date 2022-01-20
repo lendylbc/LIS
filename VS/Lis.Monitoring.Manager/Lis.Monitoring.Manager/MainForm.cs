@@ -27,8 +27,7 @@ namespace Lis.Monitoring.Manager {
 			Init();
 		}
 
-		private void Init() {
-			//_apiController = new ApiController();
+		private void Init() {			
 			labLoggedUser.Text = _member.Login;
 		}
 
@@ -40,9 +39,9 @@ namespace Lis.Monitoring.Manager {
 				var data = result.Data.OrderByDescending(x => x.Inserted).ToList();
 				grdData.DataSource = data;
 			} else {
-				//edtLog.Text = result.
-				edtLog.Text = _apiController.Request;
-				edtLog.Text += Environment.NewLine + "___________________________________" + Environment.NewLine + _apiController.Response;
+				////edtLog.Text = result.
+				//edtLog.Text = _apiController.Request;
+				//edtLog.Text += Environment.NewLine + "___________________________________" + Environment.NewLine + _apiController.Response;
 			}
 		}
 		#endregion
@@ -76,6 +75,17 @@ namespace Lis.Monitoring.Manager {
 			try {
 				GetActiveDeviceData();
 				AddLogText(DateTime.Now.ToString());
+
+				//JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
+
+				//TokenValidationParameters tokenValidationParameters = new TokenValidationParameters() {
+				//	ValidateIssuerSigningKey = true,
+				//	IssuerSigningKey = symmetricSecurityKey
+				//};
+
+				//tokenHandler.ValidateToken(_apiController.JwtToken, tokenValidationParameters, out SecurityToken validatedToken);
+
+				//AddLogText(validatedToken.ValidTo.ToString());
 			} finally {
 				timer.Enabled = true;
 			}
@@ -97,7 +107,11 @@ namespace Lis.Monitoring.Manager {
 			}
 		}
 
-		private void button1_Click(object sender, EventArgs e) {
+		private void grdData_Click(object sender, EventArgs e) {
+			DrawChartForParameter();
+		}
+
+		private void DrawChartForParameter() {
 			ActiveDeviceLastDataDto data = (ActiveDeviceLastDataDto)grdData.CurrentRow.DataBoundItem;
 
 			DeviceParameterDataQuery query = new DeviceParameterDataQuery();
@@ -106,19 +120,14 @@ namespace Lis.Monitoring.Manager {
 			query.DateTimeFrom = DateTime.Now.AddHours(-2);
 			query.DateTimeTo = DateTime.Now.AddHours(1);
 
-			PagedResponse<DeviceParameterDataDto> result = _apiController.GetFilteredData(query);
+			PagedResponse<DeviceParameterDataDto> result = _apiController.GetFilteredDeviceData(query);
 			if(result != null) {
 
 				ChartForm frm = new ChartForm(result.Data);
 				frm.Show();
 				//var data = result.Data.OrderByDescending(x => x.Inserted).ToList();
 				//grdData.DataSource = data;
-				edtLog.Text = _apiController.Request;
-				edtLog.Text += Environment.NewLine + "___________________________________" + Environment.NewLine + _apiController.Response;
-			} else {
-				//edtLog.Text = result.
-				edtLog.Text = _apiController.Request;
-				edtLog.Text += Environment.NewLine + "___________________________________" + Environment.NewLine + _apiController.Response;
+
 			}
 		}
 	}
