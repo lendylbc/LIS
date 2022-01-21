@@ -56,6 +56,7 @@ namespace WinFormsApp1 {
 			this.edtSickPort = new System.Windows.Forms.NumericUpDown();
 			this.edtSickIp = new System.Windows.Forms.TextBox();
 			this.btnSick = new System.Windows.Forms.Button();
+			this.button3 = new System.Windows.Forms.Button();
 			this.panel1.SuspendLayout();
 			this.panel2.SuspendLayout();
 			this.panel3.SuspendLayout();
@@ -191,6 +192,7 @@ namespace WinFormsApp1 {
 			// 
 			// panel6
 			// 
+			this.panel6.Controls.Add(this.button3);
 			this.panel6.Controls.Add(this.groupBox3);
 			this.panel6.Controls.Add(this.groupBox2);
 			this.panel6.Controls.Add(this.groupBox1);
@@ -404,6 +406,16 @@ namespace WinFormsApp1 {
 			this.btnSick.UseVisualStyleBackColor = true;
 			this.btnSick.Click += new System.EventHandler(this.btnSick_Click);
 			// 
+			// button3
+			// 
+			this.button3.Location = new System.Drawing.Point(224, 257);
+			this.button3.Name = "button3";
+			this.button3.Size = new System.Drawing.Size(75, 23);
+			this.button3.TabIndex = 18;
+			this.button3.Text = "SMTP test";
+			this.button3.UseVisualStyleBackColor = true;
+			this.button3.Click += new System.EventHandler(this.button3_Click);
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -466,6 +478,7 @@ namespace WinFormsApp1 {
 		private System.Windows.Forms.NumericUpDown edtModbusPort;
 		private System.Windows.Forms.TextBox edtModbusIp;
 		private System.Windows.Forms.Button btnModbus;
+		private System.Windows.Forms.Button button3;
 	}
 }
 

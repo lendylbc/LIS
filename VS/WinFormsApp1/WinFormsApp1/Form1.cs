@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
@@ -364,6 +365,41 @@ namespace WinFormsApp1 {
 			//}
 
 			//client.Close();
+		}
+
+		private void button3_Click(object sender, EventArgs e) {
+			MailAddress from = new MailAddress("lendy@centrum.cz", "Lendy");
+			MailAddress to = new MailAddress("lendy@centrum.cz", "Lendy");
+			List<MailAddress> cc = new List<MailAddress>();
+			cc.Add(new MailAddress("lendy@centrum.cz", "Lendy"));
+			SendEmail("Test", from, to, cc);
+		}
+
+		protected void SendEmail(string _subject, MailAddress _from, MailAddress _to, List<MailAddress> _cc, List<MailAddress> _bcc = null) {
+			string Text = "";
+			SmtpClient mailClient = new SmtpClient("smtp.centrum.cz", 465);
+			MailMessage msgMail;
+			Text = "Stuff";
+			msgMail = new MailMessage();
+			msgMail.From = _from;
+			msgMail.To.Add(_to);
+			foreach(MailAddress addr in _cc) {
+				msgMail.CC.Add(addr);
+			}
+			if(_bcc != null) {
+				foreach(MailAddress addr in _bcc) {
+					msgMail.Bcc.Add(addr);
+				}
+			}
+
+			mailClient.Credentials = new NetworkCredential("lendy@centrum.cz", "Dolomity050511");
+			mailClient.EnableSsl = true;
+
+			msgMail.Subject = _subject;
+			msgMail.Body = Text;
+			msgMail.IsBodyHtml = true;
+			mailClient.Send(msgMail);
+			msgMail.Dispose();
 		}
 	}
 }
