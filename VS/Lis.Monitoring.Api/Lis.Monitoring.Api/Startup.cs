@@ -79,16 +79,21 @@ namespace Lis.Monitoring.Api {
 
 			services.AddControllers();
 
-			//services.AddCors(options => options.AddPolicy("CorsPolicy",
-			//	 builder => builder.AllowAnyOrigin()
-			//		  .AllowAnyMethod()
-			//		  .AllowAnyHeader()
-			//		  .AllowCredentials()
-			//		  //.SetIsOriginAllowed(hostName => true)
-			//		  //.SetIsOriginAllowed(_ => true)
-			//	 )
-			//);
+			services.AddCors(options => options.AddPolicy("CorsPolicy",
+				 builder => builder.WithOrigins("https://localhost:44392")
+					.AllowAnyMethod()
+					.AllowAnyHeader()
+					.AllowCredentials()
 
+				 //builder => builder.AllowAnyOrigin()
+				 //  .AllowAnyMethod()
+				 //  .AllowAnyHeader()
+				 //  .AllowCredentials()
+				 ////.SetIsOriginAllowed(hostName => true)
+				 ////.SetIsOriginAllowed(_ => true)
+				 )
+			);
+			
 			services.AddAutoMapper(typeof(Startup));
 
 			//	Authentication			
@@ -192,7 +197,7 @@ namespace Lis.Monitoring.Api {
 
 			app.UseHsts();
 			
-			//app.UseCors("CorsPolicy");
+			app.UseCors("CorsPolicy");
 
 			//	Only for migrations
 			//if(DbOptions.AutoUpdate) {
