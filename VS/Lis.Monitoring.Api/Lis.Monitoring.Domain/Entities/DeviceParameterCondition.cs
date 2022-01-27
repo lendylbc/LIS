@@ -11,5 +11,7 @@ namespace Lis.Monitoring.Domain.Entities {
 		public Decimal Value { get; set; }
 		public int Operator { get; set; }
 		public DateTime Inserted { get; set; }
+		public DeviceParameter DeviceParameter { get; set; }
+
 	}
 }

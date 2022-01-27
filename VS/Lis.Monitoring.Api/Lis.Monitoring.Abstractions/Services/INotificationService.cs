@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Lis.Monitoring.Abstractions.Entities;
+using Lis.Monitoring.Shared.Enums;
 
 namespace Lis.Monitoring.Abstractions.Services
 {
@@ -13,6 +14,6 @@ namespace Lis.Monitoring.Abstractions.Services
         /// <param name="odberatele">Seznam odběratelů události (notifikace)</param>
         /// <param name="data">Parametry dané události</param>
         /// <param name="filtrOdberNotifikaci">Možnost vypnout filtrování odběru notifikací (pokud false, odešle se notifikace bez ohledu na nastavení odběru)</param>
-        Task ZpracujUdalost(int typ, IEnumerable<INotifikaceOdberSource> odberatele, Dictionary<string, object> data = null, bool filtrOdberNotifikaci = true);
+        Task ZpracujUdalost(NotificationType notificationType, NotificationSend notificationSend, Dictionary<string, object> data = null, bool filtrOdberNotifikaci = true);
     }
 }

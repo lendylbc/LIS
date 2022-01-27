@@ -10,8 +10,7 @@ using Lis.Monitoring.Infrastructure;
 using Lis.Monitoring.Shared.Enums;
 
 namespace Lis.Monitoring.Services.Aspects {
-	public class NotificationService : INotificationService
-    {
+	public class NotificationService : INotificationService {
 		private readonly DbService _dbService;
 		private readonly IMailService _mailService;
 
@@ -27,21 +26,24 @@ namespace Lis.Monitoring.Services.Aspects {
 		/// <param name="odberatele">Seznam odběratelů události (notifikace)</param>
 		/// <param name="data">Parametry dané události</param>
 		/// <param name="filtrOdberNotifikaci">Možnost vypnout filtrování odběru notifikací (pokud false, odešle se notifikace bez ohledu na nastavení odběru)</param>
-		public async Task ZpracujUdalost(int typ, IEnumerable<INotifikaceOdberSource> odberatele, Dictionary<string, object> data = null, bool filtrOdberNotifikaci = true) {
-			if(filtrOdberNotifikaci) {
-				odberatele = odberatele.Where(o => o.SendNotifications);
+		public async Task ZpracujUdalost(NotificationType notificationType, NotificationSend notificationSend, Dictionary<string, object> data = null, bool filtrOdberNotifikaci = true) {
+			IEnumerable<INotifikaceOdberSource> odberatele = _dbService.Set<Member>().Where(o => o.SendNotifications);
+
+			if((notificationSend & NotificationSend.Email) > 0) {
+				//await OdeslatEmail((NotificationType)notificationType, odberatele, data);
 			}
-			await OdeslatEmail((UdalostTyp)typ, odberatele, data);
+			if((notificationSend & NotificationSend.SMS) > 0) {
+			}
 		}
 
 		/// <summary>
 		/// Provede odeslání e-mailů daného typu všem zadaným uživatelům
 		/// </summary>
-		/// <param name="typ"></param>
+		/// <param name="notificationType"></param>
 		/// <param name="odberatele"></param>
 		/// <param name="data"></param>
 		/// <returns></returns>
-		private async Task OdeslatEmail(UdalostTyp typ, IEnumerable<INotifikaceOdberSource> odberatele, Dictionary<string, object> data) {
+		private async Task OdeslatEmail(NotificationType notificationType, IEnumerable<INotifikaceOdberSource> odberatele, Dictionary<string, object> data) {
 			Sablona sablona = new Sablona();// await _dbService.Sablona.SingleOrDefaultAsync(s => (s.SablonaTyp & SablonaTyp.Email) > 0 && s.UdalostTyp == typ);
 			if(sablona != null && odberatele.Any()) {
 				string predmet = TransformujSablonu(sablona.Predmet, data);

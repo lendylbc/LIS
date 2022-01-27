@@ -36,6 +36,6 @@ namespace Lis.Monitoring.Domain.Entities {
 		/// <summary>
 		/// Definice typu události, se kterou je šablona spojena
 		/// </summary>
-		public UdalostTyp UdalostTyp { get; set; }
+		public NotificationType UdalostTyp { get; set; }
 	}
 }

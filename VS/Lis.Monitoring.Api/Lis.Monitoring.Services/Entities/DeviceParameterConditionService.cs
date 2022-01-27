@@ -38,5 +38,11 @@ namespace Lis.Monitoring.Services.Entities {
 
 			return condition;
 		}
+		//public IEnumerable<DeviceParameterCondition> GetAllDeviceParamsWithConditions(long id) {
+		//	var devicesParam = EntitySet.Where(x => x.DeviceParameterId == id)
+		//		.Include(x => x.DeviceParameter);              //	.Select(c => c.DeviceParameterCondition)
+
+		//	return devicesParam;
+		//}
 	}
 }

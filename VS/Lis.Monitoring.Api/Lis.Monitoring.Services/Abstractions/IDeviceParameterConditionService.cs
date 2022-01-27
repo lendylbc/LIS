@@ -9,5 +9,6 @@ using Lis.Monitoring.Services.Queries;
 
 namespace Lis.Monitoring.Services.Abstractions {
 	public interface IDeviceParameterConditionService : IBaseEntityService<DeviceParameterCondition, long, DeviceParameterConditionQuery, DeviceParameterConditionDto> {
+		//IEnumerable<DeviceParameterCondition> GetAllDeviceParamsWithConditions(long id);
 	}
 }

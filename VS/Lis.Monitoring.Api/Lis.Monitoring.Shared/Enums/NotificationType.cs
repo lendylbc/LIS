@@ -2,7 +2,7 @@
 	/// <summary>
 	/// Typy událostí, na které je navázán veškerý messaging
 	/// </summary>
-	public enum UdalostTyp
+	public enum NotificationType
 	{
 		#region Události pro správu uživatelů
 
