@@ -3,3 +3,16 @@
 body {
 	background-color: #312f2f;
 }
+
+.align-left {
+	text-align: left;
+}
+
+.align-right {
+	text-align: right;	
+}
+
+.table-color {
+	color: cornflowerblue;
+	white-space: nowrap;
+}

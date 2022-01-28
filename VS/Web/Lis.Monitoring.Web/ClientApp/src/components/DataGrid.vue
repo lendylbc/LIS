@@ -1,21 +1,23 @@
 <template>
 	<div class="grid">
-		<div class="grid-container">
-			<div class="grid-item">1</div>
-			<div class="grid-item">2</div>
-			<div class="grid-item">3</div>
-			<div class="grid-item">4</div>
+		<div class="grid-container">			
 			<div class="grid-item">
 				<h1>{{ msg }}</h1>
 			</div>
 			<div class="grid-item">
-				<table style="width:30%">
-					<tr>
-						<th style="text-align:left">Id</th>
-						<th style="text-align:left">Text</th>
-						<th style="text-align:right">Teplota</th>
+				<table class="table table-striped" style="width: 30%" >
+					<tr class="table-color">
+						<th class="align-left">IP</th>
+						<th class="align-left">Port</th>
+						<th class="align-right">Popis</th>
+						<th class="align-right">Aktivní</th>
 					</tr>
-					<tr v-for="item in playlist" v-bind:key="item.name"><td style="text-align:left">{{ item.id }}</td><td style="text-align:left">{{ item.name }}</td><td style="text-align:right">{{ item.value }}</td></tr>
+					<tr class="table-color" v-for="item in gridData" v-bind:key="item.id">
+					<td class="align-left">{{ item.ipAddress }}</td>
+					<td class="align-left">{{ item.port }}</td>
+					<td class="align-right">{{ item.description }}</td>
+					<td class="align-right">{{ item.active }}</td>
+					</tr>
 				</table>
 			</div>
 		</div>
@@ -26,7 +28,8 @@
 	export default {
 		name: 'DataGrid',
 		props: {
-			msg: String
+			msg: String,
+			gridData: [],
 		},
 		data() {
 			return {
