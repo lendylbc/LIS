@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -8,6 +9,7 @@ using Lis.Monitoring.Abstractions.Services;
 using Lis.Monitoring.Domain.Entities;
 using Lis.Monitoring.Infrastructure;
 using Lis.Monitoring.Shared.Enums;
+using Lis.Monitoring.Shared.Errors;
 
 namespace Lis.Monitoring.Services.Aspects {
 	public class NotificationService : INotificationService {
@@ -44,33 +46,47 @@ namespace Lis.Monitoring.Services.Aspects {
 		/// <param name="data"></param>
 		/// <returns></returns>
 		private async Task OdeslatEmail(NotificationType notificationType, IEnumerable<INotifikaceOdberSource> odberatele, Dictionary<string, object> data) {
-			Sablona sablona = new Sablona();// await _dbService.Sablona.SingleOrDefaultAsync(s => (s.SablonaTyp & SablonaTyp.Email) > 0 && s.UdalostTyp == typ);
-			if(sablona != null && odberatele.Any()) {
-				string predmet = TransformujSablonu(sablona.Predmet, data);
-				string zprava = TransformujSablonu(sablona.Zprava, data);
-				// TODO předělat na odeslání přes bcc v případě více než jednoho odběratele
-				_mailService.Send(predmet, zprava, odberatele.Select(x => x.Email).ToArray());
-			}
+			//Sablona sablona = new Sablona();// await _dbService.Sablona.SingleOrDefaultAsync(s => (s.SablonaTyp & SablonaTyp.Email) > 0 && s.UdalostTyp == typ);
+			//if(sablona != null && odberatele.Any()) {
+			string predmet = "Informace monitoringu"; //	 TransformujSablonu(sablona.Predmet, data);
+			string zprava = TransformujSablonu("", data);			
+			_mailService.Send(predmet, zprava, odberatele.Select(x => x.Email).ToArray());
+			//}
 		}
 
 		private string TransformujSablonu(string sablona, Dictionary<string, object> placeholders) {
-			var pattern = @"\$\{([^\{\}]+)\}";
-
-			MatchCollection matches = Regex.Matches(sablona, pattern, RegexOptions.IgnoreCase);
 			StringBuilder builder = new StringBuilder(sablona);
-			for(int i = matches.Count - 1; i >= 0; i--) {
-				Match match = matches[i];
-				builder.Remove(match.Index, match.Length);
-				string key = match.Groups[1].Value;
-				if(placeholders.ContainsKey(key)) {
-					builder.Insert(match.Index, placeholders[key]);
+			foreach(KeyValuePair<string, object> item in placeholders) {
+				if(item.Value is List<ErrorParameterInfo>) {
+					foreach(ErrorParameterInfo error in (item.Value as List<ErrorParameterInfo>)) {
+						builder.AppendLine(error.ToString());
+						//builder.Append(Environment.NewLine);
+					}
 				} else {
-					// TODO log missing data key
-					builder.Insert(match.Index, "<<---CHYBNÁ DATA--->>");
+					builder.Append($"{item.Key} - {item.Value.ToString()}");
 				}
 			}
-
 			return builder.ToString();
 		}
+
+		//private string TransformujSablonu(string sablona, Dictionary<string, object> placeholders) {
+		//	var pattern = @"\$\{([^\{\}]+)\}";
+
+		//	MatchCollection matches = Regex.Matches(sablona, pattern, RegexOptions.IgnoreCase);
+		//	StringBuilder builder = new StringBuilder(sablona);
+		//	for(int i = matches.Count - 1; i >= 0; i--) {
+		//		Match match = matches[i];
+		//		builder.Remove(match.Index, match.Length);
+		//		string key = match.Groups[1].Value;
+		//		if(placeholders.ContainsKey(key)) {
+		//			builder.Insert(match.Index, placeholders[key]);
+		//		} else {
+		//			// TODO log missing data key
+		//			builder.Insert(match.Index, "<<---CHYBNÁ DATA--->>");
+		//		}
+		//	}
+
+		//	return builder.ToString();
+		//}
 	}
 }

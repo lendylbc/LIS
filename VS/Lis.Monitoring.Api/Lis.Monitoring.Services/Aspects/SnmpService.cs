@@ -7,6 +7,7 @@ using Lis.Monitoring.Abstractions.Services;
 using Lis.Monitoring.Domain.Entities;
 using Lis.Monitoring.Services.Abstractions;
 using Lis.Monitoring.Shared.Enums;
+using Lis.Monitoring.Shared.Errors;
 using Lis.Monitoring.Snmp;
 using Microsoft.Extensions.Logging;
 
@@ -40,9 +41,11 @@ namespace Lis.Monitoring.Services.Aspects {
 								Type typ = data.Value.GetType();
 								decimal value = 0;
 								if(typ.Name.Equals("Integer32")) {
-									value = (decimal)Convert.ToInt32(data.Value.ToString()) / 10;
+									value = (decimal)Convert.ToInt32(data.Value.ToString());
 								}
-
+								if(parameter.Unit == "°C") {
+									value /= 10;
+								}
 								_deviceParameterDataService.Save(new DeviceParameterData() { DeviceParameterId = parameter.Id, Inserted = DateTime.Now, Value = value });
 							}
 						}

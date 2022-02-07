@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Lis.Monitoring.Domain.Entities;
 using Lis.Monitoring.Services.Aspects;
+using Lis.Monitoring.Shared.Errors;
 
 namespace Lis.Monitoring.Services.Abstractions {
 	public interface IConditionService {

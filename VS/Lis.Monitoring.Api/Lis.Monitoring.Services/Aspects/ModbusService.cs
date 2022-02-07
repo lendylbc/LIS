@@ -7,6 +7,7 @@ using Lis.Monitoring.Domain.Entities;
 using Lis.Monitoring.Modbus;
 using Lis.Monitoring.Services.Abstractions;
 using Lis.Monitoring.Shared.Enums;
+using Lis.Monitoring.Shared.Errors;
 
 namespace Lis.Monitoring.Services.Aspects {
 	public class ModbusService : IModbusService {

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Lis.Monitoring.Services.Entities {
 	public abstract class BaseEntityService<TEntity, TId, TFilter, TUpdateDto> : IBaseEntityService<TEntity, TId, TFilter, TUpdateDto>
-		 where TEntity : class, IEntity<TId>
+		where TEntity : class, IEntity<TId>
 		where TId : struct
 		where TFilter : class, IPagedQuery {
 		protected readonly DbService DbService;

@@ -7,17 +7,17 @@ using Lis.Monitoring.Abstractions.Services;
 using Lis.Monitoring.Domain.Entities;
 using Lis.Monitoring.Services.Abstractions;
 using Lis.Monitoring.Shared.Enums;
+using Lis.Monitoring.Shared.Errors;
 
 namespace Lis.Monitoring.Services.Aspects {
 	public class ConditionService : IConditionService {
+		private const int _RETRY_NOTIFICATION_AFTER_MINUTES = -30;
+
 		List<ErrorParameterInfo> _deviceErrors;
-		
-		private INotificationService _notificationService;
 
 		public List<ErrorParameterInfo> DeviceErrors { get => _deviceErrors; }
 
-		public ConditionService(INotificationService notificationService) {
-			_notificationService = notificationService;
+		public ConditionService() {
 			_deviceErrors = new List<ErrorParameterInfo>();
 		}
 
@@ -26,7 +26,7 @@ namespace Lis.Monitoring.Services.Aspects {
 			IEnumerable<DeviceParameter> noParamData = deviceParameters.Where(x => deviceData == null || !deviceData.Keys.Contains(x.Address));
 
 			foreach(DeviceParameter param in noParamData) {
-				_deviceErrors.Add(new ErrorParameterInfo() { Description = $"{param.Device?.Description} - {param.Description}", Address = param.Address, Unit = param.Unit, ErrorType = "No data" });
+				AddError(param);
 			}
 
 			if(deviceData != null) {
@@ -39,20 +39,28 @@ namespace Lis.Monitoring.Services.Aspects {
 							Type typ = valueData.GetType();
 
 							if(typ.Name.Equals("Integer32")) {
-								value = (decimal)Convert.ToInt32(valueData.ToString()) / 10;
+								value = (decimal)Convert.ToInt32(valueData.ToString());
 							}
 							foreach(DeviceParameterCondition condition in param.DeviceParameterCondition) {
 								if(!ConditionOk(condition, value)) {
-									_deviceErrors.Add(new ErrorParameterInfo() { Description = $"{param.Device?.Description} - {param.Description}", Address = param.Address, Unit = param.Unit, ErrorType = "Condition" });
+									AddError(param);
 								}
 							}
 						} catch {
-							_deviceErrors.Add(new ErrorParameterInfo() { Description = $"{param.Device?.Description} - {param.Description}", Address = param.Address, Unit = param.Unit, ErrorType = "No value" });
+							AddError(param);
 						}
 					} else {
-						_deviceErrors.Add(new ErrorParameterInfo() { Description = $"{param.Device?.Description} - {param.Description}", Address = param.Address, Unit = param.Unit, ErrorType = "No value" });
+						AddError(param);
 					}
 				}
+			}
+		}
+
+		private void AddError(DeviceParameter param) {
+			if(param.ErrorDetected == null || param.Notified == null || param.Notified < DateTime.Now.AddMinutes(_RETRY_NOTIFICATION_AFTER_MINUTES)) {
+				_deviceErrors.Add(new ErrorParameterInfo() { Description = $"{param.Device?.Description} - {param.Description}", Address = param.Address, Unit = param.Unit, ErrorType = "No data" });
+				param.ErrorDetected = DateTime.Now;
+				param.Notified = DateTime.Now;
 			}
 		}
 
@@ -80,20 +88,6 @@ namespace Lis.Monitoring.Services.Aspects {
 			}
 
 			return result;
-		}
-	}
-
-	public class ErrorParameterInfo {
-		public string Description { get; set; }
-		public string Address { get; set; }
-		public string Unit { get; set; }
-		public string ErrorType { get; set; }
-
-		public override string ToString() {
-			return "Description " + Description + Environment.NewLine +
-				"Address " + Address + Environment.NewLine +
-				"Unit " + Unit + Environment.NewLine +
-				"ErrorType " + ErrorType + Environment.NewLine;
 		}
 	}
 }
