@@ -20,9 +20,9 @@ namespace Lis.Monitoring.Services.Entities {
 		}
 
 		/// <summary>
-		/// Provede změnu pro dané zařízení
+		/// Provede změnu pro daný parametr
 		/// </summary>
-		/// <param name="id">Identifikátor zařízení</param>
+		/// <param name="id">Identifikátor parametru</param>
 		/// <param name="data">Data, která mají být změněná</param>
 		/// <returns></returns>
 		public override async Task<DeviceParameter> UpdateAsync(long id, DeviceParameterDto data) {
@@ -39,6 +39,27 @@ namespace Lis.Monitoring.Services.Entities {
 			await DbService.SaveChangesAsync();
 
 			return deviceParam;
+		}
+
+		/// <summary>
+		/// Provede změnu informace o chybě pro daný parametr
+		/// </summary>
+		/// <param name="id">Identifikátor parametru</param>
+		/// <param name="data">Data, která mají být změněná</param>
+		/// <returns></returns>
+		//public async Task<bool> UpdateErrorInfoAsync(DeviceParameter data) {
+		public bool UpdateErrorInfoAsync(DeviceParameter data) {
+			DeviceParameter deviceParam = EntitySet.SingleOrDefault(u => u.Id == data.Id);
+			if(deviceParam == null) {
+				throw new Exception("Parametr nebyl nalezen!");
+			}
+
+			deviceParam.ErrorDetected = data.ErrorDetected;
+			deviceParam.Notified = data.Notified;
+
+			DbService.SaveChanges();
+
+			return true;
 		}
 	}
 }

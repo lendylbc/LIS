@@ -38,13 +38,16 @@ namespace WinFormsApp1 {
 			this.btnTme = new System.Windows.Forms.Button();
 			this.btnQuido = new System.Windows.Forms.Button();
 			this.panel6 = new System.Windows.Forms.Panel();
+			this.button3 = new System.Windows.Forms.Button();
 			this.groupBox3 = new System.Windows.Forms.GroupBox();
+			this.button4 = new System.Windows.Forms.Button();
 			this.radioButton1 = new System.Windows.Forms.RadioButton();
 			this.edtModbusData = new System.Windows.Forms.TextBox();
 			this.edtModbusPort = new System.Windows.Forms.NumericUpDown();
 			this.edtModbusIp = new System.Windows.Forms.TextBox();
 			this.btnModbus = new System.Windows.Forms.Button();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
+			this.edtSnmpPort = new System.Windows.Forms.NumericUpDown();
 			this.edtSnmpCount = new System.Windows.Forms.NumericUpDown();
 			this.rbtnSnmp = new System.Windows.Forms.RadioButton();
 			this.button1 = new System.Windows.Forms.Button();
@@ -56,7 +59,7 @@ namespace WinFormsApp1 {
 			this.edtSickPort = new System.Windows.Forms.NumericUpDown();
 			this.edtSickIp = new System.Windows.Forms.TextBox();
 			this.btnSick = new System.Windows.Forms.Button();
-			this.button3 = new System.Windows.Forms.Button();
+			this.edtComPort = new System.Windows.Forms.TextBox();
 			this.panel1.SuspendLayout();
 			this.panel2.SuspendLayout();
 			this.panel3.SuspendLayout();
@@ -66,6 +69,7 @@ namespace WinFormsApp1 {
 			this.groupBox3.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.edtModbusPort)).BeginInit();
 			this.groupBox2.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.edtSnmpPort)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.edtSnmpCount)).BeginInit();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.edtSickPort)).BeginInit();
@@ -142,6 +146,7 @@ namespace WinFormsApp1 {
 			this.edtOids.Name = "edtOids";
 			this.edtOids.Size = new System.Drawing.Size(200, 416);
 			this.edtOids.TabIndex = 15;
+			this.edtOids.Text = "1.3.6.1.4.1.476.1.42.3.4.1.3.3.1.3.3";
 			// 
 			// panel5
 			// 
@@ -202,8 +207,20 @@ namespace WinFormsApp1 {
 			this.panel6.Size = new System.Drawing.Size(336, 450);
 			this.panel6.TabIndex = 16;
 			// 
+			// button3
+			// 
+			this.button3.Location = new System.Drawing.Point(224, 257);
+			this.button3.Name = "button3";
+			this.button3.Size = new System.Drawing.Size(75, 23);
+			this.button3.TabIndex = 18;
+			this.button3.Text = "SMTP test";
+			this.button3.UseVisualStyleBackColor = true;
+			this.button3.Click += new System.EventHandler(this.button3_Click);
+			// 
 			// groupBox3
 			// 
+			this.groupBox3.Controls.Add(this.edtComPort);
+			this.groupBox3.Controls.Add(this.button4);
 			this.groupBox3.Controls.Add(this.radioButton1);
 			this.groupBox3.Controls.Add(this.edtModbusData);
 			this.groupBox3.Controls.Add(this.edtModbusPort);
@@ -215,6 +232,16 @@ namespace WinFormsApp1 {
 			this.groupBox3.TabIndex = 17;
 			this.groupBox3.TabStop = false;
 			this.groupBox3.Text = "MODBUS";
+			// 
+			// button4
+			// 
+			this.button4.Location = new System.Drawing.Point(214, 61);
+			this.button4.Name = "button4";
+			this.button4.Size = new System.Drawing.Size(75, 23);
+			this.button4.TabIndex = 16;
+			this.button4.Text = "Send serial";
+			this.button4.UseVisualStyleBackColor = true;
+			this.button4.Click += new System.EventHandler(this.button4_Click);
 			// 
 			// radioButton1
 			// 
@@ -232,7 +259,8 @@ namespace WinFormsApp1 {
 			this.edtModbusData.Name = "edtModbusData";
 			this.edtModbusData.Size = new System.Drawing.Size(173, 23);
 			this.edtModbusData.TabIndex = 14;
-			this.edtModbusData.Text = "01234567898765432108564";
+			this.edtModbusData.Text = "010403F30001C1BD";
+			this.edtModbusData.TextChanged += new System.EventHandler(this.edtModbusData_TextChanged);
 			// 
 			// edtModbusPort
 			// 
@@ -257,7 +285,7 @@ namespace WinFormsApp1 {
 			this.edtModbusIp.Name = "edtModbusIp";
 			this.edtModbusIp.Size = new System.Drawing.Size(173, 23);
 			this.edtModbusIp.TabIndex = 12;
-			this.edtModbusIp.Text = "192.168.1.247";
+			this.edtModbusIp.Text = "172.20.1.86";
 			// 
 			// btnModbus
 			// 
@@ -271,6 +299,7 @@ namespace WinFormsApp1 {
 			// 
 			// groupBox2
 			// 
+			this.groupBox2.Controls.Add(this.edtSnmpPort);
 			this.groupBox2.Controls.Add(this.edtSnmpCount);
 			this.groupBox2.Controls.Add(this.rbtnSnmp);
 			this.groupBox2.Controls.Add(this.button1);
@@ -283,9 +312,26 @@ namespace WinFormsApp1 {
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "SNMP";
 			// 
+			// edtSnmpPort
+			// 
+			this.edtSnmpPort.Location = new System.Drawing.Point(36, 50);
+			this.edtSnmpPort.Maximum = new decimal(new int[] {
+            99999,
+            0,
+            0,
+            0});
+			this.edtSnmpPort.Name = "edtSnmpPort";
+			this.edtSnmpPort.Size = new System.Drawing.Size(76, 23);
+			this.edtSnmpPort.TabIndex = 18;
+			this.edtSnmpPort.Value = new decimal(new int[] {
+            161,
+            0,
+            0,
+            0});
+			// 
 			// edtSnmpCount
 			// 
-			this.edtSnmpCount.Location = new System.Drawing.Point(37, 51);
+			this.edtSnmpCount.Location = new System.Drawing.Point(162, 50);
 			this.edtSnmpCount.Maximum = new decimal(new int[] {
             4,
             0,
@@ -313,7 +359,7 @@ namespace WinFormsApp1 {
 			// 
 			// button1
 			// 
-			this.button1.Location = new System.Drawing.Point(91, 51);
+			this.button1.Location = new System.Drawing.Point(216, 50);
 			this.button1.Name = "button1";
 			this.button1.Size = new System.Drawing.Size(75, 23);
 			this.button1.TabIndex = 14;
@@ -327,7 +373,7 @@ namespace WinFormsApp1 {
 			this.edtSnmpIp.Name = "edtSnmpIp";
 			this.edtSnmpIp.Size = new System.Drawing.Size(173, 23);
 			this.edtSnmpIp.TabIndex = 13;
-			this.edtSnmpIp.Text = "192.168.1.243";
+			this.edtSnmpIp.Text = "172.20.0.111";
 			// 
 			// btnSendReq
 			// 
@@ -406,15 +452,13 @@ namespace WinFormsApp1 {
 			this.btnSick.UseVisualStyleBackColor = true;
 			this.btnSick.Click += new System.EventHandler(this.btnSick_Click);
 			// 
-			// button3
+			// edtComPort
 			// 
-			this.button3.Location = new System.Drawing.Point(224, 257);
-			this.button3.Name = "button3";
-			this.button3.Size = new System.Drawing.Size(75, 23);
-			this.button3.TabIndex = 18;
-			this.button3.Text = "SMTP test";
-			this.button3.UseVisualStyleBackColor = true;
-			this.button3.Click += new System.EventHandler(this.button3_Click);
+			this.edtComPort.Location = new System.Drawing.Point(214, 104);
+			this.edtComPort.Name = "edtComPort";
+			this.edtComPort.Size = new System.Drawing.Size(77, 23);
+			this.edtComPort.TabIndex = 17;
+			this.edtComPort.Text = "COM16";
 			// 
 			// Form1
 			// 
@@ -425,6 +469,7 @@ namespace WinFormsApp1 {
 			this.Controls.Add(this.panel1);
 			this.Name = "Form1";
 			this.Text = "Form1";
+			this.Load += new System.EventHandler(this.Form1_Load);
 			this.panel1.ResumeLayout(false);
 			this.panel2.ResumeLayout(false);
 			this.panel2.PerformLayout();
@@ -438,6 +483,7 @@ namespace WinFormsApp1 {
 			((System.ComponentModel.ISupportInitialize)(this.edtModbusPort)).EndInit();
 			this.groupBox2.ResumeLayout(false);
 			this.groupBox2.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.edtSnmpPort)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.edtSnmpCount)).EndInit();
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
@@ -479,6 +525,9 @@ namespace WinFormsApp1 {
 		private System.Windows.Forms.TextBox edtModbusIp;
 		private System.Windows.Forms.Button btnModbus;
 		private System.Windows.Forms.Button button3;
+		private System.Windows.Forms.NumericUpDown edtSnmpPort;
+		private System.Windows.Forms.Button button4;
+		private System.Windows.Forms.TextBox edtComPort;
 	}
 }
 

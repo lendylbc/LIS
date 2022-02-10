@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.IO.Ports;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -14,6 +15,7 @@ using System.Windows.Forms;
 using Lextm.SharpSnmpLib;
 using Lextm.SharpSnmpLib.Messaging;
 using NModbus;
+using NModbus.IO;
 using SnmpSharpNet;
 
 namespace WinFormsApp1 {
@@ -24,7 +26,7 @@ namespace WinFormsApp1 {
 		}
 
 		private void btnSendReq_Click(object sender, EventArgs e) {
-			SnmpRequest(edtSnmpIp.Text);
+			SnmpRequest(edtSnmpIp.Text, (int)edtSnmpPort.Value);
 		}
 
 		//private void SnmpGetAll() {
@@ -32,7 +34,7 @@ namespace WinFormsApp1 {
 
 		//			edtIp.Text
 		//}
-		private void SnmpRequest(string ip) {
+		private void SnmpRequest(string ip, int port) {
 			//IList<Variable> result = Messenger.Get(VersionCode.V1,
 			//									new IPEndPoint(IPAddress.Parse(ip), 161),
 			//									new Lextm.SharpSnmpLib.OctetString("public"),
@@ -59,7 +61,7 @@ namespace WinFormsApp1 {
 
 			//	************************************************************************************************
 
-			SimpleSnmp snmp = new SimpleSnmp(ip, 161, "public");
+			SimpleSnmp snmp = new SimpleSnmp(ip, port, "public");
 
 			if(!snmp.Valid) {
 				return;
@@ -78,20 +80,20 @@ namespace WinFormsApp1 {
 			////"1.3.6.1.2.1.1.1.0",
 			////"1.3.6.1.4.1.18248.31.1.2.1.1.3.1"
 			//});
-			
+
 			if(result != null) {
 				foreach(KeyValuePair<Oid, AsnType> variable in result) {
 					if(variable.Key.ToString().Equals("1.3.6.1.4.1.18248.31.1.2.1.1.3.1") ||
 						variable.Key.ToString().Equals("1.3.6.1.4.1.18248.31.1.2.1.1.3.4") ||
 						variable.Key.ToString().Equals("1.3.6.1.4.1.18248.1.1.1.0") ||
-						variable.Key.ToString().Equals("1.3.6.1.4.1.18248.16.1.1.0")) {						
+						variable.Key.ToString().Equals("1.3.6.1.4.1.18248.16.1.1.0")) {
 						string data = variable.Value.ToString();
 						edtLog.Text += "\t" + data.Insert(data.Length - 1, ".") + "°C";
 					} else {
 						edtLog.Text += variable.Value.ToString();//Environment.NewLine + variable.Id.ToString() + "  " + 
 					}
 					edtLog.Text += Environment.NewLine;
-				}				
+				}
 			}
 
 			//	************************************************************************************************
@@ -219,14 +221,14 @@ namespace WinFormsApp1 {
 		}
 
 		private void timer1_Tick(object sender, EventArgs e) {
-			if(rbtnSick.Checked) {
-				SickRequest();
-			} else {
-				SnmpRequest(edtSnmpIp.Text);
-				SnmpRequest("172.20.1.56");
-				SnmpRequest("172.20.1.57");
-				SnmpRequest("172.20.1.58");
-			}
+			//if(rbtnSick.Checked) {
+			//	SickRequest();
+			//} else {
+			//	SnmpRequest(edtSnmpIp.Text);
+			//	SnmpRequest("172.20.1.56");
+			//	SnmpRequest("172.20.1.57");
+			//	SnmpRequest("172.20.1.58");
+			//}
 		}
 
 		private void btnTimer_Click(object sender, EventArgs e) {
@@ -240,7 +242,7 @@ namespace WinFormsApp1 {
 			edtLog.Clear();
 		}
 
-		private void btnQuido_Click(object sender, EventArgs e) {			
+		private void btnQuido_Click(object sender, EventArgs e) {
 			edtOids.Text = "1.3.6.1.4.1.18248.16.1.3.0" + Environment.NewLine +
 			"1.3.6.1.4.1.18248.16.1.1.0" + Environment.NewLine +
 			"1.3.6.1.4.1.18248.16.2.1.1.2.1" + Environment.NewLine +
@@ -248,8 +250,8 @@ namespace WinFormsApp1 {
 			edtSnmpIp.Text = "192.168.1.243";
 		}
 
-		private void btnTme_Click(object sender, EventArgs e) {			
-			edtOids.Text = "1.3.6.1.4.1.18248.1.1.3.0" + Environment.NewLine + 
+		private void btnTme_Click(object sender, EventArgs e) {
+			edtOids.Text = "1.3.6.1.4.1.18248.1.1.3.0" + Environment.NewLine +
 				"1.3.6.1.4.1.18248.1.1.1.0";
 			edtSnmpIp.Text = "192.168.1.244";
 		}
@@ -305,68 +307,100 @@ namespace WinFormsApp1 {
 			//}
 
 
-			TcpClient client;
-
-			client = new TcpClient();
-			client.SendBufferSize = 0;
-			client.ReceiveTimeout = 2000;
-
-			try {
-				client.BeginConnect(edtModbusIp.Text, (int)edtModbusPort.Value, null, null);
-				client.SendBufferSize = 0;
-				// Create modbus master device on the tcp client
-				//ModbusIpMaster master = ModbusIpMaster.CreateIp(tcpClient);
-
-				//RequestData(new byte[] { 0xaa, 0x55, 0x5a }, client);
-				//return;
-
-				ModbusFactory modbusFactory = new ModbusFactory();
-				IModbusMaster modbusMaster = modbusFactory.CreateMaster(client);
-
-				//modbusSlaveTransport = modbusFactory.CreateSlaveNetwork(tcpListener);
-				if(client.Connected) {
-					try {
-						bool[] dInputs = modbusMaster.ReadInputs(12, 32, 54);
-						//modbusMaster.WriteSingleRegister(6, 6, 18);
-						//modbusMaster.WriteMultipleRegisters(0, 0, new ushort[] { 1, 2, 3, 4, 5 });
-						//modbusMaster.WriteMultipleCoils(0, 0, new bool[] { true, false, true, false, true });
-
-						//	WriteMultipleRegisters
-					} catch {
-
-					}
-					//bool[] dInputs = modbusMaster.ReadInputs(0, 0, 5);
-				}
-			} catch {
-
-			}
-
-			client.Close();
-
-
 			//TcpClient client;
 
-			//client = new TcpClient(edtModbusIp.Text, (int)edtModbusPort.Value);
+			//client = new TcpClient();
+			//client.SendBufferSize = 0;
 			//client.ReceiveTimeout = 2000;
 
-			//byte[] commandTestBytes = Encoding.ASCII.GetBytes(edtModbusData.Text);
+			//try {
+			//	//client.BeginConnect(edtModbusIp.Text, (int)edtModbusPort.Value, null, null);
+			//	client.SendBufferSize = 0;
+			//	// Create modbus master device on the tcp client
+			//	//ModbusIpMaster master = ModbusIpMaster.CreateIp(tcpClient);
 
-			////byte[] dataCommand = new byte[commandTestBytes.Length + 2];
+			//	//RequestData(new byte[] { 0xaa, 0x55, 0x5a }, client);
+			//	//return;
 
-			////Array.Copy(commandTestBytes, 0, dataCommand, 1, commandTestBytes.Length);
+			//	IStreamResource streamResource = new StreamModbus();
 
-			////dataCommand[0] = 0x02;
-			////dataCommand[dataCommand.Length - 1] = 0x03;
 
-			//byte[] data = RequestData(commandTestBytes, client);
+			//	ModbusFactory modbusFactory = new ModbusFactory();
 
-			//if(data != null) {
-			//	//edtLog.Text = BitConverter.ToString(data).Replace("-", "");
+			//	IModbusSerialMaster modbusSerialMaster = modbusFactory.CreateRtuMaster(streamResource);
+			//	modbusSerialMaster.ReadInputRegisters(1, 1011, 1);
 
-			//	edtLog.Text += Environment.NewLine + Encoding.ASCII.GetString(data);
+			//	IModbusMaster modbusMaster = modbusFactory.CreateMaster(client);
+
+			//	client.Connect(edtModbusIp.Text, (int)edtModbusPort.Value);
+			//	//modbusSlaveTransport = modbusFactory.CreateSlaveNetwork(tcpListener);
+			//	if(client.Connected) {
+			//		try {
+			//			//ushort[] data = modbusMaster.ReadHoldingRegisters(1, 1011, 4);
+
+			//			ushort[] data = modbusMaster.ReadInputRegisters(1, 1011, 1);
+
+			//			//bool[] dInputs = modbusMaster.ReadInputs(1, 1500, 1);
+			//			//modbusMaster.WriteSingleRegister(6, 6, 18);
+			//			//modbusMaster.WriteMultipleRegisters(0, 0, new ushort[] { 1, 2, 3, 4, 5 });
+			//			//modbusMaster.WriteMultipleCoils(0, 0, new bool[] { true, false, true, false, true });
+
+			//			//	WriteMultipleRegisters
+			//		} catch {
+
+			//		}
+			//		//bool[] dInputs = modbusMaster.ReadInputs(0, 0, 5);
+			//	}
+			//} catch {
+
 			//}
 
 			//client.Close();
+
+
+
+
+
+			TcpClient client;
+
+			client = new TcpClient(edtModbusIp.Text, (int)edtModbusPort.Value);
+			client.ReceiveTimeout = 5000;
+			client.SendBufferSize = 0;
+
+			byte[] commandTestBytes = StringToByteArray(edtModbusData.Text);
+
+			//byte[] dataCommand = new byte[commandTestBytes.Length + 2];
+
+			//Array.Copy(commandTestBytes, 0, dataCommand, 1, commandTestBytes.Length);
+
+			//dataCommand[0] = 0x02;
+			//dataCommand[dataCommand.Length - 1] = 0x03;
+			byte[] data = null;
+			try {
+
+				data = RequestData(commandTestBytes, client);
+			} catch {
+				edtLog.Text += Environment.NewLine + "Nevrátil data";
+			}
+
+			if(data != null) {
+				//edtLog.Text = BitConverter.ToString(data).Replace("-", "");
+
+				edtLog.Text += Environment.NewLine + Encoding.ASCII.GetString(data);
+			} else {
+				//edtLog.Text = BitConverter.ToString(data).Replace("-", "");
+
+				edtLog.Text += Environment.NewLine + "NO DATA";
+			}
+
+			client.Close();
+		}
+
+		public static byte[] StringToByteArray(string hex) {
+			return Enumerable.Range(0, hex.Length)
+								  .Where(x => x % 2 == 0)
+								  .Select(x => Convert.ToByte(hex.Substring(x, 2), 16))
+								  .ToArray();
 		}
 
 		private void button3_Click(object sender, EventArgs e) {
@@ -403,5 +437,107 @@ namespace WinFormsApp1 {
 			mailClient.Send(msgMail);
 			msgMail.Dispose();
 		}
+
+		private void button4_Click(object sender, EventArgs e) {
+			SerialPort _serialPort = new SerialPort();
+
+			_serialPort.PortName = edtComPort.Text;
+			_serialPort.BaudRate = 19200;// SetPortBaudRate(_serialPort.BaudRate);
+			_serialPort.Parity = Parity.Even;
+			//_serialPort.DataBits = SetPortDataBits(_serialPort.DataBits);
+			//_serialPort.StopBits = SetPortStopBits(_serialPort.StopBits);
+			//_serialPort.Handshake = SetPortHandshake(_serialPort.Handshake);
+
+			// Set the read/write timeouts
+			_serialPort.ReadTimeout = 2000;
+			_serialPort.WriteTimeout = 2000;
+
+			byte[] commandTestBytes = StringToByteArray(edtModbusData.Text);
+			try {
+				try {
+					_serialPort.Open();
+					_serialPort.Write(commandTestBytes, 0, commandTestBytes.Length);
+					edtLog.Text += Environment.NewLine + "Odesláno: " + BitConverter.ToString(commandTestBytes).Replace("-", "");
+					for(int i = 0; i < commandTestBytes.Length; i++) {
+						commandTestBytes[i] = 0;
+					}
+
+					_serialPort.Read(commandTestBytes, 0, commandTestBytes.Length);
+					edtLog.Text += Environment.NewLine + "Přijato: " + BitConverter.ToString(commandTestBytes).Replace("-", "");
+
+
+				} catch(Exception ex) {
+					if(ex.Message.Contains("time")) {
+						edtLog.Text += Environment.NewLine + "Timeout";
+					} else {
+						edtLog.Text += Environment.NewLine + "Chyba portu";
+					}
+				}
+			} finally {
+				_serialPort.Close();
+			}
+		}
+			
+
+		private void Form1_Load(object sender, EventArgs e) {
+				foreach(string s in SerialPort.GetPortNames()) {
+					edtLog.Text += s + Environment.NewLine;
+				}
+			}
+
+			public string SetPortName(string defaultPortName) {
+				string portName;
+
+				//Console.WriteLine("Available Ports:");
+				//foreach(string s in SerialPort.GetPortNames()) {
+				//	Console.WriteLine("   {0}", s);
+				//}
+
+				//Console.Write("Enter COM port value (Default: {0}): ", defaultPortName);
+				portName = Console.ReadLine();
+
+				if(portName == "" || !(portName.ToLower()).StartsWith("com")) {
+					portName = defaultPortName;
+				}
+				return portName;
+			}
+
+			private void edtModbusData_TextChanged(object sender, EventArgs e) {
+
+			}
+		}
+
+
+
+		public class StreamModbus : IStreamResource {
+
+			public string write;
+			public string read;
+
+			public byte[] writeByte;
+			public byte[] readByte;
+			public int InfiniteTimeout { get; set; }
+
+			public int ReadTimeout { get; set; }
+			public int WriteTimeout { get; set; }
+
+			public void DiscardInBuffer() {
+				//throw new NotImplementedException();
+			}
+
+			public void Dispose() {
+				//throw new NotImplementedException();
+			}
+
+			public int Read(byte[] buffer, int offset, int count) {
+				readByte = buffer;
+				read = Encoding.ASCII.GetString(buffer);
+				return 1;
+			}
+
+			public void Write(byte[] buffer, int offset, int count) {
+				writeByte = buffer;
+				write = BitConverter.ToString(buffer).Replace("-", "");// Encoding.ASCII.GetString(buffer);
+			}
+		}
 	}
-}

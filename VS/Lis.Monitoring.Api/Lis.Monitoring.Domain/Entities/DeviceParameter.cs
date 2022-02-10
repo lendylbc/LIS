@@ -16,8 +16,10 @@ namespace Lis.Monitoring.Domain.Entities {
 		public DateTime Inserted { get; set; }
 		public bool Active { get; set; }
 		public DateTime? ErrorDetected { get; set; }
-		public DateTime? Notified { get; set; }		
+		public DateTime? Notified { get; set; }
 
+		[NotMapped]
+		public bool ErrorInfoChange { get; set; }
 		public ICollection<DeviceParameterCondition> DeviceParameterCondition { get; set; } = new List<DeviceParameterCondition>();
 	}
 }

@@ -32,7 +32,7 @@ namespace Lis.Monitoring.Services.Aspects {
 			IEnumerable<INotifikaceOdberSource> odberatele = _dbService.Set<Member>().Where(o => o.SendNotifications);
 
 			if((notificationSend & NotificationSend.Email) > 0) {
-				//await OdeslatEmail((NotificationType)notificationType, odberatele, data);
+				await OdeslatEmail((NotificationType)notificationType, odberatele, data);
 			}
 			if((notificationSend & NotificationSend.SMS) > 0) {
 			}
@@ -59,7 +59,7 @@ namespace Lis.Monitoring.Services.Aspects {
 			foreach(KeyValuePair<string, object> item in placeholders) {
 				if(item.Value is List<ErrorParameterInfo>) {
 					foreach(ErrorParameterInfo error in (item.Value as List<ErrorParameterInfo>)) {
-						builder.AppendLine(error.ToString());
+						builder.AppendLine(error.ToString() + "<br>");
 						//builder.Append(Environment.NewLine);
 					}
 				} else {

@@ -9,5 +9,7 @@ using Lis.Monitoring.Services.Queries;
 
 namespace Lis.Monitoring.Services.Abstractions {
 	public interface IDeviceParameterService : IBaseEntityService<DeviceParameter, long, DeviceParameterQuery, DeviceParameterDto> {
+		//Task<bool> UpdateErrorInfoAsync(DeviceParameter data);
+		bool UpdateErrorInfoAsync(DeviceParameter data);
 	}
 }

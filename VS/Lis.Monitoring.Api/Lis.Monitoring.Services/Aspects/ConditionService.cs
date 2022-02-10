@@ -22,6 +22,7 @@ namespace Lis.Monitoring.Services.Aspects {
 		}
 
 		public void ResolveConditions(ICollection<DeviceParameter> deviceParameters, Dictionary<string, object> deviceData) {
+			bool errorConditionExists;
 			//	TODO:	If no data for 
 			IEnumerable<DeviceParameter> noParamData = deviceParameters.Where(x => deviceData == null || !deviceData.Keys.Contains(x.Address));
 
@@ -41,10 +42,20 @@ namespace Lis.Monitoring.Services.Aspects {
 							if(typ.Name.Equals("Integer32")) {
 								value = (decimal)Convert.ToInt32(valueData.ToString());
 							}
+							if(param.Unit == "°C") {
+								value /= 10;
+							}
+							errorConditionExists = false;
 							foreach(DeviceParameterCondition condition in param.DeviceParameterCondition) {
 								if(!ConditionOk(condition, value)) {
-									AddError(param);
+									errorConditionExists = true;
+									break;
 								}
+							}
+							if(errorConditionExists) {
+								AddError(param, true, value.ToString());
+							} else {
+								ClearErrorInfo(param);
 							}
 						} catch {
 							AddError(param);
@@ -56,11 +67,27 @@ namespace Lis.Monitoring.Services.Aspects {
 			}
 		}
 
-		private void AddError(DeviceParameter param) {
+		private void AddError(DeviceParameter param, bool condition = false, string value = null) {
 			if(param.ErrorDetected == null || param.Notified == null || param.Notified < DateTime.Now.AddMinutes(_RETRY_NOTIFICATION_AFTER_MINUTES)) {
-				_deviceErrors.Add(new ErrorParameterInfo() { Description = $"{param.Device?.Description} - {param.Description}", Address = param.Address, Unit = param.Unit, ErrorType = "No data" });
+				_deviceErrors.Add(new ErrorParameterInfo() { 
+					Id = param.Id,
+					Description = $"{param.Device?.Description} - {param.Description}",
+					Address = param.Address,
+					Unit = param.Unit,
+					Value = value,
+					ErrorType = condition ? "Condition" : "No data",
+					Timestamp = DateTime.Now 
+				});
 				param.ErrorDetected = DateTime.Now;
 				param.Notified = DateTime.Now;
+				param.ErrorInfoChange = true;
+			}
+		}
+		private void ClearErrorInfo(DeviceParameter param) {
+			if(param.ErrorDetected != null || param.Notified != null) {
+				param.ErrorDetected = null;
+				param.Notified = null;
+				param.ErrorInfoChange = true;
 			}
 		}
 

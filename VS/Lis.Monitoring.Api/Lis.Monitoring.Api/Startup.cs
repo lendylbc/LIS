@@ -126,6 +126,8 @@ namespace Lis.Monitoring.Api {
 
 			services.AddSingleton<IAuthJwt>(new Auth(_jwtOptions.Secret));
 
+			//services.AddSingleton<ILogger>(_logger);
+
 			services.AddScoped<IMemberService, MemberService>();
 			services.AddScoped<IDeviceService, DeviceService>();
 			services.AddScoped<IDeviceParameterDataService, DeviceParameterDataService>();

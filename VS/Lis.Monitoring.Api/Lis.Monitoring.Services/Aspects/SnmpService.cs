@@ -14,14 +14,16 @@ using Microsoft.Extensions.Logging;
 namespace Lis.Monitoring.Services.Aspects {
 	public class SnmpService : ISnmpService {
 		private IDeviceService _deviceService;
-		private IDeviceParameterDataService _deviceParameterDataService;		
+		private IDeviceParameterDataService _deviceParameterDataService;
+		private IDeviceParameterService _deviceParameterService;
 		private IConditionService _conditionService;
 
 		public List<ErrorParameterInfo> Errors { get => _conditionService.DeviceErrors; }
 
-		public SnmpService(IDeviceService deviceService, IDeviceParameterDataService deviceParameterDataService, IConditionService conditionService) {
+		public SnmpService(IDeviceService deviceService, IDeviceParameterDataService deviceParameterDataService, IDeviceParameterService deviceParameterService, IConditionService conditionService) {
 			_deviceService = deviceService;
-			_deviceParameterDataService = deviceParameterDataService;			
+			_deviceParameterDataService = deviceParameterDataService;
+			_deviceParameterService = deviceParameterService;
 			_conditionService = conditionService;
 		}
 
@@ -51,6 +53,15 @@ namespace Lis.Monitoring.Services.Aspects {
 						}
 					}
 					_conditionService.ResolveConditions(device.DeviceParameter, deviceData);
+					foreach(DeviceParameter parameter in device.DeviceParameter) {
+						if(parameter.ErrorInfoChange) {
+							try {
+								_deviceParameterService.UpdateErrorInfoAsync(parameter);
+							} catch {
+								//	log
+							}
+						}
+					}
 				}
 			}			
 		}
