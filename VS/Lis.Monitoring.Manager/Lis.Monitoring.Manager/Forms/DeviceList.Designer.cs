@@ -49,23 +49,23 @@ namespace Lis.Monitoring.Manager.Forms {
 			this.panel4 = new System.Windows.Forms.Panel();
 			this.panel6 = new System.Windows.Forms.Panel();
 			this.grdConditions = new System.Windows.Forms.DataGridView();
+			this.Operator = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.panel8 = new System.Windows.Forms.Panel();
 			this.btnConditionDelete = new System.Windows.Forms.Button();
 			this.btnConditionEdit = new System.Windows.Forms.Button();
 			this.btnConditionInsert = new System.Windows.Forms.Button();
 			this.panel5 = new System.Windows.Forms.Panel();
 			this.grdParams = new System.Windows.Forms.DataGridView();
+			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
 			this.panel7 = new System.Windows.Forms.Panel();
 			this.btnParamDelete = new System.Windows.Forms.Button();
 			this.btnParamEdit = new System.Windows.Forms.Button();
 			this.btnParamInsert = new System.Windows.Forms.Button();
 			this.tipDevice = new System.Windows.Forms.ToolTip(this.components);
-			this.Operator = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
 			this.panel1.SuspendLayout();
 			this.panel2.SuspendLayout();
 			this.panel3.SuspendLayout();
@@ -292,7 +292,23 @@ namespace Lis.Monitoring.Manager.Forms {
 			this.grdConditions.Size = new System.Drawing.Size(434, 134);
 			this.grdConditions.TabIndex = 10;
 			this.grdConditions.DataSourceChanged += new System.EventHandler(this.grdConditions_DataSourceChanged);
+			this.grdConditions.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.grdConditions_CellFormatting);
 			this.grdConditions.DoubleClick += new System.EventHandler(this.grdConditions_DoubleClick);
+			// 
+			// Operator
+			// 
+			this.Operator.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.Operator.DataPropertyName = "Operator";
+			this.Operator.HeaderText = "Operátor";
+			this.Operator.Name = "Operator";
+			this.Operator.ReadOnly = true;
+			// 
+			// Value
+			// 
+			this.Value.DataPropertyName = "Value";
+			this.Value.HeaderText = "Hodnota";
+			this.Value.Name = "Value";
+			this.Value.ReadOnly = true;
 			// 
 			// panel8
 			// 
@@ -400,6 +416,37 @@ namespace Lis.Monitoring.Manager.Forms {
 			this.grdParams.SelectionChanged += new System.EventHandler(this.grdParams_SelectionChanged);
 			this.grdParams.DoubleClick += new System.EventHandler(this.grdParams_DoubleClick);
 			// 
+			// dataGridViewTextBoxColumn1
+			// 
+			this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.dataGridViewTextBoxColumn1.DataPropertyName = "Description";
+			this.dataGridViewTextBoxColumn1.HeaderText = "Parametr";
+			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+			this.dataGridViewTextBoxColumn1.ReadOnly = true;
+			// 
+			// Address
+			// 
+			this.Address.DataPropertyName = "Address";
+			this.Address.HeaderText = "Adresa";
+			this.Address.Name = "Address";
+			this.Address.ReadOnly = true;
+			// 
+			// Unit
+			// 
+			this.Unit.DataPropertyName = "Unit";
+			this.Unit.HeaderText = "Jednotka";
+			this.Unit.Name = "Unit";
+			this.Unit.ReadOnly = true;
+			this.Unit.Width = 60;
+			// 
+			// dataGridViewCheckBoxColumn1
+			// 
+			this.dataGridViewCheckBoxColumn1.DataPropertyName = "Active";
+			this.dataGridViewCheckBoxColumn1.HeaderText = "Aktivní";
+			this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
+			this.dataGridViewCheckBoxColumn1.ReadOnly = true;
+			this.dataGridViewCheckBoxColumn1.Width = 50;
+			// 
 			// panel7
 			// 
 			this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -447,52 +494,6 @@ namespace Lis.Monitoring.Manager.Forms {
 			this.tipDevice.SetToolTip(this.btnParamInsert, "Přidat parametr");
 			this.btnParamInsert.UseVisualStyleBackColor = true;
 			this.btnParamInsert.Click += new System.EventHandler(this.btnParamInsert_Click);
-			// 
-			// Operator
-			// 
-			this.Operator.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.Operator.DataPropertyName = "Operator";
-			this.Operator.HeaderText = "Operátor";
-			this.Operator.Name = "Operator";
-			this.Operator.ReadOnly = true;
-			// 
-			// Value
-			// 
-			this.Value.DataPropertyName = "Value";
-			this.Value.HeaderText = "Hodnota";
-			this.Value.Name = "Value";
-			this.Value.ReadOnly = true;
-			// 
-			// dataGridViewTextBoxColumn1
-			// 
-			this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.dataGridViewTextBoxColumn1.DataPropertyName = "Description";
-			this.dataGridViewTextBoxColumn1.HeaderText = "Parametr";
-			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-			this.dataGridViewTextBoxColumn1.ReadOnly = true;
-			// 
-			// Address
-			// 
-			this.Address.DataPropertyName = "Address";
-			this.Address.HeaderText = "Adresa";
-			this.Address.Name = "Address";
-			this.Address.ReadOnly = true;
-			// 
-			// Unit
-			// 
-			this.Unit.DataPropertyName = "Unit";
-			this.Unit.HeaderText = "Jednotka";
-			this.Unit.Name = "Unit";
-			this.Unit.ReadOnly = true;
-			this.Unit.Width = 60;
-			// 
-			// dataGridViewCheckBoxColumn1
-			// 
-			this.dataGridViewCheckBoxColumn1.DataPropertyName = "Active";
-			this.dataGridViewCheckBoxColumn1.HeaderText = "Aktivní";
-			this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
-			this.dataGridViewCheckBoxColumn1.ReadOnly = true;
-			this.dataGridViewCheckBoxColumn1.Width = 50;
 			// 
 			// DeviceList
 			// 

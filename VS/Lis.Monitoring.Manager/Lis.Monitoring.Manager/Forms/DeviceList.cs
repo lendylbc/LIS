@@ -11,6 +11,7 @@ using Lis.Monitoring.Api;
 using Lis.Monitoring.Dto.Communication;
 using Lis.Monitoring.Dto.Core;
 using Lis.Monitoring.Manager.Edits;
+using Lis.Monitoring.Shared.Enums;
 
 namespace Lis.Monitoring.Manager.Forms {
 	public partial class DeviceList : Form {
@@ -224,6 +225,12 @@ namespace Lis.Monitoring.Manager.Forms {
 
 		private void grdConditions_DoubleClick(object sender, EventArgs e) {
 			btnConditionEdit_Click(sender, e);
+		}
+
+		private void grdConditions_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e) {
+			if(grdConditions.Columns[e.ColumnIndex].Name.Equals("Operator")) {
+				e.Value = ((ConditionType)e.Value).ToDescriptionString();				
+			}
 		}
 	}
 }

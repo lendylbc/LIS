@@ -63,6 +63,8 @@ namespace Lis.Monitoring.Manager {
 				//grdData.Columns["ParamDesc"].Visible = false;
 				grdData.Columns["Value"].Visible = false;
 				grdData.Columns["Unit"].Visible = false;
+				grdData.Columns["ErrorDetected"].Visible = false;
+				grdData.Columns["Notified"].Visible = false;
 			} catch { }
 		}
 
@@ -129,6 +131,23 @@ namespace Lis.Monitoring.Manager {
 				//grdData.DataSource = data;
 
 			}
+		}
+
+		private void grdData_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e) {
+			ActiveDeviceLastDataDto activeDevice = grdData.Rows[e.RowIndex].DataBoundItem as ActiveDeviceLastDataDto;
+			if(activeDevice.ErrorDetected != null || activeDevice.Notified != null) {
+				grdData.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Red;
+			}
+			//if(measurementOverviewDto.CorrelCoef != 0.0 && measurementOverviewDto.CorrelCoef < _leakCoefThreshold) {
+			//	gridOverview.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Red;
+			//}
+
+		}
+
+		private void grdData_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e) {
+			//if(grdData.Columns[e.ColumnIndex].Name.Equals("Operator")) {
+			//	e.Value = ((ConditionType)e.Value).ToDescriptionString();
+			//}
 		}
 	}
 }

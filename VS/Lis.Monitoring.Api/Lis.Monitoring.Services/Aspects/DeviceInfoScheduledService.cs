@@ -23,10 +23,17 @@ namespace Lis.Monitoring.Services.Aspects {
          _snmpService.GetDevicesData();
          _modbusService.GetDevicesData();
        
-         if(_modbusService.Errors?.Count > 0) {         
-            await _notificationService.ZpracujUdalost(NotificationType.ValueCondition, NotificationSend.Email | NotificationSend.SMS, new Dictionary<string, object> {
-               { "Conditions", _modbusService.Errors}
+         if(_snmpService.NotifyErrors?.Count > 0 || _modbusService.NotifyErrors?.Count > 0) {         
+            await _notificationService.ZpracujUdalost(NotificationType.ValueCondition, NotificationSend.Email | NotificationSend.SMS | NotificationSend.Beacon, new Dictionary<string, object> {
+               { "Conditions", _modbusService.NotifyErrors}
             });
+         } else {
+            //if(_snmpService.ErrorsExists || _modbusService.ErrorsExists) {
+            //   await _notificationService.NotificationClear();
+            //}
+            if(!_snmpService.ErrorsExists && !_modbusService.ErrorsExists) {
+               await _notificationService.NotificationClear();
+            }
          }
 
          await Task.CompletedTask;

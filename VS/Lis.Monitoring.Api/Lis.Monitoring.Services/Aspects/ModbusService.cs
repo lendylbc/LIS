@@ -15,7 +15,9 @@ namespace Lis.Monitoring.Services.Aspects {
 		IDeviceParameterDataService _deviceParameterDataService;
 		IConditionService _conditionService;
 
-		public List<ErrorParameterInfo> Errors { get => _conditionService.DeviceErrors; }
+		public List<ErrorParameterInfo> NotifyErrors { get => _conditionService.NotifyDeviceErrors; }
+		public bool ErrorsExists { get => _conditionService.ErrorsExists; }
+
 		public ModbusService(IDeviceService deviceService, IDeviceParameterDataService deviceParameterDataService, IConditionService conditionService) {
 			_deviceService = deviceService;
 			_deviceParameterDataService = deviceParameterDataService;

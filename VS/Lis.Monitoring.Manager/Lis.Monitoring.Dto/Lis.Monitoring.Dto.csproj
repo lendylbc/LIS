@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Authentication\MemberCredentialDto.cs" />
+    <Compile Include="Authentication\MemberTokenDto.cs" />
     <Compile Include="Communication\ActiveDeviceLastDataDto.cs" />
     <Compile Include="Communication\DeviceDto.cs" />
     <Compile Include="Communication\DeviceParameterConditionDto.cs" />

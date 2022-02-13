@@ -9,7 +9,8 @@ using Lis.Monitoring.Shared.Errors;
 
 namespace Lis.Monitoring.Services.Abstractions {
 	public interface IConditionService {
-		List<ErrorParameterInfo> DeviceErrors { get; }
+		List<ErrorParameterInfo> NotifyDeviceErrors { get; }
+		bool ErrorsExists { get; }
 		void ResolveConditions(ICollection<DeviceParameter> deviceParameters, Dictionary<string, object> deviceData);
 	}
 }

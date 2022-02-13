@@ -30,10 +30,17 @@ namespace Lis.Monitoring.Api.Controllers {
 		public IActionResult Authentication([FromBody] MemberCredentialDto userCredential) {//Task<MemberDto>																														
 			Member member = EntityService.GetByCredentials(userCredential.UserName, userCredential.Password);
 			var token = _authJwt.Authenticate(member);
-			if(token == null)
+			if(token == null) {
 				return Unauthorized();
+			}
+			//member.Login = string.Empty;
+			//member.Password = string.Empty;
+			MemberTokenDto memberToken = new MemberTokenDto() {
+				Member = Mapper.Map<MemberDto>(member),
+				Token = token
+			};
 			//log.Debug($"Token: {token}");
-			return Ok(token);
+			return Ok(memberToken);
 		}
 
 

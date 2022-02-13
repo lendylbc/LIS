@@ -14,7 +14,9 @@ namespace Lis.Monitoring.Dto.Communication {
 		public string Unit { get; set; }
 		public Decimal? Value { get; set; }
 		public DateTime? Inserted { get; set; }
+		public DateTime? ErrorDetected { get; set; }
+		public DateTime? Notified { get; set; }
 
-		public string ValueUnit { get { return Value == null ? String.Empty : Value?.ToString("F") + Unit; } }
+		public string ValueUnit { get { return Value == null ? String.Empty : Value?.ToString("###0.##") + Unit; } }
 	}
 }

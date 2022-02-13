@@ -14,6 +14,7 @@ namespace Lis.Monitoring.Domain.Entities {
 		public string Name { get; set; }
 		public string Surname { get; set; }
 		public string Email { get; set; }
+		public string? Phone { get; set; }
 		public bool Active { get; set; }
 		public int MemberType { get; set; }
 		public DateTime Inserted { get; set; }

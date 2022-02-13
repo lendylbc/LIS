@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lis.Monitoring.Shared.Enums {
-	public enum NotificationSend {
-		Email = 1 << 0,
-		SMS = 1 << 1,
-		Beacon = 1 << 2
+namespace Lis.Monitoring.Abstractions.Services {
+	public interface IBeaconService {
+		void LightOn();
+		void LightOff();
 	}
 }

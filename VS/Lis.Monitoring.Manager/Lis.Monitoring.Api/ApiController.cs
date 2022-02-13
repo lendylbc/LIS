@@ -28,8 +28,9 @@ namespace Lis.Monitoring.Api {
 			MemberCredentialDto memberCredentialDto = new MemberCredentialDto() { UserName = login, Password = password };
 			RestResponse response = _requestController.Post("Member/authentication/", Method.Post, memberCredentialDto, null, false);
 
-			if(response != null && response.StatusCode == System.Net.HttpStatusCode.OK && !string.IsNullOrEmpty(response.Content)) {				
-				_requestController.JwtToken = (string)JsonConvert.DeserializeObject(response.Content);
+			if(response != null && response.StatusCode == System.Net.HttpStatusCode.OK && !string.IsNullOrEmpty(response.Content)) {
+				MemberTokenDto mtd = (MemberTokenDto)JsonConvert.DeserializeObject<MemberTokenDto>(response.Content);
+				_requestController.JwtToken = mtd.Token;
 				return true;
 			} else {
 				return false;

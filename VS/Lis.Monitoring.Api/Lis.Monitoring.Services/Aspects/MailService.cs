@@ -6,8 +6,7 @@ namespace Lis.Monitoring.Services.Aspects {
 	/// <summary>
 	/// Service pro odesílání e-mailů
 	/// </summary>
-	public class MailService : IMailService
-	{
+	public class MailService : IMailService {
 		/// <summary>
 		/// Konstruktor
 		/// </summary>
@@ -17,7 +16,7 @@ namespace Lis.Monitoring.Services.Aspects {
 		/// <param name="password">Heslo</param>
 		/// <param name="from">E-mail adresa, která bude uvedena v položce from (možno změnit v metodě odesílající e-mail)</param>
 		public MailService(
-			string host, 
+			string host,
 			int port,
 			string username,
 			string password,
@@ -51,26 +50,26 @@ namespace Lis.Monitoring.Services.Aspects {
 				UseDefaultCredentials = false
 			};
 
-            if (!string.IsNullOrEmpty(_username) || !string.IsNullOrEmpty(_password)) {
-                client.Credentials = new NetworkCredential(_username, _password);
-            }
+			if(!string.IsNullOrEmpty(_username) || !string.IsNullOrEmpty(_password)) {
+				client.Credentials = new NetworkCredential(_username, _password);
+			}
 
 			MailMessage message = new MailMessage {
 				From = new MailAddress(from ?? _from),
 				Subject = predmet,
 				Body = zprava,
-				To = { string.Join(",",prijemci)},
+				To = { string.Join(",", prijemci) },
 				IsBodyHtml = isBodyHtml,
 			};
 
-			if (ccs != null) {
-				foreach (string cc in ccs) {
+			if(ccs != null) {
+				foreach(string cc in ccs) {
 					message.CC.Add(cc);
 				}
 			}
 
-			if (bccs != null) {
-				foreach (string bcc in bccs) {
+			if(bccs != null) {
+				foreach(string bcc in bccs) {
 					message.Bcc.Add(bcc);
 				}
 			}

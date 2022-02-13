@@ -18,7 +18,8 @@ namespace Lis.Monitoring.Services.Aspects {
 		private IDeviceParameterService _deviceParameterService;
 		private IConditionService _conditionService;
 
-		public List<ErrorParameterInfo> Errors { get => _conditionService.DeviceErrors; }
+		public List<ErrorParameterInfo> NotifyErrors { get => _conditionService.NotifyDeviceErrors; }
+		public bool ErrorsExists { get => _conditionService.ErrorsExists; }
 
 		public SnmpService(IDeviceService deviceService, IDeviceParameterDataService deviceParameterDataService, IDeviceParameterService deviceParameterService, IConditionService conditionService) {
 			_deviceService = deviceService;
@@ -45,8 +46,8 @@ namespace Lis.Monitoring.Services.Aspects {
 								if(typ.Name.Equals("Integer32")) {
 									value = (decimal)Convert.ToInt32(data.Value.ToString());
 								}
-								if(parameter.Unit == "°C") {
-									value /= 10;
+								if(parameter.Multiplier != null) {
+									value *= (decimal)parameter.Multiplier;
 								}
 								_deviceParameterDataService.Save(new DeviceParameterData() { DeviceParameterId = parameter.Id, Inserted = DateTime.Now, Value = value });
 							}

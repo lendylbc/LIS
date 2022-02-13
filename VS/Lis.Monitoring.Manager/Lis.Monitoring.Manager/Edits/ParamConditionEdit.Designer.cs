@@ -34,10 +34,12 @@ namespace Lis.Monitoring.Manager.Edits {
 			// btnSave
 			// 
 			this.btnSave.Location = new System.Drawing.Point(80, 60);
+			this.btnSave.TabIndex = 2;
 			// 
 			// btnStorno
 			// 
 			this.btnStorno.Location = new System.Drawing.Point(169, 60);
+			this.btnStorno.TabIndex = 3;
 			// 
 			// cmbOperator
 			// 
@@ -45,7 +47,7 @@ namespace Lis.Monitoring.Manager.Edits {
 			this.cmbOperator.Location = new System.Drawing.Point(12, 23);
 			this.cmbOperator.Name = "cmbOperator";
 			this.cmbOperator.Size = new System.Drawing.Size(116, 21);
-			this.cmbOperator.TabIndex = 18;
+			this.cmbOperator.TabIndex = 0;
 			this.cmbOperator.SelectedIndexChanged += new System.EventHandler(this.edit_TextChanged);
 			// 
 			// label3
@@ -69,7 +71,7 @@ namespace Lis.Monitoring.Manager.Edits {
             -2147483648});
 			this.edtValue.Name = "edtValue";
 			this.edtValue.Size = new System.Drawing.Size(120, 20);
-			this.edtValue.TabIndex = 20;
+			this.edtValue.TabIndex = 1;
 			this.edtValue.ValueChanged += new System.EventHandler(this.edit_TextChanged);
 			// 
 			// label1

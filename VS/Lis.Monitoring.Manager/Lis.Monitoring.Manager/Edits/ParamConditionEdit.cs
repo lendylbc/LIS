@@ -24,6 +24,10 @@ namespace Lis.Monitoring.Manager.Edits {
 			_apiController = apiController;
 			_paramCondition = ParamCondition;
 			InitializeComponent();
+			//cmbOperator.FormattingEnabled = true;
+			//cmbOperator.Format += delegate (object sender, ListControlConvertEventArgs e) {
+			//	e.Value = ((ConditionType)e.Value).ToDescriptionString();
+			//};
 		}
 
 		private void edit_TextChanged(object sender, EventArgs e) {
@@ -31,11 +35,22 @@ namespace Lis.Monitoring.Manager.Edits {
 		}
 
 		protected override bool LoadData() {
-			cmbOperator.DataSource = (ConditionType[])Enum.GetValues(typeof(ConditionType));
+			foreach(ConditionType condition in (ConditionType[])Enum.GetValues(typeof(ConditionType))) {
+				cmbOperator.Items.Add(condition.ToDescriptionString());
+			}
+
+			//cmbOperator.DataSource = (ConditionType[])Enum.GetValues(typeof(ConditionType));
 			cmbOperator.SelectedIndex = -1;
 			if(_paramCondition != null) {
-			
-				cmbOperator.SelectedIndex = _paramCondition.Operator;
+
+				string description = ((ConditionType)_paramCondition.Operator).ToDescriptionString();
+				for(int i = 0; i < cmbOperator.Items.Count; i++) {
+					if((String)cmbOperator.Items[i] == description) {
+						cmbOperator.SelectedIndex = i;
+						break;
+					}
+				}
+
 				edtValue.Value = _paramCondition.Value;
 
 				cmbOperator.Focus();
@@ -51,9 +66,12 @@ namespace Lis.Monitoring.Manager.Edits {
 
 		protected override bool SaveData() {
 			try {				
-				_paramCondition.Value = edtValue.Value;				
+				_paramCondition.Value = edtValue.Value;
 
-				ConditionType conditionType = (ConditionType)cmbOperator.SelectedItem;
+				//ConditionType conditionType = (ConditionType)cmbOperator.SelectedItem;
+				//ConditionType conditionType = ConditionType.GetValueFromDescription((string)cmbOperator.SelectedItem);
+
+				ConditionType conditionType = EnumExtensions.GetValueFromDescription<ConditionType>((string)cmbOperator.SelectedItem);
 
 				_paramCondition.Operator = (int)conditionType;
 

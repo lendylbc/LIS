@@ -36,6 +36,7 @@ namespace Lis.Monitoring.Manager.Edits {
 				edtIpAddress.Text = _device.IpAddress;
 				edtPort.Text = _device.Port.ToString();
 				cmbDeviceType.SelectedIndex = _device.DeviceType - 1;
+				edtModbusAddress.Text = _device.ModbusDeviceAddress;
 				chkActive.Checked = _device.Active;
 
 				edtDescription.Focus();
@@ -49,7 +50,7 @@ namespace Lis.Monitoring.Manager.Edits {
 		}
 
 		protected override bool SaveData() {
-			try {				
+			try {
 				_device.Description = edtDescription.Text;
 				_device.IpAddress = edtIpAddress.Text;
 
@@ -67,6 +68,12 @@ namespace Lis.Monitoring.Manager.Edits {
 
 				_device.DeviceType = (int)deviceType;
 
+				if(deviceType == DeviceType.Modbus) {
+					_device.ModbusDeviceAddress = edtModbusAddress.Text;
+				} else {
+					_device.ModbusDeviceAddress = null;
+				}
+
 				_device.Active = chkActive.Checked;
 
 				if(_device.Id == null) {
@@ -79,7 +86,7 @@ namespace Lis.Monitoring.Manager.Edits {
 				//if(log.IsErrorEnabled) log.Error(ex.Message);
 				MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return false;
-			}			
+			}
 		}
 
 		protected override bool ValidateData() {
@@ -94,13 +101,34 @@ namespace Lis.Monitoring.Manager.Edits {
 				_errors.Add("Zadejte IP adresu zařízení!");
 			}
 
+			if(string.IsNullOrEmpty(edtPort.Text)) {
+				_errors.Add("Zadejte port zařízení!");
+			}
+
 			if(cmbDeviceType.SelectedIndex < 0) {
 				_errors.Add("Zvolte typ zařízení!");
 			}
+
+			DeviceType deviceType = (DeviceType)cmbDeviceType.SelectedItem;
+			if(deviceType == DeviceType.Modbus && string.IsNullOrEmpty(edtModbusAddress.Text)) {
+				_errors.Add("Zadejte adresu MODBUS zařízení!");
+			}
+
 			if(_errors.Count > 0) {
 				MessageBox.Show(string.Join(Environment.NewLine, _errors), Lis.Monitoring.Manager.Properties.Resources.Upozornění, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 			}
-			return _errors.Count == 0;			
+			return _errors.Count == 0;
+		}
+
+		private void cmbDeviceType_SelectedIndexChanged(object sender, EventArgs e) {
+			DeviceType deviceType = (DeviceType)cmbDeviceType.SelectedItem;
+			labModbusAddress.Visible = deviceType == DeviceType.Modbus;
+			edtModbusAddress.Visible = deviceType == DeviceType.Modbus;
+			if(!edtModbusAddress.Visible) {
+				edtModbusAddress.Text = string.Empty;
+			}
+
+			edit_TextChanged(sender, e);
 		}
 	}
 }

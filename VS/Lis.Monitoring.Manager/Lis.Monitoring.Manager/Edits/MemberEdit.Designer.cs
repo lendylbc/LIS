@@ -44,10 +44,12 @@ namespace Lis.Monitoring.Manager.Edits {
 			// btnSave
 			// 
 			this.btnSave.Location = new System.Drawing.Point(108, 301);
+			this.btnSave.TabIndex = 8;
 			// 
 			// btnStorno
 			// 
 			this.btnStorno.Location = new System.Drawing.Point(199, 301);
+			this.btnStorno.TabIndex = 9;
 			// 
 			// edtJmeno
 			// 
@@ -55,7 +57,7 @@ namespace Lis.Monitoring.Manager.Edits {
 			this.edtJmeno.MaxLength = 20;
 			this.edtJmeno.Name = "edtJmeno";
 			this.edtJmeno.Size = new System.Drawing.Size(269, 20);
-			this.edtJmeno.TabIndex = 13;
+			this.edtJmeno.TabIndex = 0;
 			this.edtJmeno.TextChanged += new System.EventHandler(this.edit_TextChanged);
 			// 
 			// label1
@@ -74,7 +76,7 @@ namespace Lis.Monitoring.Manager.Edits {
 			this.chkActive.Location = new System.Drawing.Point(131, 270);
 			this.chkActive.Name = "chkActive";
 			this.chkActive.Size = new System.Drawing.Size(60, 17);
-			this.chkActive.TabIndex = 17;
+			this.chkActive.TabIndex = 7;
 			this.chkActive.Text = "Aktivní";
 			this.chkActive.UseVisualStyleBackColor = true;
 			this.chkActive.CheckedChanged += new System.EventHandler(this.edit_TextChanged);
@@ -85,7 +87,7 @@ namespace Lis.Monitoring.Manager.Edits {
 			this.cmbMemberType.Location = new System.Drawing.Point(10, 268);
 			this.cmbMemberType.Name = "cmbMemberType";
 			this.cmbMemberType.Size = new System.Drawing.Size(115, 21);
-			this.cmbMemberType.TabIndex = 18;
+			this.cmbMemberType.TabIndex = 6;
 			this.cmbMemberType.SelectedIndexChanged += new System.EventHandler(this.edit_TextChanged);
 			this.cmbMemberType.TextChanged += new System.EventHandler(this.edit_TextChanged);
 			// 
@@ -105,7 +107,7 @@ namespace Lis.Monitoring.Manager.Edits {
 			this.edtSurname.MaxLength = 20;
 			this.edtSurname.Name = "edtSurname";
 			this.edtSurname.Size = new System.Drawing.Size(269, 20);
-			this.edtSurname.TabIndex = 20;
+			this.edtSurname.TabIndex = 1;
 			this.edtSurname.TextChanged += new System.EventHandler(this.edit_TextChanged);
 			// 
 			// label2
@@ -124,7 +126,7 @@ namespace Lis.Monitoring.Manager.Edits {
 			this.edtEmail.MaxLength = 20;
 			this.edtEmail.Name = "edtEmail";
 			this.edtEmail.Size = new System.Drawing.Size(269, 20);
-			this.edtEmail.TabIndex = 22;
+			this.edtEmail.TabIndex = 2;
 			this.edtEmail.TextChanged += new System.EventHandler(this.edit_TextChanged);
 			// 
 			// label4
@@ -143,7 +145,7 @@ namespace Lis.Monitoring.Manager.Edits {
 			this.edtLogin.MaxLength = 20;
 			this.edtLogin.Name = "edtLogin";
 			this.edtLogin.Size = new System.Drawing.Size(269, 20);
-			this.edtLogin.TabIndex = 24;
+			this.edtLogin.TabIndex = 3;
 			this.edtLogin.TextChanged += new System.EventHandler(this.edit_TextChanged);
 			// 
 			// label5
@@ -163,7 +165,7 @@ namespace Lis.Monitoring.Manager.Edits {
 			this.edtPassword.Name = "edtPassword";
 			this.edtPassword.PasswordChar = '*';
 			this.edtPassword.Size = new System.Drawing.Size(269, 20);
-			this.edtPassword.TabIndex = 26;
+			this.edtPassword.TabIndex = 4;
 			this.edtPassword.TextChanged += new System.EventHandler(this.edit_TextChanged);
 			// 
 			// label6
@@ -183,7 +185,7 @@ namespace Lis.Monitoring.Manager.Edits {
 			this.edtPasswordCheck.Name = "edtPasswordCheck";
 			this.edtPasswordCheck.PasswordChar = '*';
 			this.edtPasswordCheck.Size = new System.Drawing.Size(269, 20);
-			this.edtPasswordCheck.TabIndex = 28;
+			this.edtPasswordCheck.TabIndex = 5;
 			this.edtPasswordCheck.TextChanged += new System.EventHandler(this.edit_TextChanged);
 			// 
 			// label7

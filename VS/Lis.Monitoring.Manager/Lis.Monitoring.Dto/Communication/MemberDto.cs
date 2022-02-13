@@ -4,26 +4,26 @@ using Lis.Monitoring.Dto.Core;
 using Lis.Monitoring.Shared.Enums;
 
 namespace Lis.Monitoring.Dto.Communication {
+	/// <summary>
+	/// Data transfer object pro vytvoření uživatele
+	/// </summary>
+	public class MemberDto : BaseDto<long?> {//, IRecaptchaResponseSource {
 		/// <summary>
-		/// Data transfer object pro vytvoření uživatele
+		/// Jméno uživatele
 		/// </summary>
-		public class MemberDto : BaseDto<long?> {//, IRecaptchaResponseSource {
-			/// <summary>
-			/// Jméno uživatele
-			/// </summary>
-			public string Name { get; set; }
-			/// <summary>
-			/// Příjmění uživatele
-			/// </summary>
-			public string Surname { get; set; }
-			/// <summary>
-			/// Email (uživatelské jméno) uživatele
-			/// </summary>
-			public string Email { get; set; }
-			/// <summary>
-			/// Heslo
-			/// </summary>
-			public string Password { get; set; }
+		public string Name { get; set; }
+		/// <summary>
+		/// Příjmění uživatele
+		/// </summary>
+		public string Surname { get; set; }
+		/// <summary>
+		/// Email (uživatelské jméno) uživatele
+		/// </summary>
+		public string Email { get; set; }
+		/// <summary>
+		/// Heslo
+		/// </summary>
+		public string Password { get; set; }
 
 		public string Login { get; set; }
 
@@ -50,4 +50,4 @@ namespace Lis.Monitoring.Dto.Communication {
 
 		public string MemberTypeText { get => ((MemberType)MemberType).ToString(); }
 	}
-	}
+}

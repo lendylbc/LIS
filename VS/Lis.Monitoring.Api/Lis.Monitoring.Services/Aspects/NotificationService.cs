@@ -15,10 +15,14 @@ namespace Lis.Monitoring.Services.Aspects {
 	public class NotificationService : INotificationService {
 		private readonly DbService _dbService;
 		private readonly IMailService _mailService;
+		private readonly ISmsService _smsService;
+		private readonly IBeaconService _beaconService;
 
-		public NotificationService(DbService dbService, IMailService mailService) {
+		public NotificationService(DbService dbService, IMailService mailService, ISmsService smsService, IBeaconService beaconService) {
 			_dbService = dbService;
 			_mailService = mailService;
+			_smsService = smsService;
+			_beaconService = beaconService;
 		}
 
 		/// <summary>
@@ -35,7 +39,15 @@ namespace Lis.Monitoring.Services.Aspects {
 				await OdeslatEmail((NotificationType)notificationType, odberatele, data);
 			}
 			if((notificationSend & NotificationSend.SMS) > 0) {
+				await OdeslatSms((NotificationType)notificationType, odberatele.Where(x => x.Phone != null), data);
 			}
+			if((notificationSend & NotificationSend.Beacon) > 0) {
+				await BeaconOn();
+			}
+		}
+
+		public async Task NotificationClear() {
+			await BeaconOff();
 		}
 
 		/// <summary>
@@ -49,9 +61,23 @@ namespace Lis.Monitoring.Services.Aspects {
 			//Sablona sablona = new Sablona();// await _dbService.Sablona.SingleOrDefaultAsync(s => (s.SablonaTyp & SablonaTyp.Email) > 0 && s.UdalostTyp == typ);
 			//if(sablona != null && odberatele.Any()) {
 			string predmet = "Informace monitoringu"; //	 TransformujSablonu(sablona.Predmet, data);
-			string zprava = TransformujSablonu("", data);			
+			string zprava = TransformujSablonu("", data);
 			_mailService.Send(predmet, zprava, odberatele.Select(x => x.Email).ToArray());
 			//}
+		}
+
+		private async Task OdeslatSms(NotificationType notificationType, IEnumerable<INotifikaceOdberSource> odberatele, Dictionary<string, object> data) {
+			string predmet = "Informace monitoringu"; //	 TransformujSablonu(sablona.Predmet, data);
+			string zprava = "Chybový stav";
+			_smsService.Send(predmet, zprava, odberatele.Select(x => x.Phone).ToArray());
+		}
+
+		private async Task BeaconOn() {
+			_beaconService.LightOn();
+		}
+
+		private async Task BeaconOff() {
+			_beaconService.LightOff();
 		}
 
 		private string TransformujSablonu(string sablona, Dictionary<string, object> placeholders) {

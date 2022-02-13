@@ -10,7 +10,8 @@ namespace Lis.Monitoring.Domain.Entities {
 	public class DeviceParameter : Entity {
 		public string Description { get; set; }
 		public string Address { get; set; }
-		public string Unit { get; set; }		
+		public string Unit { get; set; }
+		public decimal? Multiplier { get; set; }
 		public long DeviceId{ get; set; }
 		public Device Device { get; set; }		
 		public DateTime Inserted { get; set; }

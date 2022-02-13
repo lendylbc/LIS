@@ -14,8 +14,11 @@ namespace Lis.Monitoring.Services.Aspects {
 		private const int _RETRY_NOTIFICATION_AFTER_MINUTES = -30;
 
 		List<ErrorParameterInfo> _deviceErrors;
+		bool _errorsExists = false;
 
-		public List<ErrorParameterInfo> DeviceErrors { get => _deviceErrors; }
+		public List<ErrorParameterInfo> NotifyDeviceErrors { get => _deviceErrors; }
+
+		public bool ErrorsExists { get => _errorsExists; }
 
 		public ConditionService() {
 			_deviceErrors = new List<ErrorParameterInfo>();
@@ -42,8 +45,8 @@ namespace Lis.Monitoring.Services.Aspects {
 							if(typ.Name.Equals("Integer32")) {
 								value = (decimal)Convert.ToInt32(valueData.ToString());
 							}
-							if(param.Unit == "°C") {
-								value /= 10;
+							if(param.Multiplier != null) {
+								value *= (decimal)param.Multiplier;
 							}
 							errorConditionExists = false;
 							foreach(DeviceParameterCondition condition in param.DeviceParameterCondition) {
@@ -68,6 +71,7 @@ namespace Lis.Monitoring.Services.Aspects {
 		}
 
 		private void AddError(DeviceParameter param, bool condition = false, string value = null) {
+			_errorsExists = true;
 			if(param.ErrorDetected == null || param.Notified == null || param.Notified < DateTime.Now.AddMinutes(_RETRY_NOTIFICATION_AFTER_MINUTES)) {
 				_deviceErrors.Add(new ErrorParameterInfo() { 
 					Id = param.Id,

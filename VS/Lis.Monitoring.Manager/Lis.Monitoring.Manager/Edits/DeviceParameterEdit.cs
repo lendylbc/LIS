@@ -31,11 +31,12 @@ namespace Lis.Monitoring.Manager.Edits {
 		}
 
 		protected override bool LoadData() {
-			
+
 			if(_deviceParameter != null) {
 				edtDescription.Text = _deviceParameter.Description;
 				edtAddress.Text = _deviceParameter.Address;
-				edtUnit.Text = _deviceParameter.Unit;				
+				edtUnit.Text = _deviceParameter.Unit;
+				edtMultiplier.Text = _deviceParameter.Multiplier.ToString();
 				chkActive.Checked = _deviceParameter.Active;
 
 				edtDescription.Focus();
@@ -50,10 +51,21 @@ namespace Lis.Monitoring.Manager.Edits {
 		}
 
 		protected override bool SaveData() {
-			try {				
+			try {
 				_deviceParameter.Description = edtDescription.Text;
 				_deviceParameter.Address = edtAddress.Text;
 				_deviceParameter.Unit = edtUnit.Text;
+
+				if(string.IsNullOrEmpty(edtMultiplier.Text)) {
+					_deviceParameter.Multiplier = null;
+				} else {
+					try {
+						_deviceParameter.Multiplier = Convert.ToInt32(edtMultiplier.Text);
+					} catch {
+						_deviceParameter.Multiplier = null;
+					}
+				}
+
 				_deviceParameter.Active = chkActive.Checked;
 
 				if(_deviceParameter.Id == null) {
@@ -66,7 +78,7 @@ namespace Lis.Monitoring.Manager.Edits {
 				//if(log.IsErrorEnabled) log.Error(ex.Message);
 				MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return false;
-			}			
+			}
 		}
 
 		protected override bool ValidateData() {
@@ -80,14 +92,14 @@ namespace Lis.Monitoring.Manager.Edits {
 				_errors.Add("Zadejte adresu pro čtení hodnoty!");
 			}
 
-			if(string.IsNullOrEmpty(edtAddress.Text)) {
-				_errors.Add("Zadejte jednotku!");
-			}
+			//if(string.IsNullOrEmpty(edtAddress.Text)) {
+			//	_errors.Add("Zadejte jednotku!");
+			//}
 
 			if(_errors.Count > 0) {
 				MessageBox.Show(string.Join(Environment.NewLine, _errors), Lis.Monitoring.Manager.Properties.Resources.Upozornění, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 			}
-			return _errors.Count == 0;			
+			return _errors.Count == 0;
 		}
 	}
 }

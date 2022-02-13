@@ -31,15 +31,19 @@ namespace Lis.Monitoring.Manager.Edits {
 			this.label4 = new System.Windows.Forms.Label();
 			this.edtAddress = new System.Windows.Forms.TextBox();
 			this.edtUnit = new System.Windows.Forms.TextBox();
+			this.labMultiplier = new System.Windows.Forms.Label();
+			this.edtMultiplier = new System.Windows.Forms.MaskedTextBox();
 			this.SuspendLayout();
 			// 
 			// btnSave
 			// 
 			this.btnSave.Location = new System.Drawing.Point(108, 138);
+			this.btnSave.TabIndex = 5;
 			// 
 			// btnStorno
 			// 
 			this.btnStorno.Location = new System.Drawing.Point(199, 138);
+			this.btnStorno.TabIndex = 6;
 			// 
 			// label2
 			// 
@@ -57,7 +61,7 @@ namespace Lis.Monitoring.Manager.Edits {
 			this.edtDescription.MaxLength = 50;
 			this.edtDescription.Name = "edtDescription";
 			this.edtDescription.Size = new System.Drawing.Size(269, 20);
-			this.edtDescription.TabIndex = 13;
+			this.edtDescription.TabIndex = 0;
 			this.edtDescription.TextChanged += new System.EventHandler(this.edit_TextChanged);
 			// 
 			// label1
@@ -73,10 +77,10 @@ namespace Lis.Monitoring.Manager.Edits {
 			// chkActive
 			// 
 			this.chkActive.AutoSize = true;
-			this.chkActive.Location = new System.Drawing.Point(118, 106);
+			this.chkActive.Location = new System.Drawing.Point(221, 107);
 			this.chkActive.Name = "chkActive";
 			this.chkActive.Size = new System.Drawing.Size(60, 17);
-			this.chkActive.TabIndex = 17;
+			this.chkActive.TabIndex = 4;
 			this.chkActive.Text = "Aktivní";
 			this.chkActive.UseVisualStyleBackColor = true;
 			this.chkActive.CheckedChanged += new System.EventHandler(this.edit_TextChanged);
@@ -97,7 +101,7 @@ namespace Lis.Monitoring.Manager.Edits {
 			this.edtAddress.MaxLength = 50;
 			this.edtAddress.Name = "edtAddress";
 			this.edtAddress.Size = new System.Drawing.Size(269, 20);
-			this.edtAddress.TabIndex = 23;
+			this.edtAddress.TabIndex = 1;
 			this.edtAddress.TextChanged += new System.EventHandler(this.edit_TextChanged);
 			// 
 			// edtUnit
@@ -106,14 +110,35 @@ namespace Lis.Monitoring.Manager.Edits {
 			this.edtUnit.MaxLength = 5;
 			this.edtUnit.Name = "edtUnit";
 			this.edtUnit.Size = new System.Drawing.Size(90, 20);
-			this.edtUnit.TabIndex = 24;
+			this.edtUnit.TabIndex = 2;
 			this.edtUnit.TextChanged += new System.EventHandler(this.edit_TextChanged);
+			// 
+			// labMultiplier
+			// 
+			this.labMultiplier.AutoSize = true;
+			this.labMultiplier.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+			this.labMultiplier.Location = new System.Drawing.Point(108, 88);
+			this.labMultiplier.Name = "labMultiplier";
+			this.labMultiplier.Size = new System.Drawing.Size(51, 13);
+			this.labMultiplier.TabIndex = 26;
+			this.labMultiplier.Text = "Násobitel";
+			// 
+			// edtMultiplier
+			// 
+			this.edtMultiplier.Location = new System.Drawing.Point(108, 104);
+			this.edtMultiplier.Mask = "00000";
+			this.edtMultiplier.Name = "edtMultiplier";
+			this.edtMultiplier.PromptChar = ' ';
+			this.edtMultiplier.Size = new System.Drawing.Size(100, 20);
+			this.edtMultiplier.TabIndex = 3;
 			// 
 			// DeviceParameterEdit
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(296, 173);
+			this.Controls.Add(this.labMultiplier);
+			this.Controls.Add(this.edtMultiplier);
 			this.Controls.Add(this.edtUnit);
 			this.Controls.Add(this.edtAddress);
 			this.Controls.Add(this.label4);
@@ -122,7 +147,7 @@ namespace Lis.Monitoring.Manager.Edits {
 			this.Controls.Add(this.edtDescription);
 			this.Controls.Add(this.label1);
 			this.Name = "DeviceParameterEdit";
-			this.Text = "Změna zařízení";
+			this.Text = "Změna parametru";
 			this.Controls.SetChildIndex(this.btnSave, 0);
 			this.Controls.SetChildIndex(this.btnStorno, 0);
 			this.Controls.SetChildIndex(this.label1, 0);
@@ -132,6 +157,8 @@ namespace Lis.Monitoring.Manager.Edits {
 			this.Controls.SetChildIndex(this.label4, 0);
 			this.Controls.SetChildIndex(this.edtAddress, 0);
 			this.Controls.SetChildIndex(this.edtUnit, 0);
+			this.Controls.SetChildIndex(this.edtMultiplier, 0);
+			this.Controls.SetChildIndex(this.labMultiplier, 0);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -145,5 +172,7 @@ namespace Lis.Monitoring.Manager.Edits {
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.TextBox edtAddress;
 		private System.Windows.Forms.TextBox edtUnit;
+		private System.Windows.Forms.Label labMultiplier;
+		private System.Windows.Forms.MaskedTextBox edtMultiplier;
 	}
 }

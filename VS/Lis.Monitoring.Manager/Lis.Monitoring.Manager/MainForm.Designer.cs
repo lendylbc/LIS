@@ -37,12 +37,12 @@ namespace Lis.Monitoring.Manager {
 			this.panel2 = new System.Windows.Forms.Panel();
 			this.panel3 = new System.Windows.Forms.Panel();
 			this.grdData = new System.Windows.Forms.DataGridView();
+			this.edtLog = new System.Windows.Forms.TextBox();
+			this.timer = new System.Windows.Forms.Timer(this.components);
 			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.ParamDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.edtLog = new System.Windows.Forms.TextBox();
-			this.timer = new System.Windows.Forms.Timer(this.components);
 			this.panel1.SuspendLayout();
 			this.panel2.SuspendLayout();
 			this.panel3.SuspendLayout();
@@ -157,7 +157,23 @@ namespace Lis.Monitoring.Manager {
 			this.grdData.Size = new System.Drawing.Size(660, 606);
 			this.grdData.TabIndex = 8;
 			this.grdData.DataSourceChanged += new System.EventHandler(this.grdData_DataSourceChanged);
+			this.grdData.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.grdData_CellFormatting);
+			this.grdData.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.grdData_RowPrePaint);
 			this.grdData.Click += new System.EventHandler(this.grdData_Click);
+			// 
+			// edtLog
+			// 
+			this.edtLog.Dock = System.Windows.Forms.DockStyle.Right;
+			this.edtLog.Location = new System.Drawing.Point(660, 0);
+			this.edtLog.Multiline = true;
+			this.edtLog.Name = "edtLog";
+			this.edtLog.Size = new System.Drawing.Size(250, 606);
+			this.edtLog.TabIndex = 4;
+			// 
+			// timer
+			// 
+			this.timer.Interval = 30000;
+			this.timer.Tick += new System.EventHandler(this.timer_Tick);
 			// 
 			// dataGridViewTextBoxColumn1
 			// 
@@ -184,6 +200,7 @@ namespace Lis.Monitoring.Manager {
 			// dataGridViewCheckBoxColumn1
 			// 
 			this.dataGridViewCheckBoxColumn1.DataPropertyName = "ValueUnit";
+			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
 			dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
 			this.dataGridViewCheckBoxColumn1.DefaultCellStyle = dataGridViewCellStyle2;
 			this.dataGridViewCheckBoxColumn1.HeaderText = "Hodnota";
@@ -192,20 +209,6 @@ namespace Lis.Monitoring.Manager {
 			this.dataGridViewCheckBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
 			this.dataGridViewCheckBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.dataGridViewCheckBoxColumn1.Width = 60;
-			// 
-			// edtLog
-			// 
-			this.edtLog.Dock = System.Windows.Forms.DockStyle.Right;
-			this.edtLog.Location = new System.Drawing.Point(660, 0);
-			this.edtLog.Multiline = true;
-			this.edtLog.Name = "edtLog";
-			this.edtLog.Size = new System.Drawing.Size(250, 606);
-			this.edtLog.TabIndex = 4;
-			// 
-			// timer
-			// 
-			this.timer.Interval = 30000;
-			this.timer.Tick += new System.EventHandler(this.timer_Tick);
 			// 
 			// MainForm
 			// 
@@ -236,13 +239,13 @@ namespace Lis.Monitoring.Manager {
 		private System.Windows.Forms.Panel panel3;
 		private System.Windows.Forms.DataGridView grdData;
 		private System.Windows.Forms.Timer timer;
+		private System.Windows.Forms.Button btnUsers;
+		private System.Windows.Forms.Button btnDevices;
+		private System.Windows.Forms.Label labLoggedUser;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
 		private System.Windows.Forms.DataGridViewTextBoxColumn ParamDesc;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewCheckBoxColumn1;
-		private System.Windows.Forms.Button btnUsers;
-		private System.Windows.Forms.Button btnDevices;
-		private System.Windows.Forms.Label labLoggedUser;
 	}
 }
 

@@ -12,16 +12,16 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Lextm.SharpSnmpLib;
-using Lextm.SharpSnmpLib.Messaging;
+//using Lextm.SharpSnmpLib;
+//using Lextm.SharpSnmpLib.Messaging;
 using NModbus;
 using NModbus.IO;
 using SnmpSharpNet;
 
 namespace WinFormsApp1 {
-	public partial class Form1 : Form {
+	public partial class MainForm : Form {
 
-		public Form1() {
+		public MainForm() {
 			InitializeComponent();
 		}
 
@@ -70,6 +70,29 @@ namespace WinFormsApp1 {
 			string[] oids = edtOids.Text.Split(Environment.NewLine);
 
 			Dictionary<Oid, AsnType> result = snmp.Get(SnmpVersion.Ver1, oids);
+
+			//Pdu pdu = new Pdu(PduType.Set);
+			//pdu.VbList.Add(new Oid("1.3.6.1.4.1.18248.16.3.1.1.1.1"), new SnmpSharpNet.Integer32(1));
+			//pdu.
+
+			//SnmpV2Packet response;
+			//try {
+			//	// Send request and wait for response
+			//	response = target.Request(pdu, aparam) as SnmpV2Packet;
+			//} catch(Exception ex) {
+			//	// If exception happens, it will be returned here
+			//	Console.WriteLine(String.Format("Request failed with exception: {0}", ex.Message));
+			//	target.Close();
+			//	return;
+			//}
+
+			//Pdu pdu = new Pdu(PduType.Set);
+			////pdu.Type = SnmpConstants.; // type SET
+			//Oid setOid = new Oid("1.3.6.1.4.1.18248.16.3.1.1.1.1"); // sysDescr.0
+			//Integer32 setValue = new Integer32(1);
+			//pdu.VbList.Add(setOid, setValue);
+
+			//Dictionary<Oid, AsnType> result1 = snmp.Set(SnmpVersion.Ver1, pdu);
 
 
 			//	new string[] {
