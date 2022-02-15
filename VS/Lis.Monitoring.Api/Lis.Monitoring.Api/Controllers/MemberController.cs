@@ -39,6 +39,7 @@ namespace Lis.Monitoring.Api.Controllers {
 				Member = Mapper.Map<MemberDto>(member),
 				Token = token
 			};
+			
 			//log.Debug($"Token: {token}");
 			return Ok(memberToken);
 		}

@@ -39,6 +39,7 @@ namespace Lis.Monitoring.Manager {
 				var data = result.Data.OrderByDescending(x => x.Inserted).ToList();
 				grdData.DataSource = data;
 			} else {
+				grdData.DataSource = null;
 				////edtLog.Text = result.
 				//edtLog.Text = _apiController.Request;
 				//edtLog.Text += Environment.NewLine + "___________________________________" + Environment.NewLine + _apiController.Response;

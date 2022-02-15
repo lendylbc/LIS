@@ -5,9 +5,11 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Lis.Monitoring.Abstractions.Services;
+using Serilog;
 
 namespace Lis.Monitoring.Services.Aspects {
 	public class BeaconService : IBeaconService {
+		private static readonly ILogger log = Serilog.Log.ForContext<BeaconService>();
 
 		private const string _SET_OUTPUT_PARAMETER = "http://{0}/set.xml?type={1}&id=1";
 
@@ -38,8 +40,12 @@ namespace Lis.Monitoring.Services.Aspects {
 		private async void SendSetRequest(string request) {
 
 			HttpClient client = new HttpClient();
-
-			var responseString = await client.GetStringAsync(request);
+			try {
+				var responseString = await client.GetStringAsync(request);
+		
+			} catch(Exception ex) {
+				log.Error("Error beacon request: " + ex.Message);
+			}
 
 			//var client = new RestClient("http://192.168.1.240/set.xml?type=r&id=1");
 			//client.Timeout = -1;

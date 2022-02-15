@@ -1,12 +1,16 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Net.Mail;
 using Lis.Monitoring.Abstractions.Services;
+using Serilog;
 
 namespace Lis.Monitoring.Services.Aspects {
 	/// <summary>
 	/// Service pro odesílání e-mailů
 	/// </summary>
 	public class MailService : IMailService {
+		private static readonly ILogger log = Serilog.Log.ForContext<MailService>();
+
 		/// <summary>
 		/// Konstruktor
 		/// </summary>
@@ -45,36 +49,39 @@ namespace Lis.Monitoring.Services.Aspects {
 		/// <param name="isBodyHtml">Příznak, jetli je tělo zprávy html nebo není</param>
 		/// <param name="from">Adresa, ze které se má e-mail odeslat. Pokud zůstane null, použije se globální nastavení z konfigurace</param>
 		public void Send(string predmet, string zprava, string[] prijemci, string[] ccs = null, string[] bccs = null, bool isBodyHtml = true, string from = null) {
+			try {
+				SmtpClient client = new SmtpClient(_host, _port) {
+					UseDefaultCredentials = false
+				};
 
-			SmtpClient client = new SmtpClient(_host, _port) {
-				UseDefaultCredentials = false
-			};
-
-			if(!string.IsNullOrEmpty(_username) || !string.IsNullOrEmpty(_password)) {
-				client.Credentials = new NetworkCredential(_username, _password);
-			}
-
-			MailMessage message = new MailMessage {
-				From = new MailAddress(from ?? _from),
-				Subject = predmet,
-				Body = zprava,
-				To = { string.Join(",", prijemci) },
-				IsBodyHtml = isBodyHtml,
-			};
-
-			if(ccs != null) {
-				foreach(string cc in ccs) {
-					message.CC.Add(cc);
+				if(!string.IsNullOrEmpty(_username) || !string.IsNullOrEmpty(_password)) {
+					client.Credentials = new NetworkCredential(_username, _password);
 				}
-			}
 
-			if(bccs != null) {
-				foreach(string bcc in bccs) {
-					message.Bcc.Add(bcc);
+				MailMessage message = new MailMessage {
+					From = new MailAddress(from ?? _from),
+					Subject = predmet,
+					Body = zprava,
+					To = { string.Join(",", prijemci) },
+					IsBodyHtml = isBodyHtml,
+				};
+
+				if(ccs != null) {
+					foreach(string cc in ccs) {
+						message.CC.Add(cc);
+					}
 				}
-			}
 
-			client.Send(message);
+				if(bccs != null) {
+					foreach(string bcc in bccs) {
+						message.Bcc.Add(bcc);
+					}
+				}
+
+				client.Send(message);
+			} catch(Exception ex) {
+				log.Error("Error e-mail send: " + ex.Message);
+			}
 		}
 	}
 }

@@ -10,9 +10,12 @@ using Lis.Monitoring.Domain.Entities;
 using Lis.Monitoring.Infrastructure;
 using Lis.Monitoring.Shared.Enums;
 using Lis.Monitoring.Shared.Errors;
+using Serilog;
 
-namespace Lis.Monitoring.Services.Aspects {
+namespace Lis.Monitoring.Services.Aspects {	
 	public class NotificationService : INotificationService {
+		private static readonly ILogger log = Serilog.Log.ForContext<NotificationService>();
+
 		private readonly DbService _dbService;
 		private readonly IMailService _mailService;
 		private readonly ISmsService _smsService;
@@ -33,16 +36,28 @@ namespace Lis.Monitoring.Services.Aspects {
 		/// <param name="data">Parametry dané události</param>
 		/// <param name="filtrOdberNotifikaci">Možnost vypnout filtrování odběru notifikací (pokud false, odešle se notifikace bez ohledu na nastavení odběru)</param>
 		public async Task ZpracujUdalost(NotificationType notificationType, NotificationSend notificationSend, Dictionary<string, object> data = null, bool filtrOdberNotifikaci = true) {
-			IEnumerable<INotifikaceOdberSource> odberatele = _dbService.Set<Member>().Where(o => o.SendNotifications);
+			IEnumerable<INotifikaceOdberSource> odberatele = _dbService.Set<Member>().Where(o => o.SendNotifications && o.Active);
 
 			if((notificationSend & NotificationSend.Email) > 0) {
-				await OdeslatEmail((NotificationType)notificationType, odberatele, data);
+				try {
+					await OdeslatEmail((NotificationType)notificationType, odberatele, data);
+				}catch(Exception ex) {
+					log.Error("Error e-mail send: " + ex.Message);
+				}
 			}
 			if((notificationSend & NotificationSend.SMS) > 0) {
-				await OdeslatSms((NotificationType)notificationType, odberatele.Where(x => x.Phone != null), data);
+				try {
+					await OdeslatSms((NotificationType)notificationType, odberatele.Where(x => x.Phone != null), data);
+				} catch(Exception ex) {
+					log.Error("Error SMS send: " + ex.Message);
+				}
 			}
 			if((notificationSend & NotificationSend.Beacon) > 0) {
-				await BeaconOn();
+					try {
+						await BeaconOn();
+				} catch(Exception ex) {
+					log.Error("Error beacon ON: " + ex.Message);
+				}
 			}
 		}
 
@@ -68,7 +83,7 @@ namespace Lis.Monitoring.Services.Aspects {
 
 		private async Task OdeslatSms(NotificationType notificationType, IEnumerable<INotifikaceOdberSource> odberatele, Dictionary<string, object> data) {
 			string predmet = "Informace monitoringu"; //	 TransformujSablonu(sablona.Predmet, data);
-			string zprava = "Chybový stav";
+			string zprava = "Chybovy stav";
 			_smsService.Send(predmet, zprava, odberatele.Select(x => x.Phone).ToArray());
 		}
 

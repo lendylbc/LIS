@@ -270,10 +270,10 @@ namespace Lis.Monitoring.Api {
 				.CreateLogger();
 
 			_logger = Serilog.Log.ForContext<Startup>();
-			_logger.Information("INFO");
-			_logger.Debug("DEBUG");
-			_logger.Warning("WARNING");
-			_logger.Error("ERROR");
+			_logger.Information("INFO Start test");
+			_logger.Debug("DEBUG Start test");
+			_logger.Warning("WARNING Start test");
+			_logger.Error("ERROR Start test");
 		}
 	}
 }

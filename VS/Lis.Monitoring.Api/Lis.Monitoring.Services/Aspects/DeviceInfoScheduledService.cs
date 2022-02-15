@@ -7,9 +7,12 @@ using System.Threading.Tasks;
 using Lis.Monitoring.Abstractions.Services;
 using Lis.Monitoring.Services.Abstractions;
 using Lis.Monitoring.Shared.Enums;
+using Serilog;
 
 namespace Lis.Monitoring.Services.Aspects {
    public class DeviceInfoScheduledService : IScopedScheduleService {
+      private static readonly ILogger log = Serilog.Log.ForContext<DeviceInfoScheduledService>();
+
       private ISnmpService _snmpService;
       private IModbusService _modbusService;
       private INotificationService _notificationService;
@@ -20,8 +23,13 @@ namespace Lis.Monitoring.Services.Aspects {
       }
 
       public async Task DoWork(CancellationToken cancellationToken) {
-         _snmpService.GetDevicesData();
-         _modbusService.GetDevicesData();
+         try {
+            _snmpService.GetDevicesData();
+            _modbusService.GetDevicesData();
+            log.Debug("Device info.");
+			} catch (Exception ex) {
+            log.Error(ex.Message);
+			}
        
          if(_snmpService.NotifyErrors?.Count > 0 || _modbusService.NotifyErrors?.Count > 0) {         
             await _notificationService.ZpracujUdalost(NotificationType.ValueCondition, NotificationSend.Email | NotificationSend.SMS | NotificationSend.Beacon, new Dictionary<string, object> {
@@ -35,7 +43,7 @@ namespace Lis.Monitoring.Services.Aspects {
                await _notificationService.NotificationClear();
             }
          }
-
+      
          await Task.CompletedTask;
       }
    }
