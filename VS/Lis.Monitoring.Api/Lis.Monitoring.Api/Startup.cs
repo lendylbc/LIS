@@ -212,7 +212,7 @@ namespace Lis.Monitoring.Api {
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IMapper autoMapper) {
-			if(env.IsDevelopment()) {
+			if(env.IsDevelopment() || env.IsProduction()) {
 				app.UseDeveloperExceptionPage();
 				app.UseSwagger();
 				app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Lis.Monitoring.Api v1"));

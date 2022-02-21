@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Lis.Monitoring.Api</name>
+    </assembly>
+    <members>
+        <member name="M:Lis.Monitoring.Api.Controllers.BaseController`7.GetById(`1)">
+            <summary>
+            Detail záznamu
+            </summary>
+            <param name="id">Identifikátor záznamu</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lis.Monitoring.Api.Controllers.BaseController`7.Get(`6)">
+            <summary>
+            Dotaz na stránkovaný seznam záznamů
+            </summary>
+            <param name="query">Stránkovaný dotaz s filtrem</param>
+            <returns>Stránkovaný seznam záznamů</returns>
+        </member>
+        <member name="F:Lis.Monitoring.Api.Startup._logger">
+            <summary>
+            Service pro logování
+            </summary>
+        </member>
+        <member name="P:Lis.Monitoring.Api.Startup._jwtOptions">
+            <summary>
+            Specifikace pro JWT service auth
+            </summary>
+        </member>
+        <member name="P:Lis.Monitoring.Api.Startup.Configuration">
+            <summary>
+            Root konfigurace aplikace
+            </summary>
+        </member>
+        <member name="P:Lis.Monitoring.Api.Startup.DbOptions">
+            <summary>
+            Specifikace připojení k databázi entit
+            </summary>
+        </member>
+        <member name="P:Lis.Monitoring.Api.Startup.MailServiceOptions">
+            <summary>
+            Specifikace pro service na odesílání e-mailů
+            </summary>				
+        </member>
+        <member name="P:Lis.Monitoring.Api.Startup.SmsServiceOptions">
+            <summary>
+            Specifikace pro service na odesílání SMS
+            </summary>				
+        </member>
+        <member name="P:Lis.Monitoring.Api.Startup.BeaconServiceOptions">
+            <summary>
+            Specifikace pro service na nastavení majáku
+            </summary>				
+        </member>
+    </members>
+</doc>

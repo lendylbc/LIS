@@ -16,6 +16,7 @@ namespace Lis.Monitoring.Api {
 		public static IHostBuilder CreateHostBuilder(string[] args) =>
 			 Host.CreateDefaultBuilder(args)
 				  .ConfigureWebHostDefaults(webBuilder => {
+					  //webBuilder.UseKestrel
 					  webBuilder.UseIISIntegration();
 					  webBuilder.UseStartup<Startup>();
 				  });

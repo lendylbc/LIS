@@ -11,7 +11,8 @@ using RestSharp;
 
 namespace Lis.Monitoring.Api {
 	public class RequestController: ApiBase {
-		private const string _API_URL = "https://localhost:44336";
+		//private const string _API_URL = "https://localhost:44336";
+		private const string _API_URL = "http://172.16.205.243:90";
 		public string JwtToken { get; set; }
 		//BaseDto<long>
 		public RestResponse Post(string resource, Method method, object bodyData, Dictionary<string, string> parameters, bool useAuthToken = true) {
