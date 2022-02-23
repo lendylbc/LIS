@@ -12,13 +12,19 @@ using RestSharp;
 namespace Lis.Monitoring.Api {
 	public class RequestController: ApiBase {
 		//private const string _API_URL = "https://localhost:44336";
-		private const string _API_URL = "http://172.16.205.243:90";
+		//private const string _API_URL = "http://172.16.205.243:90";
+		private const string _API_URL = "https://172.16.205.243";
 		public string JwtToken { get; set; }
 		//BaseDto<long>
 		public RestResponse Post(string resource, Method method, object bodyData, Dictionary<string, string> parameters, bool useAuthToken = true) {
-			
+			//System.Net.SecurityProtocolType.Tls13;
 			RestClient client = new RestClient(_API_URL);
 			//client.Timeout = -1;
+
+			System.Net.ServicePointManager.Expect100Continue = true;
+			System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls | System.Net.SecurityProtocolType.Tls11 | System.Net.SecurityProtocolType.Tls12 | System.Net.SecurityProtocolType.Tls13 | System.Net.SecurityProtocolType.Ssl3;
+			System.Net.ServicePointManager.ServerCertificateValidationCallback = (snder, cert, chain, error) => true;
+
 			RestRequest request = new RestRequest($"api/{resource}", method);
 			if(bodyData != null) {
 				request.AddHeader("Content-Type", "application/json");
@@ -44,7 +50,7 @@ namespace Lis.Monitoring.Api {
 				foreach(KeyValuePair<string, string> parameter in parameters) {					
 					request.AddQueryParameter(parameter.Key, parameter.Value);
 				}				
-			}
+			}			
 
 			Task<RestResponse> response = client.ExecuteAsync(request);
 
