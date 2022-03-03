@@ -24,8 +24,11 @@ namespace Lis.Monitoring.Manager.Dialos {
 		}
 
 		protected override bool OkAction() {
+			labErrorLogin.Visible = false;
 			_member = new MemberDto() { Login = edtLogin.Text, Password = edtPassword.Text };
-			return _apiController.Authenticate(edtLogin.Text, edtPassword.Text);
+			bool loginOk = _apiController.Authenticate(edtLogin.Text, edtPassword.Text);
+			labErrorLogin.Visible = !loginOk;
+			return loginOk;
 		}
 	}
 }

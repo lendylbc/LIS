@@ -62,7 +62,7 @@
 				try {
 					this.isLoading = true;
 					const res = await apiClient.get("Device/Get");
-
+					
 					const result = {
 						status: res.status + "-" + res.statusText,
 						headers: res.headers,

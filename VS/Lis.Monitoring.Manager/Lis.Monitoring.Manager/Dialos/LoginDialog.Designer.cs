@@ -31,6 +31,7 @@ namespace Lis.Monitoring.Manager.Dialos {
 			this.label2 = new System.Windows.Forms.Label();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
+			this.labErrorLogin = new System.Windows.Forms.Label();
 			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.SuspendLayout();
@@ -111,12 +112,25 @@ namespace Lis.Monitoring.Manager.Dialos {
 			this.pictureBox1.TabIndex = 11;
 			this.pictureBox1.TabStop = false;
 			// 
+			// labErrorLogin
+			// 
+			this.labErrorLogin.AutoSize = true;
+			this.labErrorLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			this.labErrorLogin.ForeColor = System.Drawing.Color.DarkRed;
+			this.labErrorLogin.Location = new System.Drawing.Point(206, 136);
+			this.labErrorLogin.Name = "labErrorLogin";
+			this.labErrorLogin.Size = new System.Drawing.Size(138, 17);
+			this.labErrorLogin.TabIndex = 12;
+			this.labErrorLogin.Text = "Chybné přihlášení";
+			this.labErrorLogin.Visible = false;
+			// 
 			// LoginDialog
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.SystemColors.Control;
 			this.ClientSize = new System.Drawing.Size(355, 167);
+			this.Controls.Add(this.labErrorLogin);
 			this.Controls.Add(this.edtPassword);
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.edtLogin);
@@ -132,6 +146,7 @@ namespace Lis.Monitoring.Manager.Dialos {
 			this.Controls.SetChildIndex(this.edtLogin, 0);
 			this.Controls.SetChildIndex(this.label2, 0);
 			this.Controls.SetChildIndex(this.edtPassword, 0);
+			this.Controls.SetChildIndex(this.labErrorLogin, 0);
 			this.panel1.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			this.ResumeLayout(false);
@@ -147,5 +162,6 @@ namespace Lis.Monitoring.Manager.Dialos {
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Panel panel1;
 		private System.Windows.Forms.PictureBox pictureBox1;
+		private System.Windows.Forms.Label labErrorLogin;
 	}
 }

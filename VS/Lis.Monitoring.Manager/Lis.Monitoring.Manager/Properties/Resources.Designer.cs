@@ -211,9 +211,9 @@ namespace Lis.Monitoring.Manager.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Upozornění.
         /// </summary>
-        internal static string Upozornění {
+        internal static string Warning {
             get {
-                return ResourceManager.GetString("Upozornění", resourceCulture);
+                return ResourceManager.GetString("Warning", resourceCulture);
             }
         }
         

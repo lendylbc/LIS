@@ -25,6 +25,7 @@ namespace Lis.Monitoring.Manager.Forms {
 			grdDevices.Columns["Id"].Visible = false;
 			grdDevices.Columns["DeviceType"].Visible = false;
 			grdDevices.Columns["Inserted"].Visible = false;
+			grdDevices.Columns["ModbusDeviceAddress"].Visible = false;
 		}
 
 		private void DesignParamGrid() {
@@ -136,7 +137,9 @@ namespace Lis.Monitoring.Manager.Forms {
 				if(MessageBox.Show("Přejete si smazat zařízení?", Lis.Monitoring.Manager.Properties.Resources.Dotaz, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
 					DeviceDto deviceDto = (DeviceDto)grdDevices.CurrentRow.DataBoundItem;
 					try {
-						_apiController.DeleteDevice((long)deviceDto.Id);
+						if(!_apiController.DeleteDevice((long)deviceDto.Id)) {
+							MessageBox.Show("Zařízení nelze smazat, pravděpodobně má podřízené záznamy.", Properties.Resources.Warning, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+						}
 						RefreshDeviceGrid();
 					} catch {
 						MessageBox.Show("Zařízení nelze smazat." + Environment.NewLine +
@@ -161,7 +164,9 @@ namespace Lis.Monitoring.Manager.Forms {
 				if(MessageBox.Show("Přejete si smazat parametr?", Lis.Monitoring.Manager.Properties.Resources.Dotaz, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
 					DeviceParameterDto deviceParam = (DeviceParameterDto)grdParams.CurrentRow.DataBoundItem;
 					try {
-						_apiController.DeleteParameter((long)deviceParam.Id);
+						if(!_apiController.DeleteParameter((long)deviceParam.Id)) {
+							MessageBox.Show("Parametr nelze smazat, pravděpodobně má podřízené záznamy.", Properties.Resources.Warning, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+						}
 						RefreshParamGrid();
 					} catch {
 						MessageBox.Show("Parametr nelze smazat." + Environment.NewLine +
@@ -186,7 +191,9 @@ namespace Lis.Monitoring.Manager.Forms {
 				if(MessageBox.Show("Přejete si smazat podmínku?", Lis.Monitoring.Manager.Properties.Resources.Dotaz, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
 					DeviceParameterConditionDto deviceCondition = (DeviceParameterConditionDto)grdConditions.CurrentRow.DataBoundItem;
 					try {
-						_apiController.DeleteCondition((long)deviceCondition.Id);
+						if(!_apiController.DeleteCondition((long)deviceCondition.Id)) {
+							MessageBox.Show("Podmínku se nepodařilo smazat.", Properties.Resources.Warning, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+						}
 						RefreshConditionGrid();
 					} catch {
 						MessageBox.Show("Podmínku nelze smazat.", Lis.Monitoring.Manager.Properties.Resources.Chyba, MessageBoxButtons.OK, MessageBoxIcon.Error);

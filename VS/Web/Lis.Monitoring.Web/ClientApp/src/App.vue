@@ -3,12 +3,15 @@
 		<router-link to="/">Home</router-link>
 		<router-link to="/data">Data</router-link>
 		<router-link to="/about">About</router-link>
+
+		
+
+		<router-link v-if="!isLoggedIn" to="/login"><button>Login</button></router-link>
 	</div>
-	<router-view />	
+	<router-view />
 </template>
 
 <style>
-	/*@import url('https://fonts.googleapis.com/css?family=Audiowide');*/
 	#app {
 		/*font-family: Audiowide, Andada, Avenir, Helvetica, Andada, Arial, sans-serif;*/
 		-webkit-font-smoothing: antialiased;
@@ -31,3 +34,11 @@
 				color: #42b983;
 			}
 </style>
+<script>
+	import { mapGetters } from "vuex";
+	export default {
+		computed: {
+			...mapGetters(["isLoggedIn"])
+		}
+	};
+</script>

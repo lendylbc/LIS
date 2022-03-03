@@ -39,14 +39,17 @@ namespace Lis.Monitoring.Manager {
 			this.grdData = new System.Windows.Forms.DataGridView();
 			this.edtLog = new System.Windows.Forms.TextBox();
 			this.timer = new System.Windows.Forms.Timer(this.components);
-			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.ParamDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+			this.labStatusInfo = new System.Windows.Forms.ToolStripStatusLabel();
+			this.colDeviceDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.colParamDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.colValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.panel1.SuspendLayout();
 			this.panel2.SuspendLayout();
 			this.panel3.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.grdData)).BeginInit();
+			this.statusStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// panel1
@@ -127,10 +130,10 @@ namespace Lis.Monitoring.Manager {
 			this.grdData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
 			this.grdData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.grdData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.ParamDesc,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewCheckBoxColumn1});
+            this.colDeviceDesc,
+            this.colParamDesc,
+            this.colDate,
+            this.colValue});
 			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
 			dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
 			dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
@@ -175,46 +178,64 @@ namespace Lis.Monitoring.Manager {
 			this.timer.Interval = 30000;
 			this.timer.Tick += new System.EventHandler(this.timer_Tick);
 			// 
-			// dataGridViewTextBoxColumn1
+			// statusStrip1
 			// 
-			this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.dataGridViewTextBoxColumn1.DataPropertyName = "DeviceDesc";
-			this.dataGridViewTextBoxColumn1.HeaderText = "Popis zařízení";
-			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-			this.dataGridViewTextBoxColumn1.ReadOnly = true;
+			this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.labStatusInfo});
+			this.statusStrip1.Location = new System.Drawing.Point(0, 616);
+			this.statusStrip1.Name = "statusStrip1";
+			this.statusStrip1.Size = new System.Drawing.Size(910, 22);
+			this.statusStrip1.TabIndex = 8;
+			this.statusStrip1.Text = "statusStrip1";
 			// 
-			// ParamDesc
+			// labStatusInfo
 			// 
-			this.ParamDesc.DataPropertyName = "ParamDesc";
-			this.ParamDesc.HeaderText = "Parametr";
-			this.ParamDesc.Name = "ParamDesc";
-			this.ParamDesc.ReadOnly = true;
+			this.labStatusInfo.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+			this.labStatusInfo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+			this.labStatusInfo.Name = "labStatusInfo";
+			this.labStatusInfo.Size = new System.Drawing.Size(0, 17);
 			// 
-			// dataGridViewTextBoxColumn2
+			// colDeviceDesc
 			// 
-			this.dataGridViewTextBoxColumn2.DataPropertyName = "Inserted";
-			this.dataGridViewTextBoxColumn2.HeaderText = "Datum";
-			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-			this.dataGridViewTextBoxColumn2.ReadOnly = true;
+			this.colDeviceDesc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.colDeviceDesc.DataPropertyName = "DeviceDesc";
+			this.colDeviceDesc.HeaderText = "Popis zařízení";
+			this.colDeviceDesc.Name = "colDeviceDesc";
+			this.colDeviceDesc.ReadOnly = true;
 			// 
-			// dataGridViewCheckBoxColumn1
+			// colParamDesc
 			// 
-			this.dataGridViewCheckBoxColumn1.DataPropertyName = "ValueUnit";
+			this.colParamDesc.DataPropertyName = "ParamDesc";
+			this.colParamDesc.HeaderText = "Parametr";
+			this.colParamDesc.Name = "colParamDesc";
+			this.colParamDesc.ReadOnly = true;
+			// 
+			// colDate
+			// 
+			this.colDate.DataPropertyName = "Inserted";
+			this.colDate.HeaderText = "Datum";
+			this.colDate.Name = "colDate";
+			this.colDate.ReadOnly = true;
+			// 
+			// colValue
+			// 
+			this.colValue.DataPropertyName = "ValueUnit";
 			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
 			dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			this.dataGridViewCheckBoxColumn1.DefaultCellStyle = dataGridViewCellStyle2;
-			this.dataGridViewCheckBoxColumn1.HeaderText = "Hodnota";
-			this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
-			this.dataGridViewCheckBoxColumn1.ReadOnly = true;
-			this.dataGridViewCheckBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.dataGridViewCheckBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.dataGridViewCheckBoxColumn1.Width = 60;
+			this.colValue.DefaultCellStyle = dataGridViewCellStyle2;
+			this.colValue.HeaderText = "Hodnota";
+			this.colValue.Name = "colValue";
+			this.colValue.ReadOnly = true;
+			this.colValue.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.colValue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.colValue.Width = 60;
 			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(910, 638);
+			this.Controls.Add(this.statusStrip1);
 			this.Controls.Add(this.panel2);
 			this.Controls.Add(this.panel1);
 			this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
@@ -228,7 +249,10 @@ namespace Lis.Monitoring.Manager {
 			this.panel2.PerformLayout();
 			this.panel3.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.grdData)).EndInit();
+			this.statusStrip1.ResumeLayout(false);
+			this.statusStrip1.PerformLayout();
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
 		}
 
@@ -242,10 +266,12 @@ namespace Lis.Monitoring.Manager {
 		private System.Windows.Forms.Button btnUsers;
 		private System.Windows.Forms.Button btnDevices;
 		private System.Windows.Forms.Label labLoggedUser;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-		private System.Windows.Forms.DataGridViewTextBoxColumn ParamDesc;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewCheckBoxColumn1;
+		private System.Windows.Forms.StatusStrip statusStrip1;
+		private System.Windows.Forms.ToolStripStatusLabel labStatusInfo;
+		private System.Windows.Forms.DataGridViewTextBoxColumn colDeviceDesc;
+		private System.Windows.Forms.DataGridViewTextBoxColumn colParamDesc;
+		private System.Windows.Forms.DataGridViewTextBoxColumn colDate;
+		private System.Windows.Forms.DataGridViewTextBoxColumn colValue;
 	}
 }
 

@@ -95,7 +95,7 @@ namespace Lis.Monitoring.Manager.Edits {
 				_errors.Add("Zvolte typ operátor!");
 			}
 			if(_errors.Count > 0) {
-				MessageBox.Show(string.Join(Environment.NewLine, _errors), Lis.Monitoring.Manager.Properties.Resources.Upozornění, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				MessageBox.Show(string.Join(Environment.NewLine, _errors), Lis.Monitoring.Manager.Properties.Resources.Warning, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 			}
 			return _errors.Count == 0;			
 		}

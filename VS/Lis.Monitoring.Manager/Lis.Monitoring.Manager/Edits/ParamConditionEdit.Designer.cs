@@ -28,23 +28,24 @@ namespace Lis.Monitoring.Manager.Edits {
 			this.label3 = new System.Windows.Forms.Label();
 			this.edtValue = new System.Windows.Forms.NumericUpDown();
 			this.label1 = new System.Windows.Forms.Label();
+			this.label2 = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.edtValue)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// btnSave
 			// 
-			this.btnSave.Location = new System.Drawing.Point(80, 60);
+			this.btnSave.Location = new System.Drawing.Point(80, 80);
 			this.btnSave.TabIndex = 2;
 			// 
 			// btnStorno
 			// 
-			this.btnStorno.Location = new System.Drawing.Point(169, 60);
+			this.btnStorno.Location = new System.Drawing.Point(169, 80);
 			this.btnStorno.TabIndex = 3;
 			// 
 			// cmbOperator
 			// 
 			this.cmbOperator.FormattingEnabled = true;
-			this.cmbOperator.Location = new System.Drawing.Point(12, 23);
+			this.cmbOperator.Location = new System.Drawing.Point(12, 49);
 			this.cmbOperator.Name = "cmbOperator";
 			this.cmbOperator.Size = new System.Drawing.Size(116, 21);
 			this.cmbOperator.TabIndex = 0;
@@ -54,7 +55,7 @@ namespace Lis.Monitoring.Manager.Edits {
 			// 
 			this.label3.AutoSize = true;
 			this.label3.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.label3.Location = new System.Drawing.Point(12, 7);
+			this.label3.Location = new System.Drawing.Point(12, 33);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(48, 13);
 			this.label3.TabIndex = 19;
@@ -63,7 +64,7 @@ namespace Lis.Monitoring.Manager.Edits {
 			// edtValue
 			// 
 			this.edtValue.DecimalPlaces = 1;
-			this.edtValue.Location = new System.Drawing.Point(134, 24);
+			this.edtValue.Location = new System.Drawing.Point(134, 50);
 			this.edtValue.Minimum = new decimal(new int[] {
             100,
             0,
@@ -78,17 +79,27 @@ namespace Lis.Monitoring.Manager.Edits {
 			// 
 			this.label1.AutoSize = true;
 			this.label1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.label1.Location = new System.Drawing.Point(131, 8);
+			this.label1.Location = new System.Drawing.Point(131, 34);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(48, 13);
 			this.label1.TabIndex = 21;
 			this.label1.Text = "Hodnota";
 			// 
+			// label2
+			// 
+			this.label2.AutoSize = true;
+			this.label2.Location = new System.Drawing.Point(12, 10);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(252, 13);
+			this.label2.TabIndex = 22;
+			this.label2.Text = "Upozornit, pokud naměřená hodnot splní podmínku";
+			// 
 			// ParamConditionEdit
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(268, 95);
+			this.ClientSize = new System.Drawing.Size(268, 115);
+			this.Controls.Add(this.label2);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.edtValue);
 			this.Controls.Add(this.label3);
@@ -101,6 +112,7 @@ namespace Lis.Monitoring.Manager.Edits {
 			this.Controls.SetChildIndex(this.label3, 0);
 			this.Controls.SetChildIndex(this.edtValue, 0);
 			this.Controls.SetChildIndex(this.label1, 0);
+			this.Controls.SetChildIndex(this.label2, 0);
 			((System.ComponentModel.ISupportInitialize)(this.edtValue)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
@@ -112,5 +124,6 @@ namespace Lis.Monitoring.Manager.Edits {
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.NumericUpDown edtValue;
 		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.Label label2;
 	}
 }

@@ -115,20 +115,22 @@ namespace Lis.Monitoring.Manager.Edits {
 			}
 
 			if(_errors.Count > 0) {
-				MessageBox.Show(string.Join(Environment.NewLine, _errors), Lis.Monitoring.Manager.Properties.Resources.Upozornění, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				MessageBox.Show(string.Join(Environment.NewLine, _errors), Lis.Monitoring.Manager.Properties.Resources.Warning, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 			}
 			return _errors.Count == 0;
 		}
 
 		private void cmbDeviceType_SelectedIndexChanged(object sender, EventArgs e) {
-			DeviceType deviceType = (DeviceType)cmbDeviceType.SelectedItem;
-			labModbusAddress.Visible = deviceType == DeviceType.Modbus;
-			edtModbusAddress.Visible = deviceType == DeviceType.Modbus;
-			if(!edtModbusAddress.Visible) {
-				edtModbusAddress.Text = string.Empty;
-			}
+			if(cmbDeviceType.SelectedItem != null) {
+				DeviceType deviceType = (DeviceType)cmbDeviceType.SelectedItem;
+				labModbusAddress.Visible = deviceType == DeviceType.Modbus;
+				edtModbusAddress.Visible = deviceType == DeviceType.Modbus;
+				if(!edtModbusAddress.Visible) {
+					edtModbusAddress.Text = string.Empty;
+				}
 
-			edit_TextChanged(sender, e);
+				edit_TextChanged(sender, e);
+			}
 		}
 	}
 }

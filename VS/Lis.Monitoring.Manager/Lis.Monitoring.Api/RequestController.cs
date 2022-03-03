@@ -13,7 +13,8 @@ namespace Lis.Monitoring.Api {
 	public class RequestController: ApiBase {
 		//private const string _API_URL = "https://localhost:44336";
 		//private const string _API_URL = "http://172.16.205.243:90";
-		private const string _API_URL = "https://172.16.205.243";
+		//private const string _API_URL = "https://172.16.205.243";	//	VQ server
+		private const string _API_URL = "https://dohled.liberec.cz";	//	LIS server
 		public string JwtToken { get; set; }
 		//BaseDto<long>
 		public RestResponse Post(string resource, Method method, object bodyData, Dictionary<string, string> parameters, bool useAuthToken = true) {

@@ -45,6 +45,7 @@
     <Compile Include="Enums\DeviceType.cs" />
     <Compile Include="Enums\EnumExtensions.cs" />
     <Compile Include="Enums\MemberType.cs" />
+    <Compile Include="Enums\ParameterType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

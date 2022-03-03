@@ -17,7 +17,7 @@ namespace Lis.Monitoring.Api {
 
 		public string Request { get { return _requestController.Request; } }
 		public string Response { get { return _requestController.Response; } }
-
+		public MemberDto Member { get; set; }
 		public string JwtToken { get => _requestController.JwtToken; }
 
 		public ApiController() {
@@ -29,26 +29,61 @@ namespace Lis.Monitoring.Api {
 			RestResponse response = _requestController.Post("Member/authentication/", Method.Post, memberCredentialDto, null, false);
 
 			if(response != null && response.StatusCode == System.Net.HttpStatusCode.OK && !string.IsNullOrEmpty(response.Content)) {
-				MemberTokenDto mtd = (MemberTokenDto)JsonConvert.DeserializeObject<MemberTokenDto>(response.Content);
-				_requestController.JwtToken = mtd.Token;
+				MemberTokenDto memberToken = (MemberTokenDto)JsonConvert.DeserializeObject<MemberTokenDto>(response.Content);
+				_requestController.JwtToken = memberToken.Token;
+				Member = memberToken.Member;
 				return true;
 			} else {
 				return false;
 			}
 		}
 
+		public bool CheckResponse(RestResponse response) {
+			bool result = false;
+			if(response != null) {
+				if(response.StatusCode == System.Net.HttpStatusCode.OK) {
+					result = true;
+				} else if(response.StatusCode == System.Net.HttpStatusCode.Unauthorized) {
+					if(Member != null) {
+						Authenticate(Member.Login, Member.Password);
+					}
+				}
+			}
+			return result;
+		}
+
+		public bool CheckResponse<T>(RestResponse response, out T data) {
+			bool result = false;
+			data = default(T);
+			if(response != null) {
+				if(response.StatusCode == System.Net.HttpStatusCode.OK) {
+					if(!string.IsNullOrEmpty(response.Content)) {
+						data = (T)JsonConvert.DeserializeObject<T>(response.Content);
+					}
+					result = true;
+				} else if(response.StatusCode == System.Net.HttpStatusCode.Unauthorized) {
+					if(Member != null) {
+						Authenticate(Member.Login, Member.Password);
+					}
+				}
+			}
+			return result;
+		}
+
 		public PagedResponse<DeviceDto> GetDeviceList() {//?Page=0&Size=4
 			RestResponse response = _requestController.Post("Device/Get", Method.Get, null, null, true);
-			if(response != null && response.StatusCode == System.Net.HttpStatusCode.OK && !string.IsNullOrEmpty(response.Content)) {
-				return (PagedResponse<DeviceDto>)JsonConvert.DeserializeObject<PagedResponse<DeviceDto>>(response.Content);
+			PagedResponse<DeviceDto> data;
+			if(CheckResponse<PagedResponse<DeviceDto>>(response, out data)) {
+				return data;// (PagedResponse<DeviceDto>)JsonConvert.DeserializeObject<PagedResponse<DeviceDto>>(response.Content);
 			} else {
 				return null;
 			}
+
 		}
 
 		public PagedResponse<ActiveDeviceLastDataDto> GetActiveDeviceLastData() {//?Page=0&Size=4
 			RestResponse response = _requestController.Post("DeviceData/GetLastDataAllActiveDevices", Method.Get, null, null, true);
-			if(response != null && response.StatusCode == System.Net.HttpStatusCode.OK && !string.IsNullOrEmpty(response.Content)) {
+			if(CheckResponse(response)) {
 				return (PagedResponse<ActiveDeviceLastDataDto>)JsonConvert.DeserializeObject<PagedResponse<ActiveDeviceLastDataDto>>(response.Content);
 			} else {
 				return null;
@@ -56,7 +91,7 @@ namespace Lis.Monitoring.Api {
 		}
 		public DeviceDto GetDeviceById(long id) {
 			RestResponse response = _requestController.Post($"Device/GetById/{id}", Method.Get, null, null, true);
-			if(response != null && response.StatusCode == System.Net.HttpStatusCode.OK && !string.IsNullOrEmpty(response.Content)) {
+			if(CheckResponse(response)) {
 				return (DeviceDto)JsonConvert.DeserializeObject<DeviceDto>(response.Content);
 			} else {
 				return null;
@@ -64,7 +99,7 @@ namespace Lis.Monitoring.Api {
 		}
 		public DeviceDto SaveDevice(DeviceDto device) {
 			RestResponse response = _requestController.Post($"Device/Save/", Method.Post, device, null, true);
-			if(response != null && response.StatusCode == System.Net.HttpStatusCode.Created && !string.IsNullOrEmpty(response.Content)) {
+			if(CheckResponse(response)) {
 				return (DeviceDto)JsonConvert.DeserializeObject<DeviceDto>(response.Content);
 			} else {
 				return null;
@@ -73,7 +108,7 @@ namespace Lis.Monitoring.Api {
 
 		public bool UpdateDevice(DeviceDto device) {
 			RestResponse response = _requestController.Post($"Device/Put/{device.Id}", Method.Put, device, null, true);
-			if(response != null && response.StatusCode == System.Net.HttpStatusCode.OK) {
+			if(CheckResponse(response)) {
 				return true;
 			} else {
 				return false;
@@ -91,7 +126,7 @@ namespace Lis.Monitoring.Api {
 
 		public PagedResponse<MemberDto> GetMemberList() {//?Page=0&Size=4
 			RestResponse response = _requestController.Post("Member/Get", Method.Get, null, null, true);
-			if(response != null && response.StatusCode == System.Net.HttpStatusCode.OK && !string.IsNullOrEmpty(response.Content)) {
+			if(CheckResponse(response)) {
 				return (PagedResponse<MemberDto>)JsonConvert.DeserializeObject<PagedResponse<MemberDto>>(response.Content);
 			} else {
 				return null;
@@ -100,7 +135,7 @@ namespace Lis.Monitoring.Api {
 
 		public MemberDto GetMemberById(long id) {
 			RestResponse response = _requestController.Post($"Member/GetById/{id}", Method.Get, null, null, true);
-			if(response != null && response.StatusCode == System.Net.HttpStatusCode.OK && !string.IsNullOrEmpty(response.Content)) {
+			if(CheckResponse(response)) {
 				return (MemberDto)JsonConvert.DeserializeObject<MemberDto>(response.Content);
 			} else {
 				return null;
@@ -108,7 +143,7 @@ namespace Lis.Monitoring.Api {
 		}
 		public MemberDto SaveMember(MemberDto member) {
 			RestResponse response = _requestController.Post($"Member/Save/", Method.Post, member, null, true);
-			if(response != null && response.StatusCode == System.Net.HttpStatusCode.Created && !string.IsNullOrEmpty(response.Content)) {
+			if(CheckResponse(response)) {
 				return (MemberDto)JsonConvert.DeserializeObject<MemberDto>(response.Content);
 			} else {
 				return null;
@@ -125,7 +160,7 @@ namespace Lis.Monitoring.Api {
 		}
 
 		public bool DeleteMember(long id) {
-			RestResponse response = _requestController.Post( $"Member/Delete/{id}", Method.Delete, null, null, true);
+			RestResponse response = _requestController.Post($"Member/Delete/{id}", Method.Delete, null, null, true);
 			if(response != null && response.StatusCode == System.Net.HttpStatusCode.OK) {
 				return true;
 			} else {
@@ -142,7 +177,7 @@ namespace Lis.Monitoring.Api {
 			parameters.Add("Size", "0");
 
 			RestResponse response = _requestController.Post("DeviceData/Get", Method.Get, null, parameters, true);
-			if(response != null && response.StatusCode == System.Net.HttpStatusCode.OK && !string.IsNullOrEmpty(response.Content)) {
+			if(CheckResponse(response)) {
 				return (PagedResponse<DeviceParameterDataDto>)JsonConvert.DeserializeObject<PagedResponse<DeviceParameterDataDto>>(response.Content);
 			} else {
 				return null;
@@ -153,7 +188,7 @@ namespace Lis.Monitoring.Api {
 			Dictionary<string, string> parameters = new Dictionary<string, string>();
 			parameters.Add("DeviceId", id.ToString());
 			RestResponse response = _requestController.Post("DeviceParameter/Get", Method.Get, null, parameters, true);
-			if(response != null && response.StatusCode == System.Net.HttpStatusCode.OK && !string.IsNullOrEmpty(response.Content)) {
+			if(CheckResponse(response)) {
 				return (PagedResponse<DeviceParameterDto>)JsonConvert.DeserializeObject<PagedResponse<DeviceParameterDto>>(response.Content);
 			} else {
 				return null;
@@ -172,7 +207,7 @@ namespace Lis.Monitoring.Api {
 			Dictionary<string, string> parameters = new Dictionary<string, string>();
 			parameters.Add("DeviceParameterId", id.ToString());
 			RestResponse response = _requestController.Post("DeviceCondition/Get", Method.Get, null, parameters, true);
-			if(response != null && response.StatusCode == System.Net.HttpStatusCode.OK && !string.IsNullOrEmpty(response.Content)) {
+			if(CheckResponse(response)) {
 				return (PagedResponse<DeviceParameterConditionDto>)JsonConvert.DeserializeObject<PagedResponse<DeviceParameterConditionDto>>(response.Content);
 			} else {
 				return null;
@@ -190,7 +225,7 @@ namespace Lis.Monitoring.Api {
 
 		public DeviceParameterDto SaveDeviceParameter(DeviceParameterDto deviceParameter) {
 			RestResponse response = _requestController.Post($"DeviceParameter/Save/", Method.Post, deviceParameter, null, true);
-			if(response != null && response.StatusCode == System.Net.HttpStatusCode.Created && !string.IsNullOrEmpty(response.Content)) {
+			if(CheckResponse(response)) {
 				return (DeviceParameterDto)JsonConvert.DeserializeObject<DeviceParameterDto>(response.Content);
 			} else {
 				return null;
@@ -208,7 +243,7 @@ namespace Lis.Monitoring.Api {
 
 		public DeviceParameterConditionDto SaveParamCondition(DeviceParameterConditionDto DeviceCondition) {
 			RestResponse response = _requestController.Post($"DeviceCondition/Save/", Method.Post, DeviceCondition, null, true);
-			if(response != null && response.StatusCode == System.Net.HttpStatusCode.Created && !string.IsNullOrEmpty(response.Content)) {
+			if(CheckResponse(response)) {
 				return (DeviceParameterConditionDto)JsonConvert.DeserializeObject<DeviceParameterConditionDto>(response.Content);
 			} else {
 				return null;

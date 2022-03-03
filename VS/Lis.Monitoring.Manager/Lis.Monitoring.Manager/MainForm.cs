@@ -13,6 +13,7 @@ using Lis.Monitoring.Dto.Communication;
 using Lis.Monitoring.Dto.Core;
 using Lis.Monitoring.Dto.Queries;
 using Lis.Monitoring.Manager.Forms;
+using Lis.Monitoring.Shared.Enums;
 
 namespace Lis.Monitoring.Manager {
 	public partial class MainForm : Form {
@@ -27,19 +28,20 @@ namespace Lis.Monitoring.Manager {
 			Init();
 		}
 
-		private void Init() {			
+		private void Init() {
 			labLoggedUser.Text = _member.Login;
 		}
 
 		#region Events
-		
+
 		private void GetActiveDeviceData() {
 			PagedResponse<ActiveDeviceLastDataDto> result = _apiController.GetActiveDeviceLastData();
 			if(result != null) {
 				var data = result.Data.OrderByDescending(x => x.Inserted).ToList();
 				grdData.DataSource = data;
 			} else {
-				grdData.DataSource = null;
+				List<ActiveDeviceLastDataDto> data = new List<ActiveDeviceLastDataDto>();
+				grdData.DataSource = data;
 				////edtLog.Text = result.
 				//edtLog.Text = _apiController.Request;
 				//edtLog.Text += Environment.NewLine + "___________________________________" + Environment.NewLine + _apiController.Response;
@@ -49,15 +51,21 @@ namespace Lis.Monitoring.Manager {
 
 		private void AddLogText(string text) {
 			edtLog.Text += Environment.NewLine + text;
-		}		
+		}
 
-		private void MainForm_Load(object sender, EventArgs e) {		
+		private void MainForm_Load(object sender, EventArgs e) {
+			UseRights();
 			GetActiveDeviceData();
 			timer.Enabled = true;
 		}
-	
+
+		private void UseRights() {
+			btnDevices.Enabled = _apiController.Member?.MemberType == (int)MemberType.Admin;
+			btnUsers.Enabled = _apiController.Member?.MemberType == (int)MemberType.Admin;
+		}
+
 		private void DesignDataGrid() {
-			try {
+			try {				
 				grdData.Columns["Id"].Visible = false;
 				grdData.Columns["DeviceId"].Visible = false;
 				grdData.Columns["ParamId"].Visible = false;
@@ -76,6 +84,7 @@ namespace Lis.Monitoring.Manager {
 		private void timer_Tick(object sender, EventArgs e) {
 			timer.Enabled = false;
 			try {
+				labStatusInfo.Text = "Aktualizace";
 				GetActiveDeviceData();
 				AddLogText(DateTime.Now.ToString());
 
@@ -91,13 +100,14 @@ namespace Lis.Monitoring.Manager {
 				//AddLogText(validatedToken.ValidTo.ToString());
 			} finally {
 				timer.Enabled = true;
+				labStatusInfo.Text = string.Empty;
 			}
 		}
 
 		private void btnDevices_Click(object sender, EventArgs e) {
 			using(DeviceList form = new DeviceList(_apiController)) {
 				if(form.ShowDialog() == DialogResult.OK) {
-					
+
 				}
 			}
 		}
@@ -135,14 +145,15 @@ namespace Lis.Monitoring.Manager {
 		}
 
 		private void grdData_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e) {
-			ActiveDeviceLastDataDto activeDevice = grdData.Rows[e.RowIndex].DataBoundItem as ActiveDeviceLastDataDto;
-			if(activeDevice.ErrorDetected != null || activeDevice.Notified != null) {
-				grdData.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Red;
+			if(grdData.DataSource != null && ((ICollection<ActiveDeviceLastDataDto>)grdData.DataSource).Count > 0) {
+				ActiveDeviceLastDataDto activeDevice = grdData.Rows[e.RowIndex].DataBoundItem as ActiveDeviceLastDataDto;
+				if(activeDevice.ErrorDetected != null || activeDevice.Notified != null) {
+					grdData.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Red;
+				}
+				//if(measurementOverviewDto.CorrelCoef != 0.0 && measurementOverviewDto.CorrelCoef < _leakCoefThreshold) {
+				//	gridOverview.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Red;
+				//}
 			}
-			//if(measurementOverviewDto.CorrelCoef != 0.0 && measurementOverviewDto.CorrelCoef < _leakCoefThreshold) {
-			//	gridOverview.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Red;
-			//}
-
 		}
 
 		private void grdData_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e) {
