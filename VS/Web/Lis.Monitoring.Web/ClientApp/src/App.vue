@@ -1,12 +1,10 @@
 ﻿<template>
 	<div id="nav">
-		<router-link to="/">Home</router-link>
-		<router-link to="/data">Data</router-link>
-		<router-link to="/about">About</router-link>
-
+		<!--<router-link to="/">Home</router-link>-->
+		<!--<router-link v-if="isLoggedIn" to="/data">Data</router-link>-->
+		<!--<router-link to="/about">About</router-link>-->
 		
-
-		<router-link v-if="!isLoggedIn" to="/login"><button>Login</button></router-link>
+		<router-link v-if="!isLoggedIn" to="/login">Login</router-link>
 	</div>
 	<router-view />
 </template>

@@ -45,9 +45,11 @@
 					}),
 				});
 				const { user, token } = await response.json();
-				this.setUser(user);
-				this.setToken(token);
-				this.$router.push("/");
+				if (token != null) {
+					this.setUser(user);
+					this.setToken(token);
+					this.$router.push("/data");
+				}
 			},
 		},
 	};

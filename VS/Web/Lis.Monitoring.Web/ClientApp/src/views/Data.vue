@@ -16,11 +16,7 @@
 					<strong>Chyba!</strong> Pozor pozor!!!
 				</div>
 			</div>
-		</div>
-		<br />
-		<div>
-			<button class="btn btn-lg btn-primary" @click="getAllData">Stáhni všechna data</button>
-		</div>
+		</div>		
 		<br />
 		<div v-if="isError">
 			<div class="alert alert-danger">
@@ -29,7 +25,7 @@
 		</div>
 		<div v-else-if="isLoading"><div class="spinner-border text-info"></div></div>
 		<div v-else>
-			<DataGrid msg="Message" v-bind:gridData="gridData" />
+			<DataGrid msg="Přehled hlídaných parametrů" v-bind:gridData="gridData" />
 		</div>
 	</div>
 </template>
@@ -54,6 +50,7 @@
 			}
 		},
 		methods: {
+
 			fortmatResponse(res) {
 				return JSON.stringify(res.data, null, 2);
 			},
@@ -62,7 +59,7 @@
 				try {
 					this.isLoading = true;
 					const res = await apiClient.get("Device/Get");
-					
+
 					const result = {
 						status: res.status + "-" + res.statusText,
 						headers: res.headers,
@@ -81,6 +78,11 @@
 					this.isLoading = false;
 				}
 			},
+
+		},
+		mounted() {
+			this.getAllData();
+			this.timer = setInterval(this.getAllData, 60000);
 		}
 	}
 </script>
