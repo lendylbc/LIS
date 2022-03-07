@@ -1,31 +1,31 @@
 ﻿<template>
-		<div class="container">			
-			<div class="row">
-				<h2>{{ msg }}</h2>
+	<div class="container">
+		<div class="row">
+			<h2>{{ msg }}</h2>
+		</div>
+		<div class="row">
+			<div class="col">
 			</div>
-			<div class="row">
-				<div class="col">
-				</div>
-				<div class="col">
-					<table class="table table-striped" style="width: 30%">
-						<tr class="table-color">
-							<th class="align-left">IP</th>
-							<th class="align-left">Port</th>
-							<th class="align-right">Popis</th>
-							<th class="align-right">Aktivní</th>
-						</tr>
-						<tr class="table-color" v-for="item in gridData" v-bind:key="item.id">
-							<td class="align-left">{{ item.ipAddress }}</td>
-							<td class="align-left">{{ item.port }}</td>
-							<td class="align-right">{{ item.description }}</td>
-							<td class="align-right">{{ item.active }}</td>
-						</tr>
-					</table>
-				</div>
-				<div class="col">
-				</div>
+			<div class="col">
+				<table class="table table-striped" style="width: 30%">
+					<tr class="table-color">
+						<th class="align-left">Popis zařízení</th>
+						<th class="align-left">Parametr</th>
+						<th class="align-left">Datum odečtu</th>
+						<th class="align-right">Hodnota</th>
+					</tr>
+					<tr class="table-color table-active-color" :style="[item.errorDetected ? {'background': '#dc3545'} : {'background': '#198754'}] " v-for="item in gridData" v-bind:key="item.id">
+						<td class="align-left">{{item.deviceDesc}}</td>
+						<td class="align-left">{{item.paramDesc}}</td>
+						<td class="align-right">{{item.inserted}}</td>
+						<td class="align-right">{{ValueUnitData(item)}}</td>						
+					</tr>
+				</table>
+			</div>
+			<div class="col">
 			</div>
 		</div>
+	</div>
 </template>
 
 <script>
@@ -36,31 +36,17 @@
 			gridData: [],
 		},
 		data() {
-			return {
-				// example playlist array
-				playlist: [
-					{
-						id: 123,
-						name: 'teplota 1',
-						value: 25.4
-					},
-					{
-						id: 124,
-						name: 'teplota 2',
-						value: 25.8
-					},
-					{
-						id: 125,
-						name: 'teplota 3',
-						value: 28.6
-					},
-					{
-						id: 126,
-						name: 'teplota 4',
-						value: 27.1
-					},
-				],
-			};
+		},
+		methods: {
+			ValueUnitData(item) {
+				if (item.valueType == 1) {
+					return item.value == null ? "" : item.value + item.unit;
+				} else if (item.valueType == 2) {
+					return item.valueString == null ? "" : item.valueString;
+				} else {
+					return "";
+				}
+			}
 		}
 	}
 </script>

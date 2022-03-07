@@ -45,6 +45,7 @@ namespace Lis.Monitoring.Manager {
 			this.colParamDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.btnCsvExport = new System.Windows.Forms.Button();
 			this.panel1.SuspendLayout();
 			this.pnlMain.SuspendLayout();
 			this.panel3.SuspendLayout();
@@ -54,6 +55,7 @@ namespace Lis.Monitoring.Manager {
 			// 
 			// panel1
 			// 
+			this.panel1.Controls.Add(this.btnCsvExport);
 			this.panel1.Controls.Add(this.labLoggedUser);
 			this.panel1.Controls.Add(this.btnUsers);
 			this.panel1.Controls.Add(this.btnDevices);
@@ -209,13 +211,15 @@ namespace Lis.Monitoring.Manager {
 			this.colParamDesc.HeaderText = "Parametr";
 			this.colParamDesc.Name = "colParamDesc";
 			this.colParamDesc.ReadOnly = true;
+			this.colParamDesc.Width = 150;
 			// 
 			// colDate
 			// 
 			this.colDate.DataPropertyName = "Inserted";
-			this.colDate.HeaderText = "Datum";
+			this.colDate.HeaderText = "Datum odečtu";
 			this.colDate.Name = "colDate";
 			this.colDate.ReadOnly = true;
+			this.colDate.Width = 120;
 			// 
 			// colValue
 			// 
@@ -229,6 +233,17 @@ namespace Lis.Monitoring.Manager {
 			this.colValue.Resizable = System.Windows.Forms.DataGridViewTriState.True;
 			this.colValue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.colValue.Width = 150;
+			// 
+			// btnCsvExport
+			// 
+			this.btnCsvExport.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			this.btnCsvExport.Location = new System.Drawing.Point(182, 2);
+			this.btnCsvExport.Name = "btnCsvExport";
+			this.btnCsvExport.Size = new System.Drawing.Size(83, 28);
+			this.btnCsvExport.TabIndex = 13;
+			this.btnCsvExport.Text = "CSV";
+			this.btnCsvExport.UseVisualStyleBackColor = true;
+			this.btnCsvExport.Click += new System.EventHandler(this.btnCsvExport_Click);
 			// 
 			// MainForm
 			// 
@@ -272,6 +287,7 @@ namespace Lis.Monitoring.Manager {
 		private System.Windows.Forms.DataGridViewTextBoxColumn colParamDesc;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colDate;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colValue;
+		private System.Windows.Forms.Button btnCsvExport;
 	}
 }
 

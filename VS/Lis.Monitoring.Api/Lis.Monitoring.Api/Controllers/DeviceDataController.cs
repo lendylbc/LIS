@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using Serilog;
 
 namespace Lis.Monitoring.Api.Controllers {
-	[Authorize]
+	//[Authorize]
 	[Route("api/[controller]/[Action]")]
 	[ApiController]
 	public class DeviceDataController : BaseController<DeviceParameterData, long, IDeviceParameterDataService, DeviceParameterDataDto, DeviceParameterDataDto, DeviceParameterDataDto, DeviceParameterDataQuery> {

@@ -58,11 +58,7 @@
 			async getAllData() {
 				try {
 					this.isLoading = true;
-					const res = await apiClient.get("Device/Get", {
-						headers: {
-							Authorization: `Bearer aaaaaaa`
-						}
-					});
+					const res = await apiClient.get("Device/GetActiveDeviceLastData");
 
 					const result = {
 						status: res.status + "-" + res.statusText,

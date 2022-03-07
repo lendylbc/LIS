@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -66,7 +67,7 @@ namespace Lis.Monitoring.Manager {
 		}
 
 		private void DesignDataGrid() {
-			try {				
+			try {
 				//grdData.Columns["Id"].Visible = false;
 				//grdData.Columns["DeviceId"].Visible = false;
 				//grdData.Columns["ParamId"].Visible = false;
@@ -75,6 +76,7 @@ namespace Lis.Monitoring.Manager {
 				//grdData.Columns["Unit"].Visible = false;
 				//grdData.Columns["ErrorDetected"].Visible = false;
 				//grdData.Columns["Notified"].Visible = false;
+				grdData.Columns[3].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
 			} catch { }
 		}
 
@@ -166,6 +168,49 @@ namespace Lis.Monitoring.Manager {
 			//if(grdData.Columns[e.ColumnIndex].Name.Equals("Operator")) {
 			//	e.Value = ((ConditionType)e.Value).ToDescriptionString();
 			//}
+		}
+
+		private void btnCsvExport_Click(object sender, EventArgs e) {
+			if(grdData.Rows.Count > 0) {
+				SaveFileDialog sfd = new SaveFileDialog();
+				sfd.Filter = "CSV (*.csv)|*.csv";
+				sfd.FileName = "Data.csv";
+				bool fileError = false;
+				if(sfd.ShowDialog() == DialogResult.OK) {
+					if(File.Exists(sfd.FileName)) {
+						try {
+							File.Delete(sfd.FileName);
+						} catch(IOException ex) {
+							fileError = true;
+							MessageBox.Show("Nelze zapsat data do souboru.");
+						}
+					}
+					if(!fileError) {
+						try {
+							int columnCount = grdData.Columns.Count;
+							string columnNames = "";
+							string[] outputCsv = new string[grdData.Rows.Count + 1];
+							for(int i = 0; i < columnCount; i++) {
+								columnNames += grdData.Columns[i].HeaderText.ToString() + ",";
+							}
+							outputCsv[0] += columnNames;
+
+							for(int i = 1; (i - 1) < grdData.Rows.Count; i++) {
+								for(int j = 0; j < columnCount; j++) {
+									outputCsv[i] += grdData.Rows[i - 1].Cells[j].Value.ToString() + ",";
+								}
+							}
+
+							File.WriteAllLines(sfd.FileName, outputCsv, Encoding.UTF8);
+							MessageBox.Show("Data úspěšně exportována.", "Info");
+						} catch(Exception ex) {
+							MessageBox.Show("Chyba exportu dat.");
+						}
+					}
+				}
+			} else {
+				MessageBox.Show("Žádná data pro export.", "Info");
+			}
 		}
 	}
 }
