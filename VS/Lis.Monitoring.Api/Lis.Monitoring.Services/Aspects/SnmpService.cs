@@ -10,6 +10,7 @@ using Lis.Monitoring.Shared.Enums;
 using Lis.Monitoring.Shared.Errors;
 using Lis.Monitoring.Snmp;
 using Microsoft.Extensions.Logging;
+using SnmpSharpNet;
 
 namespace Lis.Monitoring.Services.Aspects {
 	public class SnmpService : ISnmpService {
@@ -33,6 +34,8 @@ namespace Lis.Monitoring.Services.Aspects {
 			List<Device> devices = _deviceService.GetAllDevicesWithParams((int)DeviceType.Snmp).ToList();
 
 			foreach(Device device in devices) {
+				decimal? valueNumeric = null;
+				string valueString = null;
 				List<string> paramOids = device.DeviceParameter.Select(x => x.Address).ToList();
 				if(paramOids.Count > 0) {
 					Dictionary<string, object> deviceData = snmpController.RequestData(device.IpAddress, (int)device.Port, "public", paramOids);//device.Port, device.Community
@@ -42,14 +45,21 @@ namespace Lis.Monitoring.Services.Aspects {
 							DeviceParameter parameter = device.DeviceParameter.Where(x => x.Address == data.Key).FirstOrDefault();
 							if(parameter != null) {
 								Type typ = data.Value.GetType();
-								decimal value = 0;
-								if(typ.Name.Equals("Integer32")) {
-									value = (decimal)Convert.ToInt32(data.Value.ToString());
+								//decimal value = 0;
+								//if(typ.Name.Equals("Integer32")) {
+								if(parameter.ValueType == (int)Shared.Enums.ValueType.Numeric) {
+									valueNumeric = (decimal)Convert.ToInt32(data.Value.ToString());
+									if(parameter.Multiplier != null) {
+										valueNumeric *= (decimal)parameter.Multiplier;
+									}
+									valueString = string.Empty;
+								} else {
+									OctetString ostr = (OctetString)data.Value;
+									valueString = ostr.ToString();
+									valueNumeric = null;
 								}
-								if(parameter.Multiplier != null) {
-									value *= (decimal)parameter.Multiplier;
-								}
-								_deviceParameterDataService.Save(new DeviceParameterData() { DeviceParameterId = parameter.Id, Inserted = DateTime.Now, Value = value });
+
+								_deviceParameterDataService.Save(new DeviceParameterData() { DeviceParameterId = parameter.Id, Inserted = DateTime.Now, Value = valueNumeric, ValueString = valueString });
 							}
 						}
 					}
@@ -64,7 +74,7 @@ namespace Lis.Monitoring.Services.Aspects {
 						}
 					}
 				}
-			}			
+			}
 		}
 	}
 }

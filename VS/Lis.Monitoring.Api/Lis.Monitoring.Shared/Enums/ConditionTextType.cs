@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Lis.Monitoring.Shared.Enums {
-	public enum ConditionType {
-		NoValue = 0,
-		Greater = 1,
-		Smaller = 2,
+	public enum ConditionTextType {
+		[Description("Rovno")]
 		Equal = 3,
-		NotEqual = 4
-	}
+		[Description("Nerovno")]
+		NotEqual = 4	
+}
 }

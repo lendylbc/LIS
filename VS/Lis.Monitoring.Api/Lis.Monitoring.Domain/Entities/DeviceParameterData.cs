@@ -8,7 +8,8 @@ using Lis.Monitoring.Abstractions.Entities;
 namespace Lis.Monitoring.Domain.Entities {
 	public class DeviceParameterData : Entity {
 		public long DeviceParameterId { get; set; }
-		public Decimal Value { get; set; }
-		public DateTime Inserted { get; set; }		
+		public Decimal? Value { get; set; }
+		public string ValueString { get; set; }
+		public DateTime Inserted { get; set; }				
 	}
 }

@@ -32,12 +32,26 @@ namespace Lis.Monitoring.Manager.Edits {
 
 		protected override bool LoadData() {
 
+			foreach(Shared.Enums.ValueType condition in (Shared.Enums.ValueType[])Enum.GetValues(typeof(Shared.Enums.ValueType))) {
+				cmbValueType.Items.Add(condition.ToDescriptionString());
+			}
+
+			cmbValueType.SelectedIndex = -1;
+
 			if(_deviceParameter != null) {
 				edtDescription.Text = _deviceParameter.Description;
 				edtAddress.Text = _deviceParameter.Address;
 				edtUnit.Text = _deviceParameter.Unit;
 				edtMultiplier.Text = _deviceParameter.Multiplier.ToString();
 				chkActive.Checked = _deviceParameter.Active;
+
+				string description = ((Shared.Enums.ValueType)_deviceParameter.ValueType).ToDescriptionString();
+				for(int i = 0; i < cmbValueType.Items.Count; i++) {
+					if((String)cmbValueType.Items[i] == description) {
+						cmbValueType.SelectedIndex = i;
+						break;
+					}
+				}
 
 				edtDescription.Focus();
 
@@ -66,6 +80,10 @@ namespace Lis.Monitoring.Manager.Edits {
 					}
 				}
 
+				Shared.Enums.ValueType valueType = EnumExtensions.GetValueFromDescription<Shared.Enums.ValueType>((string)cmbValueType.SelectedItem);
+
+				_deviceParameter.ValueType = (int)valueType;
+
 				_deviceParameter.Active = chkActive.Checked;
 
 				if(_deviceParameter.Id == null) {
@@ -92,6 +110,9 @@ namespace Lis.Monitoring.Manager.Edits {
 				_errors.Add("Zadejte adresu pro čtení hodnoty!");
 			}
 
+			if(cmbValueType.SelectedIndex < 0) {
+				_errors.Add("Zvolte typ hodnoty!");
+			}
 			//if(string.IsNullOrEmpty(edtAddress.Text)) {
 			//	_errors.Add("Zadejte jednotku!");
 			//}

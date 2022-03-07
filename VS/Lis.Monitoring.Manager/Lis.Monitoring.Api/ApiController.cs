@@ -40,34 +40,44 @@ namespace Lis.Monitoring.Api {
 
 		public bool CheckResponse(RestResponse response) {
 			bool result = false;
-			if(response != null) {
-				if(response.StatusCode == System.Net.HttpStatusCode.OK) {
-					result = true;
-				} else if(response.StatusCode == System.Net.HttpStatusCode.Unauthorized) {
-					if(Member != null) {
-						Authenticate(Member.Login, Member.Password);
+			try {
+				if(response != null) {
+					if(response.StatusCode == System.Net.HttpStatusCode.OK) {
+						result = true;
+					} else if(response.StatusCode == System.Net.HttpStatusCode.Created) {
+						result = true;
+					} else if(response.StatusCode == System.Net.HttpStatusCode.Unauthorized) {
+						if(Member != null) {
+							Authenticate(Member.Login, Member.Password);
+						}
 					}
 				}
+				return result;
+			} catch {
+				return false;
 			}
-			return result;
 		}
 
 		public bool CheckResponse<T>(RestResponse response, out T data) {
 			bool result = false;
 			data = default(T);
-			if(response != null) {
-				if(response.StatusCode == System.Net.HttpStatusCode.OK) {
-					if(!string.IsNullOrEmpty(response.Content)) {
-						data = (T)JsonConvert.DeserializeObject<T>(response.Content);
-					}
-					result = true;
-				} else if(response.StatusCode == System.Net.HttpStatusCode.Unauthorized) {
-					if(Member != null) {
-						Authenticate(Member.Login, Member.Password);
+			try {
+				if(response != null) {
+					if(response.StatusCode == System.Net.HttpStatusCode.OK) {
+						if(!string.IsNullOrEmpty(response.Content)) {
+							data = (T)JsonConvert.DeserializeObject<T>(response.Content);
+						}
+						result = true;
+					} else if(response.StatusCode == System.Net.HttpStatusCode.Unauthorized) {
+						if(Member != null) {
+							Authenticate(Member.Login, Member.Password);
+						}
 					}
 				}
+				return result;
+			} catch {
+				return false;
 			}
-			return result;
 		}
 
 		public PagedResponse<DeviceDto> GetDeviceList() {//?Page=0&Size=4

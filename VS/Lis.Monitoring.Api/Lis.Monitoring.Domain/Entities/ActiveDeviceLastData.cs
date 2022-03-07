@@ -12,7 +12,9 @@ namespace Lis.Monitoring.Domain.Entities {
 		public long ParamId { get; set; }
 		public string? ParamDesc { get; set; }
 		public string Unit { get; set; }
+		public int ValueType { get; set; }
 		public Decimal? Value { get; set; }
+		public string ValueString { get; set; }
 		public DateTime? Inserted { get; set; }
 		public DateTime? ErrorDetected { get; set; }
 		public DateTime? Notified { get; set; }

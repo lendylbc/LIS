@@ -49,8 +49,6 @@ namespace Lis.Monitoring.Manager.Forms {
 			this.panel4 = new System.Windows.Forms.Panel();
 			this.panel6 = new System.Windows.Forms.Panel();
 			this.grdConditions = new System.Windows.Forms.DataGridView();
-			this.Operator = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.panel8 = new System.Windows.Forms.Panel();
 			this.btnConditionDelete = new System.Windows.Forms.Button();
 			this.btnConditionEdit = new System.Windows.Forms.Button();
@@ -66,6 +64,10 @@ namespace Lis.Monitoring.Manager.Forms {
 			this.btnParamEdit = new System.Windows.Forms.Button();
 			this.btnParamInsert = new System.Windows.Forms.Button();
 			this.tipDevice = new System.Windows.Forms.ToolTip(this.components);
+			this.Operator = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.OperatorString = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.ValueString = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.panel1.SuspendLayout();
 			this.panel2.SuspendLayout();
 			this.panel3.SuspendLayout();
@@ -265,7 +267,9 @@ namespace Lis.Monitoring.Manager.Forms {
 			this.grdConditions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.grdConditions.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Operator,
-            this.Value});
+            this.Value,
+            this.OperatorString,
+            this.ValueString});
 			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
 			dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
 			dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
@@ -294,21 +298,6 @@ namespace Lis.Monitoring.Manager.Forms {
 			this.grdConditions.DataSourceChanged += new System.EventHandler(this.grdConditions_DataSourceChanged);
 			this.grdConditions.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.grdConditions_CellFormatting);
 			this.grdConditions.DoubleClick += new System.EventHandler(this.grdConditions_DoubleClick);
-			// 
-			// Operator
-			// 
-			this.Operator.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.Operator.DataPropertyName = "Operator";
-			this.Operator.HeaderText = "Operátor";
-			this.Operator.Name = "Operator";
-			this.Operator.ReadOnly = true;
-			// 
-			// Value
-			// 
-			this.Value.DataPropertyName = "Value";
-			this.Value.HeaderText = "Hodnota";
-			this.Value.Name = "Value";
-			this.Value.ReadOnly = true;
 			// 
 			// panel8
 			// 
@@ -495,6 +484,35 @@ namespace Lis.Monitoring.Manager.Forms {
 			this.btnParamInsert.UseVisualStyleBackColor = true;
 			this.btnParamInsert.Click += new System.EventHandler(this.btnParamInsert_Click);
 			// 
+			// Operator
+			// 
+			this.Operator.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.Operator.DataPropertyName = "Operator";
+			this.Operator.HeaderText = "Operátor číslo";
+			this.Operator.Name = "Operator";
+			this.Operator.ReadOnly = true;
+			// 
+			// Value
+			// 
+			this.Value.DataPropertyName = "Value";
+			this.Value.HeaderText = "Hodnota číslo";
+			this.Value.Name = "Value";
+			this.Value.ReadOnly = true;
+			// 
+			// OperatorString
+			// 
+			this.OperatorString.DataPropertyName = "OperatorString";
+			this.OperatorString.HeaderText = "Operátor text";
+			this.OperatorString.Name = "OperatorString";
+			this.OperatorString.ReadOnly = true;
+			// 
+			// ValueString
+			// 
+			this.ValueString.DataPropertyName = "ValueString";
+			this.ValueString.HeaderText = "Hodnota text";
+			this.ValueString.Name = "ValueString";
+			this.ValueString.ReadOnly = true;
+			// 
 			// DeviceList
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -549,11 +567,13 @@ namespace Lis.Monitoring.Manager.Forms {
 		private System.Windows.Forms.Button btnParamInsert;
 		private System.Windows.Forms.DataGridView grdConditions;
 		private System.Windows.Forms.DataGridView grdParams;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Operator;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Value;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Address;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Unit;
 		private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Operator;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Value;
+		private System.Windows.Forms.DataGridViewTextBoxColumn OperatorString;
+		private System.Windows.Forms.DataGridViewTextBoxColumn ValueString;
 	}
 }

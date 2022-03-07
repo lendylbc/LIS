@@ -34,7 +34,7 @@ namespace Lis.Monitoring.Manager {
 			this.labLoggedUser = new System.Windows.Forms.Label();
 			this.btnUsers = new System.Windows.Forms.Button();
 			this.btnDevices = new System.Windows.Forms.Button();
-			this.panel2 = new System.Windows.Forms.Panel();
+			this.pnlMain = new System.Windows.Forms.Panel();
 			this.panel3 = new System.Windows.Forms.Panel();
 			this.grdData = new System.Windows.Forms.DataGridView();
 			this.edtLog = new System.Windows.Forms.TextBox();
@@ -46,7 +46,7 @@ namespace Lis.Monitoring.Manager {
 			this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.panel1.SuspendLayout();
-			this.panel2.SuspendLayout();
+			this.pnlMain.SuspendLayout();
 			this.panel3.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.grdData)).BeginInit();
 			this.statusStrip1.SuspendLayout();
@@ -96,15 +96,15 @@ namespace Lis.Monitoring.Manager {
 			this.btnDevices.UseVisualStyleBackColor = true;
 			this.btnDevices.Click += new System.EventHandler(this.btnDevices_Click);
 			// 
-			// panel2
+			// pnlMain
 			// 
-			this.panel2.Controls.Add(this.panel3);
-			this.panel2.Controls.Add(this.edtLog);
-			this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panel2.Location = new System.Drawing.Point(0, 32);
-			this.panel2.Name = "panel2";
-			this.panel2.Size = new System.Drawing.Size(910, 606);
-			this.panel2.TabIndex = 7;
+			this.pnlMain.Controls.Add(this.panel3);
+			this.pnlMain.Controls.Add(this.edtLog);
+			this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.pnlMain.Location = new System.Drawing.Point(0, 32);
+			this.pnlMain.Name = "pnlMain";
+			this.pnlMain.Size = new System.Drawing.Size(910, 606);
+			this.pnlMain.TabIndex = 7;
 			// 
 			// panel3
 			// 
@@ -112,7 +112,7 @@ namespace Lis.Monitoring.Manager {
 			this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel3.Location = new System.Drawing.Point(0, 0);
 			this.panel3.Name = "panel3";
-			this.panel3.Size = new System.Drawing.Size(660, 606);
+			this.panel3.Size = new System.Drawing.Size(910, 606);
 			this.panel3.TabIndex = 5;
 			// 
 			// grdData
@@ -157,7 +157,7 @@ namespace Lis.Monitoring.Manager {
 			this.grdData.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
 			this.grdData.RowHeadersVisible = false;
 			this.grdData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.grdData.Size = new System.Drawing.Size(660, 606);
+			this.grdData.Size = new System.Drawing.Size(910, 606);
 			this.grdData.TabIndex = 8;
 			this.grdData.DataSourceChanged += new System.EventHandler(this.grdData_DataSourceChanged);
 			this.grdData.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.grdData_CellFormatting);
@@ -167,10 +167,10 @@ namespace Lis.Monitoring.Manager {
 			// edtLog
 			// 
 			this.edtLog.Dock = System.Windows.Forms.DockStyle.Right;
-			this.edtLog.Location = new System.Drawing.Point(660, 0);
+			this.edtLog.Location = new System.Drawing.Point(910, 0);
 			this.edtLog.Multiline = true;
 			this.edtLog.Name = "edtLog";
-			this.edtLog.Size = new System.Drawing.Size(250, 606);
+			this.edtLog.Size = new System.Drawing.Size(0, 606);
 			this.edtLog.TabIndex = 4;
 			// 
 			// timer
@@ -228,7 +228,7 @@ namespace Lis.Monitoring.Manager {
 			this.colValue.ReadOnly = true;
 			this.colValue.Resizable = System.Windows.Forms.DataGridViewTriState.True;
 			this.colValue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			this.colValue.Width = 60;
+			this.colValue.Width = 150;
 			// 
 			// MainForm
 			// 
@@ -236,7 +236,7 @@ namespace Lis.Monitoring.Manager {
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(910, 638);
 			this.Controls.Add(this.statusStrip1);
-			this.Controls.Add(this.panel2);
+			this.Controls.Add(this.pnlMain);
 			this.Controls.Add(this.panel1);
 			this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -245,8 +245,8 @@ namespace Lis.Monitoring.Manager {
 			this.Text = "Přehled";
 			this.Load += new System.EventHandler(this.MainForm_Load);
 			this.panel1.ResumeLayout(false);
-			this.panel2.ResumeLayout(false);
-			this.panel2.PerformLayout();
+			this.pnlMain.ResumeLayout(false);
+			this.pnlMain.PerformLayout();
 			this.panel3.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.grdData)).EndInit();
 			this.statusStrip1.ResumeLayout(false);
@@ -258,7 +258,7 @@ namespace Lis.Monitoring.Manager {
 
 		#endregion
 		private System.Windows.Forms.Panel panel1;
-		private System.Windows.Forms.Panel panel2;
+		private System.Windows.Forms.Panel pnlMain;
 		private System.Windows.Forms.TextBox edtLog;
 		private System.Windows.Forms.Panel panel3;
 		private System.Windows.Forms.DataGridView grdData;

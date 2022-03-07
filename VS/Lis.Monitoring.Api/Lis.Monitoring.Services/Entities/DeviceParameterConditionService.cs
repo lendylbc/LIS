@@ -34,6 +34,9 @@ namespace Lis.Monitoring.Services.Entities {
 			condition.Operator = data.Operator;
 			condition.Value = data.Value;
 
+			condition.OperatorString = data.OperatorString;
+			condition.ValueString = data.ValueString;
+
 			await DbService.SaveChangesAsync();
 
 			return condition;

@@ -41,11 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enums\ConditionType.cs" />
+    <Compile Include="Enums\ConditionNumericType.cs" />
+    <Compile Include="Enums\ConditionTextType.cs" />
     <Compile Include="Enums\DeviceType.cs" />
     <Compile Include="Enums\EnumExtensions.cs" />
     <Compile Include="Enums\MemberType.cs" />
     <Compile Include="Enums\ParameterType.cs" />
+    <Compile Include="Enums\ValueType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

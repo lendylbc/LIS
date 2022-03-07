@@ -8,6 +8,7 @@ using Lis.Monitoring.Domain.Entities;
 using Lis.Monitoring.Services.Abstractions;
 using Lis.Monitoring.Shared.Enums;
 using Lis.Monitoring.Shared.Errors;
+using SnmpSharpNet;
 
 namespace Lis.Monitoring.Services.Aspects {
 	public class ConditionService : IConditionService {
@@ -37,34 +38,68 @@ namespace Lis.Monitoring.Services.Aspects {
 				IEnumerable<DeviceParameter> paramData = deviceParameters.Where(x => deviceData.Keys.Contains(x.Address));
 
 				foreach(DeviceParameter param in paramData) {
-					decimal? value = null;
-					if(deviceData.TryGetValue(param.Address, out object valueData)) {
-						try {
-							Type typ = valueData.GetType();
+					if(param.ValueType == (int)Shared.Enums.ValueType.Numeric) {
+						decimal? value = null;
+						if(deviceData.TryGetValue(param.Address, out object valueData)) {
+							try {
+								Type typ = valueData.GetType();
 
-							if(typ.Name.Equals("Integer32")) {
-								value = (decimal)Convert.ToInt32(valueData.ToString());
-							}
-							if(param.Multiplier != null) {
-								value *= (decimal)param.Multiplier;
-							}
-							errorConditionExists = false;
-							foreach(DeviceParameterCondition condition in param.DeviceParameterCondition) {
-								if(!ConditionOk(condition, value)) {
-									errorConditionExists = true;
-									break;
+								if(typ.Name.Equals("Integer32")) {
+									value = (decimal)Convert.ToInt32(valueData.ToString());
 								}
+								if(param.Multiplier != null) {
+									value *= (decimal)param.Multiplier;
+								}
+								errorConditionExists = false;
+								foreach(DeviceParameterCondition condition in param.DeviceParameterCondition) {
+
+									if(!ConditionOk(condition, value)) {
+										errorConditionExists = true;
+										break;
+									}
+								}
+								if(errorConditionExists) {
+									AddError(param, true, value.ToString());
+								} else {
+									ClearErrorInfo(param);
+								}
+							} catch {
+								AddError(param);
 							}
-							if(errorConditionExists) {
-								AddError(param, true, value.ToString());
-							} else {
-								ClearErrorInfo(param);
-							}
-						} catch {
+						} else {
 							AddError(param);
 						}
 					} else {
-						AddError(param);
+						string value = string.Empty;
+						if(deviceData.TryGetValue(param.Address, out object valueData)) {
+							try {
+								Type typ = valueData.GetType();
+
+								OctetString ostr = (OctetString)valueData;
+								value = ostr.ToString();
+								//if(typ.Name.Equals("Integer32")) {
+								//	value = (decimal)Convert.ToInt32(valueData.ToString());
+								//}
+
+								errorConditionExists = false;
+								foreach(DeviceParameterCondition condition in param.DeviceParameterCondition) {
+
+									if(!ConditionOk(condition, value)) {
+										errorConditionExists = true;
+										break;
+									}
+								}
+								if(errorConditionExists) {
+									AddError(param, true, value.ToString());
+								} else {
+									ClearErrorInfo(param);
+								}
+							} catch {
+								AddError(param);
+							}
+						} else {
+							AddError(param);
+						}
 					}
 				}
 			}
@@ -73,14 +108,14 @@ namespace Lis.Monitoring.Services.Aspects {
 		private void AddError(DeviceParameter param, bool condition = false, string value = null) {
 			_errorsExists = true;
 			if(param.ErrorDetected == null || param.Notified == null || param.Notified < DateTime.Now.AddMinutes(_RETRY_NOTIFICATION_AFTER_MINUTES)) {
-				_deviceErrors.Add(new ErrorParameterInfo() { 
+				_deviceErrors.Add(new ErrorParameterInfo() {
 					Id = param.Id,
 					Description = $"{param.Device?.Description} - {param.Description}",
 					Address = param.Address,
 					Unit = param.Unit,
 					Value = value,
 					ErrorType = condition ? "Condition" : "No data",
-					Timestamp = DateTime.Now 
+					Timestamp = DateTime.Now
 				});
 				param.ErrorDetected = DateTime.Now;
 				param.Notified = DateTime.Now;
@@ -97,21 +132,38 @@ namespace Lis.Monitoring.Services.Aspects {
 
 		private bool ConditionOk(DeviceParameterCondition condition, decimal? value) {
 			bool result = false;
-			switch((ConditionType)condition.Operator) {
-				case ConditionType.NoValue:
+			switch((ConditionNumericType)condition.Operator) {
+				case ConditionNumericType.NoValue:
 					result = value != null;
 					break;
-				case ConditionType.Greater:
+				case ConditionNumericType.Greater:
 					result = value <= condition.Value;
 					break;
-				case ConditionType.Smaller:
+				case ConditionNumericType.Smaller:
 					result = value >= condition.Value;
 					break;
-				case ConditionType.Equal:
+				case ConditionNumericType.Equal:
 					result = value != condition.Value;
 					break;
-				case ConditionType.NotEqual:
+				case ConditionNumericType.NotEqual:
 					result = value == condition.Value;
+					break;
+				default:
+					result = false;
+					break;
+			}
+
+			return result;
+		}
+
+		private bool ConditionOk(DeviceParameterCondition condition, string value) {
+			bool result = false;
+			switch((ConditionTextType)condition.OperatorString) {
+				case ConditionTextType.Equal:
+					result = value != condition.ValueString;
+					break;
+				case ConditionTextType.NotEqual:
+					result = value == condition.ValueString;
 					break;
 				default:
 					result = false;

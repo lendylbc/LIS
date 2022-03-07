@@ -28,7 +28,7 @@ namespace Lis.Monitoring.Manager.Forms {
 
 				foreach(DeviceParameterDataDto dataValue in _data) {
 					//series.Points.Add(Decimal.ToDouble(dataValue.Value));
-					series.Points.AddXY(dataValue.Inserted.ToString("HH:mm"), Decimal.ToDouble(dataValue.Value));
+					series.Points.AddXY(dataValue.Inserted.ToString("HH:mm"), Decimal.ToDouble((decimal)dataValue.Value));
 				}
 
 				//if(chkContClearOldValues.Checked && chart.Series.First().Points.Count > 6 * 200) {

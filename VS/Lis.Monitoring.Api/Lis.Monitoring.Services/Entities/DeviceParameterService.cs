@@ -35,6 +35,8 @@ namespace Lis.Monitoring.Services.Entities {
 			deviceParam.Address = data.Address;
 			deviceParam.Unit = data.Unit;			
 			deviceParam.Active = data.Active;
+			deviceParam.Multiplier = data.Multiplier;
+			deviceParam.ValueType = data.ValueType;
 
 			await DbService.SaveChangesAsync();
 

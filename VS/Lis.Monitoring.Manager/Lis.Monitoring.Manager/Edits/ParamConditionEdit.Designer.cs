@@ -24,66 +24,31 @@ namespace Lis.Monitoring.Manager.Edits {
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
-			this.cmbOperator = new System.Windows.Forms.ComboBox();
-			this.label3 = new System.Windows.Forms.Label();
-			this.edtValue = new System.Windows.Forms.NumericUpDown();
-			this.label1 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
-			((System.ComponentModel.ISupportInitialize)(this.edtValue)).BeginInit();
+			this.pnlNumericValue = new System.Windows.Forms.Panel();
+			this.label1 = new System.Windows.Forms.Label();
+			this.edtValueNumeric = new System.Windows.Forms.NumericUpDown();
+			this.label3 = new System.Windows.Forms.Label();
+			this.cmbOperatorNumeric = new System.Windows.Forms.ComboBox();
+			this.pnlTextValue = new System.Windows.Forms.Panel();
+			this.label4 = new System.Windows.Forms.Label();
+			this.label5 = new System.Windows.Forms.Label();
+			this.cmbOperatorText = new System.Windows.Forms.ComboBox();
+			this.edtValueText = new System.Windows.Forms.TextBox();
+			this.pnlNumericValue.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.edtValueNumeric)).BeginInit();
+			this.pnlTextValue.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// btnSave
 			// 
-			this.btnSave.Location = new System.Drawing.Point(80, 80);
+			this.btnSave.Location = new System.Drawing.Point(125, 141);
 			this.btnSave.TabIndex = 2;
 			// 
 			// btnStorno
 			// 
-			this.btnStorno.Location = new System.Drawing.Point(169, 80);
+			this.btnStorno.Location = new System.Drawing.Point(214, 141);
 			this.btnStorno.TabIndex = 3;
-			// 
-			// cmbOperator
-			// 
-			this.cmbOperator.FormattingEnabled = true;
-			this.cmbOperator.Location = new System.Drawing.Point(12, 49);
-			this.cmbOperator.Name = "cmbOperator";
-			this.cmbOperator.Size = new System.Drawing.Size(116, 21);
-			this.cmbOperator.TabIndex = 0;
-			this.cmbOperator.SelectedIndexChanged += new System.EventHandler(this.edit_TextChanged);
-			// 
-			// label3
-			// 
-			this.label3.AutoSize = true;
-			this.label3.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.label3.Location = new System.Drawing.Point(12, 33);
-			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(48, 13);
-			this.label3.TabIndex = 19;
-			this.label3.Text = "Operátor";
-			// 
-			// edtValue
-			// 
-			this.edtValue.DecimalPlaces = 1;
-			this.edtValue.Location = new System.Drawing.Point(134, 50);
-			this.edtValue.Minimum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            -2147483648});
-			this.edtValue.Name = "edtValue";
-			this.edtValue.Size = new System.Drawing.Size(120, 20);
-			this.edtValue.TabIndex = 1;
-			this.edtValue.ValueChanged += new System.EventHandler(this.edit_TextChanged);
-			// 
-			// label1
-			// 
-			this.label1.AutoSize = true;
-			this.label1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.label1.Location = new System.Drawing.Point(131, 34);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(48, 13);
-			this.label1.TabIndex = 21;
-			this.label1.Text = "Hodnota";
 			// 
 			// label2
 			// 
@@ -94,36 +59,144 @@ namespace Lis.Monitoring.Manager.Edits {
 			this.label2.TabIndex = 22;
 			this.label2.Text = "Upozornit, pokud naměřená hodnot splní podmínku";
 			// 
+			// pnlNumericValue
+			// 
+			this.pnlNumericValue.Controls.Add(this.label1);
+			this.pnlNumericValue.Controls.Add(this.edtValueNumeric);
+			this.pnlNumericValue.Controls.Add(this.label3);
+			this.pnlNumericValue.Controls.Add(this.cmbOperatorNumeric);
+			this.pnlNumericValue.Location = new System.Drawing.Point(12, 35);
+			this.pnlNumericValue.Name = "pnlNumericValue";
+			this.pnlNumericValue.Size = new System.Drawing.Size(290, 54);
+			this.pnlNumericValue.TabIndex = 23;
+			// 
+			// label1
+			// 
+			this.label1.AutoSize = true;
+			this.label1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+			this.label1.Location = new System.Drawing.Point(135, 7);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(48, 13);
+			this.label1.TabIndex = 25;
+			this.label1.Text = "Hodnota";
+			// 
+			// edtValueNumeric
+			// 
+			this.edtValueNumeric.DecimalPlaces = 1;
+			this.edtValueNumeric.Location = new System.Drawing.Point(138, 23);
+			this.edtValueNumeric.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+			this.edtValueNumeric.Name = "edtValueNumeric";
+			this.edtValueNumeric.Size = new System.Drawing.Size(139, 20);
+			this.edtValueNumeric.TabIndex = 23;
+			this.edtValueNumeric.ValueChanged += new System.EventHandler(this.edit_TextChanged);
+			// 
+			// label3
+			// 
+			this.label3.AutoSize = true;
+			this.label3.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+			this.label3.Location = new System.Drawing.Point(16, 6);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(48, 13);
+			this.label3.TabIndex = 24;
+			this.label3.Text = "Operátor";
+			// 
+			// cmbOperatorNumeric
+			// 
+			this.cmbOperatorNumeric.FormattingEnabled = true;
+			this.cmbOperatorNumeric.Location = new System.Drawing.Point(16, 22);
+			this.cmbOperatorNumeric.Name = "cmbOperatorNumeric";
+			this.cmbOperatorNumeric.Size = new System.Drawing.Size(116, 21);
+			this.cmbOperatorNumeric.TabIndex = 22;
+			this.cmbOperatorNumeric.SelectedIndexChanged += new System.EventHandler(this.edit_TextChanged);
+			// 
+			// pnlTextValue
+			// 
+			this.pnlTextValue.Controls.Add(this.edtValueText);
+			this.pnlTextValue.Controls.Add(this.label4);
+			this.pnlTextValue.Controls.Add(this.label5);
+			this.pnlTextValue.Controls.Add(this.cmbOperatorText);
+			this.pnlTextValue.Location = new System.Drawing.Point(12, 84);
+			this.pnlTextValue.Name = "pnlTextValue";
+			this.pnlTextValue.Size = new System.Drawing.Size(290, 54);
+			this.pnlTextValue.TabIndex = 24;
+			// 
+			// label4
+			// 
+			this.label4.AutoSize = true;
+			this.label4.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+			this.label4.Location = new System.Drawing.Point(135, 7);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(48, 13);
+			this.label4.TabIndex = 25;
+			this.label4.Text = "Hodnota";
+			// 
+			// label5
+			// 
+			this.label5.AutoSize = true;
+			this.label5.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+			this.label5.Location = new System.Drawing.Point(16, 7);
+			this.label5.Name = "label5";
+			this.label5.Size = new System.Drawing.Size(48, 13);
+			this.label5.TabIndex = 24;
+			this.label5.Text = "Operátor";
+			// 
+			// cmbOperatorText
+			// 
+			this.cmbOperatorText.FormattingEnabled = true;
+			this.cmbOperatorText.Location = new System.Drawing.Point(16, 22);
+			this.cmbOperatorText.Name = "cmbOperatorText";
+			this.cmbOperatorText.Size = new System.Drawing.Size(116, 21);
+			this.cmbOperatorText.TabIndex = 22;
+			this.cmbOperatorText.SelectedIndexChanged += new System.EventHandler(this.edit_TextChanged);
+			// 
+			// edtValueText
+			// 
+			this.edtValueText.Location = new System.Drawing.Point(138, 22);
+			this.edtValueText.Name = "edtValueText";
+			this.edtValueText.Size = new System.Drawing.Size(139, 20);
+			this.edtValueText.TabIndex = 26;
+			this.edtValueText.TextChanged += new System.EventHandler(this.edit_TextChanged);
+			// 
 			// ParamConditionEdit
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(268, 115);
+			this.ClientSize = new System.Drawing.Size(313, 176);
+			this.Controls.Add(this.pnlTextValue);
+			this.Controls.Add(this.pnlNumericValue);
 			this.Controls.Add(this.label2);
-			this.Controls.Add(this.label1);
-			this.Controls.Add(this.edtValue);
-			this.Controls.Add(this.label3);
-			this.Controls.Add(this.cmbOperator);
 			this.Name = "ParamConditionEdit";
 			this.Text = "Změna zařízení";
 			this.Controls.SetChildIndex(this.btnSave, 0);
 			this.Controls.SetChildIndex(this.btnStorno, 0);
-			this.Controls.SetChildIndex(this.cmbOperator, 0);
-			this.Controls.SetChildIndex(this.label3, 0);
-			this.Controls.SetChildIndex(this.edtValue, 0);
-			this.Controls.SetChildIndex(this.label1, 0);
 			this.Controls.SetChildIndex(this.label2, 0);
-			((System.ComponentModel.ISupportInitialize)(this.edtValue)).EndInit();
+			this.Controls.SetChildIndex(this.pnlNumericValue, 0);
+			this.Controls.SetChildIndex(this.pnlTextValue, 0);
+			this.pnlNumericValue.ResumeLayout(false);
+			this.pnlNumericValue.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.edtValueNumeric)).EndInit();
+			this.pnlTextValue.ResumeLayout(false);
+			this.pnlTextValue.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
 		}
 
 		#endregion
-		private System.Windows.Forms.ComboBox cmbOperator;
-		private System.Windows.Forms.Label label3;
-		private System.Windows.Forms.NumericUpDown edtValue;
-		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.Panel pnlNumericValue;
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.NumericUpDown edtValueNumeric;
+		private System.Windows.Forms.Label label3;
+		private System.Windows.Forms.ComboBox cmbOperatorNumeric;
+		private System.Windows.Forms.Panel pnlTextValue;
+		private System.Windows.Forms.TextBox edtValueText;
+		private System.Windows.Forms.Label label4;
+		private System.Windows.Forms.Label label5;
+		private System.Windows.Forms.ComboBox cmbOperatorText;
 	}
 }

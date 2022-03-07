@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Lis.Monitoring.Shared.Enums {
    public static class EnumExtensions {
-      public static string ToDescriptionString(this ConditionType val) {
+      public static string ToDescriptionString<T>(this T val) {
          DescriptionAttribute[] attributes = (DescriptionAttribute[])val
             .GetType()
             .GetField(val.ToString())

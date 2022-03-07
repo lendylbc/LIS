@@ -11,7 +11,8 @@ namespace Lis.Monitoring.Dto.Communication {
 		public string Address { get; set; }
 		public string Unit { get; set; }
 		public decimal? Multiplier { get; set; }
-		public long DeviceId { get; set; }		
+		public long DeviceId { get; set; }
+		public int ValueType { get; set; }
 		public DateTime Inserted { get; set; }
 		public bool Active { get; set; }
 	}

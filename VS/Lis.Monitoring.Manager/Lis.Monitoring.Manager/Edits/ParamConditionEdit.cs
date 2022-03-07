@@ -19,10 +19,12 @@ namespace Lis.Monitoring.Manager.Edits {
 		private ApiController _apiController;
 		private DeviceParameterConditionDto _paramCondition;
 		private long _deviceParameterId;
-		public ParamConditionEdit(long deviceParameterId, DeviceParameterConditionDto ParamCondition, ApiController apiController) : base(ParamCondition) {
+		private int _valueType;
+		public ParamConditionEdit(long deviceParameterId, DeviceParameterConditionDto ParamCondition, int valueType, ApiController apiController) : base(ParamCondition) {
 			_deviceParameterId = deviceParameterId;
 			_apiController = apiController;
 			_paramCondition = ParamCondition;
+			_valueType = valueType;
 			InitializeComponent();
 			//cmbOperator.FormattingEnabled = true;
 			//cmbOperator.Format += delegate (object sender, ListControlConvertEventArgs e) {
@@ -35,26 +37,42 @@ namespace Lis.Monitoring.Manager.Edits {
 		}
 
 		protected override bool LoadData() {
-			foreach(ConditionType condition in (ConditionType[])Enum.GetValues(typeof(ConditionType))) {
-				cmbOperator.Items.Add(condition.ToDescriptionString());
+			foreach(ConditionNumericType condition in (ConditionNumericType[])Enum.GetValues(typeof(ConditionNumericType))) {
+				cmbOperatorNumeric.Items.Add(condition.ToDescriptionString());
+			}
+
+			foreach(ConditionTextType condition in (ConditionTextType[])Enum.GetValues(typeof(ConditionTextType))) {
+				cmbOperatorText.Items.Add(condition.ToDescriptionString());
 			}
 
 			//cmbOperator.DataSource = (ConditionType[])Enum.GetValues(typeof(ConditionType));
-			cmbOperator.SelectedIndex = -1;
+			cmbOperatorNumeric.SelectedIndex = -1;
+			cmbOperatorText.SelectedIndex = -1;
+			pnlNumericValue.Visible = _valueType == (int)Shared.Enums.ValueType.Numeric;
+			pnlTextValue.Visible = _valueType == (int)Shared.Enums.ValueType.String;
 			if(_paramCondition != null) {
-
-				string description = ((ConditionType)_paramCondition.Operator).ToDescriptionString();
-				for(int i = 0; i < cmbOperator.Items.Count; i++) {
-					if((String)cmbOperator.Items[i] == description) {
-						cmbOperator.SelectedIndex = i;
-						break;
+				if(_valueType == (int)Shared.Enums.ValueType.Numeric) {
+					string description = ((ConditionNumericType)_paramCondition.Operator).ToDescriptionString();
+					for(int i = 0; i < cmbOperatorNumeric.Items.Count; i++) {
+						if((String)cmbOperatorNumeric.Items[i] == description) {
+							cmbOperatorNumeric.SelectedIndex = i;
+							break;
+						}
 					}
+					edtValueNumeric.Value = (decimal)_paramCondition.Value;
+					cmbOperatorNumeric.Focus();
+				} else {
+					string description = ((ConditionTextType)_paramCondition.OperatorString).ToDescriptionString();
+					for(int i = 0; i < cmbOperatorText.Items.Count; i++) {
+						if((String)cmbOperatorText.Items[i] == description) {
+							cmbOperatorText.SelectedIndex = i;
+							break;
+						}
+					}
+					edtValueText.Text = _paramCondition.ValueString;
+					cmbOperatorText.Focus();
 				}
-
-				edtValue.Value = _paramCondition.Value;
-
-				cmbOperator.Focus();
-
+								
 				return true;
 			} else {
 				_paramCondition = new DeviceParameterConditionDto();
@@ -65,15 +83,20 @@ namespace Lis.Monitoring.Manager.Edits {
 		}
 
 		protected override bool SaveData() {
-			try {				
-				_paramCondition.Value = edtValue.Value;
+			try {
+				if(_valueType == (int)Shared.Enums.ValueType.Numeric) {
+					_paramCondition.Value = edtValueNumeric.Value;
 
-				//ConditionType conditionType = (ConditionType)cmbOperator.SelectedItem;
-				//ConditionType conditionType = ConditionType.GetValueFromDescription((string)cmbOperator.SelectedItem);
+					ConditionNumericType conditionType = EnumExtensions.GetValueFromDescription<ConditionNumericType>((string)cmbOperatorNumeric.SelectedItem);
 
-				ConditionType conditionType = EnumExtensions.GetValueFromDescription<ConditionType>((string)cmbOperator.SelectedItem);
+					_paramCondition.Operator = (int)conditionType;
+				} else {
+					_paramCondition.ValueString = edtValueText.Text;
 
-				_paramCondition.Operator = (int)conditionType;
+					ConditionTextType conditionType = EnumExtensions.GetValueFromDescription<ConditionTextType>((string)cmbOperatorText.SelectedItem);
+
+					_paramCondition.OperatorString = (int)conditionType;
+				}
 
 				if(_paramCondition.Id == null) {
 					return _apiController.SaveParamCondition(_paramCondition) != null;
@@ -91,8 +114,14 @@ namespace Lis.Monitoring.Manager.Edits {
 		protected override bool ValidateData() {
 			_errors.Clear();
 
-			if(cmbOperator.SelectedIndex < 0) {
-				_errors.Add("Zvolte typ operátor!");
+			if(_valueType == (int)Shared.Enums.ValueType.Numeric) {
+				if(cmbOperatorNumeric.SelectedIndex < 0) {
+					_errors.Add("Zvolte typ operátoru!");
+				}
+			} else {
+				if(cmbOperatorText.SelectedIndex < 0) {
+					_errors.Add("Zvolte typ operátoru!");
+				}
 			}
 			if(_errors.Count > 0) {
 				MessageBox.Show(string.Join(Environment.NewLine, _errors), Lis.Monitoring.Manager.Properties.Resources.Warning, MessageBoxButtons.OK, MessageBoxIcon.Warning);

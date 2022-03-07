@@ -33,16 +33,18 @@ namespace Lis.Monitoring.Manager.Edits {
 			this.edtUnit = new System.Windows.Forms.TextBox();
 			this.labMultiplier = new System.Windows.Forms.Label();
 			this.edtMultiplier = new System.Windows.Forms.MaskedTextBox();
+			this.label5 = new System.Windows.Forms.Label();
+			this.cmbValueType = new System.Windows.Forms.ComboBox();
 			this.SuspendLayout();
 			// 
 			// btnSave
 			// 
-			this.btnSave.Location = new System.Drawing.Point(108, 138);
+			this.btnSave.Location = new System.Drawing.Point(108, 175);
 			this.btnSave.TabIndex = 5;
 			// 
 			// btnStorno
 			// 
-			this.btnStorno.Location = new System.Drawing.Point(199, 138);
+			this.btnStorno.Location = new System.Drawing.Point(199, 175);
 			this.btnStorno.TabIndex = 6;
 			// 
 			// label2
@@ -131,12 +133,34 @@ namespace Lis.Monitoring.Manager.Edits {
 			this.edtMultiplier.PromptChar = ' ';
 			this.edtMultiplier.Size = new System.Drawing.Size(100, 20);
 			this.edtMultiplier.TabIndex = 3;
+			this.edtMultiplier.TextChanged += new System.EventHandler(this.edit_TextChanged);
+			// 
+			// label5
+			// 
+			this.label5.AutoSize = true;
+			this.label5.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+			this.label5.Location = new System.Drawing.Point(12, 128);
+			this.label5.Name = "label5";
+			this.label5.Size = new System.Drawing.Size(65, 13);
+			this.label5.TabIndex = 28;
+			this.label5.Text = "TypHodnoty";
+			// 
+			// cmbValueType
+			// 
+			this.cmbValueType.FormattingEnabled = true;
+			this.cmbValueType.Location = new System.Drawing.Point(12, 143);
+			this.cmbValueType.Name = "cmbValueType";
+			this.cmbValueType.Size = new System.Drawing.Size(116, 21);
+			this.cmbValueType.TabIndex = 27;
+			this.cmbValueType.SelectedIndexChanged += new System.EventHandler(this.edit_TextChanged);
 			// 
 			// DeviceParameterEdit
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(296, 173);
+			this.ClientSize = new System.Drawing.Size(296, 210);
+			this.Controls.Add(this.label5);
+			this.Controls.Add(this.cmbValueType);
 			this.Controls.Add(this.labMultiplier);
 			this.Controls.Add(this.edtMultiplier);
 			this.Controls.Add(this.edtUnit);
@@ -159,6 +183,8 @@ namespace Lis.Monitoring.Manager.Edits {
 			this.Controls.SetChildIndex(this.edtUnit, 0);
 			this.Controls.SetChildIndex(this.edtMultiplier, 0);
 			this.Controls.SetChildIndex(this.labMultiplier, 0);
+			this.Controls.SetChildIndex(this.cmbValueType, 0);
+			this.Controls.SetChildIndex(this.label5, 0);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -174,5 +200,7 @@ namespace Lis.Monitoring.Manager.Edits {
 		private System.Windows.Forms.TextBox edtUnit;
 		private System.Windows.Forms.Label labMultiplier;
 		private System.Windows.Forms.MaskedTextBox edtMultiplier;
+		private System.Windows.Forms.Label label5;
+		private System.Windows.Forms.ComboBox cmbValueType;
 	}
 }

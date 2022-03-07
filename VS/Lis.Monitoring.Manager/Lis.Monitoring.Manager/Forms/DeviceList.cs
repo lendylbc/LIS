@@ -18,26 +18,33 @@ namespace Lis.Monitoring.Manager.Forms {
 		private ApiController _apiController;
 		public DeviceList(ApiController apiController) {
 			_apiController = apiController;
-			InitializeComponent();			
+			InitializeComponent();
+			grdDevices.AutoGenerateColumns = false;
+			grdParams.AutoGenerateColumns = false;
+			grdConditions.AutoGenerateColumns = false;
 		}
 
 		private void DesignDeviceGrid() {
-			grdDevices.Columns["Id"].Visible = false;
-			grdDevices.Columns["DeviceType"].Visible = false;
-			grdDevices.Columns["Inserted"].Visible = false;
-			grdDevices.Columns["ModbusDeviceAddress"].Visible = false;
+			//grdDevices.Columns["Id"].Visible = false;
+			//grdDevices.Columns["DeviceType"].Visible = false;
+			//grdDevices.Columns["Inserted"].Visible = false;
+			//grdDevices.Columns["ModbusDeviceAddress"].Visible = false;
 		}
 
 		private void DesignParamGrid() {
-			grdParams.Columns["Id"].Visible = false;
-			grdParams.Columns["DeviceId"].Visible = false;
-			grdParams.Columns["Inserted"].Visible = false;
+			//grdParams.Columns["Id"].Visible = false;
+			//grdParams.Columns["DeviceId"].Visible = false;
+			//grdParams.Columns["Inserted"].Visible = false;
+			////grdParams.Columns["ErrorDetected"].Visible = false;
+			////grdParams.Columns["Notified"].Visible = false;
+			//grdParams.Columns["Multiplier"].Visible = false;
+			//grdParams.Columns["ValueType"].Visible = false;
 		}
 
 		private void DesignConditionGrid() {
-			grdConditions.Columns["Id"].Visible = false;
-			grdConditions.Columns["DeviceParameterId"].Visible = false;
-			grdConditions.Columns["Inserted"].Visible = false;
+			//grdConditions.Columns["Id"].Visible = false;
+			//grdConditions.Columns["DeviceParameterId"].Visible = false;
+			//grdConditions.Columns["Inserted"].Visible = false;			
 		}
 
 		private void RefreshDeviceGrid() {
@@ -112,8 +119,8 @@ namespace Lis.Monitoring.Manager.Forms {
 			}
 		}
 
-		private void EditCondition(long idParameter, DeviceParameterConditionDto deviceParameterConditionDto) {
-			using(ParamConditionEdit edt = new ParamConditionEdit(idParameter, deviceParameterConditionDto, _apiController)) {
+		private void EditCondition(long idParameter, int valueType, DeviceParameterConditionDto deviceParameterConditionDto) {
+			using(ParamConditionEdit edt = new ParamConditionEdit(idParameter, deviceParameterConditionDto, valueType, _apiController)) {
 				if(edt.ShowDialog() == DialogResult.OK) {
 					if(deviceParameterConditionDto != null) {
 						RefreshConditionGrid();
@@ -129,7 +136,9 @@ namespace Lis.Monitoring.Manager.Forms {
 		}
 
 		private void btnEdit_Click(object sender, EventArgs e) {
-			EditDevice((DeviceDto)grdDevices.CurrentRow.DataBoundItem);
+			if(grdDevices.SelectedCells.Count > 0) {
+				EditDevice((DeviceDto)grdDevices.CurrentRow.DataBoundItem);
+			}
 		}
 
 		private void btnDelete_Click(object sender, EventArgs e) {
@@ -150,13 +159,17 @@ namespace Lis.Monitoring.Manager.Forms {
 		}
 
 		private void btnParamInsert_Click(object sender, EventArgs e) {
-			DeviceDto deviceDto = (DeviceDto)grdDevices.CurrentRow.DataBoundItem;
-			EditParam((long)deviceDto.Id, null);
+			if(grdDevices.SelectedCells.Count > 0) {
+				DeviceDto deviceDto = (DeviceDto)grdDevices.CurrentRow.DataBoundItem;
+				EditParam((long)deviceDto.Id, null);
+			}
 		}
 
 		private void btnParamEdit_Click(object sender, EventArgs e) {
-			DeviceDto deviceDto = (DeviceDto)grdDevices.CurrentRow.DataBoundItem;
-			EditParam((long)deviceDto.Id, (DeviceParameterDto)grdParams.CurrentRow.DataBoundItem);
+			if(grdParams.SelectedCells.Count > 0) {
+				DeviceDto deviceDto = (DeviceDto)grdDevices.CurrentRow.DataBoundItem;
+				EditParam((long)deviceDto.Id, (DeviceParameterDto)grdParams.CurrentRow.DataBoundItem);
+			}
 		}
 
 		private void btnParamDelete_Click(object sender, EventArgs e) {
@@ -177,13 +190,17 @@ namespace Lis.Monitoring.Manager.Forms {
 		}
 
 		private void btnConditionInsert_Click(object sender, EventArgs e) {
-			DeviceParameterDto deviceParam = (DeviceParameterDto)grdParams.CurrentRow.DataBoundItem;
-			EditCondition((long)deviceParam.Id, null);
+			if(grdParams.SelectedCells.Count > 0) {
+				DeviceParameterDto deviceParam = (DeviceParameterDto)grdParams.CurrentRow.DataBoundItem;
+				EditCondition((long)deviceParam.Id, deviceParam.ValueType, null);
+			}
 		}
 
 		private void btnConditionEdit_Click(object sender, EventArgs e) {
-			DeviceParameterDto deviceParam = (DeviceParameterDto)grdParams.CurrentRow.DataBoundItem;
-			EditCondition((long)deviceParam.Id, (DeviceParameterConditionDto)grdConditions.CurrentRow.DataBoundItem);
+			if(grdConditions.SelectedCells.Count > 0) {
+				DeviceParameterDto deviceParam = (DeviceParameterDto)grdParams.CurrentRow.DataBoundItem;
+				EditCondition((long)deviceParam.Id, deviceParam.ValueType, (DeviceParameterConditionDto)grdConditions.CurrentRow.DataBoundItem);
+			}
 		}
 
 		private void btnConditionDelete_Click(object sender, EventArgs e) {
@@ -235,8 +252,14 @@ namespace Lis.Monitoring.Manager.Forms {
 		}
 
 		private void grdConditions_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e) {
-			if(grdConditions.Columns[e.ColumnIndex].Name.Equals("Operator")) {
-				e.Value = ((ConditionType)e.Value).ToDescriptionString();				
+			if(e.Value != null) {
+				if(grdConditions.Columns[e.ColumnIndex].Name.Equals("Operator")) {
+					e.Value = ((ConditionNumericType)e.Value).ToDescriptionString();
+				}
+
+				if(grdConditions.Columns[e.ColumnIndex].Name.Equals("OperatorString")) {
+					e.Value = ((ConditionTextType)e.Value).ToDescriptionString();
+				}
 			}
 		}
 	}

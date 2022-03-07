@@ -30,6 +30,7 @@ namespace Lis.Monitoring.Manager {
 
 		private void Init() {
 			labLoggedUser.Text = _member.Login;
+			grdData.AutoGenerateColumns = false;
 		}
 
 		#region Events
@@ -50,7 +51,7 @@ namespace Lis.Monitoring.Manager {
 		#endregion
 
 		private void AddLogText(string text) {
-			edtLog.Text += Environment.NewLine + text;
+			//edtLog.Text += Environment.NewLine + text;
 		}
 
 		private void MainForm_Load(object sender, EventArgs e) {
@@ -66,14 +67,14 @@ namespace Lis.Monitoring.Manager {
 
 		private void DesignDataGrid() {
 			try {				
-				grdData.Columns["Id"].Visible = false;
-				grdData.Columns["DeviceId"].Visible = false;
-				grdData.Columns["ParamId"].Visible = false;
-				//grdData.Columns["ParamDesc"].Visible = false;
-				grdData.Columns["Value"].Visible = false;
-				grdData.Columns["Unit"].Visible = false;
-				grdData.Columns["ErrorDetected"].Visible = false;
-				grdData.Columns["Notified"].Visible = false;
+				//grdData.Columns["Id"].Visible = false;
+				//grdData.Columns["DeviceId"].Visible = false;
+				//grdData.Columns["ParamId"].Visible = false;
+				////grdData.Columns["ParamDesc"].Visible = false;
+				//grdData.Columns["Value"].Visible = false;
+				//grdData.Columns["Unit"].Visible = false;
+				//grdData.Columns["ErrorDetected"].Visible = false;
+				//grdData.Columns["Notified"].Visible = false;
 			} catch { }
 		}
 
@@ -126,6 +127,11 @@ namespace Lis.Monitoring.Manager {
 
 		private void DrawChartForParameter() {
 			ActiveDeviceLastDataDto data = (ActiveDeviceLastDataDto)grdData.CurrentRow.DataBoundItem;
+
+			if(data.ValueType != (int)Shared.Enums.ValueType.Numeric) {
+				MessageBox.Show("Měřený parametr neobsahuje číselné hodnoty.", Properties.Resources.Informace, MessageBoxButtons.OK, MessageBoxIcon.Information);
+				return;
+			}
 
 			DeviceParameterDataQuery query = new DeviceParameterDataQuery();
 
