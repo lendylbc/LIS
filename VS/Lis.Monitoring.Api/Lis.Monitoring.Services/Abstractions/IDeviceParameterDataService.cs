@@ -10,5 +10,7 @@ using Lis.Monitoring.Services.Queries;
 namespace Lis.Monitoring.Services.Abstractions {
 	public interface IDeviceParameterDataService : IBaseEntityService<DeviceParameterData, long, DeviceParameterDataQuery, DeviceParameterDataDto> {
 		Task<IEnumerable<ActiveDeviceLastData>> GetLastDataAllActiveDevices();
+
+		void DeleteOldData();
 	}
 }

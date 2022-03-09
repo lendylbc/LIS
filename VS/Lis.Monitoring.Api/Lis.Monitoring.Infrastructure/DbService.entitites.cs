@@ -14,21 +14,18 @@ namespace Lis.Monitoring.Infrastructure
       public DbSet<DeviceParameter> DeviceParameter { get; set; }
       public DbSet<DeviceParameterData> DeviceParameterData { get; set; }
       public DbSet<DeviceParameterCondition> DeviceParameterCondition { get; set; }
-      public DbSet<ActiveDeviceLastData> ActiveDeviceLastData { get; set; }      
+      public DbSet<ActiveDeviceLastData> ActiveDeviceLastData { get; set; }
 
       private void ApplyEntityConfigurations(ModelBuilder modelBuilder) 
 		{
 			modelBuilder.ApplyConfiguration(new MemberEntityTypeConfiguration());
          modelBuilder.ApplyConfiguration(new DeviceEntityTypeConfiguration());
-
       }
 
         private void DataSeed(ModelBuilder modelbuilder) {
 
             //DateTimeOffset createdDateTimeOffset = new DateTimeOffset(new DateTime(2018,1,1));
-            //string uzivatelVytvoreni = "Data Seed";
-
-           
+            //string uzivatelVytvoreni = "Data Seed";          
 
             #region Uzivatel
 
