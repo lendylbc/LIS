@@ -59,7 +59,8 @@ namespace WinFormsApp1 {
 			this.edtSickPort = new System.Windows.Forms.NumericUpDown();
 			this.edtSickIp = new System.Windows.Forms.TextBox();
 			this.btnSick = new System.Windows.Forms.Button();
-			this.edtComPort = new System.Windows.Forms.TextBox();
+			this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+			this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
 			this.panel1.SuspendLayout();
 			this.panel2.SuspendLayout();
 			this.panel3.SuspendLayout();
@@ -73,6 +74,8 @@ namespace WinFormsApp1 {
 			((System.ComponentModel.ISupportInitialize)(this.edtSnmpCount)).BeginInit();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.edtSickPort)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// timer1
@@ -219,7 +222,8 @@ namespace WinFormsApp1 {
 			// 
 			// groupBox3
 			// 
-			this.groupBox3.Controls.Add(this.edtComPort);
+			this.groupBox3.Controls.Add(this.numericUpDown2);
+			this.groupBox3.Controls.Add(this.numericUpDown1);
 			this.groupBox3.Controls.Add(this.button4);
 			this.groupBox3.Controls.Add(this.radioButton1);
 			this.groupBox3.Controls.Add(this.edtModbusData);
@@ -285,7 +289,7 @@ namespace WinFormsApp1 {
 			this.edtModbusIp.Name = "edtModbusIp";
 			this.edtModbusIp.Size = new System.Drawing.Size(173, 23);
 			this.edtModbusIp.TabIndex = 12;
-			this.edtModbusIp.Text = "172.20.1.86";
+			this.edtModbusIp.Text = "172.20.1.93";
 			// 
 			// btnModbus
 			// 
@@ -373,7 +377,7 @@ namespace WinFormsApp1 {
 			this.edtSnmpIp.Name = "edtSnmpIp";
 			this.edtSnmpIp.Size = new System.Drawing.Size(173, 23);
 			this.edtSnmpIp.TabIndex = 13;
-			this.edtSnmpIp.Text = "172.20.0.111";
+			this.edtSnmpIp.Text = "192.168.104.3";
 			// 
 			// btnSendReq
 			// 
@@ -452,22 +456,48 @@ namespace WinFormsApp1 {
 			this.btnSick.UseVisualStyleBackColor = true;
 			this.btnSick.Click += new System.EventHandler(this.btnSick_Click);
 			// 
-			// edtComPort
+			// numericUpDown1
 			// 
-			this.edtComPort.Location = new System.Drawing.Point(214, 104);
-			this.edtComPort.Name = "edtComPort";
-			this.edtComPort.Size = new System.Drawing.Size(77, 23);
-			this.edtComPort.TabIndex = 17;
-			this.edtComPort.Text = "COM16";
+			this.numericUpDown1.Location = new System.Drawing.Point(199, 105);
+			this.numericUpDown1.Maximum = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+			this.numericUpDown1.Name = "numericUpDown1";
+			this.numericUpDown1.Size = new System.Drawing.Size(69, 23);
+			this.numericUpDown1.TabIndex = 18;
+			this.numericUpDown1.Value = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
 			// 
-			// Form1
+			// numericUpDown2
+			// 
+			this.numericUpDown2.Location = new System.Drawing.Point(274, 104);
+			this.numericUpDown2.Maximum = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+			this.numericUpDown2.Name = "numericUpDown2";
+			this.numericUpDown2.Size = new System.Drawing.Size(36, 23);
+			this.numericUpDown2.TabIndex = 19;
+			this.numericUpDown2.Value = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+			// 
+			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(826, 450);
 			this.Controls.Add(this.panel6);
 			this.Controls.Add(this.panel1);
-			this.Name = "Form1";
+			this.Name = "MainForm";
 			this.Text = "Form1";
 			this.Load += new System.EventHandler(this.Form1_Load);
 			this.panel1.ResumeLayout(false);
@@ -488,6 +518,8 @@ namespace WinFormsApp1 {
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.edtSickPort)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -527,7 +559,8 @@ namespace WinFormsApp1 {
 		private System.Windows.Forms.Button button3;
 		private System.Windows.Forms.NumericUpDown edtSnmpPort;
 		private System.Windows.Forms.Button button4;
-		private System.Windows.Forms.TextBox edtComPort;
+		private System.Windows.Forms.NumericUpDown numericUpDown2;
+		private System.Windows.Forms.NumericUpDown numericUpDown1;
 	}
 }
 

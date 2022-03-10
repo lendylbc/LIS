@@ -8,10 +8,13 @@ using Lis.Monitoring.Domain.Entities;
 using Lis.Monitoring.Services.Abstractions;
 using Lis.Monitoring.Shared.Enums;
 using Lis.Monitoring.Shared.Errors;
+using Serilog;
 using SnmpSharpNet;
 
 namespace Lis.Monitoring.Services.Aspects {
 	public class ConditionService : IConditionService {
+		private static readonly ILogger log = Serilog.Log.ForContext<ConditionService>();
+
 		private const int _RETRY_NOTIFICATION_AFTER_MINUTES = -30;
 
 		List<ErrorParameterInfo> _deviceErrors;
@@ -57,6 +60,7 @@ namespace Lis.Monitoring.Services.Aspects {
 										errorConditionExists = true;
 										break;
 									}
+									log.Error($"Device: {param.Device.Description} Cond val: {condition.Value} Value: {value} Result: {errorConditionExists}");
 								}
 								if(errorConditionExists) {
 									AddError(param, true, value.ToString());

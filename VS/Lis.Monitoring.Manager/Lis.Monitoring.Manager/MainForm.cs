@@ -37,9 +37,10 @@ namespace Lis.Monitoring.Manager {
 		#region Events
 
 		private void GetActiveDeviceData() {
+			grdData.ClearSelection();
 			PagedResponse<ActiveDeviceLastDataDto> result = _apiController.GetActiveDeviceLastData();
 			if(result != null) {
-				var data = result.Data.OrderByDescending(x => x.Inserted).ToList();
+				var data = result.Data.OrderBy(x => x.DeviceDesc).ToList();
 				grdData.DataSource = data;
 			} else {
 				List<ActiveDeviceLastDataDto> data = new List<ActiveDeviceLastDataDto>();
@@ -56,7 +57,7 @@ namespace Lis.Monitoring.Manager {
 		}
 
 		private void MainForm_Load(object sender, EventArgs e) {
-			UseRights();
+			UseRights();			
 			GetActiveDeviceData();
 			timer.Enabled = true;
 		}
@@ -76,7 +77,8 @@ namespace Lis.Monitoring.Manager {
 				//grdData.Columns["Unit"].Visible = false;
 				//grdData.Columns["ErrorDetected"].Visible = false;
 				//grdData.Columns["Notified"].Visible = false;
-				grdData.Columns[3].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
+				grdData.EnableHeadersVisualStyles = false;
+				grdData.Columns[3].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;			
 			} catch { }
 		}
 
@@ -158,15 +160,15 @@ namespace Lis.Monitoring.Manager {
 				if(activeDevice.ErrorDetected != null || activeDevice.Notified != null) {
 					grdData.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Red;
 				}
-				//if(measurementOverviewDto.CorrelCoef != 0.0 && measurementOverviewDto.CorrelCoef < _leakCoefThreshold) {
-				//	gridOverview.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Red;
-				//}
 			}
 		}
 
 		private void grdData_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e) {
-			//if(grdData.Columns[e.ColumnIndex].Name.Equals("Operator")) {
-			//	e.Value = ((ConditionType)e.Value).ToDescriptionString();
+			//if(grdData.DataSource != null && ((ICollection<ActiveDeviceLastDataDto>)grdData.DataSource).Count > 0) {
+			//	ActiveDeviceLastDataDto activeDevice = grdData.Rows[e.RowIndex].DataBoundItem as ActiveDeviceLastDataDto;
+			//	if(activeDevice.ErrorDetected != null || activeDevice.Notified != null) {
+			//		grdData.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Red;
+			//	}
 			//}
 		}
 
@@ -211,6 +213,10 @@ namespace Lis.Monitoring.Manager {
 			} else {
 				MessageBox.Show("Žádná data pro export.", "Info");
 			}
+		}
+
+		private void grdData_SelectionChanged(object sender, EventArgs e) {
+			grdData.ClearSelection();
 		}
 	}
 }

@@ -123,7 +123,7 @@ namespace Lis.Monitoring.Manager.Edits {
 			// edtEmail
 			// 
 			this.edtEmail.Location = new System.Drawing.Point(10, 103);
-			this.edtEmail.MaxLength = 20;
+			this.edtEmail.MaxLength = 50;
 			this.edtEmail.Name = "edtEmail";
 			this.edtEmail.Size = new System.Drawing.Size(269, 20);
 			this.edtEmail.TabIndex = 2;

@@ -30,5 +30,9 @@ namespace Lis.Monitoring.Manager.Dialos {
 			labErrorLogin.Visible = !loginOk;
 			return loginOk;
 		}
+
+		private void LoginDialog_Load(object sender, EventArgs e) {
+			edtLogin.Focus();
+		}
 	}
 }

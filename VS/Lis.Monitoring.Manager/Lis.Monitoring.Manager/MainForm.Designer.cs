@@ -31,6 +31,7 @@ namespace Lis.Monitoring.Manager {
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.panel1 = new System.Windows.Forms.Panel();
+			this.btnCsvExport = new System.Windows.Forms.Button();
 			this.labLoggedUser = new System.Windows.Forms.Label();
 			this.btnUsers = new System.Windows.Forms.Button();
 			this.btnDevices = new System.Windows.Forms.Button();
@@ -42,10 +43,9 @@ namespace Lis.Monitoring.Manager {
 			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
 			this.labStatusInfo = new System.Windows.Forms.ToolStripStatusLabel();
 			this.colDeviceDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colParamDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.colParamDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.btnCsvExport = new System.Windows.Forms.Button();
 			this.panel1.SuspendLayout();
 			this.pnlMain.SuspendLayout();
 			this.panel3.SuspendLayout();
@@ -64,6 +64,17 @@ namespace Lis.Monitoring.Manager {
 			this.panel1.Name = "panel1";
 			this.panel1.Size = new System.Drawing.Size(910, 32);
 			this.panel1.TabIndex = 6;
+			// 
+			// btnCsvExport
+			// 
+			this.btnCsvExport.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			this.btnCsvExport.Location = new System.Drawing.Point(182, 2);
+			this.btnCsvExport.Name = "btnCsvExport";
+			this.btnCsvExport.Size = new System.Drawing.Size(83, 28);
+			this.btnCsvExport.TabIndex = 13;
+			this.btnCsvExport.Text = "CSV";
+			this.btnCsvExport.UseVisualStyleBackColor = true;
+			this.btnCsvExport.Click += new System.EventHandler(this.btnCsvExport_Click);
 			// 
 			// labLoggedUser
 			// 
@@ -133,8 +144,8 @@ namespace Lis.Monitoring.Manager {
 			this.grdData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.grdData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colDeviceDesc,
-            this.colParamDesc,
             this.colDate,
+            this.colParamDesc,
             this.colValue});
 			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
 			dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
@@ -146,6 +157,7 @@ namespace Lis.Monitoring.Manager {
 			this.grdData.DefaultCellStyle = dataGridViewCellStyle3;
 			this.grdData.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.grdData.Location = new System.Drawing.Point(0, 0);
+			this.grdData.MultiSelect = false;
 			this.grdData.Name = "grdData";
 			this.grdData.ReadOnly = true;
 			this.grdData.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
@@ -162,8 +174,8 @@ namespace Lis.Monitoring.Manager {
 			this.grdData.Size = new System.Drawing.Size(910, 606);
 			this.grdData.TabIndex = 8;
 			this.grdData.DataSourceChanged += new System.EventHandler(this.grdData_DataSourceChanged);
-			this.grdData.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.grdData_CellFormatting);
 			this.grdData.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.grdData_RowPrePaint);
+			this.grdData.SelectionChanged += new System.EventHandler(this.grdData_SelectionChanged);
 			this.grdData.Click += new System.EventHandler(this.grdData_Click);
 			// 
 			// edtLog
@@ -205,14 +217,6 @@ namespace Lis.Monitoring.Manager {
 			this.colDeviceDesc.Name = "colDeviceDesc";
 			this.colDeviceDesc.ReadOnly = true;
 			// 
-			// colParamDesc
-			// 
-			this.colParamDesc.DataPropertyName = "ParamDesc";
-			this.colParamDesc.HeaderText = "Parametr";
-			this.colParamDesc.Name = "colParamDesc";
-			this.colParamDesc.ReadOnly = true;
-			this.colParamDesc.Width = 150;
-			// 
 			// colDate
 			// 
 			this.colDate.DataPropertyName = "Inserted";
@@ -220,6 +224,14 @@ namespace Lis.Monitoring.Manager {
 			this.colDate.Name = "colDate";
 			this.colDate.ReadOnly = true;
 			this.colDate.Width = 120;
+			// 
+			// colParamDesc
+			// 
+			this.colParamDesc.DataPropertyName = "ParamDesc";
+			this.colParamDesc.HeaderText = "Parametr";
+			this.colParamDesc.Name = "colParamDesc";
+			this.colParamDesc.ReadOnly = true;
+			this.colParamDesc.Width = 150;
 			// 
 			// colValue
 			// 
@@ -233,17 +245,6 @@ namespace Lis.Monitoring.Manager {
 			this.colValue.Resizable = System.Windows.Forms.DataGridViewTriState.True;
 			this.colValue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.colValue.Width = 150;
-			// 
-			// btnCsvExport
-			// 
-			this.btnCsvExport.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			this.btnCsvExport.Location = new System.Drawing.Point(182, 2);
-			this.btnCsvExport.Name = "btnCsvExport";
-			this.btnCsvExport.Size = new System.Drawing.Size(83, 28);
-			this.btnCsvExport.TabIndex = 13;
-			this.btnCsvExport.Text = "CSV";
-			this.btnCsvExport.UseVisualStyleBackColor = true;
-			this.btnCsvExport.Click += new System.EventHandler(this.btnCsvExport_Click);
 			// 
 			// MainForm
 			// 
@@ -283,11 +284,11 @@ namespace Lis.Monitoring.Manager {
 		private System.Windows.Forms.Label labLoggedUser;
 		private System.Windows.Forms.StatusStrip statusStrip1;
 		private System.Windows.Forms.ToolStripStatusLabel labStatusInfo;
-		private System.Windows.Forms.DataGridViewTextBoxColumn colDeviceDesc;
-		private System.Windows.Forms.DataGridViewTextBoxColumn colParamDesc;
-		private System.Windows.Forms.DataGridViewTextBoxColumn colDate;
-		private System.Windows.Forms.DataGridViewTextBoxColumn colValue;
 		private System.Windows.Forms.Button btnCsvExport;
+		private System.Windows.Forms.DataGridViewTextBoxColumn colDeviceDesc;
+		private System.Windows.Forms.DataGridViewTextBoxColumn colDate;
+		private System.Windows.Forms.DataGridViewTextBoxColumn colParamDesc;
+		private System.Windows.Forms.DataGridViewTextBoxColumn colValue;
 	}
 }
 

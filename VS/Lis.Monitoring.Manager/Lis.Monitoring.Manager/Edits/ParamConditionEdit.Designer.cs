@@ -31,10 +31,10 @@ namespace Lis.Monitoring.Manager.Edits {
 			this.label3 = new System.Windows.Forms.Label();
 			this.cmbOperatorNumeric = new System.Windows.Forms.ComboBox();
 			this.pnlTextValue = new System.Windows.Forms.Panel();
+			this.edtValueText = new System.Windows.Forms.TextBox();
 			this.label4 = new System.Windows.Forms.Label();
 			this.label5 = new System.Windows.Forms.Label();
 			this.cmbOperatorText = new System.Windows.Forms.ComboBox();
-			this.edtValueText = new System.Windows.Forms.TextBox();
 			this.pnlNumericValue.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.edtValueNumeric)).BeginInit();
 			this.pnlTextValue.SuspendLayout();
@@ -42,12 +42,12 @@ namespace Lis.Monitoring.Manager.Edits {
 			// 
 			// btnSave
 			// 
-			this.btnSave.Location = new System.Drawing.Point(125, 141);
+			this.btnSave.Location = new System.Drawing.Point(125, 98);
 			this.btnSave.TabIndex = 2;
 			// 
 			// btnStorno
 			// 
-			this.btnStorno.Location = new System.Drawing.Point(214, 141);
+			this.btnStorno.Location = new System.Drawing.Point(214, 98);
 			this.btnStorno.TabIndex = 3;
 			// 
 			// label2
@@ -83,9 +83,19 @@ namespace Lis.Monitoring.Manager.Edits {
 			// edtValueNumeric
 			// 
 			this.edtValueNumeric.DecimalPlaces = 1;
+			this.edtValueNumeric.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
 			this.edtValueNumeric.Location = new System.Drawing.Point(138, 23);
+			this.edtValueNumeric.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
 			this.edtValueNumeric.Minimum = new decimal(new int[] {
-            100,
+            1000,
             0,
             0,
             -2147483648});
@@ -93,6 +103,7 @@ namespace Lis.Monitoring.Manager.Edits {
 			this.edtValueNumeric.Size = new System.Drawing.Size(139, 20);
 			this.edtValueNumeric.TabIndex = 23;
 			this.edtValueNumeric.ValueChanged += new System.EventHandler(this.edit_TextChanged);
+			this.edtValueNumeric.KeyUp += new System.Windows.Forms.KeyEventHandler(this.edtValueNumeric_KeyUp);
 			// 
 			// label3
 			// 
@@ -119,10 +130,18 @@ namespace Lis.Monitoring.Manager.Edits {
 			this.pnlTextValue.Controls.Add(this.label4);
 			this.pnlTextValue.Controls.Add(this.label5);
 			this.pnlTextValue.Controls.Add(this.cmbOperatorText);
-			this.pnlTextValue.Location = new System.Drawing.Point(12, 84);
+			this.pnlTextValue.Location = new System.Drawing.Point(12, 35);
 			this.pnlTextValue.Name = "pnlTextValue";
 			this.pnlTextValue.Size = new System.Drawing.Size(290, 54);
 			this.pnlTextValue.TabIndex = 24;
+			// 
+			// edtValueText
+			// 
+			this.edtValueText.Location = new System.Drawing.Point(138, 22);
+			this.edtValueText.Name = "edtValueText";
+			this.edtValueText.Size = new System.Drawing.Size(139, 20);
+			this.edtValueText.TabIndex = 26;
+			this.edtValueText.TextChanged += new System.EventHandler(this.edit_TextChanged);
 			// 
 			// label4
 			// 
@@ -153,29 +172,21 @@ namespace Lis.Monitoring.Manager.Edits {
 			this.cmbOperatorText.TabIndex = 22;
 			this.cmbOperatorText.SelectedIndexChanged += new System.EventHandler(this.edit_TextChanged);
 			// 
-			// edtValueText
-			// 
-			this.edtValueText.Location = new System.Drawing.Point(138, 22);
-			this.edtValueText.Name = "edtValueText";
-			this.edtValueText.Size = new System.Drawing.Size(139, 20);
-			this.edtValueText.TabIndex = 26;
-			this.edtValueText.TextChanged += new System.EventHandler(this.edit_TextChanged);
-			// 
 			// ParamConditionEdit
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(313, 176);
-			this.Controls.Add(this.pnlTextValue);
+			this.ClientSize = new System.Drawing.Size(313, 133);
 			this.Controls.Add(this.pnlNumericValue);
 			this.Controls.Add(this.label2);
+			this.Controls.Add(this.pnlTextValue);
 			this.Name = "ParamConditionEdit";
 			this.Text = "Změna zařízení";
+			this.Controls.SetChildIndex(this.pnlTextValue, 0);
 			this.Controls.SetChildIndex(this.btnSave, 0);
 			this.Controls.SetChildIndex(this.btnStorno, 0);
 			this.Controls.SetChildIndex(this.label2, 0);
 			this.Controls.SetChildIndex(this.pnlNumericValue, 0);
-			this.Controls.SetChildIndex(this.pnlTextValue, 0);
 			this.pnlNumericValue.ResumeLayout(false);
 			this.pnlNumericValue.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.edtValueNumeric)).EndInit();

@@ -345,14 +345,19 @@ namespace WinFormsApp1 {
 			//	//RequestData(new byte[] { 0xaa, 0x55, 0x5a }, client);
 			//	//return;
 
-			//	IStreamResource streamResource = new StreamModbus();
+			IStreamResource streamResource = new StreamModbus();
 
 
-			//	ModbusFactory modbusFactory = new ModbusFactory();
+			ModbusFactory modbusFactory = new ModbusFactory();
 
-			//	IModbusSerialMaster modbusSerialMaster = modbusFactory.CreateRtuMaster(streamResource);
-			//	modbusSerialMaster.ReadInputRegisters(1, 1011, 1);
+			IModbusSerialMaster modbusSerialMaster = modbusFactory.CreateRtuMaster(streamResource);
+			try {
+				//modbusSerialMaster.ReadHoldingRegisters(1, 1900, 4);
+				modbusSerialMaster.ReadInputRegisters(1, 1032, 4);
+			} catch {
 
+			}
+			edtModbusData.Text = (streamResource as StreamModbus).write;
 			//	IModbusMaster modbusMaster = modbusFactory.CreateMaster(client);
 
 			//	client.Connect(edtModbusIp.Text, (int)edtModbusPort.Value);
@@ -409,7 +414,8 @@ namespace WinFormsApp1 {
 			if(data != null) {
 				//edtLog.Text = BitConverter.ToString(data).Replace("-", "");
 
-				edtLog.Text += Environment.NewLine + Encoding.ASCII.GetString(data);
+				//edtLog.Text += Environment.NewLine + Encoding.ASCII.GetString(data);
+				edtLog.Text += Environment.NewLine + BitConverter.ToString(data).Replace("-", "");
 			} else {
 				//edtLog.Text = BitConverter.ToString(data).Replace("-", "");
 
@@ -464,7 +470,7 @@ namespace WinFormsApp1 {
 		private void button4_Click(object sender, EventArgs e) {
 			SerialPort _serialPort = new SerialPort();
 
-			_serialPort.PortName = edtComPort.Text;
+			//_serialPort.PortName = edtModAdr.Text;
 			_serialPort.BaudRate = 19200;// SetPortBaudRate(_serialPort.BaudRate);
 			_serialPort.Parity = Parity.Even;
 			//_serialPort.DataBits = SetPortDataBits(_serialPort.DataBits);
@@ -561,6 +567,7 @@ namespace WinFormsApp1 {
 			public void Write(byte[] buffer, int offset, int count) {
 				writeByte = buffer;
 				write = BitConverter.ToString(buffer).Replace("-", "");// Encoding.ASCII.GetString(buffer);
+				read = "AAAA";
 			}
 		}
 	}

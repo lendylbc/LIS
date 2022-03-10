@@ -128,5 +128,9 @@ namespace Lis.Monitoring.Manager.Edits {
 			}
 			return _errors.Count == 0;			
 		}
+
+		private void edtValueNumeric_KeyUp(object sender, KeyEventArgs e) {
+			ComponentModified();
+		}
 	}
 }

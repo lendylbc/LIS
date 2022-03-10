@@ -37,6 +37,11 @@
 	export default {
 		computed: {
 			...mapGetters(["isLoggedIn"])
+		},
+		beforeCreate() {
+			if (!this.$store.state.isLoggedIn) {
+				this.$router.push("/login");
+			}
 		}
 	};
 </script>

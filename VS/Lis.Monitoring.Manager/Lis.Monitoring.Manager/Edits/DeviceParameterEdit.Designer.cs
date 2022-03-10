@@ -32,9 +32,10 @@ namespace Lis.Monitoring.Manager.Edits {
 			this.edtAddress = new System.Windows.Forms.TextBox();
 			this.edtUnit = new System.Windows.Forms.TextBox();
 			this.labMultiplier = new System.Windows.Forms.Label();
-			this.edtMultiplier = new System.Windows.Forms.MaskedTextBox();
 			this.label5 = new System.Windows.Forms.Label();
 			this.cmbValueType = new System.Windows.Forms.ComboBox();
+			this.edtMultiplier = new System.Windows.Forms.NumericUpDown();
+			((System.ComponentModel.ISupportInitialize)(this.edtMultiplier)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// btnSave
@@ -125,16 +126,6 @@ namespace Lis.Monitoring.Manager.Edits {
 			this.labMultiplier.TabIndex = 26;
 			this.labMultiplier.Text = "Násobitel";
 			// 
-			// edtMultiplier
-			// 
-			this.edtMultiplier.Location = new System.Drawing.Point(108, 104);
-			this.edtMultiplier.Mask = "00000";
-			this.edtMultiplier.Name = "edtMultiplier";
-			this.edtMultiplier.PromptChar = ' ';
-			this.edtMultiplier.Size = new System.Drawing.Size(100, 20);
-			this.edtMultiplier.TabIndex = 3;
-			this.edtMultiplier.TextChanged += new System.EventHandler(this.edit_TextChanged);
-			// 
 			// label5
 			// 
 			this.label5.AutoSize = true;
@@ -154,15 +145,39 @@ namespace Lis.Monitoring.Manager.Edits {
 			this.cmbValueType.TabIndex = 27;
 			this.cmbValueType.SelectedIndexChanged += new System.EventHandler(this.edit_TextChanged);
 			// 
+			// edtMultiplier
+			// 
+			this.edtMultiplier.DecimalPlaces = 2;
+			this.edtMultiplier.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+			this.edtMultiplier.Location = new System.Drawing.Point(111, 104);
+			this.edtMultiplier.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+			this.edtMultiplier.Name = "edtMultiplier";
+			this.edtMultiplier.Size = new System.Drawing.Size(82, 20);
+			this.edtMultiplier.TabIndex = 104;
+			this.edtMultiplier.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.edtMultiplier.ValueChanged += new System.EventHandler(this.edit_TextChanged);
+			// 
 			// DeviceParameterEdit
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(296, 210);
+			this.Controls.Add(this.edtMultiplier);
 			this.Controls.Add(this.label5);
 			this.Controls.Add(this.cmbValueType);
 			this.Controls.Add(this.labMultiplier);
-			this.Controls.Add(this.edtMultiplier);
 			this.Controls.Add(this.edtUnit);
 			this.Controls.Add(this.edtAddress);
 			this.Controls.Add(this.label4);
@@ -181,10 +196,11 @@ namespace Lis.Monitoring.Manager.Edits {
 			this.Controls.SetChildIndex(this.label4, 0);
 			this.Controls.SetChildIndex(this.edtAddress, 0);
 			this.Controls.SetChildIndex(this.edtUnit, 0);
-			this.Controls.SetChildIndex(this.edtMultiplier, 0);
 			this.Controls.SetChildIndex(this.labMultiplier, 0);
 			this.Controls.SetChildIndex(this.cmbValueType, 0);
 			this.Controls.SetChildIndex(this.label5, 0);
+			this.Controls.SetChildIndex(this.edtMultiplier, 0);
+			((System.ComponentModel.ISupportInitialize)(this.edtMultiplier)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -199,8 +215,8 @@ namespace Lis.Monitoring.Manager.Edits {
 		private System.Windows.Forms.TextBox edtAddress;
 		private System.Windows.Forms.TextBox edtUnit;
 		private System.Windows.Forms.Label labMultiplier;
-		private System.Windows.Forms.MaskedTextBox edtMultiplier;
 		private System.Windows.Forms.Label label5;
 		private System.Windows.Forms.ComboBox cmbValueType;
+		private System.Windows.Forms.NumericUpDown edtMultiplier;
 	}
 }

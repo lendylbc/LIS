@@ -35,7 +35,7 @@ namespace Lis.Monitoring.Api.Authentication {
 							new Claim(ClaimTypes.Surname, member.Surname),
 							new Claim(ClaimTypes.Email, member.Email)
 					  }),
-				Expires = DateTime.UtcNow.AddHours(1),
+				Expires = DateTime.UtcNow.AddHours(10),
 				SigningCredentials = new SigningCredentials(
 					  new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature)
 			};

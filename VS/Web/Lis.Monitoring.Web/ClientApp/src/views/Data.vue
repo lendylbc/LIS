@@ -1,23 +1,7 @@
 ﻿<template>
 	<div class="data">
 		<img alt="LIS logo" src="../assets/logo.png">
-		<div>
-			<button class="btn btn-primary btn-lg" data-bs-target="#collapseTarget" data-bs-toggle="collapse">
-				Test zabalení
-			</button>
-			<div class="collapse py-2" id="collapseTarget">
-				<div class="alert alert-success">
-					<strong>Úspěšně!</strong> Indikace stavů.
-				</div>
-				<div class="alert alert-info">
-					<strong>Info!</strong> Informace.
-				</div>
-				<div class="alert alert-danger">
-					<strong>Chyba!</strong> Pozor pozor!!!
-				</div>
-			</div>
-		</div>		
-		<br />
+		
 		<div v-if="isError">
 			<div class="alert alert-danger">
 				<strong>Chyba!</strong> Chyba načtení dat!!!
@@ -34,6 +18,7 @@
 	// @ is an alias to /src
 	import DataGrid from '@/components/DataGrid.vue'
 	import apiClient from '@/common/httpCommon.js';
+	import { mapGetters } from "vuex";
 	export default {
 		name: 'Data',
 		components: {
@@ -51,14 +36,19 @@
 		},
 		methods: {
 
-			fortmatResponse(res) {
+			formatResponse(res) {
 				return JSON.stringify(res.data, null, 2);
 			},
 
 			async getAllData() {
 				try {
 					this.isLoading = true;
-					const res = await apiClient.get("Device/GetActiveDeviceLastData");
+					let token = JSON.parse(localStorage.getItem('token'));
+					const res = await apiClient.get("DeviceData/GetLastDataAllActiveDevices", {
+						headers: {
+							Authorization: `Bearer ` + token
+						}
+					});
 
 					const result = {
 						status: res.status + "-" + res.statusText,
@@ -66,14 +56,15 @@
 						data: res.data,
 					};
 
-					this.getResult = this.fortmatResponse(result);
+					this.getResult = this.formatResponse(result);
 					var json = JSON.parse(this.getResult);
 					this.page = json["page"];
 					this.size = json["size"];
 					this.gridData = json["data"];
 				} catch (err) {
 					this.isError = true;
-					this.getResult = this.fortmatResponse(err.response?.data) || err;
+					this.getResult = this.formatResponse(err.response?.data) || err;
+					this.$router.push("/login");
 				} finally {
 					this.isLoading = false;
 				}
@@ -83,6 +74,9 @@
 		mounted() {
 			this.getAllData();
 			this.timer = setInterval(this.getAllData, 60000);
+		},
+		computed: {
+			...mapGetters(["getToken"])
 		}
 	}
 </script>

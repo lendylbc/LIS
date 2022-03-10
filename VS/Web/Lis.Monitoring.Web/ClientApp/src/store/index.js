@@ -21,5 +21,8 @@ export default createStore({
         isLoggedIn(state) {
             return !!state.token;
         },
+        getToken(state) {
+            return state.token;
+        },
     },
 })

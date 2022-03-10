@@ -43,6 +43,7 @@ namespace Lis.Monitoring.Manager.Dialos {
 			this.btnOk.ForeColor = System.Drawing.Color.MidnightBlue;
 			this.btnOk.Location = new System.Drawing.Point(16, 98);
 			this.btnOk.Size = new System.Drawing.Size(176, 28);
+			this.btnOk.TabIndex = 2;
 			this.btnOk.Text = "Přihlásit se";
 			// 
 			// btnStorno
@@ -52,6 +53,7 @@ namespace Lis.Monitoring.Manager.Dialos {
 			this.btnStorno.ForeColor = System.Drawing.Color.DimGray;
 			this.btnStorno.Location = new System.Drawing.Point(16, 132);
 			this.btnStorno.Size = new System.Drawing.Size(176, 28);
+			this.btnStorno.TabIndex = 3;
 			this.btnStorno.Text = "Zavřít";
 			// 
 			// label1
@@ -69,8 +71,7 @@ namespace Lis.Monitoring.Manager.Dialos {
 			this.edtLogin.MaxLength = 30;
 			this.edtLogin.Name = "edtLogin";
 			this.edtLogin.Size = new System.Drawing.Size(176, 20);
-			this.edtLogin.TabIndex = 7;
-			this.edtLogin.Text = "LENDY";
+			this.edtLogin.TabIndex = 0;
 			// 
 			// edtPassword
 			// 
@@ -80,8 +81,7 @@ namespace Lis.Monitoring.Manager.Dialos {
 			this.edtPassword.Name = "edtPassword";
 			this.edtPassword.PasswordChar = '*';
 			this.edtPassword.Size = new System.Drawing.Size(176, 20);
-			this.edtPassword.TabIndex = 9;
-			this.edtPassword.Text = "admin";
+			this.edtPassword.TabIndex = 1;
 			// 
 			// label2
 			// 
@@ -126,6 +126,7 @@ namespace Lis.Monitoring.Manager.Dialos {
 			// 
 			// LoginDialog
 			// 
+			this.AcceptButton = this.btnOk;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.SystemColors.Control;
@@ -139,6 +140,7 @@ namespace Lis.Monitoring.Manager.Dialos {
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "LoginDialog";
 			this.Text = "Přihlášení uživatele";
+			this.Load += new System.EventHandler(this.LoginDialog_Load);
 			this.Controls.SetChildIndex(this.panel1, 0);
 			this.Controls.SetChildIndex(this.btnOk, 0);
 			this.Controls.SetChildIndex(this.btnStorno, 0);

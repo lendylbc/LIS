@@ -2,33 +2,26 @@
 	<div class="container">
 		<div class="row">
 			<h2>{{ msg }}</h2>
-		</div>
-		<div class="row">
-			<div class="col">
-			</div>
-			<div class="col">
-				<table class="table table-striped" style="width: 30%">
-					<tr class="table-color">
-						<th class="align-left">Popis zařízení</th>
-						<th class="align-left">Parametr</th>
-						<th class="align-left">Datum odečtu</th>
-						<th class="align-right">Hodnota</th>
-					</tr>
-					<tr class="table-color table-active-color" :style="[item.errorDetected ? {'background': '#dc3545'} : {'background': '#198754'}] " v-for="item in gridData" v-bind:key="item.id">
-						<td class="align-left">{{item.deviceDesc}}</td>
-						<td class="align-left">{{item.paramDesc}}</td>
-						<td class="align-right">{{item.inserted}}</td>
-						<td class="align-right">{{ValueUnitData(item)}}</td>						
-					</tr>
-				</table>
-			</div>
-			<div class="col">
-			</div>
-		</div>
+		</div>		
 	</div>
+	<table class="table center">
+		<tr class="table-active-color">
+			<th nowrap class="align-left">Popis zařízení</th>
+			<th nowrap class="align-left">Parametr</th>
+			<th nowrap class="align-right">Datum odečtu </th>
+			<th nowrap class="align-right">Hodnota</th>
+		</tr>
+		<tr class="table-active-color" :style="[item.errorDetected ? {'background': '#dc3545'} : {'background': '#198754'}] " v-for="item in gridData" v-bind:key="item.id">
+			<td nowrap class="align-left">{{item.deviceDesc}}</td>
+			<td nowrap class="align-left">{{item.paramDesc}}</td>
+			<td nowrap class="align-right">{{dateFormat(item.inserted)}}</td>
+			<td nowrap class="align-right">{{ValueUnitData(item)}}</td>
+		</tr>
+	</table>
 </template>
 
 <script>
+	import moment from 'moment'
 	export default {
 		name: 'DataGrid',
 		props: {
@@ -38,7 +31,7 @@
 		data() {
 		},
 		methods: {
-			ValueUnitData(item) {
+			ValueUnitData(item) {				
 				if (item.valueType == 1) {
 					return item.value == null ? "" : item.value + item.unit;
 				} else if (item.valueType == 2) {
@@ -46,8 +39,15 @@
 				} else {
 					return "";
 				}
+			},
+			dateFormat(date) {
+				if (date == null) {
+					return ""
+				} else {
+					return moment(date).format("DD.MM.YYYY HH:mm");
+				}
 			}
-		}
+		},		
 	}
 </script>
 
@@ -69,5 +69,11 @@
 
 	a {
 		color: #42b983;
+	}
+
+	.center {
+		margin-left: auto;
+		margin-right: auto;
+		width: 80%;
 	}
 </style>

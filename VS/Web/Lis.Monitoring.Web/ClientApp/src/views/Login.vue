@@ -22,7 +22,7 @@
 </template>
 
 <script>
-	import { mapMutations } from "vuex";
+	import { mapMutations } from "vuex";	
 	export default {
 		data: () => {
 			return {
@@ -48,7 +48,8 @@
 				if (token != null) {
 					this.setUser(user);
 					this.setToken(token);
-					this.$router.push("/data");
+					localStorage.setItem('token', JSON.stringify(token));
+					this.$router.push("/data");					
 				}
 			},
 		},

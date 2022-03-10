@@ -42,7 +42,11 @@ namespace Lis.Monitoring.Manager.Edits {
 				edtDescription.Text = _deviceParameter.Description;
 				edtAddress.Text = _deviceParameter.Address;
 				edtUnit.Text = _deviceParameter.Unit;
-				edtMultiplier.Text = _deviceParameter.Multiplier.ToString();
+				if(_deviceParameter.Multiplier != null) {
+					edtMultiplier.Value = (decimal)_deviceParameter.Multiplier;
+				} else {
+					edtMultiplier.Value = 0;
+				}
 				chkActive.Checked = _deviceParameter.Active;
 
 				string description = ((Shared.Enums.ValueType)_deviceParameter.ValueType).ToDescriptionString();
@@ -70,15 +74,7 @@ namespace Lis.Monitoring.Manager.Edits {
 				_deviceParameter.Address = edtAddress.Text;
 				_deviceParameter.Unit = edtUnit.Text;
 
-				if(string.IsNullOrEmpty(edtMultiplier.Text)) {
-					_deviceParameter.Multiplier = null;
-				} else {
-					try {
-						_deviceParameter.Multiplier = Convert.ToInt32(edtMultiplier.Text);
-					} catch {
-						_deviceParameter.Multiplier = null;
-					}
-				}
+				_deviceParameter.Multiplier = edtMultiplier.Value;
 
 				Shared.Enums.ValueType valueType = EnumExtensions.GetValueFromDescription<Shared.Enums.ValueType>((string)cmbValueType.SelectedItem);
 
