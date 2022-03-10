@@ -42,9 +42,9 @@ namespace Lis.Monitoring.Services.Aspects {
 			HttpClient client = new HttpClient();
 			try {
 				var responseString = await client.GetStringAsync(request);
-
+				log.Debug("SMS request: " + request);
 			} catch(Exception ex) {
-				log.Error("Error beacon request: " + ex.Message);
+				log.Error("Error SMS request: " + ex.Message);
 			}
 
 			//var client = new RestClient("http://192.168.1.240/set.xml?type=r&id=1");

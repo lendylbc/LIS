@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="NModbus" Version="3.0.72" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Lis.Monitoring.Abstractions\Lis.Monitoring.Abstractions.csproj" />
   </ItemGroup>
 

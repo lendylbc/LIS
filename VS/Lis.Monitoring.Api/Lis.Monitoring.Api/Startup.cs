@@ -91,7 +91,7 @@ namespace Lis.Monitoring.Api {
 			services.AddControllers();
 
 			services.AddCors(options => options.AddPolicy("CorsPolicy",
-				 builder => builder.WithOrigins("https://localhost:44392", "https://localhost:8081", "http://localhost:8081", "https://localhost")
+				 builder => builder.WithOrigins("https://monitor.liberec.cz", "https://localhost:44392", "https://localhost:8081", "http://localhost:8081", "https://localhost")
 					.AllowAnyMethod()
 					.AllowAnyHeader()
 					.AllowCredentials()

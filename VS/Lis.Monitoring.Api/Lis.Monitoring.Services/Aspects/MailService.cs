@@ -53,9 +53,11 @@ namespace Lis.Monitoring.Services.Aspects {
 				SmtpClient client = new SmtpClient(_host, _port) {
 					UseDefaultCredentials = false
 				};
-
+				
 				if(!string.IsNullOrEmpty(_username) || !string.IsNullOrEmpty(_password)) {
 					client.Credentials = new NetworkCredential(_username, _password);
+				} else {
+					client.Credentials = null;
 				}
 
 				MailMessage message = new MailMessage {

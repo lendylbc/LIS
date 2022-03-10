@@ -34,7 +34,7 @@
 			...mapMutations(["setUser", "setToken"]),
 			async login(e) {
 				e.preventDefault();
-				const response = await fetch("https://localhost:44336/api/Member/Authentication", {
+				const response = await fetch("https://dohled.liberec.cz/api/Member/Authentication", {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json",

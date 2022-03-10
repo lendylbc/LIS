@@ -60,7 +60,7 @@ namespace Lis.Monitoring.Services.Aspects {
 										errorConditionExists = true;
 										break;
 									}
-									log.Error($"Device: {param.Device.Description} Cond val: {condition.Value} Value: {value} Result: {errorConditionExists}");
+									log.Debug($"Device: {param.Device.Description} Cond val: {condition.Value} Value: {value} Result: {errorConditionExists}");
 								}
 								if(errorConditionExists) {
 									AddError(param, true, value.ToString());

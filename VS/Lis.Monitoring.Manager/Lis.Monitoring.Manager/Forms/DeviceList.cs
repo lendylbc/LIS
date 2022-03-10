@@ -64,7 +64,7 @@ namespace Lis.Monitoring.Manager.Forms {
 		private void GetDeviceList() {
 			PagedResponse<DeviceDto> result = _apiController.GetDeviceList();
 			if(result != null) {				
-				grdDevices.DataSource = result.Data;
+				grdDevices.DataSource = result.Data.OrderBy(x => x.Description).ToList();
 			} else {
 				grdDevices.DataSource = null;
 			}

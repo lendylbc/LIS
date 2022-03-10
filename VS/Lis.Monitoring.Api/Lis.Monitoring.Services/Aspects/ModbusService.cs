@@ -29,9 +29,9 @@ namespace Lis.Monitoring.Services.Aspects {
 			List<Device> devices = _deviceService.GetAllDevicesWithParams((int)DeviceType.Modbus).ToList();
 
 			foreach(Device device in devices) {
-				List<string> paramOids = device.DeviceParameter.Select(x => x.Address).ToList();
-				if(paramOids.Count > 0) {
-					Dictionary<string, object> deviceData = modbusController.RequestData(device.IpAddress, (int)device.Port, "public", paramOids);//device.Port, device.Community
+				List<string> paramAddress = device.DeviceParameter.Select(x => x.Address).ToList();
+				if(paramAddress.Count > 0) {
+					Dictionary<string, object> deviceData = modbusController.RequestData(device.IpAddress, (int)device.Port, "public", paramAddress);//device.Port, device.Community
 
 					if(deviceData != null) {
 						foreach(KeyValuePair<string, object> data in deviceData) {
@@ -39,8 +39,8 @@ namespace Lis.Monitoring.Services.Aspects {
 							if(parameter != null) {
 								Type typ = data.Value.GetType();
 								decimal value = 0;
-								if(typ.Name.Equals("Integer32")) {
-									value = (decimal)Convert.ToInt32(data.Value.ToString()) / 10;
+								if(typ.Name.Equals("Int32")) {
+									value = (decimal)Convert.ToInt32(data.Value);
 								}
 
 								_deviceParameterDataService.Save(new DeviceParameterData() { DeviceParameterId = parameter.Id, Inserted = DateTime.Now, Value = value });
