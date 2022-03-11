@@ -89,6 +89,7 @@ namespace Lis.Monitoring.Manager.Edits {
 			// 
 			// cmbDeviceType
 			// 
+			this.cmbDeviceType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cmbDeviceType.FormattingEnabled = true;
 			this.cmbDeviceType.Location = new System.Drawing.Point(12, 109);
 			this.cmbDeviceType.Name = "cmbDeviceType";

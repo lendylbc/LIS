@@ -117,6 +117,7 @@ namespace Lis.Monitoring.Manager.Edits {
 			// 
 			// cmbOperatorNumeric
 			// 
+			this.cmbOperatorNumeric.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cmbOperatorNumeric.FormattingEnabled = true;
 			this.cmbOperatorNumeric.Location = new System.Drawing.Point(16, 22);
 			this.cmbOperatorNumeric.Name = "cmbOperatorNumeric";

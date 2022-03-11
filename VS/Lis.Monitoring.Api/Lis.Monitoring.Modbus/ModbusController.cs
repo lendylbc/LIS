@@ -16,6 +16,9 @@ namespace Lis.Monitoring.Modbus {
 
 		public Dictionary<string, object> RequestData(string ip, int port, string community, List<string> addressList) {
 			Dictionary<string, object> result = new Dictionary<string, object>();
+			ushort addressNumber;
+			ushort? addressBit = null;
+			ushort function;
 			byte[] readData = new byte[256];
 			try {
 
@@ -34,8 +37,21 @@ namespace Lis.Monitoring.Modbus {
 
 						IModbusSerialMaster modbusSerialMaster = modbusFactory.CreateRtuMaster(streamResource);
 						try {
-							ushort addressNumber = Convert.ToUInt16(address);
-							modbusSerialMaster.ReadHoldingRegisters(1, addressNumber, 1);
+
+							ParseAddress(address, out addressNumber, out addressBit, out function);
+
+							switch(function) {
+								case 2:
+									modbusSerialMaster.ReadInputs(1, addressNumber, 1);
+									break;
+								case 3:
+									modbusSerialMaster.ReadHoldingRegisters(1, addressNumber, 1);
+									break;
+								case 4:
+									modbusSerialMaster.ReadInputRegisters(1, addressNumber, 4);
+									break;
+							}
+
 							//modbusSerialMaster.ReadInputRegisters(1, 1032, 4);
 						} catch {
 
@@ -43,9 +59,13 @@ namespace Lis.Monitoring.Modbus {
 						if(!string.IsNullOrEmpty((streamResource as StreamModbus).write)) {
 							byte[] commandTestBytes = StringToByteArray((streamResource as StreamModbus).write);
 
-							byte[] data = TcpRequestData(commandTestBytes, client);
+							try {
+								byte[] data = TcpRequestData(commandTestBytes, client);
 
-							result.Add(address, GetModbusValue(ip, address, data));
+								result.Add(address, GetModbusValue(ip, address, addressBit, data));
+							} catch {
+
+							}
 						}
 					}
 
@@ -60,13 +80,48 @@ namespace Lis.Monitoring.Modbus {
 			}
 		}
 
-		private int GetModbusValue(string ip, string address, byte[] data) {
-			if(ip == "172.20.1.86") {
-				if(address == "66")
-				return (int)data[4];
+		private int GetModbusValue(string ip, string address, ushort? addressBit, byte[] data) {
+			if(data != null && data.Length > 0) {
+				//if(ip == "172.20.1.86") {
+				if(address == "66" || address.Contains("66$")) {
+					return (int)data[4];
+				}
+				if(address.Contains("66#") && addressBit != null) {
+					return (int)(data[4] >> addressBit & 1);
+				}
+				if(address.Contains("0#")) {
+					return (int)(data[4] & 0b00000111);
+				}
+				if(address.Contains("1031")) {
+					return (int)data[2];
+				}
+				//}
+				//return data[0];
+			}
+			//throw new Exception("No value");
+			return 0;
+		}
+
+		private void ParseAddress(string address, out ushort addressNumber, out ushort? addressBit, out ushort function) {
+			string addressNoFunc;
+			if(address.Contains("$")) {
+				string[] addrFunction = address.Split("$");
+				addressNoFunc = addrFunction[0];
+				function = Convert.ToUInt16(addrFunction[1]);
+			} else {
+				addressNoFunc = address;
+				function = 3;
 			}
 
-			return 0;
+			if(addressNoFunc.Contains("#")) {
+				string[] addresses = addressNoFunc.Split("#");
+				addressNumber = Convert.ToUInt16(addresses[0]);
+
+				addressBit = Convert.ToUInt16(addresses[1]);
+			} else {
+				addressNumber = Convert.ToUInt16(addressNoFunc);
+				addressBit = null;
+			}
 		}
 
 		private byte[] TcpRequestData(byte[] commandMessage, TcpClient client) {

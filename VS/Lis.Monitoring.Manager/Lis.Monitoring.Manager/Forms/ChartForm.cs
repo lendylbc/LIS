@@ -23,22 +23,27 @@ namespace Lis.Monitoring.Manager.Forms {
 				Series series = new Series("Teplota");
 				series.ChartType = SeriesChartType.Spline;
 				series.Color = Color.Black;
-				chart.ChartAreas[0].AxisY.Maximum = 40;
-			
+				double maxAxisY = 30;
 
 				foreach(DeviceParameterDataDto dataValue in _data) {
 					//series.Points.Add(Decimal.ToDouble(dataValue.Value));
-					series.Points.AddXY(dataValue.Inserted.ToString("HH:mm"), Decimal.ToDouble((decimal)dataValue.Value));
-				}
+					double value = Decimal.ToDouble((decimal)dataValue.Value);
+					series.Points.AddXY(dataValue.Inserted.ToString("HH:mm"), value);
 
+					if(value > maxAxisY) {
+						maxAxisY = value;
+					}
+				}
+				chart.ChartAreas[0].AxisY.Maximum = maxAxisY + 10;
 				//if(chkContClearOldValues.Checked && chart.Series.First().Points.Count > 6 * 200) {
 				//	for(int i = 0; i < 200; i++) {
 				//		chart.Series.First().Points.RemoveAt(i);
 				//	}
 				//}
 
+				series.Color = Color.MidnightBlue;
 
-					chart.Series.Add(series);
+				chart.Series.Add(series);
 			
 
 			} catch {

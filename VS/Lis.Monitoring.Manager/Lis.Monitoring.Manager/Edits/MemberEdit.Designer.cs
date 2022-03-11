@@ -83,6 +83,7 @@ namespace Lis.Monitoring.Manager.Edits {
 			// 
 			// cmbMemberType
 			// 
+			this.cmbMemberType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cmbMemberType.FormattingEnabled = true;
 			this.cmbMemberType.Location = new System.Drawing.Point(10, 268);
 			this.cmbMemberType.Name = "cmbMemberType";

@@ -353,11 +353,28 @@ namespace WinFormsApp1 {
 			IModbusSerialMaster modbusSerialMaster = modbusFactory.CreateRtuMaster(streamResource);
 			try {
 				//modbusSerialMaster.ReadHoldingRegisters(1, 1900, 4);
-				modbusSerialMaster.ReadInputRegisters(1, 1032, 4);
+
+				switch((int)edtModFce.Value) {
+					case 2:
+						modbusSerialMaster.ReadInputs(1, (ushort)edtModAddress.Value, (ushort)edtModPocet.Value);
+						break;
+					case 3:
+						modbusSerialMaster.ReadHoldingRegisters(1, (ushort)edtModAddress.Value, (ushort)edtModPocet.Value);
+						break;
+					case 4:
+						modbusSerialMaster.ReadInputRegisters(1, (ushort)edtModAddress.Value, (ushort)edtModPocet.Value);
+						break;
+				}
+
+				
+				
 			} catch {
 
 			}
 			edtModbusData.Text = (streamResource as StreamModbus).write;
+
+			edtLog.Text += Environment.NewLine + $"Do Edgara Adr: {edtModAddress.Value} Fce: {edtModFce.Value}" + Environment.NewLine + edtModbusData.Text;
+
 			//	IModbusMaster modbusMaster = modbusFactory.CreateMaster(client);
 
 			//	client.Connect(edtModbusIp.Text, (int)edtModbusPort.Value);
@@ -415,7 +432,7 @@ namespace WinFormsApp1 {
 				//edtLog.Text = BitConverter.ToString(data).Replace("-", "");
 
 				//edtLog.Text += Environment.NewLine + Encoding.ASCII.GetString(data);
-				edtLog.Text += Environment.NewLine + BitConverter.ToString(data).Replace("-", "");
+				edtLog.Text += Environment.NewLine + "Z Edgara" + Environment.NewLine + BitConverter.ToString(data).Replace("-", "") + Environment.NewLine;
 			} else {
 				//edtLog.Text = BitConverter.ToString(data).Replace("-", "");
 
@@ -509,9 +526,9 @@ namespace WinFormsApp1 {
 			
 
 		private void Form1_Load(object sender, EventArgs e) {
-				foreach(string s in SerialPort.GetPortNames()) {
-					edtLog.Text += s + Environment.NewLine;
-				}
+				//foreach(string s in SerialPort.GetPortNames()) {
+				//	edtLog.Text += s + Environment.NewLine;
+				//}
 			}
 
 			public string SetPortName(string defaultPortName) {

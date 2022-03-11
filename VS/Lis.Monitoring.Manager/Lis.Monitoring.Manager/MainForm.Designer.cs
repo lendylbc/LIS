@@ -38,14 +38,14 @@ namespace Lis.Monitoring.Manager {
 			this.pnlMain = new System.Windows.Forms.Panel();
 			this.panel3 = new System.Windows.Forms.Panel();
 			this.grdData = new System.Windows.Forms.DataGridView();
-			this.edtLog = new System.Windows.Forms.TextBox();
-			this.timer = new System.Windows.Forms.Timer(this.components);
-			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-			this.labStatusInfo = new System.Windows.Forms.ToolStripStatusLabel();
 			this.colDeviceDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colParamDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.edtLog = new System.Windows.Forms.TextBox();
+			this.timer = new System.Windows.Forms.Timer(this.components);
+			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+			this.labStatusInfo = new System.Windows.Forms.ToolStripStatusLabel();
 			this.panel1.SuspendLayout();
 			this.pnlMain.SuspendLayout();
 			this.panel3.SuspendLayout();
@@ -81,9 +81,9 @@ namespace Lis.Monitoring.Manager {
 			this.labLoggedUser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.labLoggedUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
 			this.labLoggedUser.ForeColor = System.Drawing.Color.MidnightBlue;
-			this.labLoggedUser.Location = new System.Drawing.Point(688, 4);
+			this.labLoggedUser.Location = new System.Drawing.Point(630, 4);
 			this.labLoggedUser.Name = "labLoggedUser";
-			this.labLoggedUser.Size = new System.Drawing.Size(219, 23);
+			this.labLoggedUser.Size = new System.Drawing.Size(277, 23);
 			this.labLoggedUser.TabIndex = 12;
 			this.labLoggedUser.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
@@ -178,37 +178,6 @@ namespace Lis.Monitoring.Manager {
 			this.grdData.SelectionChanged += new System.EventHandler(this.grdData_SelectionChanged);
 			this.grdData.Click += new System.EventHandler(this.grdData_Click);
 			// 
-			// edtLog
-			// 
-			this.edtLog.Dock = System.Windows.Forms.DockStyle.Right;
-			this.edtLog.Location = new System.Drawing.Point(910, 0);
-			this.edtLog.Multiline = true;
-			this.edtLog.Name = "edtLog";
-			this.edtLog.Size = new System.Drawing.Size(0, 606);
-			this.edtLog.TabIndex = 4;
-			// 
-			// timer
-			// 
-			this.timer.Interval = 30000;
-			this.timer.Tick += new System.EventHandler(this.timer_Tick);
-			// 
-			// statusStrip1
-			// 
-			this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.labStatusInfo});
-			this.statusStrip1.Location = new System.Drawing.Point(0, 616);
-			this.statusStrip1.Name = "statusStrip1";
-			this.statusStrip1.Size = new System.Drawing.Size(910, 22);
-			this.statusStrip1.TabIndex = 8;
-			this.statusStrip1.Text = "statusStrip1";
-			// 
-			// labStatusInfo
-			// 
-			this.labStatusInfo.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-			this.labStatusInfo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-			this.labStatusInfo.Name = "labStatusInfo";
-			this.labStatusInfo.Size = new System.Drawing.Size(0, 17);
-			// 
 			// colDeviceDesc
 			// 
 			this.colDeviceDesc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -245,6 +214,37 @@ namespace Lis.Monitoring.Manager {
 			this.colValue.Resizable = System.Windows.Forms.DataGridViewTriState.True;
 			this.colValue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			this.colValue.Width = 150;
+			// 
+			// edtLog
+			// 
+			this.edtLog.Dock = System.Windows.Forms.DockStyle.Right;
+			this.edtLog.Location = new System.Drawing.Point(910, 0);
+			this.edtLog.Multiline = true;
+			this.edtLog.Name = "edtLog";
+			this.edtLog.Size = new System.Drawing.Size(0, 606);
+			this.edtLog.TabIndex = 4;
+			// 
+			// timer
+			// 
+			this.timer.Interval = 30000;
+			this.timer.Tick += new System.EventHandler(this.timer_Tick);
+			// 
+			// statusStrip1
+			// 
+			this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.labStatusInfo});
+			this.statusStrip1.Location = new System.Drawing.Point(0, 616);
+			this.statusStrip1.Name = "statusStrip1";
+			this.statusStrip1.Size = new System.Drawing.Size(910, 22);
+			this.statusStrip1.TabIndex = 8;
+			this.statusStrip1.Text = "statusStrip1";
+			// 
+			// labStatusInfo
+			// 
+			this.labStatusInfo.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+			this.labStatusInfo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+			this.labStatusInfo.Name = "labStatusInfo";
+			this.labStatusInfo.Size = new System.Drawing.Size(0, 17);
 			// 
 			// MainForm
 			// 

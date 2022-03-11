@@ -30,7 +30,7 @@ namespace Lis.Monitoring.Manager {
 		}
 
 		private void Init() {
-			labLoggedUser.Text = _member.Login;
+			labLoggedUser.Text = $"{_apiController.Member.Name} {_apiController.Member.Surname}";// _member.Login;
 			grdData.AutoGenerateColumns = false;
 		}
 
@@ -140,8 +140,8 @@ namespace Lis.Monitoring.Manager {
 			DeviceParameterDataQuery query = new DeviceParameterDataQuery();
 
 			query.DeviceParameterId = data.ParamId;
-			query.DateTimeFrom = DateTime.Now.AddHours(-2);
-			query.DateTimeTo = DateTime.Now.AddHours(1);
+			query.DateTimeFrom = DateTime.Now.AddHours(-5);
+			query.DateTimeTo = DateTime.Now;
 
 			PagedResponse<DeviceParameterDataDto> result = _apiController.GetFilteredDeviceData(query);
 			if(result != null) {

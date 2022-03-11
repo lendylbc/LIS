@@ -138,6 +138,7 @@ namespace Lis.Monitoring.Manager.Edits {
 			// 
 			// cmbValueType
 			// 
+			this.cmbValueType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cmbValueType.FormattingEnabled = true;
 			this.cmbValueType.Location = new System.Drawing.Point(12, 143);
 			this.cmbValueType.Name = "cmbValueType";

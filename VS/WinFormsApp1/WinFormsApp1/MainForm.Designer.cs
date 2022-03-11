@@ -38,8 +38,13 @@ namespace WinFormsApp1 {
 			this.btnTme = new System.Windows.Forms.Button();
 			this.btnQuido = new System.Windows.Forms.Button();
 			this.panel6 = new System.Windows.Forms.Panel();
-			this.button3 = new System.Windows.Forms.Button();
 			this.groupBox3 = new System.Windows.Forms.GroupBox();
+			this.label3 = new System.Windows.Forms.Label();
+			this.edtModPocet = new System.Windows.Forms.NumericUpDown();
+			this.label2 = new System.Windows.Forms.Label();
+			this.label1 = new System.Windows.Forms.Label();
+			this.edtModFce = new System.Windows.Forms.NumericUpDown();
+			this.edtModAddress = new System.Windows.Forms.NumericUpDown();
 			this.button4 = new System.Windows.Forms.Button();
 			this.radioButton1 = new System.Windows.Forms.RadioButton();
 			this.edtModbusData = new System.Windows.Forms.TextBox();
@@ -54,13 +59,12 @@ namespace WinFormsApp1 {
 			this.edtSnmpIp = new System.Windows.Forms.TextBox();
 			this.btnSendReq = new System.Windows.Forms.Button();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.button3 = new System.Windows.Forms.Button();
 			this.rbtnSick = new System.Windows.Forms.RadioButton();
 			this.edtSickCommand = new System.Windows.Forms.TextBox();
 			this.edtSickPort = new System.Windows.Forms.NumericUpDown();
 			this.edtSickIp = new System.Windows.Forms.TextBox();
 			this.btnSick = new System.Windows.Forms.Button();
-			this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-			this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
 			this.panel1.SuspendLayout();
 			this.panel2.SuspendLayout();
 			this.panel3.SuspendLayout();
@@ -68,14 +72,15 @@ namespace WinFormsApp1 {
 			this.panel5.SuspendLayout();
 			this.panel6.SuspendLayout();
 			this.groupBox3.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.edtModPocet)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.edtModFce)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.edtModAddress)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.edtModbusPort)).BeginInit();
 			this.groupBox2.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.edtSnmpPort)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.edtSnmpCount)).BeginInit();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.edtSickPort)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// timer1
@@ -200,7 +205,6 @@ namespace WinFormsApp1 {
 			// 
 			// panel6
 			// 
-			this.panel6.Controls.Add(this.button3);
 			this.panel6.Controls.Add(this.groupBox3);
 			this.panel6.Controls.Add(this.groupBox2);
 			this.panel6.Controls.Add(this.groupBox1);
@@ -210,20 +214,14 @@ namespace WinFormsApp1 {
 			this.panel6.Size = new System.Drawing.Size(336, 450);
 			this.panel6.TabIndex = 16;
 			// 
-			// button3
-			// 
-			this.button3.Location = new System.Drawing.Point(224, 257);
-			this.button3.Name = "button3";
-			this.button3.Size = new System.Drawing.Size(75, 23);
-			this.button3.TabIndex = 18;
-			this.button3.Text = "SMTP test";
-			this.button3.UseVisualStyleBackColor = true;
-			this.button3.Click += new System.EventHandler(this.button3_Click);
-			// 
 			// groupBox3
 			// 
-			this.groupBox3.Controls.Add(this.numericUpDown2);
-			this.groupBox3.Controls.Add(this.numericUpDown1);
+			this.groupBox3.Controls.Add(this.label3);
+			this.groupBox3.Controls.Add(this.edtModPocet);
+			this.groupBox3.Controls.Add(this.label2);
+			this.groupBox3.Controls.Add(this.label1);
+			this.groupBox3.Controls.Add(this.edtModFce);
+			this.groupBox3.Controls.Add(this.edtModAddress);
 			this.groupBox3.Controls.Add(this.button4);
 			this.groupBox3.Controls.Add(this.radioButton1);
 			this.groupBox3.Controls.Add(this.edtModbusData);
@@ -232,10 +230,88 @@ namespace WinFormsApp1 {
 			this.groupBox3.Controls.Add(this.btnModbus);
 			this.groupBox3.Location = new System.Drawing.Point(10, 99);
 			this.groupBox3.Name = "groupBox3";
-			this.groupBox3.Size = new System.Drawing.Size(316, 152);
+			this.groupBox3.Size = new System.Drawing.Size(316, 179);
 			this.groupBox3.TabIndex = 17;
 			this.groupBox3.TabStop = false;
 			this.groupBox3.Text = "MODBUS";
+			// 
+			// label3
+			// 
+			this.label3.AutoSize = true;
+			this.label3.Location = new System.Drawing.Point(197, 133);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(37, 15);
+			this.label3.TabIndex = 23;
+			this.label3.Text = "Počet";
+			// 
+			// edtModPocet
+			// 
+			this.edtModPocet.Location = new System.Drawing.Point(199, 150);
+			this.edtModPocet.Maximum = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+			this.edtModPocet.Name = "edtModPocet";
+			this.edtModPocet.Size = new System.Drawing.Size(36, 23);
+			this.edtModPocet.TabIndex = 22;
+			this.edtModPocet.Value = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+			// 
+			// label2
+			// 
+			this.label2.AutoSize = true;
+			this.label2.Location = new System.Drawing.Point(272, 87);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(25, 15);
+			this.label2.TabIndex = 21;
+			this.label2.Text = "Fce";
+			// 
+			// label1
+			// 
+			this.label1.AutoSize = true;
+			this.label1.Location = new System.Drawing.Point(199, 87);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(43, 15);
+			this.label1.TabIndex = 20;
+			this.label1.Text = "Adresa";
+			// 
+			// edtModFce
+			// 
+			this.edtModFce.Location = new System.Drawing.Point(274, 104);
+			this.edtModFce.Maximum = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+			this.edtModFce.Name = "edtModFce";
+			this.edtModFce.Size = new System.Drawing.Size(36, 23);
+			this.edtModFce.TabIndex = 19;
+			this.edtModFce.Value = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+			// 
+			// edtModAddress
+			// 
+			this.edtModAddress.Location = new System.Drawing.Point(199, 105);
+			this.edtModAddress.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+			this.edtModAddress.Name = "edtModAddress";
+			this.edtModAddress.Size = new System.Drawing.Size(69, 23);
+			this.edtModAddress.TabIndex = 18;
+			this.edtModAddress.Value = new decimal(new int[] {
+            1031,
+            0,
+            0,
+            0});
 			// 
 			// button4
 			// 
@@ -245,6 +321,7 @@ namespace WinFormsApp1 {
 			this.button4.TabIndex = 16;
 			this.button4.Text = "Send serial";
 			this.button4.UseVisualStyleBackColor = true;
+			this.button4.Visible = false;
 			this.button4.Click += new System.EventHandler(this.button4_Click);
 			// 
 			// radioButton1
@@ -391,6 +468,7 @@ namespace WinFormsApp1 {
 			// 
 			// groupBox1
 			// 
+			this.groupBox1.Controls.Add(this.button3);
 			this.groupBox1.Controls.Add(this.rbtnSick);
 			this.groupBox1.Controls.Add(this.edtSickCommand);
 			this.groupBox1.Controls.Add(this.edtSickPort);
@@ -402,6 +480,16 @@ namespace WinFormsApp1 {
 			this.groupBox1.TabIndex = 15;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "SICK";
+			// 
+			// button3
+			// 
+			this.button3.Location = new System.Drawing.Point(235, -8);
+			this.button3.Name = "button3";
+			this.button3.Size = new System.Drawing.Size(75, 23);
+			this.button3.TabIndex = 18;
+			this.button3.Text = "SMTP test";
+			this.button3.UseVisualStyleBackColor = true;
+			this.button3.Click += new System.EventHandler(this.button3_Click);
 			// 
 			// rbtnSick
 			// 
@@ -456,40 +544,6 @@ namespace WinFormsApp1 {
 			this.btnSick.UseVisualStyleBackColor = true;
 			this.btnSick.Click += new System.EventHandler(this.btnSick_Click);
 			// 
-			// numericUpDown1
-			// 
-			this.numericUpDown1.Location = new System.Drawing.Point(199, 105);
-			this.numericUpDown1.Maximum = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
-			this.numericUpDown1.Name = "numericUpDown1";
-			this.numericUpDown1.Size = new System.Drawing.Size(69, 23);
-			this.numericUpDown1.TabIndex = 18;
-			this.numericUpDown1.Value = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
-			// 
-			// numericUpDown2
-			// 
-			this.numericUpDown2.Location = new System.Drawing.Point(274, 104);
-			this.numericUpDown2.Maximum = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
-			this.numericUpDown2.Name = "numericUpDown2";
-			this.numericUpDown2.Size = new System.Drawing.Size(36, 23);
-			this.numericUpDown2.TabIndex = 19;
-			this.numericUpDown2.Value = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
-			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -510,6 +564,9 @@ namespace WinFormsApp1 {
 			this.panel6.ResumeLayout(false);
 			this.groupBox3.ResumeLayout(false);
 			this.groupBox3.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.edtModPocet)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.edtModFce)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.edtModAddress)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.edtModbusPort)).EndInit();
 			this.groupBox2.ResumeLayout(false);
 			this.groupBox2.PerformLayout();
@@ -518,8 +575,6 @@ namespace WinFormsApp1 {
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.edtSickPort)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -559,8 +614,12 @@ namespace WinFormsApp1 {
 		private System.Windows.Forms.Button button3;
 		private System.Windows.Forms.NumericUpDown edtSnmpPort;
 		private System.Windows.Forms.Button button4;
-		private System.Windows.Forms.NumericUpDown numericUpDown2;
-		private System.Windows.Forms.NumericUpDown numericUpDown1;
+		private System.Windows.Forms.NumericUpDown edtModFce;
+		private System.Windows.Forms.NumericUpDown edtModAddress;
+		private System.Windows.Forms.Label label3;
+		private System.Windows.Forms.NumericUpDown edtModPocet;
+		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.Label label1;
 	}
 }
 
