@@ -182,7 +182,7 @@ namespace Lis.Monitoring.Manager.Edits {
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.pnlTextValue);
 			this.Name = "ParamConditionEdit";
-			this.Text = "Změna zařízení";
+			this.Text = "Změna podmínky parametru";
 			this.Controls.SetChildIndex(this.pnlTextValue, 0);
 			this.Controls.SetChildIndex(this.btnSave, 0);
 			this.Controls.SetChildIndex(this.btnStorno, 0);

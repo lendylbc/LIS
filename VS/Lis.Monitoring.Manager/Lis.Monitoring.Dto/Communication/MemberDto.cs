@@ -20,6 +20,7 @@ namespace Lis.Monitoring.Dto.Communication {
 		/// Email (uživatelské jméno) uživatele
 		/// </summary>
 		public string Email { get; set; }
+		public string Phone { get; set; }
 		/// <summary>
 		/// Heslo
 		/// </summary>
@@ -28,6 +29,7 @@ namespace Lis.Monitoring.Dto.Communication {
 		public string Login { get; set; }
 
 		public bool Active { get; set; }
+		public bool SendNotifications { get; set; }
 		public int MemberType { get; set; }
 		public DateTime Inserted { get; set; }
 		//      /// <summary>
@@ -45,8 +47,8 @@ namespace Lis.Monitoring.Dto.Communication {
 		/// <summary>
 		/// Příznak odběru notifikací
 		/// </summary>
-		[NotMapped]
-		public bool ZasilatNotifikace { get; set; }
+		//[NotMapped]
+		//public bool ZasilatNotifikace { get; set; }
 
 		public string MemberTypeText { get => ((MemberType)MemberType).ToString(); }
 	}

@@ -4,12 +4,15 @@ using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using Lis.Monitoring.Abstractions.Controllers;
 using NModbus;
 using NModbus.IO;
+using Serilog;
 
 namespace Lis.Monitoring.Modbus {
 	public class ModbusController : ISensorDataController {
+		private static readonly ILogger log = Serilog.Log.ForContext<ModbusController>();
 		public ModbusController() {
 
 		}
@@ -48,7 +51,7 @@ namespace Lis.Monitoring.Modbus {
 									modbusSerialMaster.ReadHoldingRegisters(1, addressNumber, 1);
 									break;
 								case 4:
-									modbusSerialMaster.ReadInputRegisters(1, addressNumber, 4);
+									modbusSerialMaster.ReadInputRegisters(1, addressNumber, 1);
 									break;
 							}
 
@@ -63,8 +66,11 @@ namespace Lis.Monitoring.Modbus {
 								byte[] data = TcpRequestData(commandTestBytes, client);
 
 								result.Add(address, GetModbusValue(ip, address, addressBit, data));
-							} catch {
-
+								if(data != null && data.Length > 0) {
+									log.Debug($"{ip}    {address}     {BitConverter.ToString(commandTestBytes).Replace("-", "")}     {BitConverter.ToString(data).Replace("-", "")}");
+								}
+							} catch(Exception e) {
+								log.Error(e.Message);
 							}
 						}
 					}
@@ -75,7 +81,8 @@ namespace Lis.Monitoring.Modbus {
 				}
 
 				return result;
-			} catch {
+			} catch (Exception e) {
+				log.Error(e.Message);
 				return null;
 			}
 		}
@@ -92,8 +99,8 @@ namespace Lis.Monitoring.Modbus {
 				if(address.Contains("0#")) {
 					return (int)(data[4] & 0b00000111);
 				}
-				if(address.Contains("1031")) {
-					return (int)data[2];
+				if(address.Contains("1031") || address.Contains("1032") || address.Contains("1801")) {
+					return (int)data[4];
 				}
 				//}
 				//return data[0];
@@ -127,12 +134,13 @@ namespace Lis.Monitoring.Modbus {
 		private byte[] TcpRequestData(byte[] commandMessage, TcpClient client) {
 			List<byte> responseBytes = new List<byte>();
 			NetworkStream stream = client.GetStream();
-			int dataLength = 0;
+			//int dataLength = 0;
 			try {
 				if(client.Connected) {
 					if(stream.CanWrite) {
 						stream.Write(commandMessage, 0, commandMessage.Length);
 					}
+					Thread.Sleep(500);	//	Kvůli generátoru s RS232 - velmi pomalé
 					if(stream.CanRead) {
 						List<byte> requestedBytes = new List<byte>();
 						byte[] buffer = new byte[1024];

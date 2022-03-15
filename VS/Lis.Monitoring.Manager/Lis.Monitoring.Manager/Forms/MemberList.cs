@@ -23,7 +23,7 @@ namespace Lis.Monitoring.Manager.Forms {
 		private void DesignMemberGrid() {
 			grdMembers.Columns["Id"].Visible = false;
 			grdMembers.Columns["Password"].Visible = false;
-			grdMembers.Columns["ZasilatNotifikace"].Visible = false;
+			grdMembers.Columns["SendNotifications"].Visible = false;
 			grdMembers.Columns["MemberType"].Visible = false;
 			grdMembers.Columns["Inserted"].Visible = false;
 		}

@@ -49,6 +49,9 @@ namespace Lis.Monitoring.Services.Aspects {
 		/// <param name="isBodyHtml">Příznak, jetli je tělo zprávy html nebo není</param>
 		/// <param name="from">Adresa, ze které se má e-mail odeslat. Pokud zůstane null, použije se globální nastavení z konfigurace</param>
 		public void Send(string predmet, string zprava, string[] prijemci, string[] ccs = null, string[] bccs = null, bool isBodyHtml = true, string from = null) {
+			if(string.IsNullOrEmpty(_host)) {
+				return;
+			}
 			try {
 				SmtpClient client = new SmtpClient(_host, _port) {
 					UseDefaultCredentials = false

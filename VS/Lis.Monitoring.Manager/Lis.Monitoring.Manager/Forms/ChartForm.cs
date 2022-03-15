@@ -54,5 +54,11 @@ namespace Lis.Monitoring.Manager.Forms {
 		private void ChartForm_Load(object sender, EventArgs e) {
 			DrawChartValues();
 		}
+
+		private void ChartForm_KeyDown(object sender, KeyEventArgs e) {
+			if(e.KeyCode == Keys.Escape) {
+				Close();
+			}
+		}
 	}
 }

@@ -32,6 +32,9 @@ namespace Lis.Monitoring.Services.Aspects {
 		}
 
 		public void Send(string predmet, string zprava, string[] prijemci) {
+			if(string.IsNullOrEmpty(_host)) {
+				return;
+			}
 			foreach(string prijemce in prijemci) {
 				SendSetRequest(string.Format(_SEND_SMS, _host, _username, _password, prijemce, HttpUtility.UrlEncode(predmet + ": " + zprava)));
 			}			

@@ -13,14 +13,16 @@ namespace Lis.Monitoring.Services.Aspects {
 	public class ModbusService : IModbusService {
 		IDeviceService _deviceService;
 		IDeviceParameterDataService _deviceParameterDataService;
+		private IDeviceParameterService _deviceParameterService;
 		IConditionService _conditionService;
 
 		public List<ErrorParameterInfo> NotifyErrors { get => _conditionService.NotifyDeviceErrors; }
 		public bool ErrorsExists { get => _conditionService.ErrorsExists; }
 
-		public ModbusService(IDeviceService deviceService, IDeviceParameterDataService deviceParameterDataService, IConditionService conditionService) {
+		public ModbusService(IDeviceService deviceService, IDeviceParameterDataService deviceParameterDataService, IDeviceParameterService deviceParameterService, IConditionService conditionService) {
 			_deviceService = deviceService;
 			_deviceParameterDataService = deviceParameterDataService;
+			_deviceParameterService = deviceParameterService;
 			_conditionService = conditionService;
 		}
 
@@ -48,6 +50,15 @@ namespace Lis.Monitoring.Services.Aspects {
 						}
 					}
 					_conditionService.ResolveConditions(device.DeviceParameter, deviceData);
+					foreach(DeviceParameter parameter in device.DeviceParameter) {
+						if(parameter.ErrorInfoChange) {
+							try {
+								_deviceParameterService.UpdateErrorInfoAsync(parameter);
+							} catch {
+								//	log
+							}
+						}
+					}
 				}
 			}
 		}

@@ -45,7 +45,7 @@ namespace Lis.Monitoring.Dto.Communication {
 		/// <summary>
 		/// Příznak odběru notifikací
 		/// </summary>
-		[NotMapped]
+		//[NotMapped]
 		public bool SendNotifications { get; set; }
 	}
 }

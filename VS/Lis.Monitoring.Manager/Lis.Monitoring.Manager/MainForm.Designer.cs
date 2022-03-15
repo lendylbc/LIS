@@ -177,6 +177,7 @@ namespace Lis.Monitoring.Manager {
 			this.grdData.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.grdData_RowPrePaint);
 			this.grdData.SelectionChanged += new System.EventHandler(this.grdData_SelectionChanged);
 			this.grdData.Click += new System.EventHandler(this.grdData_Click);
+			this.grdData.DoubleClick += new System.EventHandler(this.grdData_DoubleClick);
 			// 
 			// colDeviceDesc
 			// 

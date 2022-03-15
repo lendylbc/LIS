@@ -34,9 +34,11 @@ namespace Lis.Monitoring.Services.Entities {
 			member.Name = data.Name;
 			member.Surname = data.Surname;
 			member.Email = data.Email;
+			member.Phone = data.Phone;
 			member.Login = data.Login;
 			member.Password = data.Password;
 			member.MemberType = data.MemberType;
+			member.SendNotifications = data.SendNotifications;
 			member.Active = data.Active;
 
 			await DbService.SaveChangesAsync();

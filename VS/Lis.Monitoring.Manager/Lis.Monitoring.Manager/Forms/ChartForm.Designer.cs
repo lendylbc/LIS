@@ -58,10 +58,12 @@ namespace Lis.Monitoring.Manager.Forms {
 			this.ClientSize = new System.Drawing.Size(800, 450);
 			this.Controls.Add(this.chart);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+			this.KeyPreview = true;
 			this.Name = "ChartForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "Průběh hodnot";
 			this.Load += new System.EventHandler(this.ChartForm_Load);
+			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ChartForm_KeyDown);
 			((System.ComponentModel.ISupportInitialize)(this.chart)).EndInit();
 			this.ResumeLayout(false);
 

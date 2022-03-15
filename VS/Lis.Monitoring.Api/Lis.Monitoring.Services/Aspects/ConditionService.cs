@@ -50,6 +50,9 @@ namespace Lis.Monitoring.Services.Aspects {
 								if(typ.Name.Equals("Integer32")) {
 									value = (decimal)Convert.ToInt32(valueData.ToString());
 								}
+								if(typ.Name.Equals("Int32")) {
+									value = (decimal)Convert.ToInt32(valueData);
+								}
 								if(param.Multiplier != null) {
 									value *= (decimal)param.Multiplier;
 								}

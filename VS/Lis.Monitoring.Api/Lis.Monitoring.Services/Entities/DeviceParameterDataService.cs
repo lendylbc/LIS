@@ -9,9 +9,11 @@ using Lis.Monitoring.Infrastructure;
 using Lis.Monitoring.Services.Abstractions;
 using Lis.Monitoring.Services.Queries;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 namespace Lis.Monitoring.Services.Entities {
 	public class DeviceParameterDataService : BaseEntityService<DeviceParameterData, long, DeviceParameterDataQuery, DeviceParameterDataDto>, IDeviceParameterDataService {
+		private static readonly ILogger log = Serilog.Log.ForContext<DeviceParameterDataService>();
 		public DeviceParameterDataService(DbService dbService) : base(dbService) {
 		}
 
@@ -27,8 +29,12 @@ namespace Lis.Monitoring.Services.Entities {
 
 		public void DeleteOldData() {
 			IEnumerable<object> parameters = new List<object>();
-
-			DbService.Database.ExecuteSqlRaw("EXECUTE dbo.spDeleteOldData", parameters);			
+			try {
+				DbService.Database.ExecuteSqlRaw("EXECUTE dbo.spDeleteOldData", parameters);
+				log.Debug("spDeleteOldData");
+			} catch (Exception e) {
+				log.Error("spDeleteOldData" + e.Message);
+			}
 		}
 	}
 }

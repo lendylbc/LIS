@@ -126,7 +126,7 @@ namespace Lis.Monitoring.Manager {
 		}
 
 		private void grdData_Click(object sender, EventArgs e) {
-			DrawChartForParameter();
+			//DrawChartForParameter();
 		}
 
 		private void DrawChartForParameter() {
@@ -140,7 +140,7 @@ namespace Lis.Monitoring.Manager {
 			DeviceParameterDataQuery query = new DeviceParameterDataQuery();
 
 			query.DeviceParameterId = data.ParamId;
-			query.DateTimeFrom = DateTime.Now.AddHours(-5);
+			query.DateTimeFrom = DateTime.Now.AddHours(-24);
 			query.DateTimeTo = DateTime.Now;
 
 			PagedResponse<DeviceParameterDataDto> result = _apiController.GetFilteredDeviceData(query);
@@ -217,6 +217,10 @@ namespace Lis.Monitoring.Manager {
 
 		private void grdData_SelectionChanged(object sender, EventArgs e) {
 			grdData.ClearSelection();
+		}
+
+		private void grdData_DoubleClick(object sender, EventArgs e) {
+			DrawChartForParameter();
 		}
 	}
 }

@@ -33,13 +33,15 @@ namespace Lis.Monitoring.Manager.Edits {
 			cmbMemberType.SelectedIndex = -1;
 			if(_Member != null) {
 				edtJmeno.Text = _Member.Name;
-				edtSurname.Text = _Member.Surname;
-				edtEmail.Text = _Member.Email;
+				edtSurname.Text = _Member.Surname;				
 				edtLogin.Text = _Member.Login;
+				edtEmail.Text = _Member.Email;
+				edtPhone.Text = _Member.Phone;
 				edtPassword.Text = _Member.Password;
 				edtPasswordCheck.Text = _Member.Password;
 
 				cmbMemberType.SelectedIndex = _Member.MemberType - 1;
+				chkNotification.Checked = _Member.SendNotifications;
 				chkActive.Checked = _Member.Active;
 
 				edtJmeno.Focus();
@@ -55,9 +57,10 @@ namespace Lis.Monitoring.Manager.Edits {
 		protected override bool SaveData() {
 			try {				
 				_Member.Name = edtJmeno.Text;
-				_Member.Surname = edtSurname.Text;
-				_Member.Email = edtEmail.Text;
+				_Member.Surname = edtSurname.Text;				
 				_Member.Login = edtLogin.Text;
+				_Member.Email = edtEmail.Text;
+				_Member.Phone = edtPhone.Text;
 				_Member.Password = edtPassword.Text;
 
 
@@ -65,6 +68,7 @@ namespace Lis.Monitoring.Manager.Edits {
 
 				_Member.MemberType = (int)MemberType;
 
+				_Member.SendNotifications = chkNotification.Checked;
 				_Member.Active = chkActive.Checked;
 
 				if(_Member.Id == null) {

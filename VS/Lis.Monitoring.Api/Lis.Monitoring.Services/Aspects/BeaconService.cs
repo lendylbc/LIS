@@ -30,10 +30,16 @@ namespace Lis.Monitoring.Services.Aspects {
 		}
 
 		public void LightOff() {
+			if(string.IsNullOrEmpty(_host)) {
+				return;
+			}
 			SendSetRequest(string.Format(_SET_OUTPUT_PARAMETER, _host, "r"));
 		}
 
 		public void LightOn() {
+			if(string.IsNullOrEmpty(_host)) {
+				return;
+			}
 			SendSetRequest(string.Format(_SET_OUTPUT_PARAMETER, _host, "s"));
 		}
 

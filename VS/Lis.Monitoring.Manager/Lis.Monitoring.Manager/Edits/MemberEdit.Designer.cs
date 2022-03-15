@@ -39,17 +39,20 @@ namespace Lis.Monitoring.Manager.Edits {
 			this.label6 = new System.Windows.Forms.Label();
 			this.edtPasswordCheck = new System.Windows.Forms.TextBox();
 			this.label7 = new System.Windows.Forms.Label();
+			this.edtPhone = new System.Windows.Forms.TextBox();
+			this.label8 = new System.Windows.Forms.Label();
+			this.chkNotification = new System.Windows.Forms.CheckBox();
 			this.SuspendLayout();
 			// 
 			// btnSave
 			// 
-			this.btnSave.Location = new System.Drawing.Point(108, 301);
-			this.btnSave.TabIndex = 8;
+			this.btnSave.Location = new System.Drawing.Point(108, 368);
+			this.btnSave.TabIndex = 10;
 			// 
 			// btnStorno
 			// 
-			this.btnStorno.Location = new System.Drawing.Point(199, 301);
-			this.btnStorno.TabIndex = 9;
+			this.btnStorno.Location = new System.Drawing.Point(199, 368);
+			this.btnStorno.TabIndex = 11;
 			// 
 			// edtJmeno
 			// 
@@ -73,10 +76,10 @@ namespace Lis.Monitoring.Manager.Edits {
 			// chkActive
 			// 
 			this.chkActive.AutoSize = true;
-			this.chkActive.Location = new System.Drawing.Point(131, 270);
+			this.chkActive.Location = new System.Drawing.Point(10, 338);
 			this.chkActive.Name = "chkActive";
 			this.chkActive.Size = new System.Drawing.Size(60, 17);
-			this.chkActive.TabIndex = 7;
+			this.chkActive.TabIndex = 9;
 			this.chkActive.Text = "Aktivní";
 			this.chkActive.UseVisualStyleBackColor = true;
 			this.chkActive.CheckedChanged += new System.EventHandler(this.edit_TextChanged);
@@ -85,10 +88,10 @@ namespace Lis.Monitoring.Manager.Edits {
 			// 
 			this.cmbMemberType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cmbMemberType.FormattingEnabled = true;
-			this.cmbMemberType.Location = new System.Drawing.Point(10, 268);
+			this.cmbMemberType.Location = new System.Drawing.Point(10, 311);
 			this.cmbMemberType.Name = "cmbMemberType";
 			this.cmbMemberType.Size = new System.Drawing.Size(115, 21);
-			this.cmbMemberType.TabIndex = 6;
+			this.cmbMemberType.TabIndex = 7;
 			this.cmbMemberType.SelectedIndexChanged += new System.EventHandler(this.edit_TextChanged);
 			this.cmbMemberType.TextChanged += new System.EventHandler(this.edit_TextChanged);
 			// 
@@ -96,7 +99,7 @@ namespace Lis.Monitoring.Manager.Edits {
 			// 
 			this.label3.AutoSize = true;
 			this.label3.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.label3.Location = new System.Drawing.Point(10, 252);
+			this.label3.Location = new System.Drawing.Point(10, 295);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(25, 13);
 			this.label3.TabIndex = 19;
@@ -123,18 +126,18 @@ namespace Lis.Monitoring.Manager.Edits {
 			// 
 			// edtEmail
 			// 
-			this.edtEmail.Location = new System.Drawing.Point(10, 103);
+			this.edtEmail.Location = new System.Drawing.Point(10, 144);
 			this.edtEmail.MaxLength = 50;
 			this.edtEmail.Name = "edtEmail";
 			this.edtEmail.Size = new System.Drawing.Size(269, 20);
-			this.edtEmail.TabIndex = 2;
+			this.edtEmail.TabIndex = 3;
 			this.edtEmail.TextChanged += new System.EventHandler(this.edit_TextChanged);
 			// 
 			// label4
 			// 
 			this.label4.AutoSize = true;
 			this.label4.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.label4.Location = new System.Drawing.Point(10, 87);
+			this.label4.Location = new System.Drawing.Point(10, 128);
 			this.label4.Name = "label4";
 			this.label4.Size = new System.Drawing.Size(35, 13);
 			this.label4.TabIndex = 23;
@@ -142,18 +145,18 @@ namespace Lis.Monitoring.Manager.Edits {
 			// 
 			// edtLogin
 			// 
-			this.edtLogin.Location = new System.Drawing.Point(10, 144);
+			this.edtLogin.Location = new System.Drawing.Point(10, 102);
 			this.edtLogin.MaxLength = 20;
 			this.edtLogin.Name = "edtLogin";
 			this.edtLogin.Size = new System.Drawing.Size(269, 20);
-			this.edtLogin.TabIndex = 3;
+			this.edtLogin.TabIndex = 2;
 			this.edtLogin.TextChanged += new System.EventHandler(this.edit_TextChanged);
 			// 
 			// label5
 			// 
 			this.label5.AutoSize = true;
 			this.label5.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.label5.Location = new System.Drawing.Point(10, 128);
+			this.label5.Location = new System.Drawing.Point(10, 86);
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(33, 13);
 			this.label5.TabIndex = 25;
@@ -161,19 +164,19 @@ namespace Lis.Monitoring.Manager.Edits {
 			// 
 			// edtPassword
 			// 
-			this.edtPassword.Location = new System.Drawing.Point(10, 185);
+			this.edtPassword.Location = new System.Drawing.Point(10, 229);
 			this.edtPassword.MaxLength = 20;
 			this.edtPassword.Name = "edtPassword";
 			this.edtPassword.PasswordChar = '*';
 			this.edtPassword.Size = new System.Drawing.Size(269, 20);
-			this.edtPassword.TabIndex = 4;
+			this.edtPassword.TabIndex = 5;
 			this.edtPassword.TextChanged += new System.EventHandler(this.edit_TextChanged);
 			// 
 			// label6
 			// 
 			this.label6.AutoSize = true;
 			this.label6.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.label6.Location = new System.Drawing.Point(10, 169);
+			this.label6.Location = new System.Drawing.Point(10, 213);
 			this.label6.Name = "label6";
 			this.label6.Size = new System.Drawing.Size(34, 13);
 			this.label6.TabIndex = 27;
@@ -181,29 +184,62 @@ namespace Lis.Monitoring.Manager.Edits {
 			// 
 			// edtPasswordCheck
 			// 
-			this.edtPasswordCheck.Location = new System.Drawing.Point(10, 226);
+			this.edtPasswordCheck.Location = new System.Drawing.Point(10, 270);
 			this.edtPasswordCheck.MaxLength = 20;
 			this.edtPasswordCheck.Name = "edtPasswordCheck";
 			this.edtPasswordCheck.PasswordChar = '*';
 			this.edtPasswordCheck.Size = new System.Drawing.Size(269, 20);
-			this.edtPasswordCheck.TabIndex = 5;
+			this.edtPasswordCheck.TabIndex = 6;
 			this.edtPasswordCheck.TextChanged += new System.EventHandler(this.edit_TextChanged);
 			// 
 			// label7
 			// 
 			this.label7.AutoSize = true;
 			this.label7.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.label7.Location = new System.Drawing.Point(10, 210);
+			this.label7.Location = new System.Drawing.Point(10, 254);
 			this.label7.Name = "label7";
 			this.label7.Size = new System.Drawing.Size(85, 13);
 			this.label7.TabIndex = 29;
 			this.label7.Text = "Heslo - kontrolní";
 			// 
+			// edtPhone
+			// 
+			this.edtPhone.Location = new System.Drawing.Point(10, 185);
+			this.edtPhone.MaxLength = 50;
+			this.edtPhone.Name = "edtPhone";
+			this.edtPhone.Size = new System.Drawing.Size(269, 20);
+			this.edtPhone.TabIndex = 4;
+			this.edtPhone.TextChanged += new System.EventHandler(this.edit_TextChanged);
+			// 
+			// label8
+			// 
+			this.label8.AutoSize = true;
+			this.label8.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+			this.label8.Location = new System.Drawing.Point(10, 169);
+			this.label8.Name = "label8";
+			this.label8.Size = new System.Drawing.Size(43, 13);
+			this.label8.TabIndex = 31;
+			this.label8.Text = "Telefon";
+			// 
+			// chkNotification
+			// 
+			this.chkNotification.AutoSize = true;
+			this.chkNotification.Location = new System.Drawing.Point(133, 311);
+			this.chkNotification.Name = "chkNotification";
+			this.chkNotification.Size = new System.Drawing.Size(108, 17);
+			this.chkNotification.TabIndex = 8;
+			this.chkNotification.Text = "Zasílat notifikace";
+			this.chkNotification.UseVisualStyleBackColor = true;
+			this.chkNotification.CheckedChanged += new System.EventHandler(this.edit_TextChanged);
+			// 
 			// MemberEdit
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(296, 336);
+			this.ClientSize = new System.Drawing.Size(296, 403);
+			this.Controls.Add(this.chkNotification);
+			this.Controls.Add(this.edtPhone);
+			this.Controls.Add(this.label8);
 			this.Controls.Add(this.edtPasswordCheck);
 			this.Controls.Add(this.label7);
 			this.Controls.Add(this.edtPassword);
@@ -238,6 +274,9 @@ namespace Lis.Monitoring.Manager.Edits {
 			this.Controls.SetChildIndex(this.edtPassword, 0);
 			this.Controls.SetChildIndex(this.label7, 0);
 			this.Controls.SetChildIndex(this.edtPasswordCheck, 0);
+			this.Controls.SetChildIndex(this.label8, 0);
+			this.Controls.SetChildIndex(this.edtPhone, 0);
+			this.Controls.SetChildIndex(this.chkNotification, 0);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -259,5 +298,8 @@ namespace Lis.Monitoring.Manager.Edits {
 		private System.Windows.Forms.Label label6;
 		private System.Windows.Forms.TextBox edtPasswordCheck;
 		private System.Windows.Forms.Label label7;
+		private System.Windows.Forms.TextBox edtPhone;
+		private System.Windows.Forms.Label label8;
+		private System.Windows.Forms.CheckBox chkNotification;
 	}
 }
