@@ -20,7 +20,7 @@ namespace Lis.Monitoring.Manager.Forms {
 
 		public void DrawChartValues() {
 			try {
-				Series series = new Series("Teplota");
+				Series series = new Series("");
 				series.ChartType = SeriesChartType.Spline;
 				series.Color = Color.Black;
 				double maxAxisY = 30;
@@ -28,7 +28,7 @@ namespace Lis.Monitoring.Manager.Forms {
 				foreach(DeviceParameterDataDto dataValue in _data) {
 					//series.Points.Add(Decimal.ToDouble(dataValue.Value));
 					double value = Decimal.ToDouble((decimal)dataValue.Value);
-					series.Points.AddXY(dataValue.Inserted.ToString("HH:mm"), value);
+					series.Points.AddXY(dataValue.Inserted.ToString("d:M HH:mm"), value);
 
 					if(value > maxAxisY) {
 						maxAxisY = value;

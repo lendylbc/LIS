@@ -18,7 +18,7 @@ namespace Lis.Monitoring.Services.Entities {
 
 		public IEnumerable<Device> GetAllDevicesWithParams(int deviceType) {
 			var devices = EntitySet.Where(x => x.Active && x.DeviceType == deviceType)
-				 .Include(d => d.DeviceParameter)
+				 .Include(d => d.DeviceParameter.Where(p => p.Active))
 				 .Include("DeviceParameter.DeviceParameterCondition");              //	.Select(c => c.DeviceParameterCondition)
 
 			return devices;

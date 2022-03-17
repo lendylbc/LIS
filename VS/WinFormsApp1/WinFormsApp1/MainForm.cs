@@ -10,6 +10,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 //using Lextm.SharpSnmpLib;
@@ -179,6 +180,20 @@ namespace WinFormsApp1 {
 			}
 		}
 
+		private void RequestTest(TcpClient client) {
+
+			StreamReader reader = new StreamReader(client.GetStream());
+			StreamWriter writer = new StreamWriter(client.GetStream());
+
+			writer.WriteLine(edtModbusData.Text);
+			writer.WriteLine("Exit");
+			writer.Close();
+			string s = String.Empty;
+			while(!(s = reader.ReadLine()).Equals("Exit")) {
+				edtLog.Text += Environment.NewLine + s;
+			}
+		}
+
 		private byte[] RequestData(byte[] commandMessage, TcpClient client) {
 			List<byte> responseBytes = new List<byte>();
 			NetworkStream stream = client.GetStream();
@@ -187,7 +202,10 @@ namespace WinFormsApp1 {
 				if(client.Connected) {
 					if(stream.CanWrite) {
 						stream.Write(commandMessage, 0, commandMessage.Length);
+						stream.Flush();
+						//stream.Close();
 					}
+					Thread.Sleep(500);
 					if(stream.CanRead) {
 						List<byte> requestedBytes = new List<byte>();
 						// Incoming message may be larger than the buffer size hence read it by chunks
@@ -345,35 +363,35 @@ namespace WinFormsApp1 {
 			//	//RequestData(new byte[] { 0xaa, 0x55, 0x5a }, client);
 			//	//return;
 
-			IStreamResource streamResource = new StreamModbus();
+			//IStreamResource streamResource = new StreamModbus();
 
 
-			ModbusFactory modbusFactory = new ModbusFactory();
+			//ModbusFactory modbusFactory = new ModbusFactory();
 
-			IModbusSerialMaster modbusSerialMaster = modbusFactory.CreateRtuMaster(streamResource);
-			try {
-				//modbusSerialMaster.ReadHoldingRegisters(1, 1900, 4);
+			//IModbusSerialMaster modbusSerialMaster = modbusFactory.CreateRtuMaster(streamResource);
+			//try {
+			//	//modbusSerialMaster.ReadHoldingRegisters(1, 1900, 4);
 
-				switch((int)edtModFce.Value) {
-					case 2:
-						modbusSerialMaster.ReadInputs(1, (ushort)edtModAddress.Value, (ushort)edtModPocet.Value);
-						break;
-					case 3:
-						modbusSerialMaster.ReadHoldingRegisters(1, (ushort)edtModAddress.Value, (ushort)edtModPocet.Value);
-						break;
-					case 4:
-						modbusSerialMaster.ReadInputRegisters(1, (ushort)edtModAddress.Value, (ushort)edtModPocet.Value);
-						break;
-				}
+			//	switch((int)edtModFce.Value) {
+			//		case 2:
+			//			modbusSerialMaster.ReadInputs(1, (ushort)edtModAddress.Value, (ushort)edtModPocet.Value);
+			//			break;
+			//		case 3:
+			//			modbusSerialMaster.ReadHoldingRegisters(1, (ushort)edtModAddress.Value, (ushort)edtModPocet.Value);
+			//			break;
+			//		case 4:
+			//			modbusSerialMaster.ReadInputRegisters(1, (ushort)edtModAddress.Value, (ushort)edtModPocet.Value);
+			//			break;
+			//	}
 
-				
-				
-			} catch {
 
-			}
-			edtModbusData.Text = (streamResource as StreamModbus).write;
 
-			edtLog.Text += Environment.NewLine + $"Do Edgara Adr: {edtModAddress.Value} Fce: {edtModFce.Value}" + Environment.NewLine + edtModbusData.Text;
+			//} catch {
+
+			//}
+			//edtModbusData.Text = (streamResource as StreamModbus).write;
+
+			//edtLog.Text += Environment.NewLine + $"Do Edgara Adr: {edtModAddress.Value} Fce: {edtModFce.Value}" + Environment.NewLine + edtModbusData.Text;
 
 			//	IModbusMaster modbusMaster = modbusFactory.CreateMaster(client);
 
@@ -412,7 +430,9 @@ namespace WinFormsApp1 {
 			client.ReceiveTimeout = 5000;
 			client.SendBufferSize = 0;
 
-			byte[] commandTestBytes = StringToByteArray(edtModbusData.Text);
+			byte[] commandTestBytes = Encoding.ASCII.GetBytes(edtModbusData.Text);     //	StringToByteArray(edtModbusData.Text);
+
+			RequestTest(client);
 
 			//byte[] dataCommand = new byte[commandTestBytes.Length + 2];
 
@@ -421,12 +441,12 @@ namespace WinFormsApp1 {
 			//dataCommand[0] = 0x02;
 			//dataCommand[dataCommand.Length - 1] = 0x03;
 			byte[] data = null;
-			try {
+			//try {
 
-				data = RequestData(commandTestBytes, client);
-			} catch {
-				edtLog.Text += Environment.NewLine + "Nevrátil data";
-			}
+			//	data = RequestData(commandTestBytes, client);
+			//} catch {
+			//	edtLog.Text += Environment.NewLine + "Nevrátil data";
+			//}
 
 			if(data != null) {
 				//edtLog.Text = BitConverter.ToString(data).Replace("-", "");
@@ -523,68 +543,68 @@ namespace WinFormsApp1 {
 				_serialPort.Close();
 			}
 		}
-			
+
 
 		private void Form1_Load(object sender, EventArgs e) {
-				//foreach(string s in SerialPort.GetPortNames()) {
-				//	edtLog.Text += s + Environment.NewLine;
-				//}
-			}
-
-			public string SetPortName(string defaultPortName) {
-				string portName;
-
-				//Console.WriteLine("Available Ports:");
-				//foreach(string s in SerialPort.GetPortNames()) {
-				//	Console.WriteLine("   {0}", s);
-				//}
-
-				//Console.Write("Enter COM port value (Default: {0}): ", defaultPortName);
-				portName = Console.ReadLine();
-
-				if(portName == "" || !(portName.ToLower()).StartsWith("com")) {
-					portName = defaultPortName;
-				}
-				return portName;
-			}
-
-			private void edtModbusData_TextChanged(object sender, EventArgs e) {
-
-			}
+			//foreach(string s in SerialPort.GetPortNames()) {
+			//	edtLog.Text += s + Environment.NewLine;
+			//}
 		}
 
+		public string SetPortName(string defaultPortName) {
+			string portName;
 
+			//Console.WriteLine("Available Ports:");
+			//foreach(string s in SerialPort.GetPortNames()) {
+			//	Console.WriteLine("   {0}", s);
+			//}
 
-		public class StreamModbus : IStreamResource {
+			//Console.Write("Enter COM port value (Default: {0}): ", defaultPortName);
+			portName = Console.ReadLine();
 
-			public string write;
-			public string read;
-
-			public byte[] writeByte;
-			public byte[] readByte;
-			public int InfiniteTimeout { get; set; }
-
-			public int ReadTimeout { get; set; }
-			public int WriteTimeout { get; set; }
-
-			public void DiscardInBuffer() {
-				//throw new NotImplementedException();
+			if(portName == "" || !(portName.ToLower()).StartsWith("com")) {
+				portName = defaultPortName;
 			}
+			return portName;
+		}
 
-			public void Dispose() {
-				//throw new NotImplementedException();
-			}
+		private void edtModbusData_TextChanged(object sender, EventArgs e) {
 
-			public int Read(byte[] buffer, int offset, int count) {
-				readByte = buffer;
-				read = Encoding.ASCII.GetString(buffer);
-				return 1;
-			}
-
-			public void Write(byte[] buffer, int offset, int count) {
-				writeByte = buffer;
-				write = BitConverter.ToString(buffer).Replace("-", "");// Encoding.ASCII.GetString(buffer);
-				read = "AAAA";
-			}
 		}
 	}
+
+
+
+	public class StreamModbus : IStreamResource {
+
+		public string write;
+		public string read;
+
+		public byte[] writeByte;
+		public byte[] readByte;
+		public int InfiniteTimeout { get; set; }
+
+		public int ReadTimeout { get; set; }
+		public int WriteTimeout { get; set; }
+
+		public void DiscardInBuffer() {
+			//throw new NotImplementedException();
+		}
+
+		public void Dispose() {
+			//throw new NotImplementedException();
+		}
+
+		public int Read(byte[] buffer, int offset, int count) {
+			readByte = buffer;
+			read = Encoding.ASCII.GetString(buffer);
+			return 1;
+		}
+
+		public void Write(byte[] buffer, int offset, int count) {
+			writeByte = buffer;
+			write = BitConverter.ToString(buffer).Replace("-", "");// Encoding.ASCII.GetString(buffer);
+			read = "AAAA";
+		}
+	}
+}

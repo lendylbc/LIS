@@ -99,8 +99,11 @@ namespace Lis.Monitoring.Modbus {
 				if(address.Contains("0#")) {
 					return (int)(data[4] & 0b00000111);
 				}
-				if(address.Contains("1031") || address.Contains("1032") || address.Contains("1801")) {
+				if(address.Contains("1031") || address.Contains("1032")) {
 					return (int)data[4];
+				}
+				if(address.Contains("1801")) {
+					return (int)data[3];
 				}
 				//}
 				//return data[0];

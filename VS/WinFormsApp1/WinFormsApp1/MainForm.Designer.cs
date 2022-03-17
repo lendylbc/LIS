@@ -340,7 +340,7 @@ namespace WinFormsApp1 {
 			this.edtModbusData.Name = "edtModbusData";
 			this.edtModbusData.Size = new System.Drawing.Size(173, 23);
 			this.edtModbusData.TabIndex = 14;
-			this.edtModbusData.Text = "010403F30001C1BD";
+			this.edtModbusData.Text = "test12345Exit";
 			this.edtModbusData.TextChanged += new System.EventHandler(this.edtModbusData_TextChanged);
 			// 
 			// edtModbusPort
@@ -355,7 +355,7 @@ namespace WinFormsApp1 {
 			this.edtModbusPort.Size = new System.Drawing.Size(120, 23);
 			this.edtModbusPort.TabIndex = 13;
 			this.edtModbusPort.Value = new decimal(new int[] {
-            10001,
+            500,
             0,
             0,
             0});
@@ -366,7 +366,7 @@ namespace WinFormsApp1 {
 			this.edtModbusIp.Name = "edtModbusIp";
 			this.edtModbusIp.Size = new System.Drawing.Size(173, 23);
 			this.edtModbusIp.TabIndex = 12;
-			this.edtModbusIp.Text = "172.20.1.93";
+			this.edtModbusIp.Text = "172.16.205.150";
 			// 
 			// btnModbus
 			// 
