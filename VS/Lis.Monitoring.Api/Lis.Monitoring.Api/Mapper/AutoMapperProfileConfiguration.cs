@@ -8,7 +8,7 @@ namespace Lis.Monitoring.Api.Mapper {
 		public AutoMapperProfileConfiguration() : this("BaseProfile") { }
 
 		public AutoMapperProfileConfiguration(string profileName) : base(profileName) {
-			CreateMap<Member, MemberDto>();
+			CreateMap<Member, MemberDto>().ReverseMap();
 			CreateMap<Device, DeviceDto>().ReverseMap();
 			CreateMap<DeviceParameter, DeviceParameterDto>().ReverseMap();
 			CreateMap<DeviceParameterCondition, DeviceParameterConditionDto>().ReverseMap();
